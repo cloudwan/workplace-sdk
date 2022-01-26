@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "edgelq-sdk/iam/proto/v1alpha2/iam.proto";
+
+import "google/api/annotations.proto";
+
+import "google/api/client.proto";
+
+import "google/protobuf/empty.proto";
+
+import "workplace-sdk/proto/v1alpha2/agent.proto";
+
+import "workplace-sdk/proto/v1alpha2/agent_custom.proto";
+
+import "workplace-sdk/proto/v1alpha2/agent_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/area.proto";
+
+import "workplace-sdk/proto/v1alpha2/area_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/building.proto";
+
+import "workplace-sdk/proto/v1alpha2/building_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/device.proto";
+
+import "workplace-sdk/proto/v1alpha2/device_group.proto";
+
+import "workplace-sdk/proto/v1alpha2/device_group_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/device_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/floor.proto";
+
+import "workplace-sdk/proto/v1alpha2/floor_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/property.proto";
+
+import "workplace-sdk/proto/v1alpha2/property_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/site.proto";
+
+import "workplace-sdk/proto/v1alpha2/site_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/vendor_connection.proto";
+
+import "workplace-sdk/proto/v1alpha2/vendor_connection_custom.proto";
+
+import "workplace-sdk/proto/v1alpha2/vendor_connection_service.proto";
+
+import "workplace-sdk/proto/v1alpha2/zone.proto";
+
+import "workplace-sdk/proto/v1alpha2/zone_service.proto";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+option java_outer_classname = "WorkplaceProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/client/v1alpha2/workplace;workplace_client";

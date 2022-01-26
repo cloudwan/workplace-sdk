@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha;
+
+import "edgelq-sdk/common/types/meta.proto";
+
+import "google/api/resource.proto";
+
+import "workplace-sdk/proto/v1alpha/area.proto";
+
+import "workplace-sdk/proto/v1alpha/bacnet.proto";
+
+import "workplace-sdk/proto/v1alpha/building.proto";
+
+import "workplace-sdk/proto/v1alpha/floor.proto";
+
+import "workplace-sdk/proto/v1alpha/site.proto";
+
+import "workplace-sdk/proto/v1alpha/zone.proto";
+
+option java_package = "com.ntt.workplace.pb.v1alpha";
+
+option java_outer_classname = "PropertyProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha/property;property";
+
+// Property Resource
+message Property {
+  option (google.api.resource) = {
+    type : "workplace.edgelq.com/Property"
+    pattern : "projects/{project}/sites/{site}/properties/{property}"
+    pattern : "projects/{project}/sites/{site}/buildings/{building}/properties/"
+              "{property}"
+    pattern : "projects/{project}/sites/{site}/buildings/{building}/floors/"
+              "{floor}/properties/{property}"
+    pattern : "projects/{project}/sites/{site}/buildings/{building}/floors/"
+              "{floor}/areas/{area}/properties/{property}"
+    pattern : "projects/{project}/sites/{site}/zones/{zone}/properties/"
+              "{property}"
+    pattern : "projects/{project}/sites/{site}/buildings/{building}/zones/"
+              "{zone}/properties/{property}"
+    pattern : "projects/{project}/sites/{site}/buildings/{building}/floors/"
+              "{floor}/zones/{zone}/properties/{property}"
+    pattern : "projects/{project}/sites/{site}/buildings/{building}/floors/"
+              "{floor}/areas/{area}/zones/{zone}/properties/{property}"
+    pattern : "projects/{project}/sites/{site}/devices/{device}/properties/"
+              "{property}"
+  };
+
+  // Name of Property
+  string name = 1;
+
+  // Display Name
+  string display_name = 2;
+
+  // BACNet Entity descriptor
+  BACNetEntity bacnet = 7;
+
+  ntt.types.Meta metadata = 8;
+
+  // placement override
+  SitePlacement site_placement = 10;
+
+  MetricOverride metric_override = 9;
+
+  // SitePlacement describes hierarchy of where Device is placed in Site.
+  // It may specify only some of those fields
+  // #TODO: allow dangling is left because of double constraint spec (parent),
+  // which causes compile error
+  message SitePlacement {
+    // Site references a site
+    string site = 1;
+
+    // Building in which the device is placed.
+    string building = 2;
+
+    // Floor on which the device is placed.
+    string floor = 3;
+
+    // area, e.g. room, commonlpace where the device is placed.
+    string area = 4;
+
+    // zone, e.g. room, commonlpace where the device is placed.
+    string zone = 5;
+  }
+
+  message MetricOverride {
+    // overrides reported property name. Used to guarantee naming consistency
+    // when conventions diverge
+    string property_name = 1;
+
+    // override unit
+    string unit = 2;
+  }
+}

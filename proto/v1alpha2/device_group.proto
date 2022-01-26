@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "edgelq-sdk/common/types/meta.proto";
+
+import "google/api/resource.proto";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+option java_outer_classname = "DeviceGroupProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/device_group;device_group";
+
+// DeviceGroup Resource
+message DeviceGroup {
+  option (google.api.resource) = {
+    type : "workplace.edgelq.com/DeviceGroup"
+    pattern : "projects/{project}/deviceGroups/{device_group}"
+  };
+
+  // Name of DeviceGroup
+  string name = 1;
+
+  // Display Name
+  string display_name = 2;
+
+  // Metadata
+  ntt.types.Meta metadata = 3;
+}

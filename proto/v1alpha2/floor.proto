@@ -1,0 +1,125 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "edgelq-sdk/common/types/meta.proto";
+
+import "google/api/resource.proto";
+
+import "google/protobuf/timestamp.proto";
+
+import "google/type/latlng.proto";
+
+import "workplace-sdk/proto/v1alpha2/common.proto";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+option java_outer_classname = "FloorProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/floor;floor";
+
+// Floor Resource
+message Floor {
+  option (google.api.resource) = {
+    type : "workplace.edgelq.com/Floor"
+    pattern : "projects/{project}/regions/{region}/sites/{site}/buildings/"
+              "{building}/floors/{floor}"
+  };
+
+  // Name of Floor
+  string name = 1;
+
+  // Display Name of Floor, e.g. B1, Ground
+  string display_name = 2;
+
+  // Ordering number describes sorting order, usually:
+  // * ground floor is 0
+  // * above-ground floors use positive numbers
+  // * basement floors use negative numbers (-1 = B1)
+  sint32 ordering_number = 3;
+
+  // Floor geometry, usually same as parent Building.
+  Geometry geometry = 4;
+
+  // vendor id mappings
+  // PointGrab: Floor
+  repeated VendorMapping vendor_mappings = 5;
+
+  // VendorSpec is vendor contains configuration
+  VendorSpec vendor_spec = 6;
+
+  // Vendor info
+  VendorInfo vendor_info = 7;
+
+  // Vendor State
+  VendorState vendor_state = 8;
+
+  ntt.types.Meta metadata = 9;
+
+  message VendorSpec {
+    // PointGrab spec
+    PointGrab point_grab = 1;
+
+    Mapbox mapbox = 2;
+
+    message PointGrab {
+      // floor id in PointGrab
+      string floor_id = 1;
+
+      // Reference points allow calculating transformation between PointGrab
+      // internal X,Y coordinates to Lat,Lng Geo-coordinates.
+      repeated ReferencePoint reference_points = 4;
+
+      // maps GeoCoordinates to plane X,Y
+      message ReferencePoint {
+        // GeoCoordinates
+        google.type.LatLng lat_lng = 1;
+
+        // XY Coordinates
+        Point xy = 2;
+      }
+
+      reserved 2, 3;
+    }
+
+    message Mapbox {
+      // Mapbox tileset with floor plan, e.g. edgelq.ntt-sunnyvale-f1
+      string floor_plan_tileset_id = 1;
+
+      // Map view bearing in degrees. Examples:
+      // - 0: North
+      // - 90: East
+      // - 180: South
+      // - -90 or 270: West
+      double bearing = 2;
+    }
+  }
+
+  message VendorInfo {
+    // PointGrab Info
+    PointGrab point_grab = 1;
+
+    message PointGrab { repeated ReferencePoint reference_points = 1; }
+  }
+
+  // Vendor state
+  message VendorState {
+    // PointGrab data
+    PointGrab point_grab = 1;
+
+    message PointGrab {
+      PeoplePositions people_positions = 1;
+
+      // People Positions
+      message PeoplePositions {
+        // coordinates of people
+        repeated google.type.LatLng coordinates = 1;
+
+        // Last report of coordinates
+        google.protobuf.Timestamp last_report_timestamp = 2;
+      }
+    }
+  }
+}

@@ -1,0 +1,139 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "edgelq-sdk/common/types/meta.proto";
+
+import "google/api/resource.proto";
+
+import "google/protobuf/timestamp.proto";
+
+import "workplace-sdk/proto/v1alpha2/area.proto";
+
+import "workplace-sdk/proto/v1alpha2/bacnet.proto";
+
+import "workplace-sdk/proto/v1alpha2/building.proto";
+
+import "workplace-sdk/proto/v1alpha2/common.proto";
+
+import "workplace-sdk/proto/v1alpha2/floor.proto";
+
+import "workplace-sdk/proto/v1alpha2/site.proto";
+
+import "workplace-sdk/proto/v1alpha2/zone.proto";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+option java_outer_classname = "DeviceProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/device;device";
+
+// Device Resource
+message Device {
+  option (google.api.resource) = {
+    type : "workplace.edgelq.com/Device"
+    pattern : "projects/{project}/regions/{region}/sites/{site}/devices/"
+              "{device}"
+  };
+
+  // Name of Device
+  string name = 1;
+
+  string display_name = 2;
+
+  Type type = 3;
+
+  // Site geometry
+  Geometry geometry = 4;
+
+  // Owner agent
+  string owner_agent = 5;
+
+  // Site Placement
+  SitePlacement site_placement = 6;
+
+  // Vendor info
+  VendorInfo vendor_info = 7;
+
+  // State
+  State state = 9;
+
+  ntt.types.Meta metadata = 10;
+
+  // SitePlacement describes hierarchy of where Device is placed in Site.
+  // It may specify only some of those fields
+  message SitePlacement {
+    // Site references a site
+    string site = 1;
+
+    // Building in which the device is placed.
+    string building = 2;
+
+    // Floor on which the device is placed.
+    string floor = 3;
+
+    // area, e.g. room, commonlpace where the device is placed.
+    string area = 4;
+
+    // area, e.g. room, commonlpace where the device is placed.
+    string zone = 5;
+  }
+
+  message VendorInfo {
+    // Vendor
+    Vendor vendor = 8;
+
+    // Bacnet Entity descriptor
+    BACNetEntity bacnet = 1;
+
+    PointGrabInfo point_grab = 2;
+
+    // PointGrab Device description
+    message PointGrabInfo {
+      // Device Id in PointGrab
+      string device_id = 1;
+
+      // Device rotation in degrees. Note that this value isn't the same as one
+      // in PointGrab. It translates PointGrab data and orients 0 as North.
+      double rotation = 2;
+    }
+  }
+
+  message State {
+    // Connection state
+    Connection connection = 1;
+
+    message Connection {
+      // Connection status
+      ConnectionStatus status = 1;
+
+      // Last connection status change
+      google.protobuf.Timestamp status_since = 2;
+
+      enum ConnectionStatus {
+        CONNECTION_STATUS_UNSPECIFIED = 0;
+
+        ONLINE = 1;
+
+        OFFLINE = 2;
+      }
+    }
+  }
+
+  enum Type {
+    TYPE_UNSPECIFIED = 0;
+
+    //    EDGELQ_DEVICE = 1;
+    HVAC = 2;
+
+    RIPTIDE_HUB = 3;
+
+    WEATHER = 4;
+
+    PM25_SENSOR = 5;
+
+    POINT_GRAB_SENSOR = 32;
+  }
+}

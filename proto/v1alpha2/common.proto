@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "google/api/resource.proto";
+
+import "google/type/latlng.proto";
+
+option java_outer_classname = "CommonProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/common;workplace_common";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+// BBox descrbes rectangular geographical area by using two corners
+message BBox {
+  // SouthWest-most corner
+  google.type.LatLng south_west = 1;
+
+  // NorthEast-most corner
+  google.type.LatLng north_east = 2;
+}
+
+// Polygon describes polygon shape with using geo-coordinates
+message Polygon {
+  // List of coordinates. Each polygon vertice connects 2 consecutive points and
+  // last point connects with first.
+  repeated google.type.LatLng coordinates = 1;
+}
+
+// Geometry contains geo-information about place.
+// It may contain just center, bounding box or polygon
+message Geometry {
+  // Center point of place
+  google.type.LatLng center = 1;
+
+  // Bounding Box of place (should contain polygon if present)
+  BBox bbox = 2;
+
+  // Polygon contains detailed shape of place
+  Polygon polygon = 3;
+
+  // Angle panning in degrees when displaying a centered map view.
+  // Panning with value 0 results in default behavior (usually North).
+  double panning = 4;
+}
+
+// StreetLocation contains street address and resolved coordinates
+message StreetLocation {
+  // Street address in english
+  string street_address = 1;
+
+  // Resolved street address coordinates
+  google.type.LatLng street_coordinates = 2;
+}
+
+// VendorMapping contains entity id registered in another system
+message VendorMapping {
+  // vendor type
+  Vendor vendor = 1;
+
+  // corresponding entity id in vendor system
+  string id = 2;
+}
+
+message Point {
+  double x = 1;
+
+  double y = 2;
+}
+
+message ReferencePoint {
+  // relative point
+  Point point = 1;
+
+  // absolute geo-coordinates
+  google.type.LatLng lat_lng = 2;
+}
+
+enum Vendor {
+  VENDOR_UNSPECIFIED = 0;
+
+  EDGELQ_WORKPLACE = 1;
+
+  POINT_GRAB = 2;
+
+  RIPTIDE = 3;
+
+  // used for floor plans. ids are tileset urls
+  MAPBOX = 4;
+}

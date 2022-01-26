@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "edgelq-sdk/common/types/meta.proto";
+
+import "google/api/resource.proto";
+
+import "workplace-sdk/proto/v1alpha2/common.proto";
+
+option java_outer_classname = "BuildingProto";
+
+option java_multiple_files = true;
+
+option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/building;building";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+// Building Resource
+message Building {
+  option (google.api.resource) = {
+    type : "workplace.edgelq.com/Building"
+    pattern : "projects/{project}/regions/{region}/sites/{site}/buildings/"
+              "{building}"
+  };
+
+  // Name of Building
+  string name = 1;
+
+  // Display Name
+  string display_name = 2;
+
+  // Street location of building
+  StreetLocation location = 3;
+
+  // Building geometry
+  Geometry geometry = 4;
+
+  // VendorSpec
+  VendorSpec vendor_spec = 6;
+
+  ntt.types.Meta metadata = 7;
+
+  // VendorSpec
+  message VendorSpec {
+    // PointGrab Specification
+    PointGrab point_grab = 1;
+
+    message PointGrab {
+      // building id in PointGrab
+      string building_id = 1;
+    }
+  }
+}

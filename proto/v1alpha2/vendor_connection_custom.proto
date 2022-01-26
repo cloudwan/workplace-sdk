@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package ntt.workplace.v1alpha2;
+
+import "workplace-sdk/proto/v1alpha2/common.proto";
+
+import "workplace-sdk/proto/v1alpha2/vendor_connection.proto";
+
+import "workplace-sdk/proto/v1alpha2/vendor_connection_change.proto";
+
+option java_package = "com.ntt.workplace.pb.v1alpha2";
+
+option java_outer_classname = "VendorConnectionCustomProto";
+
+option java_multiple_files = false;
+
+option go_package = "github.com/cloudwan/workplace-sdk/client/v1alpha2/vendor_connection;vendor_connection_client";
+
+// Request message for method
+// [PointGrabTelemetryNotify][ntt.workplace.v1alpha2.PointGrabTelemetryNotify]
+message PointGrabTelemetryNotifyRequest {
+  //  reference of ntt.workplace.v1alpha2.VendorConnection
+  string name = 1;
+
+  // Region ID for this notification
+  string region_id = 14;
+
+  // PointGrab floorId
+  string floor_id = 2;
+
+  // PointGrab areaId (Workplace zone)
+  string area_id = 3;
+
+  // list of devices that contribute to this data
+  repeated string devices = 4;
+
+  // Notification Type - currently only `COUNTING` is supported
+  PointGrab.Telemetry.NotificationType type = 5;
+
+  // unix timestamp in milliseconds
+  int64 timestamp = 6;
+
+  // `COUNTING` notification result
+  int64 count = 10;
+
+  // `TRAFFIC` type people count in
+  int64 count_in = 12;
+
+  // `TRAFFIC` type people count out
+  int64 count_out = 13;
+
+  // PointGrab relative people positions
+  repeated Point pc_positions = 11;
+}
