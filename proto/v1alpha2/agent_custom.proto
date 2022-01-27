@@ -3,18 +3,13 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/iam/proto/v1alpha2/service_account_key.proto";
-
 import "workplace-sdk/proto/v1alpha2/agent.proto";
-
 import "workplace-sdk/proto/v1alpha2/agent_change.proto";
 
-option java_multiple_files = false;
-
 option go_package = "github.com/cloudwan/workplace-sdk/client/v1alpha2/agent;agent_client";
-
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
+option java_multiple_files = false;
 option java_outer_classname = "AgentCustomProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Request message for method [Activation][ntt.workplace.v1alpha2.Activation]
 message ActivationRequest {

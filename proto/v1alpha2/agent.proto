@@ -3,16 +3,12 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/common/types/meta.proto";
-
 import "google/api/resource.proto";
 
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
-option java_outer_classname = "AgentProto";
-
-option java_multiple_files = true;
-
 option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/agent;agent";
+option java_multiple_files = true;
+option java_outer_classname = "AgentProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Agent Resource
 message Agent {

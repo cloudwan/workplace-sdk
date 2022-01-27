@@ -3,18 +3,13 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "workplace-sdk/proto/v1alpha2/common.proto";
-
 import "workplace-sdk/proto/v1alpha2/vendor_connection.proto";
-
 import "workplace-sdk/proto/v1alpha2/vendor_connection_change.proto";
 
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
-option java_outer_classname = "VendorConnectionCustomProto";
-
-option java_multiple_files = false;
-
 option go_package = "github.com/cloudwan/workplace-sdk/client/v1alpha2/vendor_connection;vendor_connection_client";
+option java_multiple_files = false;
+option java_outer_classname = "VendorConnectionCustomProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Request message for method
 // [PointGrabTelemetryNotify][ntt.workplace.v1alpha2.PointGrabTelemetryNotify]

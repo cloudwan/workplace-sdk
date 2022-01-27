@@ -3,15 +3,11 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "google/api/resource.proto";
-
 import "google/type/latlng.proto";
 
-option java_outer_classname = "CommonProto";
-
-option java_multiple_files = true;
-
 option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/common;workplace_common";
-
+option java_multiple_files = true;
+option java_outer_classname = "CommonProto";
 option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // BBox descrbes rectangular geographical area by using two corners

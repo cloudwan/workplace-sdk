@@ -3,18 +3,13 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/common/types/meta.proto";
-
 import "google/api/resource.proto";
-
 import "workplace-sdk/proto/v1alpha2/common.proto";
 
-option java_multiple_files = true;
-
 option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/area;area";
-
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
+option java_multiple_files = true;
 option java_outer_classname = "AreaProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Area Resource
 message Area {

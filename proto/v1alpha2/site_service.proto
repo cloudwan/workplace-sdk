@@ -3,32 +3,20 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/iam/proto/v1alpha2/condition.proto";
-
 import "edgelq-sdk/iam/proto/v1alpha2/permission.proto";
-
 import "google/api/annotations.proto";
-
 import "google/api/client.proto";
-
 import "google/protobuf/empty.proto";
-
 import "google/protobuf/field_mask.proto";
-
 import "goten-sdk/runtime/api/view.proto";
-
 import "goten-sdk/runtime/api/watch_type.proto";
-
 import "workplace-sdk/proto/v1alpha2/site.proto";
-
 import "workplace-sdk/proto/v1alpha2/site_change.proto";
 
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
-option java_outer_classname = "SiteServiceProto";
-
-option java_multiple_files = false;
-
 option go_package = "github.com/cloudwan/workplace-sdk/client/v1alpha2/site;site_client";
+option java_multiple_files = false;
+option java_outer_classname = "SiteServiceProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Request message for method [GetSite][ntt.workplace.v1alpha2.GetSite]
 message GetSiteRequest {
@@ -304,9 +292,8 @@ message DeleteSiteRequest {
 
 // Site service API for Workplace
 service SiteService {
-  option (google.api.oauth_scopes) = "https://apis.edgelq.com";
-
   option (google.api.default_host) = "workplace.edgelq.com";
+  option (google.api.oauth_scopes) = "https://apis.edgelq.com";
 
   // GetSite
   rpc GetSite(GetSiteRequest) returns (Site) {

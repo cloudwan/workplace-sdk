@@ -3,18 +3,13 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "google/api/resource.proto";
-
 import "google/protobuf/field_mask.proto";
-
 import "workplace-sdk/proto/v1alpha2/property.proto";
 
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
-option java_outer_classname = "PropertyChangeProto";
-
-option java_multiple_files = false;
-
 option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/property;property";
+option java_multiple_files = false;
+option java_outer_classname = "PropertyChangeProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // PropertyChange is used by Watch notifications Responses to describe change of
 // single Property One of Added, Modified, Removed

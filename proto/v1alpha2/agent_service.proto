@@ -3,34 +3,21 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/iam/proto/v1alpha2/condition.proto";
-
 import "edgelq-sdk/iam/proto/v1alpha2/permission.proto";
-
 import "google/api/annotations.proto";
-
 import "google/api/client.proto";
-
 import "google/protobuf/empty.proto";
-
 import "google/protobuf/field_mask.proto";
-
 import "goten-sdk/runtime/api/view.proto";
-
 import "goten-sdk/runtime/api/watch_type.proto";
-
 import "workplace-sdk/proto/v1alpha2/agent.proto";
-
 import "workplace-sdk/proto/v1alpha2/agent_change.proto";
-
 import "workplace-sdk/proto/v1alpha2/agent_custom.proto";
 
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
-option java_outer_classname = "AgentServiceProto";
-
-option java_multiple_files = false;
-
 option go_package = "github.com/cloudwan/workplace-sdk/client/v1alpha2/agent;agent_client";
+option java_multiple_files = false;
+option java_outer_classname = "AgentServiceProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Request message for method [GetAgent][ntt.workplace.v1alpha2.GetAgent]
 message GetAgentRequest {
@@ -307,7 +294,6 @@ message DeleteAgentRequest {
 // Agent service API for Workplace
 service AgentService {
   option (google.api.default_host) = "workplace.edgelq.com";
-
   option (google.api.oauth_scopes) = "https://apis.edgelq.com";
 
   // GetAgent

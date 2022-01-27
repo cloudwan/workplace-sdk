@@ -3,28 +3,18 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/common/types/meta.proto";
-
 import "google/api/resource.proto";
-
 import "workplace-sdk/proto/v1alpha2/area.proto";
-
 import "workplace-sdk/proto/v1alpha2/bacnet.proto";
-
 import "workplace-sdk/proto/v1alpha2/building.proto";
-
 import "workplace-sdk/proto/v1alpha2/floor.proto";
-
 import "workplace-sdk/proto/v1alpha2/site.proto";
-
 import "workplace-sdk/proto/v1alpha2/zone.proto";
 
-option java_package = "com.ntt.workplace.pb.v1alpha2";
-
-option java_outer_classname = "PropertyProto";
-
-option java_multiple_files = true;
-
 option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/property;property";
+option java_multiple_files = true;
+option java_outer_classname = "PropertyProto";
+option java_package = "com.ntt.workplace.pb.v1alpha2";
 
 // Property Resource
 message Property {
