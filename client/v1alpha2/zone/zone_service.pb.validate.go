@@ -84,6 +84,13 @@ func (obj *BatchGetZonesResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
 	}
+	for idx, elem := range obj.Zones {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("BatchGetZonesResponse", "zones", obj.Zones[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
 	}
@@ -104,6 +111,13 @@ func (obj *ListZonesRequest) GotenValidate() error {
 func (obj *ListZonesResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.Zones {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("ListZonesResponse", "zones", obj.Zones[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
@@ -151,6 +165,13 @@ func (obj *WatchZonesRequest) GotenValidate() error {
 func (obj *WatchZonesResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.ZoneChanges {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("WatchZonesResponse", "zoneChanges", obj.ZoneChanges[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if subobj, ok := interface{}(obj.PageTokenChange).(gotenvalidate.Validator); ok {
 		if err := subobj.GotenValidate(); err != nil {

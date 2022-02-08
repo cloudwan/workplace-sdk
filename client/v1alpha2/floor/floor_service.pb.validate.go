@@ -78,6 +78,13 @@ func (obj *BatchGetFloorsResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
 	}
+	for idx, elem := range obj.Floors {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("BatchGetFloorsResponse", "floors", obj.Floors[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
 	}
@@ -98,6 +105,13 @@ func (obj *ListFloorsRequest) GotenValidate() error {
 func (obj *ListFloorsResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.Floors {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("ListFloorsResponse", "floors", obj.Floors[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
@@ -145,6 +159,13 @@ func (obj *WatchFloorsRequest) GotenValidate() error {
 func (obj *WatchFloorsResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.FloorChanges {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("WatchFloorsResponse", "floorChanges", obj.FloorChanges[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if subobj, ok := interface{}(obj.PageTokenChange).(gotenvalidate.Validator); ok {
 		if err := subobj.GotenValidate(); err != nil {

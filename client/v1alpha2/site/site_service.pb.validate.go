@@ -78,6 +78,13 @@ func (obj *BatchGetSitesResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
 	}
+	for idx, elem := range obj.Sites {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("BatchGetSitesResponse", "sites", obj.Sites[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
 	}
@@ -98,6 +105,13 @@ func (obj *ListSitesRequest) GotenValidate() error {
 func (obj *ListSitesResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.Sites {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("ListSitesResponse", "sites", obj.Sites[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
@@ -145,6 +159,13 @@ func (obj *WatchSitesRequest) GotenValidate() error {
 func (obj *WatchSitesResponse) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.SiteChanges {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("WatchSitesResponse", "siteChanges", obj.SiteChanges[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if subobj, ok := interface{}(obj.PageTokenChange).(gotenvalidate.Validator); ok {
 		if err := subobj.GotenValidate(); err != nil {

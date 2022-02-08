@@ -175,6 +175,13 @@ func (obj *VendorConnection_Info_PointGrabInfo) GotenValidate() error {
 	if obj == nil {
 		return nil
 	}
+	for idx, elem := range obj.TelemetrySubscriptions {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("PointGrabInfo", "telemetrySubscriptions", obj.TelemetrySubscriptions[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
 	}

@@ -63,6 +63,13 @@ func (obj *Floor) GotenValidate() error {
 			return gotenvalidate.NewValidationError("Floor", "geometry", obj.Geometry, "nested object validation failed", err)
 		}
 	}
+	for idx, elem := range obj.VendorMappings {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("Floor", "vendorMappings", obj.VendorMappings[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if subobj, ok := interface{}(obj.VendorSpec).(gotenvalidate.Validator); ok {
 		if err := subobj.GotenValidate(); err != nil {
 			return gotenvalidate.NewValidationError("Floor", "vendorSpec", obj.VendorSpec, "nested object validation failed", err)
@@ -139,6 +146,13 @@ func (obj *Floor_VendorSpec_PointGrab) GotenValidate() error {
 	if obj == nil {
 		return nil
 	}
+	for idx, elem := range obj.ReferencePoints {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("PointGrab", "referencePoints", obj.ReferencePoints[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
 	}
@@ -176,6 +190,13 @@ func (obj *Floor_VendorInfo_PointGrab) GotenValidate() error {
 	if obj == nil {
 		return nil
 	}
+	for idx, elem := range obj.ReferencePoints {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("PointGrab", "referencePoints", obj.ReferencePoints[idx], "nested object validation failed", err)
+			}
+		}
+	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
 	}
@@ -198,6 +219,13 @@ func (obj *Floor_VendorState_PointGrab) GotenValidate() error {
 func (obj *Floor_VendorState_PointGrab_PeoplePositions) GotenValidate() error {
 	if obj == nil {
 		return nil
+	}
+	for idx, elem := range obj.Coordinates {
+		if subobj, ok := interface{}(elem).(gotenvalidate.Validator); ok {
+			if err := subobj.GotenValidate(); err != nil {
+				return gotenvalidate.NewValidationError("PeoplePositions", "coordinates", obj.Coordinates[idx], "nested object validation failed", err)
+			}
+		}
 	}
 	if cvobj, ok := interface{}(obj).(gotenvalidate.CustomValidator); ok {
 		return cvobj.GotenCustomValidate()
