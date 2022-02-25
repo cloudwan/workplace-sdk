@@ -40,15 +40,7 @@ var (
 )
 
 var (
-	descriptor = &Descriptor{
-		typeName: gotenresource.NewTypeName(
-			"Property", "Properties", "workplace.edgelq.com"),
-		nameDescriptor: gotenresource.NewNameDescriptor(
-			&Property_FieldTerminalPath{selector: Property_FieldPathSelectorName},
-			"pattern", "propertyId",
-			[]string{"projectId", "regionId", "siteId", "buildingId", "floorId", "areaId", "zoneId", "deviceId"},
-			[]gotenresource.NamePattern{NamePattern_Project_Region_Site, NamePattern_Project_Region_Site_Building, NamePattern_Project_Region_Site_Building_Floor, NamePattern_Project_Region_Site_Building_Floor_Area, NamePattern_Project_Region_Site_Zone, NamePattern_Project_Region_Site_Building_Zone, NamePattern_Project_Region_Site_Building_Floor_Zone, NamePattern_Project_Region_Site_Building_Floor_Area_Zone, NamePattern_Project_Region_Site_Device}),
-	}
+	descriptor *Descriptor
 )
 
 type Descriptor struct {
@@ -60,19 +52,11 @@ func GetDescriptor() *Descriptor {
 	return descriptor
 }
 
-func (d *Descriptor) NewProperty() *Property {
+func (d *Descriptor) NewResource() gotenresource.Resource {
 	return &Property{}
 }
 
-func (d *Descriptor) NewResource() gotenresource.Resource {
-	return d.NewProperty()
-}
-
 func (d *Descriptor) NewResourceName() gotenresource.Name {
-	return NewNameBuilder().Name()
-}
-
-func (d *Descriptor) NewPropertyName() *Name {
 	return NewNameBuilder().Name()
 }
 
@@ -91,30 +75,29 @@ func (d *Descriptor) NewSearchQuery() gotenresource.SearchQuery {
 func (d *Descriptor) NewWatchQuery() gotenresource.WatchQuery {
 	return &WatchQuery{}
 }
-func (d *Descriptor) NewPropertyCursor() *PagerCursor {
+
+func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
 	return &PagerCursor{}
 }
 
-func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
-	return d.NewPropertyCursor()
+func (d *Descriptor) NewResourceFilter() gotenresource.Filter {
+	return &Filter{}
 }
-func (d *Descriptor) NewPropertyChange() *PropertyChange {
-	return &PropertyChange{}
+
+func (d *Descriptor) NewResourceOrderBy() gotenresource.OrderBy {
+	return &OrderBy{}
+}
+
+func (d *Descriptor) NewResourceFieldMask() gotenobject.FieldMask {
+	return &Property_FieldMask{}
 }
 
 func (d *Descriptor) NewResourceChange() gotenresource.ResourceChange {
-	return d.NewPropertyChange()
-}
-
-func (d *Descriptor) NewPropertyQueryResultSnapshot() *QueryResultSnapshot {
-	return &QueryResultSnapshot{}
+	return &PropertyChange{}
 }
 
 func (d *Descriptor) NewQueryResultSnapshot() gotenresource.QueryResultSnapshot {
-	return d.NewPropertyQueryResultSnapshot()
-}
-func (d *Descriptor) NewPropertyQueryResultChange() *QueryResultChange {
-	return &QueryResultChange{}
+	return &QueryResultSnapshot{}
 }
 
 func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryResultSnapshot {
@@ -122,63 +105,35 @@ func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryRes
 }
 
 func (d *Descriptor) NewQueryResultChange() gotenresource.QueryResultChange {
-	return d.NewPropertyQueryResultChange()
-}
-
-func (d *Descriptor) NewPropertyList(size, reserved int) PropertyList {
-	return make(PropertyList, size, reserved)
+	return &QueryResultChange{}
 }
 
 func (d *Descriptor) NewResourceList(size, reserved int) gotenresource.ResourceList {
 	return make(PropertyList, size, reserved)
-}
-func (d *Descriptor) NewPropertyChangeList(size, reserved int) PropertyChangeList {
-	return make(PropertyChangeList, size, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeList(size, reserved int) gotenresource.ResourceChangeList {
 	return make(PropertyChangeList, size, reserved)
 }
 
-func (d *Descriptor) NewPropertyNameList(size, reserved int) PropertyNameList {
-	return make(PropertyNameList, size, reserved)
-}
-
 func (d *Descriptor) NewNameList(size, reserved int) gotenresource.NameList {
 	return make(PropertyNameList, size, reserved)
-}
-
-func (d *Descriptor) NewPropertyReferenceList(size, reserved int) PropertyReferenceList {
-	return make(PropertyReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewReferenceList(size, reserved int) gotenresource.ReferenceList {
 	return make(PropertyReferenceList, size, reserved)
 }
-func (d *Descriptor) NewPropertyParentNameList(size, reserved int) PropertyParentNameList {
-	return make(PropertyParentNameList, size, reserved)
-}
 
 func (d *Descriptor) NewParentNameList(size, reserved int) gotenresource.ParentNameList {
 	return make(PropertyParentNameList, size, reserved)
-}
-func (d *Descriptor) NewPropertyParentReferenceList(size, reserved int) PropertyParentReferenceList {
-	return make(PropertyParentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewParentReferenceList(size, reserved int) gotenresource.ParentReferenceList {
 	return make(PropertyParentReferenceList, size, reserved)
 }
 
-func (d *Descriptor) NewPropertyMap(reserved int) PropertyMap {
-	return make(PropertyMap, reserved)
-}
-
 func (d *Descriptor) NewResourceMap(reserved int) gotenresource.ResourceMap {
 	return make(PropertyMap, reserved)
-}
-func (d *Descriptor) NewPropertyChangeMap(reserved int) PropertyChangeMap {
-	return make(PropertyChangeMap, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeMap(reserved int) gotenresource.ResourceChangeMap {
@@ -197,10 +152,23 @@ func (d *Descriptor) ParseFieldPath(raw string) (gotenobject.FieldPath, error) {
 	return ParseProperty_FieldPath(raw)
 }
 
-func (d *Descriptor) ParsePropertyName(nameStr string) (*Name, error) {
+func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
 	return ParseName(nameStr)
 }
 
-func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
-	return ParseName(nameStr)
+func initPropertyDescriptor() {
+	descriptor = &Descriptor{
+		typeName: gotenresource.NewTypeName(
+			"Property", "Properties", "workplace.edgelq.com", "v1alpha2"),
+		nameDescriptor: gotenresource.NewNameDescriptor(
+			&Property_FieldTerminalPath{selector: Property_FieldPathSelectorName},
+			"pattern", "propertyId",
+			[]string{"projectId", "regionId", "siteId", "buildingId", "floorId", "areaId", "zoneId", "deviceId"},
+			[]gotenresource.NamePattern{NamePattern_Project_Region_Site, NamePattern_Project_Region_Site_Building, NamePattern_Project_Region_Site_Building_Floor, NamePattern_Project_Region_Site_Building_Floor_Area, NamePattern_Project_Region_Site_Zone, NamePattern_Project_Region_Site_Building_Zone, NamePattern_Project_Region_Site_Building_Floor_Zone, NamePattern_Project_Region_Site_Building_Floor_Area_Zone, NamePattern_Project_Region_Site_Device}),
+	}
+	gotenresource.GetRegistry().RegisterDescriptor(descriptor)
+}
+
+func init() {
+	initPropertyDescriptor()
 }

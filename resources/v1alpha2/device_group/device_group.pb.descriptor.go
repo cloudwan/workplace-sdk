@@ -28,15 +28,7 @@ var (
 )
 
 var (
-	descriptor = &Descriptor{
-		typeName: gotenresource.NewTypeName(
-			"DeviceGroup", "DeviceGroups", "workplace.edgelq.com"),
-		nameDescriptor: gotenresource.NewNameDescriptor(
-			&DeviceGroup_FieldTerminalPath{selector: DeviceGroup_FieldPathSelectorName},
-			"pattern", "deviceGroupId",
-			[]string{"projectId"},
-			[]gotenresource.NamePattern{NamePattern_Project}),
-	}
+	descriptor *Descriptor
 )
 
 type Descriptor struct {
@@ -48,19 +40,11 @@ func GetDescriptor() *Descriptor {
 	return descriptor
 }
 
-func (d *Descriptor) NewDeviceGroup() *DeviceGroup {
+func (d *Descriptor) NewResource() gotenresource.Resource {
 	return &DeviceGroup{}
 }
 
-func (d *Descriptor) NewResource() gotenresource.Resource {
-	return d.NewDeviceGroup()
-}
-
 func (d *Descriptor) NewResourceName() gotenresource.Name {
-	return NewNameBuilder().Name()
-}
-
-func (d *Descriptor) NewDeviceGroupName() *Name {
 	return NewNameBuilder().Name()
 }
 
@@ -79,30 +63,29 @@ func (d *Descriptor) NewSearchQuery() gotenresource.SearchQuery {
 func (d *Descriptor) NewWatchQuery() gotenresource.WatchQuery {
 	return &WatchQuery{}
 }
-func (d *Descriptor) NewDeviceGroupCursor() *PagerCursor {
+
+func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
 	return &PagerCursor{}
 }
 
-func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
-	return d.NewDeviceGroupCursor()
+func (d *Descriptor) NewResourceFilter() gotenresource.Filter {
+	return &Filter{}
 }
-func (d *Descriptor) NewDeviceGroupChange() *DeviceGroupChange {
-	return &DeviceGroupChange{}
+
+func (d *Descriptor) NewResourceOrderBy() gotenresource.OrderBy {
+	return &OrderBy{}
+}
+
+func (d *Descriptor) NewResourceFieldMask() gotenobject.FieldMask {
+	return &DeviceGroup_FieldMask{}
 }
 
 func (d *Descriptor) NewResourceChange() gotenresource.ResourceChange {
-	return d.NewDeviceGroupChange()
-}
-
-func (d *Descriptor) NewDeviceGroupQueryResultSnapshot() *QueryResultSnapshot {
-	return &QueryResultSnapshot{}
+	return &DeviceGroupChange{}
 }
 
 func (d *Descriptor) NewQueryResultSnapshot() gotenresource.QueryResultSnapshot {
-	return d.NewDeviceGroupQueryResultSnapshot()
-}
-func (d *Descriptor) NewDeviceGroupQueryResultChange() *QueryResultChange {
-	return &QueryResultChange{}
+	return &QueryResultSnapshot{}
 }
 
 func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryResultSnapshot {
@@ -110,63 +93,35 @@ func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryRes
 }
 
 func (d *Descriptor) NewQueryResultChange() gotenresource.QueryResultChange {
-	return d.NewDeviceGroupQueryResultChange()
-}
-
-func (d *Descriptor) NewDeviceGroupList(size, reserved int) DeviceGroupList {
-	return make(DeviceGroupList, size, reserved)
+	return &QueryResultChange{}
 }
 
 func (d *Descriptor) NewResourceList(size, reserved int) gotenresource.ResourceList {
 	return make(DeviceGroupList, size, reserved)
-}
-func (d *Descriptor) NewDeviceGroupChangeList(size, reserved int) DeviceGroupChangeList {
-	return make(DeviceGroupChangeList, size, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeList(size, reserved int) gotenresource.ResourceChangeList {
 	return make(DeviceGroupChangeList, size, reserved)
 }
 
-func (d *Descriptor) NewDeviceGroupNameList(size, reserved int) DeviceGroupNameList {
-	return make(DeviceGroupNameList, size, reserved)
-}
-
 func (d *Descriptor) NewNameList(size, reserved int) gotenresource.NameList {
 	return make(DeviceGroupNameList, size, reserved)
-}
-
-func (d *Descriptor) NewDeviceGroupReferenceList(size, reserved int) DeviceGroupReferenceList {
-	return make(DeviceGroupReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewReferenceList(size, reserved int) gotenresource.ReferenceList {
 	return make(DeviceGroupReferenceList, size, reserved)
 }
-func (d *Descriptor) NewDeviceGroupParentNameList(size, reserved int) DeviceGroupParentNameList {
-	return make(DeviceGroupParentNameList, size, reserved)
-}
 
 func (d *Descriptor) NewParentNameList(size, reserved int) gotenresource.ParentNameList {
 	return make(DeviceGroupParentNameList, size, reserved)
-}
-func (d *Descriptor) NewDeviceGroupParentReferenceList(size, reserved int) DeviceGroupParentReferenceList {
-	return make(DeviceGroupParentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewParentReferenceList(size, reserved int) gotenresource.ParentReferenceList {
 	return make(DeviceGroupParentReferenceList, size, reserved)
 }
 
-func (d *Descriptor) NewDeviceGroupMap(reserved int) DeviceGroupMap {
-	return make(DeviceGroupMap, reserved)
-}
-
 func (d *Descriptor) NewResourceMap(reserved int) gotenresource.ResourceMap {
 	return make(DeviceGroupMap, reserved)
-}
-func (d *Descriptor) NewDeviceGroupChangeMap(reserved int) DeviceGroupChangeMap {
-	return make(DeviceGroupChangeMap, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeMap(reserved int) gotenresource.ResourceChangeMap {
@@ -185,10 +140,23 @@ func (d *Descriptor) ParseFieldPath(raw string) (gotenobject.FieldPath, error) {
 	return ParseDeviceGroup_FieldPath(raw)
 }
 
-func (d *Descriptor) ParseDeviceGroupName(nameStr string) (*Name, error) {
+func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
 	return ParseName(nameStr)
 }
 
-func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
-	return ParseName(nameStr)
+func initDeviceGroupDescriptor() {
+	descriptor = &Descriptor{
+		typeName: gotenresource.NewTypeName(
+			"DeviceGroup", "DeviceGroups", "workplace.edgelq.com", "v1alpha2"),
+		nameDescriptor: gotenresource.NewNameDescriptor(
+			&DeviceGroup_FieldTerminalPath{selector: DeviceGroup_FieldPathSelectorName},
+			"pattern", "deviceGroupId",
+			[]string{"projectId"},
+			[]gotenresource.NamePattern{NamePattern_Project}),
+	}
+	gotenresource.GetRegistry().RegisterDescriptor(descriptor)
+}
+
+func init() {
+	initDeviceGroupDescriptor()
 }

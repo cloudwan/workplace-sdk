@@ -8,9 +8,11 @@ import (
 	"context"
 	"fmt"
 
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	gotenaccess "github.com/cloudwan/goten-sdk/runtime/access"
 	"github.com/cloudwan/goten-sdk/runtime/api/watch_type"
 	gotenresource "github.com/cloudwan/goten-sdk/runtime/resource"
 
@@ -22,9 +24,11 @@ var (
 	_ = context.Context(nil)
 	_ = fmt.GoStringer(nil)
 
+	_ = grpc.ClientConnInterface(nil)
 	_ = codes.NotFound
 	_ = status.Status{}
 
+	_ = gotenaccess.Watcher(nil)
 	_ = watch_type.WatchType_STATEFUL
 	_ = gotenresource.ListQuery(nil)
 )
@@ -156,7 +160,7 @@ func (a *apiBuildingAccess) SaveBuilding(ctx context.Context, res *building.Buil
 	saveOpts := gotenresource.MakeSaveOptions(opts)
 	previousRes := saveOpts.GetPreviousResource()
 
-	if previousRes == nil {
+	if previousRes == nil && !saveOpts.OnlyUpdate() && !saveOpts.OnlyCreate() {
 		var err error
 		previousRes, err = a.GetBuilding(ctx, &building.GetQuery{Reference: res.Name.AsReference()})
 		if err != nil {
@@ -166,9 +170,18 @@ func (a *apiBuildingAccess) SaveBuilding(ctx context.Context, res *building.Buil
 		}
 	}
 
-	if previousRes != nil {
+	if saveOpts.OnlyUpdate() || previousRes != nil {
 		updateRequest := &building_client.UpdateBuildingRequest{
 			Building: res,
+		}
+		if updateMask := saveOpts.GetUpdateMask(); updateMask != nil {
+			updateRequest.UpdateMask = updateMask.(*building.Building_FieldMask)
+		}
+		if mask, conditionalState := saveOpts.GetCAS(); mask != nil && conditionalState != nil {
+			updateRequest.Cas = &building_client.UpdateBuildingRequest_CAS{
+				ConditionalState: conditionalState.(*building.Building),
+				FieldMask:        mask.(*building.Building_FieldMask),
+			}
 		}
 		_, err := a.client.UpdateBuilding(ctx, updateRequest)
 		if err != nil {
@@ -193,4 +206,10 @@ func (a *apiBuildingAccess) DeleteBuilding(ctx context.Context, ref *building.Re
 	}
 	_, err := a.client.DeleteBuilding(ctx, request)
 	return err
+}
+
+func init() {
+	gotenaccess.GetRegistry().RegisterApiAccessConstructor(building.GetDescriptor(), func(cc grpc.ClientConnInterface) gotenresource.Access {
+		return building.AsAnyCastAccess(NewApiBuildingAccess(building_client.NewBuildingServiceClient(cc)))
+	})
 }

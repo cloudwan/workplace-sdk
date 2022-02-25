@@ -28,15 +28,7 @@ var (
 )
 
 var (
-	descriptor = &Descriptor{
-		typeName: gotenresource.NewTypeName(
-			"Agent", "Agents", "workplace.edgelq.com"),
-		nameDescriptor: gotenresource.NewNameDescriptor(
-			&Agent_FieldTerminalPath{selector: Agent_FieldPathSelectorName},
-			"pattern", "agentId",
-			[]string{"projectId", "regionId"},
-			[]gotenresource.NamePattern{NamePattern_Project_Region}),
-	}
+	descriptor *Descriptor
 )
 
 type Descriptor struct {
@@ -48,19 +40,11 @@ func GetDescriptor() *Descriptor {
 	return descriptor
 }
 
-func (d *Descriptor) NewAgent() *Agent {
+func (d *Descriptor) NewResource() gotenresource.Resource {
 	return &Agent{}
 }
 
-func (d *Descriptor) NewResource() gotenresource.Resource {
-	return d.NewAgent()
-}
-
 func (d *Descriptor) NewResourceName() gotenresource.Name {
-	return NewNameBuilder().Name()
-}
-
-func (d *Descriptor) NewAgentName() *Name {
 	return NewNameBuilder().Name()
 }
 
@@ -79,30 +63,29 @@ func (d *Descriptor) NewSearchQuery() gotenresource.SearchQuery {
 func (d *Descriptor) NewWatchQuery() gotenresource.WatchQuery {
 	return &WatchQuery{}
 }
-func (d *Descriptor) NewAgentCursor() *PagerCursor {
+
+func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
 	return &PagerCursor{}
 }
 
-func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
-	return d.NewAgentCursor()
+func (d *Descriptor) NewResourceFilter() gotenresource.Filter {
+	return &Filter{}
 }
-func (d *Descriptor) NewAgentChange() *AgentChange {
-	return &AgentChange{}
+
+func (d *Descriptor) NewResourceOrderBy() gotenresource.OrderBy {
+	return &OrderBy{}
+}
+
+func (d *Descriptor) NewResourceFieldMask() gotenobject.FieldMask {
+	return &Agent_FieldMask{}
 }
 
 func (d *Descriptor) NewResourceChange() gotenresource.ResourceChange {
-	return d.NewAgentChange()
-}
-
-func (d *Descriptor) NewAgentQueryResultSnapshot() *QueryResultSnapshot {
-	return &QueryResultSnapshot{}
+	return &AgentChange{}
 }
 
 func (d *Descriptor) NewQueryResultSnapshot() gotenresource.QueryResultSnapshot {
-	return d.NewAgentQueryResultSnapshot()
-}
-func (d *Descriptor) NewAgentQueryResultChange() *QueryResultChange {
-	return &QueryResultChange{}
+	return &QueryResultSnapshot{}
 }
 
 func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryResultSnapshot {
@@ -110,63 +93,35 @@ func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryRes
 }
 
 func (d *Descriptor) NewQueryResultChange() gotenresource.QueryResultChange {
-	return d.NewAgentQueryResultChange()
-}
-
-func (d *Descriptor) NewAgentList(size, reserved int) AgentList {
-	return make(AgentList, size, reserved)
+	return &QueryResultChange{}
 }
 
 func (d *Descriptor) NewResourceList(size, reserved int) gotenresource.ResourceList {
 	return make(AgentList, size, reserved)
-}
-func (d *Descriptor) NewAgentChangeList(size, reserved int) AgentChangeList {
-	return make(AgentChangeList, size, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeList(size, reserved int) gotenresource.ResourceChangeList {
 	return make(AgentChangeList, size, reserved)
 }
 
-func (d *Descriptor) NewAgentNameList(size, reserved int) AgentNameList {
-	return make(AgentNameList, size, reserved)
-}
-
 func (d *Descriptor) NewNameList(size, reserved int) gotenresource.NameList {
 	return make(AgentNameList, size, reserved)
-}
-
-func (d *Descriptor) NewAgentReferenceList(size, reserved int) AgentReferenceList {
-	return make(AgentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewReferenceList(size, reserved int) gotenresource.ReferenceList {
 	return make(AgentReferenceList, size, reserved)
 }
-func (d *Descriptor) NewAgentParentNameList(size, reserved int) AgentParentNameList {
-	return make(AgentParentNameList, size, reserved)
-}
 
 func (d *Descriptor) NewParentNameList(size, reserved int) gotenresource.ParentNameList {
 	return make(AgentParentNameList, size, reserved)
-}
-func (d *Descriptor) NewAgentParentReferenceList(size, reserved int) AgentParentReferenceList {
-	return make(AgentParentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewParentReferenceList(size, reserved int) gotenresource.ParentReferenceList {
 	return make(AgentParentReferenceList, size, reserved)
 }
 
-func (d *Descriptor) NewAgentMap(reserved int) AgentMap {
-	return make(AgentMap, reserved)
-}
-
 func (d *Descriptor) NewResourceMap(reserved int) gotenresource.ResourceMap {
 	return make(AgentMap, reserved)
-}
-func (d *Descriptor) NewAgentChangeMap(reserved int) AgentChangeMap {
-	return make(AgentChangeMap, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeMap(reserved int) gotenresource.ResourceChangeMap {
@@ -185,10 +140,23 @@ func (d *Descriptor) ParseFieldPath(raw string) (gotenobject.FieldPath, error) {
 	return ParseAgent_FieldPath(raw)
 }
 
-func (d *Descriptor) ParseAgentName(nameStr string) (*Name, error) {
+func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
 	return ParseName(nameStr)
 }
 
-func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
-	return ParseName(nameStr)
+func initAgentDescriptor() {
+	descriptor = &Descriptor{
+		typeName: gotenresource.NewTypeName(
+			"Agent", "Agents", "workplace.edgelq.com", "v1alpha2"),
+		nameDescriptor: gotenresource.NewNameDescriptor(
+			&Agent_FieldTerminalPath{selector: Agent_FieldPathSelectorName},
+			"pattern", "agentId",
+			[]string{"projectId", "regionId"},
+			[]gotenresource.NamePattern{NamePattern_Project_Region}),
+	}
+	gotenresource.GetRegistry().RegisterDescriptor(descriptor)
+}
+
+func init() {
+	initAgentDescriptor()
 }

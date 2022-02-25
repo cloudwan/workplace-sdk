@@ -30,15 +30,7 @@ var (
 )
 
 var (
-	descriptor = &Descriptor{
-		typeName: gotenresource.NewTypeName(
-			"Area", "Areas", "workplace.edgelq.com"),
-		nameDescriptor: gotenresource.NewNameDescriptor(
-			&Area_FieldTerminalPath{selector: Area_FieldPathSelectorName},
-			"pattern", "areaId",
-			[]string{"projectId", "regionId", "siteId", "buildingId", "floorId"},
-			[]gotenresource.NamePattern{NamePattern_Project_Region_Site_Building_Floor}),
-	}
+	descriptor *Descriptor
 )
 
 type Descriptor struct {
@@ -50,19 +42,11 @@ func GetDescriptor() *Descriptor {
 	return descriptor
 }
 
-func (d *Descriptor) NewArea() *Area {
+func (d *Descriptor) NewResource() gotenresource.Resource {
 	return &Area{}
 }
 
-func (d *Descriptor) NewResource() gotenresource.Resource {
-	return d.NewArea()
-}
-
 func (d *Descriptor) NewResourceName() gotenresource.Name {
-	return NewNameBuilder().Name()
-}
-
-func (d *Descriptor) NewAreaName() *Name {
 	return NewNameBuilder().Name()
 }
 
@@ -81,30 +65,29 @@ func (d *Descriptor) NewSearchQuery() gotenresource.SearchQuery {
 func (d *Descriptor) NewWatchQuery() gotenresource.WatchQuery {
 	return &WatchQuery{}
 }
-func (d *Descriptor) NewAreaCursor() *PagerCursor {
+
+func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
 	return &PagerCursor{}
 }
 
-func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
-	return d.NewAreaCursor()
+func (d *Descriptor) NewResourceFilter() gotenresource.Filter {
+	return &Filter{}
 }
-func (d *Descriptor) NewAreaChange() *AreaChange {
-	return &AreaChange{}
+
+func (d *Descriptor) NewResourceOrderBy() gotenresource.OrderBy {
+	return &OrderBy{}
+}
+
+func (d *Descriptor) NewResourceFieldMask() gotenobject.FieldMask {
+	return &Area_FieldMask{}
 }
 
 func (d *Descriptor) NewResourceChange() gotenresource.ResourceChange {
-	return d.NewAreaChange()
-}
-
-func (d *Descriptor) NewAreaQueryResultSnapshot() *QueryResultSnapshot {
-	return &QueryResultSnapshot{}
+	return &AreaChange{}
 }
 
 func (d *Descriptor) NewQueryResultSnapshot() gotenresource.QueryResultSnapshot {
-	return d.NewAreaQueryResultSnapshot()
-}
-func (d *Descriptor) NewAreaQueryResultChange() *QueryResultChange {
-	return &QueryResultChange{}
+	return &QueryResultSnapshot{}
 }
 
 func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryResultSnapshot {
@@ -112,63 +95,35 @@ func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryRes
 }
 
 func (d *Descriptor) NewQueryResultChange() gotenresource.QueryResultChange {
-	return d.NewAreaQueryResultChange()
-}
-
-func (d *Descriptor) NewAreaList(size, reserved int) AreaList {
-	return make(AreaList, size, reserved)
+	return &QueryResultChange{}
 }
 
 func (d *Descriptor) NewResourceList(size, reserved int) gotenresource.ResourceList {
 	return make(AreaList, size, reserved)
-}
-func (d *Descriptor) NewAreaChangeList(size, reserved int) AreaChangeList {
-	return make(AreaChangeList, size, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeList(size, reserved int) gotenresource.ResourceChangeList {
 	return make(AreaChangeList, size, reserved)
 }
 
-func (d *Descriptor) NewAreaNameList(size, reserved int) AreaNameList {
-	return make(AreaNameList, size, reserved)
-}
-
 func (d *Descriptor) NewNameList(size, reserved int) gotenresource.NameList {
 	return make(AreaNameList, size, reserved)
-}
-
-func (d *Descriptor) NewAreaReferenceList(size, reserved int) AreaReferenceList {
-	return make(AreaReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewReferenceList(size, reserved int) gotenresource.ReferenceList {
 	return make(AreaReferenceList, size, reserved)
 }
-func (d *Descriptor) NewAreaParentNameList(size, reserved int) AreaParentNameList {
-	return make(AreaParentNameList, size, reserved)
-}
 
 func (d *Descriptor) NewParentNameList(size, reserved int) gotenresource.ParentNameList {
 	return make(AreaParentNameList, size, reserved)
-}
-func (d *Descriptor) NewAreaParentReferenceList(size, reserved int) AreaParentReferenceList {
-	return make(AreaParentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewParentReferenceList(size, reserved int) gotenresource.ParentReferenceList {
 	return make(AreaParentReferenceList, size, reserved)
 }
 
-func (d *Descriptor) NewAreaMap(reserved int) AreaMap {
-	return make(AreaMap, reserved)
-}
-
 func (d *Descriptor) NewResourceMap(reserved int) gotenresource.ResourceMap {
 	return make(AreaMap, reserved)
-}
-func (d *Descriptor) NewAreaChangeMap(reserved int) AreaChangeMap {
-	return make(AreaChangeMap, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeMap(reserved int) gotenresource.ResourceChangeMap {
@@ -187,10 +142,23 @@ func (d *Descriptor) ParseFieldPath(raw string) (gotenobject.FieldPath, error) {
 	return ParseArea_FieldPath(raw)
 }
 
-func (d *Descriptor) ParseAreaName(nameStr string) (*Name, error) {
+func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
 	return ParseName(nameStr)
 }
 
-func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
-	return ParseName(nameStr)
+func initAreaDescriptor() {
+	descriptor = &Descriptor{
+		typeName: gotenresource.NewTypeName(
+			"Area", "Areas", "workplace.edgelq.com", "v1alpha2"),
+		nameDescriptor: gotenresource.NewNameDescriptor(
+			&Area_FieldTerminalPath{selector: Area_FieldPathSelectorName},
+			"pattern", "areaId",
+			[]string{"projectId", "regionId", "siteId", "buildingId", "floorId"},
+			[]gotenresource.NamePattern{NamePattern_Project_Region_Site_Building_Floor}),
+	}
+	gotenresource.GetRegistry().RegisterDescriptor(descriptor)
+}
+
+func init() {
+	initAreaDescriptor()
 }

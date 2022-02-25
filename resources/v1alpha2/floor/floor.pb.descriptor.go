@@ -34,15 +34,7 @@ var (
 )
 
 var (
-	descriptor = &Descriptor{
-		typeName: gotenresource.NewTypeName(
-			"Floor", "Floors", "workplace.edgelq.com"),
-		nameDescriptor: gotenresource.NewNameDescriptor(
-			&Floor_FieldTerminalPath{selector: Floor_FieldPathSelectorName},
-			"pattern", "floorId",
-			[]string{"projectId", "regionId", "siteId", "buildingId"},
-			[]gotenresource.NamePattern{NamePattern_Project_Region_Site_Building}),
-	}
+	descriptor *Descriptor
 )
 
 type Descriptor struct {
@@ -54,19 +46,11 @@ func GetDescriptor() *Descriptor {
 	return descriptor
 }
 
-func (d *Descriptor) NewFloor() *Floor {
+func (d *Descriptor) NewResource() gotenresource.Resource {
 	return &Floor{}
 }
 
-func (d *Descriptor) NewResource() gotenresource.Resource {
-	return d.NewFloor()
-}
-
 func (d *Descriptor) NewResourceName() gotenresource.Name {
-	return NewNameBuilder().Name()
-}
-
-func (d *Descriptor) NewFloorName() *Name {
 	return NewNameBuilder().Name()
 }
 
@@ -85,30 +69,29 @@ func (d *Descriptor) NewSearchQuery() gotenresource.SearchQuery {
 func (d *Descriptor) NewWatchQuery() gotenresource.WatchQuery {
 	return &WatchQuery{}
 }
-func (d *Descriptor) NewFloorCursor() *PagerCursor {
+
+func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
 	return &PagerCursor{}
 }
 
-func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
-	return d.NewFloorCursor()
+func (d *Descriptor) NewResourceFilter() gotenresource.Filter {
+	return &Filter{}
 }
-func (d *Descriptor) NewFloorChange() *FloorChange {
-	return &FloorChange{}
+
+func (d *Descriptor) NewResourceOrderBy() gotenresource.OrderBy {
+	return &OrderBy{}
+}
+
+func (d *Descriptor) NewResourceFieldMask() gotenobject.FieldMask {
+	return &Floor_FieldMask{}
 }
 
 func (d *Descriptor) NewResourceChange() gotenresource.ResourceChange {
-	return d.NewFloorChange()
-}
-
-func (d *Descriptor) NewFloorQueryResultSnapshot() *QueryResultSnapshot {
-	return &QueryResultSnapshot{}
+	return &FloorChange{}
 }
 
 func (d *Descriptor) NewQueryResultSnapshot() gotenresource.QueryResultSnapshot {
-	return d.NewFloorQueryResultSnapshot()
-}
-func (d *Descriptor) NewFloorQueryResultChange() *QueryResultChange {
-	return &QueryResultChange{}
+	return &QueryResultSnapshot{}
 }
 
 func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryResultSnapshot {
@@ -116,63 +99,35 @@ func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryRes
 }
 
 func (d *Descriptor) NewQueryResultChange() gotenresource.QueryResultChange {
-	return d.NewFloorQueryResultChange()
-}
-
-func (d *Descriptor) NewFloorList(size, reserved int) FloorList {
-	return make(FloorList, size, reserved)
+	return &QueryResultChange{}
 }
 
 func (d *Descriptor) NewResourceList(size, reserved int) gotenresource.ResourceList {
 	return make(FloorList, size, reserved)
-}
-func (d *Descriptor) NewFloorChangeList(size, reserved int) FloorChangeList {
-	return make(FloorChangeList, size, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeList(size, reserved int) gotenresource.ResourceChangeList {
 	return make(FloorChangeList, size, reserved)
 }
 
-func (d *Descriptor) NewFloorNameList(size, reserved int) FloorNameList {
-	return make(FloorNameList, size, reserved)
-}
-
 func (d *Descriptor) NewNameList(size, reserved int) gotenresource.NameList {
 	return make(FloorNameList, size, reserved)
-}
-
-func (d *Descriptor) NewFloorReferenceList(size, reserved int) FloorReferenceList {
-	return make(FloorReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewReferenceList(size, reserved int) gotenresource.ReferenceList {
 	return make(FloorReferenceList, size, reserved)
 }
-func (d *Descriptor) NewFloorParentNameList(size, reserved int) FloorParentNameList {
-	return make(FloorParentNameList, size, reserved)
-}
 
 func (d *Descriptor) NewParentNameList(size, reserved int) gotenresource.ParentNameList {
 	return make(FloorParentNameList, size, reserved)
-}
-func (d *Descriptor) NewFloorParentReferenceList(size, reserved int) FloorParentReferenceList {
-	return make(FloorParentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewParentReferenceList(size, reserved int) gotenresource.ParentReferenceList {
 	return make(FloorParentReferenceList, size, reserved)
 }
 
-func (d *Descriptor) NewFloorMap(reserved int) FloorMap {
-	return make(FloorMap, reserved)
-}
-
 func (d *Descriptor) NewResourceMap(reserved int) gotenresource.ResourceMap {
 	return make(FloorMap, reserved)
-}
-func (d *Descriptor) NewFloorChangeMap(reserved int) FloorChangeMap {
-	return make(FloorChangeMap, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeMap(reserved int) gotenresource.ResourceChangeMap {
@@ -191,10 +146,23 @@ func (d *Descriptor) ParseFieldPath(raw string) (gotenobject.FieldPath, error) {
 	return ParseFloor_FieldPath(raw)
 }
 
-func (d *Descriptor) ParseFloorName(nameStr string) (*Name, error) {
+func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
 	return ParseName(nameStr)
 }
 
-func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
-	return ParseName(nameStr)
+func initFloorDescriptor() {
+	descriptor = &Descriptor{
+		typeName: gotenresource.NewTypeName(
+			"Floor", "Floors", "workplace.edgelq.com", "v1alpha2"),
+		nameDescriptor: gotenresource.NewNameDescriptor(
+			&Floor_FieldTerminalPath{selector: Floor_FieldPathSelectorName},
+			"pattern", "floorId",
+			[]string{"projectId", "regionId", "siteId", "buildingId"},
+			[]gotenresource.NamePattern{NamePattern_Project_Region_Site_Building}),
+	}
+	gotenresource.GetRegistry().RegisterDescriptor(descriptor)
+}
+
+func init() {
+	initFloorDescriptor()
 }

@@ -8,9 +8,11 @@ import (
 	"context"
 	"fmt"
 
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	gotenaccess "github.com/cloudwan/goten-sdk/runtime/access"
 	"github.com/cloudwan/goten-sdk/runtime/api/watch_type"
 	gotenresource "github.com/cloudwan/goten-sdk/runtime/resource"
 
@@ -22,9 +24,11 @@ var (
 	_ = context.Context(nil)
 	_ = fmt.GoStringer(nil)
 
+	_ = grpc.ClientConnInterface(nil)
 	_ = codes.NotFound
 	_ = status.Status{}
 
+	_ = gotenaccess.Watcher(nil)
 	_ = watch_type.WatchType_STATEFUL
 	_ = gotenresource.ListQuery(nil)
 )
@@ -156,7 +160,7 @@ func (a *apiVendorConnectionAccess) SaveVendorConnection(ctx context.Context, re
 	saveOpts := gotenresource.MakeSaveOptions(opts)
 	previousRes := saveOpts.GetPreviousResource()
 
-	if previousRes == nil {
+	if previousRes == nil && !saveOpts.OnlyUpdate() && !saveOpts.OnlyCreate() {
 		var err error
 		previousRes, err = a.GetVendorConnection(ctx, &vendor_connection.GetQuery{Reference: res.Name.AsReference()})
 		if err != nil {
@@ -166,9 +170,18 @@ func (a *apiVendorConnectionAccess) SaveVendorConnection(ctx context.Context, re
 		}
 	}
 
-	if previousRes != nil {
+	if saveOpts.OnlyUpdate() || previousRes != nil {
 		updateRequest := &vendor_connection_client.UpdateVendorConnectionRequest{
 			VendorConnection: res,
+		}
+		if updateMask := saveOpts.GetUpdateMask(); updateMask != nil {
+			updateRequest.UpdateMask = updateMask.(*vendor_connection.VendorConnection_FieldMask)
+		}
+		if mask, conditionalState := saveOpts.GetCAS(); mask != nil && conditionalState != nil {
+			updateRequest.Cas = &vendor_connection_client.UpdateVendorConnectionRequest_CAS{
+				ConditionalState: conditionalState.(*vendor_connection.VendorConnection),
+				FieldMask:        mask.(*vendor_connection.VendorConnection_FieldMask),
+			}
 		}
 		_, err := a.client.UpdateVendorConnection(ctx, updateRequest)
 		if err != nil {
@@ -193,4 +206,10 @@ func (a *apiVendorConnectionAccess) DeleteVendorConnection(ctx context.Context, 
 	}
 	_, err := a.client.DeleteVendorConnection(ctx, request)
 	return err
+}
+
+func init() {
+	gotenaccess.GetRegistry().RegisterApiAccessConstructor(vendor_connection.GetDescriptor(), func(cc grpc.ClientConnInterface) gotenresource.Access {
+		return vendor_connection.AsAnyCastAccess(NewApiVendorConnectionAccess(vendor_connection_client.NewVendorConnectionServiceClient(cc)))
+	})
 }

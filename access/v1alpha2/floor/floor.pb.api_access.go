@@ -8,9 +8,11 @@ import (
 	"context"
 	"fmt"
 
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	gotenaccess "github.com/cloudwan/goten-sdk/runtime/access"
 	"github.com/cloudwan/goten-sdk/runtime/api/watch_type"
 	gotenresource "github.com/cloudwan/goten-sdk/runtime/resource"
 
@@ -22,9 +24,11 @@ var (
 	_ = context.Context(nil)
 	_ = fmt.GoStringer(nil)
 
+	_ = grpc.ClientConnInterface(nil)
 	_ = codes.NotFound
 	_ = status.Status{}
 
+	_ = gotenaccess.Watcher(nil)
 	_ = watch_type.WatchType_STATEFUL
 	_ = gotenresource.ListQuery(nil)
 )
@@ -156,7 +160,7 @@ func (a *apiFloorAccess) SaveFloor(ctx context.Context, res *floor.Floor, opts .
 	saveOpts := gotenresource.MakeSaveOptions(opts)
 	previousRes := saveOpts.GetPreviousResource()
 
-	if previousRes == nil {
+	if previousRes == nil && !saveOpts.OnlyUpdate() && !saveOpts.OnlyCreate() {
 		var err error
 		previousRes, err = a.GetFloor(ctx, &floor.GetQuery{Reference: res.Name.AsReference()})
 		if err != nil {
@@ -166,9 +170,18 @@ func (a *apiFloorAccess) SaveFloor(ctx context.Context, res *floor.Floor, opts .
 		}
 	}
 
-	if previousRes != nil {
+	if saveOpts.OnlyUpdate() || previousRes != nil {
 		updateRequest := &floor_client.UpdateFloorRequest{
 			Floor: res,
+		}
+		if updateMask := saveOpts.GetUpdateMask(); updateMask != nil {
+			updateRequest.UpdateMask = updateMask.(*floor.Floor_FieldMask)
+		}
+		if mask, conditionalState := saveOpts.GetCAS(); mask != nil && conditionalState != nil {
+			updateRequest.Cas = &floor_client.UpdateFloorRequest_CAS{
+				ConditionalState: conditionalState.(*floor.Floor),
+				FieldMask:        mask.(*floor.Floor_FieldMask),
+			}
 		}
 		_, err := a.client.UpdateFloor(ctx, updateRequest)
 		if err != nil {
@@ -193,4 +206,10 @@ func (a *apiFloorAccess) DeleteFloor(ctx context.Context, ref *floor.Reference, 
 	}
 	_, err := a.client.DeleteFloor(ctx, request)
 	return err
+}
+
+func init() {
+	gotenaccess.GetRegistry().RegisterApiAccessConstructor(floor.GetDescriptor(), func(cc grpc.ClientConnInterface) gotenresource.Access {
+		return floor.AsAnyCastAccess(NewApiFloorAccess(floor_client.NewFloorServiceClient(cc)))
+	})
 }

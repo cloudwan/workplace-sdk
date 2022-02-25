@@ -8,9 +8,11 @@ import (
 	"context"
 	"fmt"
 
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	gotenaccess "github.com/cloudwan/goten-sdk/runtime/access"
 	"github.com/cloudwan/goten-sdk/runtime/api/watch_type"
 	gotenresource "github.com/cloudwan/goten-sdk/runtime/resource"
 
@@ -22,9 +24,11 @@ var (
 	_ = context.Context(nil)
 	_ = fmt.GoStringer(nil)
 
+	_ = grpc.ClientConnInterface(nil)
 	_ = codes.NotFound
 	_ = status.Status{}
 
+	_ = gotenaccess.Watcher(nil)
 	_ = watch_type.WatchType_STATEFUL
 	_ = gotenresource.ListQuery(nil)
 )
@@ -156,7 +160,7 @@ func (a *apiZoneAccess) SaveZone(ctx context.Context, res *zone.Zone, opts ...go
 	saveOpts := gotenresource.MakeSaveOptions(opts)
 	previousRes := saveOpts.GetPreviousResource()
 
-	if previousRes == nil {
+	if previousRes == nil && !saveOpts.OnlyUpdate() && !saveOpts.OnlyCreate() {
 		var err error
 		previousRes, err = a.GetZone(ctx, &zone.GetQuery{Reference: res.Name.AsReference()})
 		if err != nil {
@@ -166,9 +170,18 @@ func (a *apiZoneAccess) SaveZone(ctx context.Context, res *zone.Zone, opts ...go
 		}
 	}
 
-	if previousRes != nil {
+	if saveOpts.OnlyUpdate() || previousRes != nil {
 		updateRequest := &zone_client.UpdateZoneRequest{
 			Zone: res,
+		}
+		if updateMask := saveOpts.GetUpdateMask(); updateMask != nil {
+			updateRequest.UpdateMask = updateMask.(*zone.Zone_FieldMask)
+		}
+		if mask, conditionalState := saveOpts.GetCAS(); mask != nil && conditionalState != nil {
+			updateRequest.Cas = &zone_client.UpdateZoneRequest_CAS{
+				ConditionalState: conditionalState.(*zone.Zone),
+				FieldMask:        mask.(*zone.Zone_FieldMask),
+			}
 		}
 		_, err := a.client.UpdateZone(ctx, updateRequest)
 		if err != nil {
@@ -193,4 +206,10 @@ func (a *apiZoneAccess) DeleteZone(ctx context.Context, ref *zone.Reference, opt
 	}
 	_, err := a.client.DeleteZone(ctx, request)
 	return err
+}
+
+func init() {
+	gotenaccess.GetRegistry().RegisterApiAccessConstructor(zone.GetDescriptor(), func(cc grpc.ClientConnInterface) gotenresource.Access {
+		return zone.AsAnyCastAccess(NewApiZoneAccess(zone_client.NewZoneServiceClient(cc)))
+	})
 }

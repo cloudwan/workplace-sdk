@@ -30,15 +30,7 @@ var (
 )
 
 var (
-	descriptor = &Descriptor{
-		typeName: gotenresource.NewTypeName(
-			"VendorConnection", "VendorConnections", "workplace.edgelq.com"),
-		nameDescriptor: gotenresource.NewNameDescriptor(
-			&VendorConnection_FieldTerminalPath{selector: VendorConnection_FieldPathSelectorName},
-			"pattern", "vendorConnectionId",
-			[]string{"projectId"},
-			[]gotenresource.NamePattern{NamePattern_Project}),
-	}
+	descriptor *Descriptor
 )
 
 type Descriptor struct {
@@ -50,19 +42,11 @@ func GetDescriptor() *Descriptor {
 	return descriptor
 }
 
-func (d *Descriptor) NewVendorConnection() *VendorConnection {
+func (d *Descriptor) NewResource() gotenresource.Resource {
 	return &VendorConnection{}
 }
 
-func (d *Descriptor) NewResource() gotenresource.Resource {
-	return d.NewVendorConnection()
-}
-
 func (d *Descriptor) NewResourceName() gotenresource.Name {
-	return NewNameBuilder().Name()
-}
-
-func (d *Descriptor) NewVendorConnectionName() *Name {
 	return NewNameBuilder().Name()
 }
 
@@ -81,30 +65,29 @@ func (d *Descriptor) NewSearchQuery() gotenresource.SearchQuery {
 func (d *Descriptor) NewWatchQuery() gotenresource.WatchQuery {
 	return &WatchQuery{}
 }
-func (d *Descriptor) NewVendorConnectionCursor() *PagerCursor {
+
+func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
 	return &PagerCursor{}
 }
 
-func (d *Descriptor) NewResourceCursor() gotenresource.Cursor {
-	return d.NewVendorConnectionCursor()
+func (d *Descriptor) NewResourceFilter() gotenresource.Filter {
+	return &Filter{}
 }
-func (d *Descriptor) NewVendorConnectionChange() *VendorConnectionChange {
-	return &VendorConnectionChange{}
+
+func (d *Descriptor) NewResourceOrderBy() gotenresource.OrderBy {
+	return &OrderBy{}
+}
+
+func (d *Descriptor) NewResourceFieldMask() gotenobject.FieldMask {
+	return &VendorConnection_FieldMask{}
 }
 
 func (d *Descriptor) NewResourceChange() gotenresource.ResourceChange {
-	return d.NewVendorConnectionChange()
-}
-
-func (d *Descriptor) NewVendorConnectionQueryResultSnapshot() *QueryResultSnapshot {
-	return &QueryResultSnapshot{}
+	return &VendorConnectionChange{}
 }
 
 func (d *Descriptor) NewQueryResultSnapshot() gotenresource.QueryResultSnapshot {
-	return d.NewVendorConnectionQueryResultSnapshot()
-}
-func (d *Descriptor) NewVendorConnectionQueryResultChange() *QueryResultChange {
-	return &QueryResultChange{}
+	return &QueryResultSnapshot{}
 }
 
 func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryResultSnapshot {
@@ -112,63 +95,35 @@ func (d *Descriptor) NewSearchQueryResultSnapshot() gotenresource.SearchQueryRes
 }
 
 func (d *Descriptor) NewQueryResultChange() gotenresource.QueryResultChange {
-	return d.NewVendorConnectionQueryResultChange()
-}
-
-func (d *Descriptor) NewVendorConnectionList(size, reserved int) VendorConnectionList {
-	return make(VendorConnectionList, size, reserved)
+	return &QueryResultChange{}
 }
 
 func (d *Descriptor) NewResourceList(size, reserved int) gotenresource.ResourceList {
 	return make(VendorConnectionList, size, reserved)
-}
-func (d *Descriptor) NewVendorConnectionChangeList(size, reserved int) VendorConnectionChangeList {
-	return make(VendorConnectionChangeList, size, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeList(size, reserved int) gotenresource.ResourceChangeList {
 	return make(VendorConnectionChangeList, size, reserved)
 }
 
-func (d *Descriptor) NewVendorConnectionNameList(size, reserved int) VendorConnectionNameList {
-	return make(VendorConnectionNameList, size, reserved)
-}
-
 func (d *Descriptor) NewNameList(size, reserved int) gotenresource.NameList {
 	return make(VendorConnectionNameList, size, reserved)
-}
-
-func (d *Descriptor) NewVendorConnectionReferenceList(size, reserved int) VendorConnectionReferenceList {
-	return make(VendorConnectionReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewReferenceList(size, reserved int) gotenresource.ReferenceList {
 	return make(VendorConnectionReferenceList, size, reserved)
 }
-func (d *Descriptor) NewVendorConnectionParentNameList(size, reserved int) VendorConnectionParentNameList {
-	return make(VendorConnectionParentNameList, size, reserved)
-}
 
 func (d *Descriptor) NewParentNameList(size, reserved int) gotenresource.ParentNameList {
 	return make(VendorConnectionParentNameList, size, reserved)
-}
-func (d *Descriptor) NewVendorConnectionParentReferenceList(size, reserved int) VendorConnectionParentReferenceList {
-	return make(VendorConnectionParentReferenceList, size, reserved)
 }
 
 func (d *Descriptor) NewParentReferenceList(size, reserved int) gotenresource.ParentReferenceList {
 	return make(VendorConnectionParentReferenceList, size, reserved)
 }
 
-func (d *Descriptor) NewVendorConnectionMap(reserved int) VendorConnectionMap {
-	return make(VendorConnectionMap, reserved)
-}
-
 func (d *Descriptor) NewResourceMap(reserved int) gotenresource.ResourceMap {
 	return make(VendorConnectionMap, reserved)
-}
-func (d *Descriptor) NewVendorConnectionChangeMap(reserved int) VendorConnectionChangeMap {
-	return make(VendorConnectionChangeMap, reserved)
 }
 
 func (d *Descriptor) NewResourceChangeMap(reserved int) gotenresource.ResourceChangeMap {
@@ -187,10 +142,23 @@ func (d *Descriptor) ParseFieldPath(raw string) (gotenobject.FieldPath, error) {
 	return ParseVendorConnection_FieldPath(raw)
 }
 
-func (d *Descriptor) ParseVendorConnectionName(nameStr string) (*Name, error) {
+func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
 	return ParseName(nameStr)
 }
 
-func (d *Descriptor) ParseResourceName(nameStr string) (gotenresource.Name, error) {
-	return ParseName(nameStr)
+func initVendorConnectionDescriptor() {
+	descriptor = &Descriptor{
+		typeName: gotenresource.NewTypeName(
+			"VendorConnection", "VendorConnections", "workplace.edgelq.com", "v1alpha2"),
+		nameDescriptor: gotenresource.NewNameDescriptor(
+			&VendorConnection_FieldTerminalPath{selector: VendorConnection_FieldPathSelectorName},
+			"pattern", "vendorConnectionId",
+			[]string{"projectId"},
+			[]gotenresource.NamePattern{NamePattern_Project}),
+	}
+	gotenresource.GetRegistry().RegisterDescriptor(descriptor)
+}
+
+func init() {
+	initVendorConnectionDescriptor()
 }

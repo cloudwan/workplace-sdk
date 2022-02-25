@@ -8,9 +8,11 @@ import (
 	"context"
 	"fmt"
 
+	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 
+	gotenaccess "github.com/cloudwan/goten-sdk/runtime/access"
 	"github.com/cloudwan/goten-sdk/runtime/api/watch_type"
 	gotenresource "github.com/cloudwan/goten-sdk/runtime/resource"
 
@@ -22,9 +24,11 @@ var (
 	_ = context.Context(nil)
 	_ = fmt.GoStringer(nil)
 
+	_ = grpc.ClientConnInterface(nil)
 	_ = codes.NotFound
 	_ = status.Status{}
 
+	_ = gotenaccess.Watcher(nil)
 	_ = watch_type.WatchType_STATEFUL
 	_ = gotenresource.ListQuery(nil)
 )
@@ -156,7 +160,7 @@ func (a *apiSiteAccess) SaveSite(ctx context.Context, res *site.Site, opts ...go
 	saveOpts := gotenresource.MakeSaveOptions(opts)
 	previousRes := saveOpts.GetPreviousResource()
 
-	if previousRes == nil {
+	if previousRes == nil && !saveOpts.OnlyUpdate() && !saveOpts.OnlyCreate() {
 		var err error
 		previousRes, err = a.GetSite(ctx, &site.GetQuery{Reference: res.Name.AsReference()})
 		if err != nil {
@@ -166,9 +170,18 @@ func (a *apiSiteAccess) SaveSite(ctx context.Context, res *site.Site, opts ...go
 		}
 	}
 
-	if previousRes != nil {
+	if saveOpts.OnlyUpdate() || previousRes != nil {
 		updateRequest := &site_client.UpdateSiteRequest{
 			Site: res,
+		}
+		if updateMask := saveOpts.GetUpdateMask(); updateMask != nil {
+			updateRequest.UpdateMask = updateMask.(*site.Site_FieldMask)
+		}
+		if mask, conditionalState := saveOpts.GetCAS(); mask != nil && conditionalState != nil {
+			updateRequest.Cas = &site_client.UpdateSiteRequest_CAS{
+				ConditionalState: conditionalState.(*site.Site),
+				FieldMask:        mask.(*site.Site_FieldMask),
+			}
 		}
 		_, err := a.client.UpdateSite(ctx, updateRequest)
 		if err != nil {
@@ -193,4 +206,10 @@ func (a *apiSiteAccess) DeleteSite(ctx context.Context, ref *site.Reference, opt
 	}
 	_, err := a.client.DeleteSite(ctx, request)
 	return err
+}
+
+func init() {
+	gotenaccess.GetRegistry().RegisterApiAccessConstructor(site.GetDescriptor(), func(cc grpc.ClientConnInterface) gotenresource.Access {
+		return site.AsAnyCastAccess(NewApiSiteAccess(site_client.NewSiteServiceClient(cc)))
+	})
 }
