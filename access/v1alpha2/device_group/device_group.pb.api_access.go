@@ -46,7 +46,12 @@ func (a *apiDeviceGroupAccess) GetDeviceGroup(ctx context.Context, query *device
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetDeviceGroup(ctx, request)
+	res, err := a.client.GetDeviceGroup(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiDeviceGroupAccess) BatchGetDeviceGroups(ctx context.Context, refs []*device_group.Reference, opts ...gotenresource.BatchGetOption) error {

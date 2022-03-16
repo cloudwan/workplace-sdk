@@ -141,7 +141,10 @@ func (name *Name) GetSiteName() *site.Name {
 }
 
 func (name *Name) IsSpecified() bool {
-	return name != nil && (name.Pattern == NamePattern_Project_Region_Site)
+	if name == nil || name.Pattern == "" || name.DeviceId == "" {
+		return false
+	}
+	return name.ParentName.IsSpecified()
 }
 
 func (name *Name) IsFullyQualified() bool {

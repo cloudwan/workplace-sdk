@@ -113,10 +113,14 @@ func (name *ParentName) GetBuildingName() *building.Name {
 }
 
 func (name *ParentName) IsSpecified() bool {
-	if name == nil {
+	if name == nil || name.Pattern == "" {
 		return false
 	}
-	return name.Pattern == NamePattern_Project_Region_Site_Building
+	switch name.Pattern {
+	case NamePattern_Project_Region_Site_Building:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != ""
+	}
+	return false
 }
 
 func (name *ParentName) IsFullyQualified() bool {

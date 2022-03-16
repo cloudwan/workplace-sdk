@@ -134,7 +134,10 @@ func (name *Name) GetBuildingName() *building.Name {
 }
 
 func (name *Name) IsSpecified() bool {
-	return name != nil && (name.Pattern == NamePattern_Project_Region_Site_Building)
+	if name == nil || name.Pattern == "" || name.FloorId == "" {
+		return false
+	}
+	return name.ParentName.IsSpecified()
 }
 
 func (name *Name) IsFullyQualified() bool {

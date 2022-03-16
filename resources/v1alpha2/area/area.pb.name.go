@@ -131,7 +131,10 @@ func (name *Name) GetFloorName() *floor.Name {
 }
 
 func (name *Name) IsSpecified() bool {
-	return name != nil && (name.Pattern == NamePattern_Project_Region_Site_Building_Floor)
+	if name == nil || name.Pattern == "" || name.AreaId == "" {
+		return false
+	}
+	return name.ParentName.IsSpecified()
 }
 
 func (name *Name) IsFullyQualified() bool {

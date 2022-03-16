@@ -46,7 +46,12 @@ func (a *apiZoneAccess) GetZone(ctx context.Context, query *zone.GetQuery) (*zon
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetZone(ctx, request)
+	res, err := a.client.GetZone(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiZoneAccess) BatchGetZones(ctx context.Context, refs []*zone.Reference, opts ...gotenresource.BatchGetOption) error {

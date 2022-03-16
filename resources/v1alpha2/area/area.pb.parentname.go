@@ -113,10 +113,14 @@ func (name *ParentName) GetFloorName() *floor.Name {
 }
 
 func (name *ParentName) IsSpecified() bool {
-	if name == nil {
+	if name == nil || name.Pattern == "" {
 		return false
 	}
-	return name.Pattern == NamePattern_Project_Region_Site_Building_Floor
+	switch name.Pattern {
+	case NamePattern_Project_Region_Site_Building_Floor:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != ""
+	}
+	return false
 }
 
 func (name *ParentName) IsFullyQualified() bool {

@@ -126,7 +126,10 @@ func (name *Name) GetProjectName() *iam_project.Name {
 }
 
 func (name *Name) IsSpecified() bool {
-	return name != nil && (name.Pattern == NamePattern_Project_Region)
+	if name == nil || name.Pattern == "" || name.AgentId == "" {
+		return false
+	}
+	return name.ParentName.IsSpecified()
 }
 
 func (name *Name) IsFullyQualified() bool {

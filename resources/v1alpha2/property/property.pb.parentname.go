@@ -392,10 +392,30 @@ func (name *ParentName) GetDeviceName() *device.Name {
 }
 
 func (name *ParentName) IsSpecified() bool {
-	if name == nil {
+	if name == nil || name.Pattern == "" {
 		return false
 	}
-	return name.Pattern == NamePattern_Project_Region_Site || name.Pattern == NamePattern_Project_Region_Site_Building || name.Pattern == NamePattern_Project_Region_Site_Building_Floor || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Area || name.Pattern == NamePattern_Project_Region_Site_Zone || name.Pattern == NamePattern_Project_Region_Site_Building_Zone || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Zone || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Area_Zone || name.Pattern == NamePattern_Project_Region_Site_Device
+	switch name.Pattern {
+	case NamePattern_Project_Region_Site:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != ""
+	case NamePattern_Project_Region_Site_Building:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != ""
+	case NamePattern_Project_Region_Site_Building_Floor:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != ""
+	case NamePattern_Project_Region_Site_Building_Floor_Area:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != "" && name.AreaId != ""
+	case NamePattern_Project_Region_Site_Zone:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.ZoneId != ""
+	case NamePattern_Project_Region_Site_Building_Zone:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.ZoneId != ""
+	case NamePattern_Project_Region_Site_Building_Floor_Zone:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != "" && name.ZoneId != ""
+	case NamePattern_Project_Region_Site_Building_Floor_Area_Zone:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != "" && name.AreaId != "" && name.ZoneId != ""
+	case NamePattern_Project_Region_Site_Device:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.DeviceId != ""
+	}
+	return false
 }
 
 func (name *ParentName) IsFullyQualified() bool {

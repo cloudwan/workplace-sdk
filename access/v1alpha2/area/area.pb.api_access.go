@@ -46,7 +46,12 @@ func (a *apiAreaAccess) GetArea(ctx context.Context, query *area.GetQuery) (*are
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetArea(ctx, request)
+	res, err := a.client.GetArea(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiAreaAccess) BatchGetAreas(ctx context.Context, refs []*area.Reference, opts ...gotenresource.BatchGetOption) error {

@@ -258,7 +258,10 @@ func (name *Name) GetDeviceName() *device.Name {
 }
 
 func (name *Name) IsSpecified() bool {
-	return name != nil && (name.Pattern == NamePattern_Project_Region_Site || name.Pattern == NamePattern_Project_Region_Site_Building || name.Pattern == NamePattern_Project_Region_Site_Building_Floor || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Area || name.Pattern == NamePattern_Project_Region_Site_Zone || name.Pattern == NamePattern_Project_Region_Site_Building_Zone || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Zone || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Area_Zone || name.Pattern == NamePattern_Project_Region_Site_Device)
+	if name == nil || name.Pattern == "" || name.PropertyId == "" {
+		return false
+	}
+	return name.ParentName.IsSpecified()
 }
 
 func (name *Name) IsFullyQualified() bool {

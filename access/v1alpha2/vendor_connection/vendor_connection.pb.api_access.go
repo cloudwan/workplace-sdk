@@ -46,7 +46,12 @@ func (a *apiVendorConnectionAccess) GetVendorConnection(ctx context.Context, que
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetVendorConnection(ctx, request)
+	res, err := a.client.GetVendorConnection(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiVendorConnectionAccess) BatchGetVendorConnections(ctx context.Context, refs []*vendor_connection.Reference, opts ...gotenresource.BatchGetOption) error {

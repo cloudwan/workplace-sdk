@@ -46,7 +46,12 @@ func (a *apiSiteAccess) GetSite(ctx context.Context, query *site.GetQuery) (*sit
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetSite(ctx, request)
+	res, err := a.client.GetSite(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiSiteAccess) BatchGetSites(ctx context.Context, refs []*site.Reference, opts ...gotenresource.BatchGetOption) error {

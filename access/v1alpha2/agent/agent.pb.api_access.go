@@ -46,7 +46,12 @@ func (a *apiAgentAccess) GetAgent(ctx context.Context, query *agent.GetQuery) (*
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetAgent(ctx, request)
+	res, err := a.client.GetAgent(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiAgentAccess) BatchGetAgents(ctx context.Context, refs []*agent.Reference, opts ...gotenresource.BatchGetOption) error {

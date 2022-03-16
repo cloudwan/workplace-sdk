@@ -227,10 +227,20 @@ func (name *ParentName) GetAreaName() *area.Name {
 }
 
 func (name *ParentName) IsSpecified() bool {
-	if name == nil {
+	if name == nil || name.Pattern == "" {
 		return false
 	}
-	return name.Pattern == NamePattern_Project_Region_Site || name.Pattern == NamePattern_Project_Region_Site_Building || name.Pattern == NamePattern_Project_Region_Site_Building_Floor || name.Pattern == NamePattern_Project_Region_Site_Building_Floor_Area
+	switch name.Pattern {
+	case NamePattern_Project_Region_Site:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != ""
+	case NamePattern_Project_Region_Site_Building:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != ""
+	case NamePattern_Project_Region_Site_Building_Floor:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != ""
+	case NamePattern_Project_Region_Site_Building_Floor_Area:
+		return name.ProjectId != "" && name.RegionId != "" && name.SiteId != "" && name.BuildingId != "" && name.FloorId != "" && name.AreaId != ""
+	}
+	return false
 }
 
 func (name *ParentName) IsFullyQualified() bool {

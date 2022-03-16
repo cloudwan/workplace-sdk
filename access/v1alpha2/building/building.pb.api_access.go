@@ -46,7 +46,12 @@ func (a *apiBuildingAccess) GetBuilding(ctx context.Context, query *building.Get
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetBuilding(ctx, request)
+	res, err := a.client.GetBuilding(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiBuildingAccess) BatchGetBuildings(ctx context.Context, refs []*building.Reference, opts ...gotenresource.BatchGetOption) error {

@@ -46,7 +46,12 @@ func (a *apiPropertyAccess) GetProperty(ctx context.Context, query *property.Get
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetProperty(ctx, request)
+	res, err := a.client.GetProperty(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiPropertyAccess) BatchGetProperties(ctx context.Context, refs []*property.Reference, opts ...gotenresource.BatchGetOption) error {

@@ -46,7 +46,12 @@ func (a *apiFloorAccess) GetFloor(ctx context.Context, query *floor.GetQuery) (*
 		Name:      query.Reference,
 		FieldMask: query.Mask,
 	}
-	return a.client.GetFloor(ctx, request)
+	res, err := a.client.GetFloor(ctx, request)
+	if err != nil {
+		return nil, err
+	}
+	query.Reference.Resolve(res)
+	return res, nil
 }
 
 func (a *apiFloorAccess) BatchGetFloors(ctx context.Context, refs []*floor.Reference, opts ...gotenresource.BatchGetOption) error {
