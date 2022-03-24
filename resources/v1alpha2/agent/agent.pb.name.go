@@ -98,7 +98,7 @@ func ParseNameOrId(nameOrId string) (*Name, error) {
 		return name, err
 	}
 	if agent_RegexpId.MatchString(nameOrId) {
-		return NewNameBuilder().SetId(nameOrId).Name(), nil
+		return &Name{AgentId: nameOrId}, nil
 	} else {
 		return nil, fmt.Errorf("unable to parse '%s' as Agent name or id", name)
 	}

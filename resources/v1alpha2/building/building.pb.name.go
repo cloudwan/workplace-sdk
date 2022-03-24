@@ -101,7 +101,7 @@ func ParseNameOrId(nameOrId string) (*Name, error) {
 		return name, err
 	}
 	if building_RegexpId.MatchString(nameOrId) {
-		return NewNameBuilder().SetId(nameOrId).Name(), nil
+		return &Name{BuildingId: nameOrId}, nil
 	} else {
 		return nil, fmt.Errorf("unable to parse '%s' as Building name or id", name)
 	}

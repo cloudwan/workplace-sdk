@@ -200,7 +200,7 @@ func ParseNameOrId(nameOrId string) (*Name, error) {
 		return name, err
 	}
 	if property_RegexpId.MatchString(nameOrId) {
-		return NewNameBuilder().SetId(nameOrId).Name(), nil
+		return &Name{PropertyId: nameOrId}, nil
 	} else {
 		return nil, fmt.Errorf("unable to parse '%s' as Property name or id", name)
 	}

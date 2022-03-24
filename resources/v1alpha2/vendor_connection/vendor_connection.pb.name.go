@@ -99,7 +99,7 @@ func ParseNameOrId(nameOrId string) (*Name, error) {
 		return name, err
 	}
 	if vendorConnection_RegexpId.MatchString(nameOrId) {
-		return NewNameBuilder().SetId(nameOrId).Name(), nil
+		return &Name{VendorConnectionId: nameOrId}, nil
 	} else {
 		return nil, fmt.Errorf("unable to parse '%s' as VendorConnection name or id", name)
 	}

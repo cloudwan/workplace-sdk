@@ -142,7 +142,7 @@ func ParseNameOrId(nameOrId string) (*Name, error) {
 		return name, err
 	}
 	if zone_RegexpId.MatchString(nameOrId) {
-		return NewNameBuilder().SetId(nameOrId).Name(), nil
+		return &Name{ZoneId: nameOrId}, nil
 	} else {
 		return nil, fmt.Errorf("unable to parse '%s' as Zone name or id", name)
 	}
