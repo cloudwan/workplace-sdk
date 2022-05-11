@@ -5,7 +5,8 @@
 package workplace_client
 
 import (
-	"google.golang.org/grpc"
+	gotenclient "github.com/cloudwan/goten-sdk/runtime/client"
+	gotenresource "github.com/cloudwan/goten-sdk/runtime/resource"
 )
 
 // proto imports
@@ -34,7 +35,8 @@ import (
 
 // Reference imports to suppress errors if they are not otherwise used.
 var (
-	_ = grpc.ClientConn{}
+	_ = gotenclient.MethodDescriptor(nil)
+	_ = gotenresource.WildcardId
 )
 
 // make sure we're using proto imports
@@ -61,43 +63,72 @@ var (
 	_ = &zone_client.GetZoneRequest{}
 )
 
-type WorkplaceClient interface {
-	agent_client.AgentServiceClient
-	area_client.AreaServiceClient
-	building_client.BuildingServiceClient
-	device_group_client.DeviceGroupServiceClient
-	device_client.DeviceServiceClient
-	floor_client.FloorServiceClient
-	property_client.PropertyServiceClient
-	site_client.SiteServiceClient
-	vendor_connection_client.VendorConnectionServiceClient
-	zone_client.ZoneServiceClient
+var (
+	descriptorInitialized bool
+	workplaceDescriptor   *WorkplaceDescriptor
+)
+
+type WorkplaceDescriptor struct{}
+
+func (d *WorkplaceDescriptor) GetServiceName() string {
+	return "workplace"
 }
 
-type workplaceClient struct {
-	agent_client.AgentServiceClient
-	area_client.AreaServiceClient
-	building_client.BuildingServiceClient
-	device_group_client.DeviceGroupServiceClient
-	device_client.DeviceServiceClient
-	floor_client.FloorServiceClient
-	property_client.PropertyServiceClient
-	site_client.SiteServiceClient
-	vendor_connection_client.VendorConnectionServiceClient
-	zone_client.ZoneServiceClient
+func (d *WorkplaceDescriptor) GetServiceDomain() string {
+	return "workplace.edgelq.com"
 }
 
-func NewWorkplaceClient(cc grpc.ClientConnInterface) WorkplaceClient {
-	return &workplaceClient{
-		AgentServiceClient:            agent_client.NewAgentServiceClient(cc),
-		AreaServiceClient:             area_client.NewAreaServiceClient(cc),
-		BuildingServiceClient:         building_client.NewBuildingServiceClient(cc),
-		DeviceGroupServiceClient:      device_group_client.NewDeviceGroupServiceClient(cc),
-		DeviceServiceClient:           device_client.NewDeviceServiceClient(cc),
-		FloorServiceClient:            floor_client.NewFloorServiceClient(cc),
-		PropertyServiceClient:         property_client.NewPropertyServiceClient(cc),
-		SiteServiceClient:             site_client.NewSiteServiceClient(cc),
-		VendorConnectionServiceClient: vendor_connection_client.NewVendorConnectionServiceClient(cc),
-		ZoneServiceClient:             zone_client.NewZoneServiceClient(cc),
+func (d *WorkplaceDescriptor) GetVersion() string {
+	return "v1alpha2"
+}
+
+func (d *WorkplaceDescriptor) GetNextVersion() string {
+
+	return ""
+}
+
+func (d *WorkplaceDescriptor) AllResourceDescriptors() []gotenresource.Descriptor {
+	return []gotenresource.Descriptor{
+		agent.GetDescriptor(),
+		area.GetDescriptor(),
+		building.GetDescriptor(),
+		device.GetDescriptor(),
+		device_group.GetDescriptor(),
+		floor.GetDescriptor(),
+		property.GetDescriptor(),
+		site.GetDescriptor(),
+		vendor_connection.GetDescriptor(),
+		zone.GetDescriptor(),
+	}
+}
+
+func (d *WorkplaceDescriptor) AllApiDescriptors() []gotenclient.ApiDescriptor {
+	return []gotenclient.ApiDescriptor{
+		agent_client.GetAgentServiceDescriptor(),
+		area_client.GetAreaServiceDescriptor(),
+		building_client.GetBuildingServiceDescriptor(),
+		device_group_client.GetDeviceGroupServiceDescriptor(),
+		device_client.GetDeviceServiceDescriptor(),
+		floor_client.GetFloorServiceDescriptor(),
+		property_client.GetPropertyServiceDescriptor(),
+		site_client.GetSiteServiceDescriptor(),
+		vendor_connection_client.GetVendorConnectionServiceDescriptor(),
+		zone_client.GetZoneServiceDescriptor(),
+	}
+}
+
+func GetWorkplaceDescriptor() *WorkplaceDescriptor {
+	return workplaceDescriptor
+}
+
+func initDescriptor() {
+	workplaceDescriptor = &WorkplaceDescriptor{}
+	gotenclient.GetRegistry().RegisterSvcDescriptor(workplaceDescriptor)
+}
+
+func init() {
+	if !descriptorInitialized {
+		initDescriptor()
+		descriptorInitialized = true
 	}
 }
