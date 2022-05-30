@@ -70,15 +70,15 @@ func (d *GetVendorConnectionDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetVendorConnectionDescriptor) IsCollectionSubject() bool {
+func (d *GetVendorConnectionDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetVendorConnectionDescriptor) IsPluralSubject() bool {
+func (d *GetVendorConnectionDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetVendorConnectionDescriptor) HasSubjectResource() bool {
+func (d *GetVendorConnectionDescriptor) HasResource() bool {
 	return true
 }
 
@@ -118,7 +118,7 @@ func (d *GetVendorConnectionDescriptor) GetApiDescriptor() gotenclient.ApiDescri
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *GetVendorConnectionDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetVendorConnectionDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -130,77 +130,84 @@ func (d *GetVendorConnectionDescriptor) GetServerMsgReflectHandle() gotenclient.
 	return &GetVendorConnectionDescriptorServerMsgHandle{}
 }
 
-func (h *GetVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetVendorConnectionDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetVendorConnectionRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*GetVendorConnectionRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*vendor_connection.Name)(nil)
 }
 
-func (h *GetVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetVendorConnectionDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetVendorConnectionRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*GetVendorConnectionRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetVendorConnectionDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetVendorConnectionDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetVendorConnectionRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*GetVendorConnectionRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetVendorConnectionDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*vendor_connection.VendorConnection) *vendor_connection.Name
+		OverrideExtractResourceName(*vendor_connection.VendorConnection) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*vendor_connection.Name)(nil)
 }
 
-func (h *GetVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetVendorConnectionDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*vendor_connection.VendorConnection) []*vendor_connection.Name
+		OverrideExtractResourceNames(*vendor_connection.VendorConnection) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetVendorConnectionDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetVendorConnectionDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*vendor_connection.VendorConnection) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*vendor_connection.VendorConnection) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -235,15 +242,15 @@ func (d *BatchGetVendorConnectionsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetVendorConnectionsDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetVendorConnectionsDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetVendorConnectionsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetVendorConnectionsDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetVendorConnectionsDescriptor) HasSubjectResource() bool {
+func (d *BatchGetVendorConnectionsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -283,7 +290,7 @@ func (d *BatchGetVendorConnectionsDescriptor) GetApiDescriptor() gotenclient.Api
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *BatchGetVendorConnectionsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetVendorConnectionsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -295,86 +302,92 @@ func (d *BatchGetVendorConnectionsDescriptor) GetServerMsgReflectHandle() gotenc
 	return &BatchGetVendorConnectionsDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetVendorConnectionsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetVendorConnectionsRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*BatchGetVendorConnectionsRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetVendorConnectionsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetVendorConnectionsRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*BatchGetVendorConnectionsRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(vendor_connection.VendorConnectionNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(vendor_connection.VendorConnectionNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (vendor_connection.VendorConnectionNameList)(nil)
 }
 
-func (h *BatchGetVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetVendorConnectionsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetVendorConnectionsRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*BatchGetVendorConnectionsRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetVendorConnectionsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetVendorConnectionsResponse) *vendor_connection.Name
+		OverrideExtractResourceName(*BatchGetVendorConnectionsResponse) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetVendorConnectionsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetVendorConnectionsResponse) []*vendor_connection.Name
+		OverrideExtractResourceNames(*BatchGetVendorConnectionsResponse) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetVendorConnections()
-	list := make(vendor_connection.VendorConnectionNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetVendorConnections(); len(resources) > 0 {
+			list := make(vendor_connection.VendorConnectionNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (vendor_connection.VendorConnectionNameList)(nil)
 }
 
-func (h *BatchGetVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetVendorConnectionsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetVendorConnectionsResponse) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*BatchGetVendorConnectionsResponse) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -409,15 +422,15 @@ func (d *ListVendorConnectionsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListVendorConnectionsDescriptor) IsCollectionSubject() bool {
+func (d *ListVendorConnectionsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListVendorConnectionsDescriptor) IsPluralSubject() bool {
+func (d *ListVendorConnectionsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListVendorConnectionsDescriptor) HasSubjectResource() bool {
+func (d *ListVendorConnectionsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -457,7 +470,7 @@ func (d *ListVendorConnectionsDescriptor) GetApiDescriptor() gotenclient.ApiDesc
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *ListVendorConnectionsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListVendorConnectionsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -469,79 +482,88 @@ func (d *ListVendorConnectionsDescriptor) GetServerMsgReflectHandle() gotenclien
 	return &ListVendorConnectionsDescriptorServerMsgHandle{}
 }
 
-func (h *ListVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListVendorConnectionsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListVendorConnectionsRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*ListVendorConnectionsRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListVendorConnectionsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListVendorConnectionsRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*ListVendorConnectionsRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListVendorConnectionsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListVendorConnectionsRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*ListVendorConnectionsRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*vendor_connection.ParentName)(nil)
 }
 
-func (h *ListVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListVendorConnectionsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListVendorConnectionsResponse) *vendor_connection.Name
+		OverrideExtractResourceName(*ListVendorConnectionsResponse) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListVendorConnectionsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListVendorConnectionsResponse) []*vendor_connection.Name
+		OverrideExtractResourceNames(*ListVendorConnectionsResponse) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetVendorConnections()
-	list := make(vendor_connection.VendorConnectionNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetVendorConnections(); len(resources) > 0 {
+			list := make(vendor_connection.VendorConnectionNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (vendor_connection.VendorConnectionNameList)(nil)
 }
 
-func (h *ListVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListVendorConnectionsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListVendorConnectionsResponse) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*ListVendorConnectionsResponse) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -576,15 +598,15 @@ func (d *WatchVendorConnectionDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchVendorConnectionDescriptor) IsCollectionSubject() bool {
+func (d *WatchVendorConnectionDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchVendorConnectionDescriptor) IsPluralSubject() bool {
+func (d *WatchVendorConnectionDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchVendorConnectionDescriptor) HasSubjectResource() bool {
+func (d *WatchVendorConnectionDescriptor) HasResource() bool {
 	return true
 }
 
@@ -624,7 +646,7 @@ func (d *WatchVendorConnectionDescriptor) GetApiDescriptor() gotenclient.ApiDesc
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *WatchVendorConnectionDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchVendorConnectionDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -636,89 +658,93 @@ func (d *WatchVendorConnectionDescriptor) GetServerMsgReflectHandle() gotenclien
 	return &WatchVendorConnectionDescriptorServerMsgHandle{}
 }
 
-func (h *WatchVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchVendorConnectionDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchVendorConnectionRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*WatchVendorConnectionRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*vendor_connection.Name)(nil)
-}
-
-func (h *WatchVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchVendorConnectionRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchVendorConnectionRequest) []*vendor_connection.Name
-	})
-	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchVendorConnectionDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchVendorConnectionRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchVendorConnectionRequest) *vendor_connection.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchVendorConnectionResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchVendorConnectionResponse) *vendor_connection.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *vendor_connection.VendorConnectionChange_Added_:
-			return tResChange.Added.GetVendorConnection().GetName()
-		case *vendor_connection.VendorConnectionChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *vendor_connection.VendorConnectionChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *vendor_connection.VendorConnectionChange_Current_:
-			return tResChange.Current.GetVendorConnection().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*vendor_connection.Name)(nil)
 }
 
-func (h *WatchVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchVendorConnectionResponse)
+func (h *WatchVendorConnectionDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchVendorConnectionResponse) []*vendor_connection.Name
+		OverrideExtractResourceNames(*WatchVendorConnectionRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchVendorConnectionDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchVendorConnectionDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchVendorConnectionRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchVendorConnectionRequest) *vendor_connection.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchVendorConnectionDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchVendorConnectionResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchVendorConnectionResponse) *vendor_connection.ParentName
+		OverrideExtractResourceName(*WatchVendorConnectionResponse) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *vendor_connection.VendorConnectionChange_Added_:
+				return tResChange.Added.GetVendorConnection().GetName()
+			case *vendor_connection.VendorConnectionChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *vendor_connection.VendorConnectionChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *vendor_connection.VendorConnectionChange_Current_:
+				return tResChange.Current.GetVendorConnection().GetName()
+			}
+		}
+	}
+	return (*vendor_connection.Name)(nil)
+}
+
+func (h *WatchVendorConnectionDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchVendorConnectionResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchVendorConnectionResponse) []*vendor_connection.Name
+	})
+	if ok {
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchVendorConnectionDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchVendorConnectionResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchVendorConnectionResponse) *vendor_connection.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -753,15 +779,15 @@ func (d *WatchVendorConnectionsDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchVendorConnectionsDescriptor) IsCollectionSubject() bool {
+func (d *WatchVendorConnectionsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchVendorConnectionsDescriptor) IsPluralSubject() bool {
+func (d *WatchVendorConnectionsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchVendorConnectionsDescriptor) HasSubjectResource() bool {
+func (d *WatchVendorConnectionsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -801,7 +827,7 @@ func (d *WatchVendorConnectionsDescriptor) GetApiDescriptor() gotenclient.ApiDes
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *WatchVendorConnectionsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchVendorConnectionsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -813,91 +839,97 @@ func (d *WatchVendorConnectionsDescriptor) GetServerMsgReflectHandle() gotenclie
 	return &WatchVendorConnectionsDescriptorServerMsgHandle{}
 }
 
-func (h *WatchVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchVendorConnectionsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchVendorConnectionsRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*WatchVendorConnectionsRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchVendorConnectionsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchVendorConnectionsRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*WatchVendorConnectionsRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchVendorConnectionsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchVendorConnectionsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchVendorConnectionsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchVendorConnectionsRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*WatchVendorConnectionsRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*vendor_connection.ParentName)(nil)
 }
 
-func (h *WatchVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchVendorConnectionsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchVendorConnectionsResponse) *vendor_connection.Name
+		OverrideExtractResourceName(*WatchVendorConnectionsResponse) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchVendorConnectionsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchVendorConnectionsResponse) []*vendor_connection.Name
+		OverrideExtractResourceNames(*WatchVendorConnectionsResponse) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetVendorConnectionChanges()
-	list := make(vendor_connection.VendorConnectionNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *vendor_connection.VendorConnectionChange_Added_:
-			list = append(list, tResChange.Added.GetVendorConnection().GetName())
-		case *vendor_connection.VendorConnectionChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *vendor_connection.VendorConnectionChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *vendor_connection.VendorConnectionChange_Current_:
-			list = append(list, tResChange.Current.GetVendorConnection().GetName())
+	{
+		if resChanges := typedMsg.GetVendorConnectionChanges(); len(resChanges) > 0 {
+			list := make(vendor_connection.VendorConnectionNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *vendor_connection.VendorConnectionChange_Added_:
+					list = append(list, tResChange.Added.GetVendorConnection().GetName())
+				case *vendor_connection.VendorConnectionChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *vendor_connection.VendorConnectionChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *vendor_connection.VendorConnectionChange_Current_:
+					list = append(list, tResChange.Current.GetVendorConnection().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (vendor_connection.VendorConnectionNameList)(nil)
 }
 
-func (h *WatchVendorConnectionsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchVendorConnectionsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchVendorConnectionsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchVendorConnectionsResponse) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*WatchVendorConnectionsResponse) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -932,15 +964,15 @@ func (d *CreateVendorConnectionDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateVendorConnectionDescriptor) IsCollectionSubject() bool {
+func (d *CreateVendorConnectionDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateVendorConnectionDescriptor) IsPluralSubject() bool {
+func (d *CreateVendorConnectionDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateVendorConnectionDescriptor) HasSubjectResource() bool {
+func (d *CreateVendorConnectionDescriptor) HasResource() bool {
 	return true
 }
 
@@ -980,7 +1012,7 @@ func (d *CreateVendorConnectionDescriptor) GetApiDescriptor() gotenclient.ApiDes
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *CreateVendorConnectionDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateVendorConnectionDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -992,77 +1024,90 @@ func (d *CreateVendorConnectionDescriptor) GetServerMsgReflectHandle() gotenclie
 	return &CreateVendorConnectionDescriptorServerMsgHandle{}
 }
 
-func (h *CreateVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateVendorConnectionDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateVendorConnectionRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*CreateVendorConnectionRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetVendorConnection().GetName()
+	{
+		res := typedMsg.GetVendorConnection()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*vendor_connection.Name)(nil)
 }
 
-func (h *CreateVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateVendorConnectionDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateVendorConnectionRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*CreateVendorConnectionRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateVendorConnectionDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateVendorConnectionDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateVendorConnectionRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*CreateVendorConnectionRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*vendor_connection.ParentName)(nil)
 }
 
-func (h *CreateVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateVendorConnectionDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*vendor_connection.VendorConnection) *vendor_connection.Name
+		OverrideExtractResourceName(*vendor_connection.VendorConnection) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*vendor_connection.Name)(nil)
 }
 
-func (h *CreateVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateVendorConnectionDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*vendor_connection.VendorConnection) []*vendor_connection.Name
+		OverrideExtractResourceNames(*vendor_connection.VendorConnection) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateVendorConnectionDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateVendorConnectionDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*vendor_connection.VendorConnection) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*vendor_connection.VendorConnection) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1097,15 +1142,15 @@ func (d *UpdateVendorConnectionDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateVendorConnectionDescriptor) IsCollectionSubject() bool {
+func (d *UpdateVendorConnectionDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateVendorConnectionDescriptor) IsPluralSubject() bool {
+func (d *UpdateVendorConnectionDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateVendorConnectionDescriptor) HasSubjectResource() bool {
+func (d *UpdateVendorConnectionDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1145,7 +1190,7 @@ func (d *UpdateVendorConnectionDescriptor) GetApiDescriptor() gotenclient.ApiDes
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *UpdateVendorConnectionDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateVendorConnectionDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -1157,74 +1202,85 @@ func (d *UpdateVendorConnectionDescriptor) GetServerMsgReflectHandle() gotenclie
 	return &UpdateVendorConnectionDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateVendorConnectionDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateVendorConnectionRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*UpdateVendorConnectionRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetVendorConnection().GetName()
+	{
+		res := typedMsg.GetVendorConnection()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*vendor_connection.Name)(nil)
 }
 
-func (h *UpdateVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateVendorConnectionDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateVendorConnectionRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*UpdateVendorConnectionRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateVendorConnectionDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateVendorConnectionDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateVendorConnectionRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*UpdateVendorConnectionRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateVendorConnectionDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*vendor_connection.VendorConnection) *vendor_connection.Name
+		OverrideExtractResourceName(*vendor_connection.VendorConnection) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*vendor_connection.Name)(nil)
 }
 
-func (h *UpdateVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateVendorConnectionDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*vendor_connection.VendorConnection) []*vendor_connection.Name
+		OverrideExtractResourceNames(*vendor_connection.VendorConnection) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateVendorConnectionDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateVendorConnectionDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*vendor_connection.VendorConnection)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*vendor_connection.VendorConnection) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*vendor_connection.VendorConnection) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1259,15 +1315,15 @@ func (d *DeleteVendorConnectionDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteVendorConnectionDescriptor) IsCollectionSubject() bool {
+func (d *DeleteVendorConnectionDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteVendorConnectionDescriptor) IsPluralSubject() bool {
+func (d *DeleteVendorConnectionDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteVendorConnectionDescriptor) HasSubjectResource() bool {
+func (d *DeleteVendorConnectionDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1307,7 +1363,7 @@ func (d *DeleteVendorConnectionDescriptor) GetApiDescriptor() gotenclient.ApiDes
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *DeleteVendorConnectionDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteVendorConnectionDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -1319,77 +1375,79 @@ func (d *DeleteVendorConnectionDescriptor) GetServerMsgReflectHandle() gotenclie
 	return &DeleteVendorConnectionDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteVendorConnectionDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteVendorConnectionRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*DeleteVendorConnectionRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*vendor_connection.Name)(nil)
 }
 
-func (h *DeleteVendorConnectionDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteVendorConnectionDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteVendorConnectionRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*DeleteVendorConnectionRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteVendorConnectionDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteVendorConnectionDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteVendorConnectionRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteVendorConnectionRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*DeleteVendorConnectionRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteVendorConnectionDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *vendor_connection.Name
+		OverrideExtractResourceName(*empty.Empty) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteVendorConnectionDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteVendorConnectionDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*vendor_connection.Name
+		OverrideExtractResourceNames(*empty.Empty) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteVendorConnectionDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteVendorConnectionDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1424,15 +1482,15 @@ func (d *PointGrabTelemetryNotifyDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *PointGrabTelemetryNotifyDescriptor) IsCollectionSubject() bool {
+func (d *PointGrabTelemetryNotifyDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *PointGrabTelemetryNotifyDescriptor) IsPluralSubject() bool {
+func (d *PointGrabTelemetryNotifyDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *PointGrabTelemetryNotifyDescriptor) HasSubjectResource() bool {
+func (d *PointGrabTelemetryNotifyDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1472,7 +1530,7 @@ func (d *PointGrabTelemetryNotifyDescriptor) GetApiDescriptor() gotenclient.ApiD
 	return vendorConnectionServiceDescriptor
 }
 
-func (d *PointGrabTelemetryNotifyDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *PointGrabTelemetryNotifyDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return vendor_connection.GetDescriptor()
 }
 
@@ -1484,77 +1542,79 @@ func (d *PointGrabTelemetryNotifyDescriptor) GetServerMsgReflectHandle() gotencl
 	return &PointGrabTelemetryNotifyDescriptorServerMsgHandle{}
 }
 
-func (h *PointGrabTelemetryNotifyDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *PointGrabTelemetryNotifyDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*PointGrabTelemetryNotifyRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*PointGrabTelemetryNotifyRequest) *vendor_connection.Name
+		OverrideExtractResourceName(*PointGrabTelemetryNotifyRequest) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*vendor_connection.Name)(nil)
 }
 
-func (h *PointGrabTelemetryNotifyDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *PointGrabTelemetryNotifyDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*PointGrabTelemetryNotifyRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*PointGrabTelemetryNotifyRequest) []*vendor_connection.Name
+		OverrideExtractResourceNames(*PointGrabTelemetryNotifyRequest) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *PointGrabTelemetryNotifyDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *PointGrabTelemetryNotifyDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*PointGrabTelemetryNotifyRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*PointGrabTelemetryNotifyRequest) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*PointGrabTelemetryNotifyRequest) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *PointGrabTelemetryNotifyDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *PointGrabTelemetryNotifyDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *vendor_connection.Name
+		OverrideExtractResourceName(*empty.Empty) *vendor_connection.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *PointGrabTelemetryNotifyDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *PointGrabTelemetryNotifyDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*vendor_connection.Name
+		OverrideExtractResourceNames(*empty.Empty) []*vendor_connection.Name
 	})
 	if ok {
-		return vendor_connection.VendorConnectionNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return vendor_connection.VendorConnectionNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *PointGrabTelemetryNotifyDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *PointGrabTelemetryNotifyDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *vendor_connection.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *vendor_connection.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

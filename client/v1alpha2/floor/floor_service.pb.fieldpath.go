@@ -542,16 +542,13 @@ type BatchGetFloorsRequest_FieldPath interface {
 type BatchGetFloorsRequest_FieldPathSelector int32
 
 const (
-	BatchGetFloorsRequest_FieldPathSelectorParent    BatchGetFloorsRequest_FieldPathSelector = 0
-	BatchGetFloorsRequest_FieldPathSelectorNames     BatchGetFloorsRequest_FieldPathSelector = 1
-	BatchGetFloorsRequest_FieldPathSelectorFieldMask BatchGetFloorsRequest_FieldPathSelector = 2
-	BatchGetFloorsRequest_FieldPathSelectorView      BatchGetFloorsRequest_FieldPathSelector = 3
+	BatchGetFloorsRequest_FieldPathSelectorNames     BatchGetFloorsRequest_FieldPathSelector = 0
+	BatchGetFloorsRequest_FieldPathSelectorFieldMask BatchGetFloorsRequest_FieldPathSelector = 1
+	BatchGetFloorsRequest_FieldPathSelectorView      BatchGetFloorsRequest_FieldPathSelector = 2
 )
 
 func (s BatchGetFloorsRequest_FieldPathSelector) String() string {
 	switch s {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		return "parent"
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		return "names"
 	case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -569,8 +566,6 @@ func BuildBatchGetFloorsRequest_FieldPath(fp gotenobject.RawFieldPath) (BatchGet
 	}
 	if len(fp) == 1 {
 		switch fp[0] {
-		case "parent":
-			return &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorParent}, nil
 		case "names":
 			return &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorNames}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -622,10 +617,6 @@ func (fp *BatchGetFloorsRequest_FieldTerminalPath) JSONString() string {
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) Get(source *BatchGetFloorsRequest) (values []interface{}) {
 	if source != nil {
 		switch fp.selector {
-		case BatchGetFloorsRequest_FieldPathSelectorParent:
-			if source.Parent != nil {
-				values = append(values, source.Parent)
-			}
 		case BatchGetFloorsRequest_FieldPathSelectorNames:
 			for _, value := range source.GetNames() {
 				values = append(values, value)
@@ -650,9 +641,6 @@ func (fp *BatchGetFloorsRequest_FieldTerminalPath) GetRaw(source proto.Message) 
 // GetSingle returns value pointed by specific field of from source BatchGetFloorsRequest
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) GetSingle(source *BatchGetFloorsRequest) (interface{}, bool) {
 	switch fp.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		res := source.GetParent()
-		return res, res != nil
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		res := source.GetNames()
 		return res, res != nil
@@ -673,8 +661,6 @@ func (fp *BatchGetFloorsRequest_FieldTerminalPath) GetSingleRaw(source proto.Mes
 // GetDefault returns a default value of the field type
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) GetDefault() interface{} {
 	switch fp.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		return (*floor.Reference)(nil)
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		return ([]*floor.Reference)(nil)
 	case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -689,8 +675,6 @@ func (fp *BatchGetFloorsRequest_FieldTerminalPath) GetDefault() interface{} {
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) ClearValue(item *BatchGetFloorsRequest) {
 	if item != nil {
 		switch fp.selector {
-		case BatchGetFloorsRequest_FieldPathSelectorParent:
-			item.Parent = nil
 		case BatchGetFloorsRequest_FieldPathSelectorNames:
 			item.Names = nil
 		case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -709,16 +693,13 @@ func (fp *BatchGetFloorsRequest_FieldTerminalPath) ClearValueRaw(item proto.Mess
 
 // IsLeaf - whether field path is holds simple value
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) IsLeaf() bool {
-	return fp.selector == BatchGetFloorsRequest_FieldPathSelectorParent ||
-		fp.selector == BatchGetFloorsRequest_FieldPathSelectorNames ||
+	return fp.selector == BatchGetFloorsRequest_FieldPathSelectorNames ||
 		fp.selector == BatchGetFloorsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == BatchGetFloorsRequest_FieldPathSelectorView
 }
 
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetFloorsRequest_FieldPathValue {
 	switch fp.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		return &BatchGetFloorsRequest_FieldTerminalPathValue{BatchGetFloorsRequest_FieldTerminalPath: *fp, value: value.(*floor.Reference)}
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		return &BatchGetFloorsRequest_FieldTerminalPathValue{BatchGetFloorsRequest_FieldTerminalPath: *fp, value: value.([]*floor.Reference)}
 	case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -737,8 +718,6 @@ func (fp *BatchGetFloorsRequest_FieldTerminalPath) WithRawIValue(value interface
 func (fp *BatchGetFloorsRequest_FieldTerminalPath) WithIArrayOfValues(values interface{}) BatchGetFloorsRequest_FieldPathArrayOfValues {
 	fpaov := &BatchGetFloorsRequest_FieldTerminalPathArrayOfValues{BatchGetFloorsRequest_FieldTerminalPath: *fp}
 	switch fp.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		return &BatchGetFloorsRequest_FieldTerminalPathArrayOfValues{BatchGetFloorsRequest_FieldTerminalPath: *fp, values: values.([]*floor.Reference)}
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		return &BatchGetFloorsRequest_FieldTerminalPathArrayOfValues{BatchGetFloorsRequest_FieldTerminalPath: *fp, values: values.([][]*floor.Reference)}
 	case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -807,10 +786,6 @@ var _ BatchGetFloorsRequest_FieldPathValue = (*BatchGetFloorsRequest_FieldTermin
 func (fpv *BatchGetFloorsRequest_FieldTerminalPathValue) GetRawValue() interface{} {
 	return fpv.value
 }
-func (fpv *BatchGetFloorsRequest_FieldTerminalPathValue) AsParentValue() (*floor.Reference, bool) {
-	res, ok := fpv.value.(*floor.Reference)
-	return res, ok
-}
 func (fpv *BatchGetFloorsRequest_FieldTerminalPathValue) AsNamesValue() ([]*floor.Reference, bool) {
 	res, ok := fpv.value.([]*floor.Reference)
 	return res, ok
@@ -830,8 +805,6 @@ func (fpv *BatchGetFloorsRequest_FieldTerminalPathValue) SetTo(target **BatchGet
 		*target = new(BatchGetFloorsRequest)
 	}
 	switch fpv.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		(*target).Parent = fpv.value.(*floor.Reference)
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		(*target).Names = fpv.value.([]*floor.Reference)
 	case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -851,25 +824,6 @@ func (fpv *BatchGetFloorsRequest_FieldTerminalPathValue) SetToRaw(target proto.M
 // CompareWith compares value in the 'BatchGetFloorsRequest_FieldTerminalPathValue' with the value under path in 'BatchGetFloorsRequest'.
 func (fpv *BatchGetFloorsRequest_FieldTerminalPathValue) CompareWith(source *BatchGetFloorsRequest) (int, bool) {
 	switch fpv.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		leftValue := fpv.value.(*floor.Reference)
-		rightValue := source.GetParent()
-		if leftValue == nil {
-			if rightValue != nil {
-				return -1, true
-			}
-			return 0, true
-		}
-		if rightValue == nil {
-			return 1, true
-		}
-		if leftValue.String() == rightValue.String() {
-			return 0, true
-		} else if leftValue.String() < rightValue.String() {
-			return -1, true
-		} else {
-			return 1, true
-		}
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		return 0, false
 	case BatchGetFloorsRequest_FieldPathSelectorFieldMask:
@@ -992,10 +946,6 @@ var _ BatchGetFloorsRequest_FieldPathArrayOfValues = (*BatchGetFloorsRequest_Fie
 
 func (fpaov *BatchGetFloorsRequest_FieldTerminalPathArrayOfValues) GetRawValues() (values []interface{}) {
 	switch fpaov.selector {
-	case BatchGetFloorsRequest_FieldPathSelectorParent:
-		for _, v := range fpaov.values.([]*floor.Reference) {
-			values = append(values, v)
-		}
 	case BatchGetFloorsRequest_FieldPathSelectorNames:
 		for _, v := range fpaov.values.([][]*floor.Reference) {
 			values = append(values, v)
@@ -1010,10 +960,6 @@ func (fpaov *BatchGetFloorsRequest_FieldTerminalPathArrayOfValues) GetRawValues(
 		}
 	}
 	return
-}
-func (fpaov *BatchGetFloorsRequest_FieldTerminalPathArrayOfValues) AsParentArrayOfValues() ([]*floor.Reference, bool) {
-	res, ok := fpaov.values.([]*floor.Reference)
-	return res, ok
 }
 func (fpaov *BatchGetFloorsRequest_FieldTerminalPathArrayOfValues) AsNamesArrayOfValues() ([][]*floor.Reference, bool) {
 	res, ok := fpaov.values.([][]*floor.Reference)

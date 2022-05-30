@@ -70,15 +70,15 @@ func (d *GetAgentDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetAgentDescriptor) IsCollectionSubject() bool {
+func (d *GetAgentDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetAgentDescriptor) IsPluralSubject() bool {
+func (d *GetAgentDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetAgentDescriptor) HasSubjectResource() bool {
+func (d *GetAgentDescriptor) HasResource() bool {
 	return true
 }
 
@@ -118,7 +118,7 @@ func (d *GetAgentDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *GetAgentDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetAgentDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -130,77 +130,84 @@ func (d *GetAgentDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgHa
 	return &GetAgentDescriptorServerMsgHandle{}
 }
 
-func (h *GetAgentDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetAgentDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetAgentRequest) *agent.Name
+		OverrideExtractResourceName(*GetAgentRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*agent.Name)(nil)
 }
 
-func (h *GetAgentDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetAgentDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetAgentRequest) []*agent.Name
+		OverrideExtractResourceNames(*GetAgentRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetAgentDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetAgentDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetAgentRequest) *agent.ParentName
+		OverrideExtractCollectionName(*GetAgentRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetAgentDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetAgentDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*agent.Agent) *agent.Name
+		OverrideExtractResourceName(*agent.Agent) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*agent.Name)(nil)
 }
 
-func (h *GetAgentDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetAgentDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*agent.Agent) []*agent.Name
+		OverrideExtractResourceNames(*agent.Agent) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetAgentDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetAgentDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*agent.Agent) *agent.ParentName
+		OverrideExtractCollectionName(*agent.Agent) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -235,15 +242,15 @@ func (d *BatchGetAgentsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetAgentsDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetAgentsDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetAgentsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetAgentsDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetAgentsDescriptor) HasSubjectResource() bool {
+func (d *BatchGetAgentsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -283,7 +290,7 @@ func (d *BatchGetAgentsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return agentServiceDescriptor
 }
 
-func (d *BatchGetAgentsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetAgentsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -295,86 +302,92 @@ func (d *BatchGetAgentsDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &BatchGetAgentsDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetAgentsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAgentsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetAgentsRequest) *agent.Name
+		OverrideExtractResourceName(*BatchGetAgentsRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetAgentsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetAgentsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetAgentsRequest) []*agent.Name
+		OverrideExtractResourceNames(*BatchGetAgentsRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(agent.AgentNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(agent.AgentNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (agent.AgentNameList)(nil)
 }
 
-func (h *BatchGetAgentsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAgentsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetAgentsRequest) *agent.ParentName
+		OverrideExtractCollectionName(*BatchGetAgentsRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetAgentsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAgentsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetAgentsResponse) *agent.Name
+		OverrideExtractResourceName(*BatchGetAgentsResponse) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetAgentsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetAgentsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetAgentsResponse) []*agent.Name
+		OverrideExtractResourceNames(*BatchGetAgentsResponse) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetAgents()
-	list := make(agent.AgentNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetAgents(); len(resources) > 0 {
+			list := make(agent.AgentNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (agent.AgentNameList)(nil)
 }
 
-func (h *BatchGetAgentsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAgentsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetAgentsResponse) *agent.ParentName
+		OverrideExtractCollectionName(*BatchGetAgentsResponse) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -409,15 +422,15 @@ func (d *ListAgentsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListAgentsDescriptor) IsCollectionSubject() bool {
+func (d *ListAgentsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListAgentsDescriptor) IsPluralSubject() bool {
+func (d *ListAgentsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListAgentsDescriptor) HasSubjectResource() bool {
+func (d *ListAgentsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -457,7 +470,7 @@ func (d *ListAgentsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *ListAgentsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListAgentsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -469,79 +482,88 @@ func (d *ListAgentsDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &ListAgentsDescriptorServerMsgHandle{}
 }
 
-func (h *ListAgentsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListAgentsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListAgentsRequest) *agent.Name
+		OverrideExtractResourceName(*ListAgentsRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListAgentsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListAgentsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListAgentsRequest) []*agent.Name
+		OverrideExtractResourceNames(*ListAgentsRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListAgentsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListAgentsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListAgentsRequest) *agent.ParentName
+		OverrideExtractCollectionName(*ListAgentsRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*agent.ParentName)(nil)
 }
 
-func (h *ListAgentsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListAgentsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListAgentsResponse) *agent.Name
+		OverrideExtractResourceName(*ListAgentsResponse) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListAgentsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListAgentsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListAgentsResponse) []*agent.Name
+		OverrideExtractResourceNames(*ListAgentsResponse) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetAgents()
-	list := make(agent.AgentNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetAgents(); len(resources) > 0 {
+			list := make(agent.AgentNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (agent.AgentNameList)(nil)
 }
 
-func (h *ListAgentsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListAgentsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListAgentsResponse) *agent.ParentName
+		OverrideExtractCollectionName(*ListAgentsResponse) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -576,15 +598,15 @@ func (d *WatchAgentDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchAgentDescriptor) IsCollectionSubject() bool {
+func (d *WatchAgentDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchAgentDescriptor) IsPluralSubject() bool {
+func (d *WatchAgentDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchAgentDescriptor) HasSubjectResource() bool {
+func (d *WatchAgentDescriptor) HasResource() bool {
 	return true
 }
 
@@ -624,7 +646,7 @@ func (d *WatchAgentDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *WatchAgentDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchAgentDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -636,89 +658,93 @@ func (d *WatchAgentDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &WatchAgentDescriptorServerMsgHandle{}
 }
 
-func (h *WatchAgentDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchAgentDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAgentRequest) *agent.Name
+		OverrideExtractResourceName(*WatchAgentRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*agent.Name)(nil)
-}
-
-func (h *WatchAgentDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchAgentRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAgentRequest) []*agent.Name
-	})
-	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchAgentDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchAgentRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAgentRequest) *agent.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchAgentDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchAgentResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAgentResponse) *agent.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *agent.AgentChange_Added_:
-			return tResChange.Added.GetAgent().GetName()
-		case *agent.AgentChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *agent.AgentChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *agent.AgentChange_Current_:
-			return tResChange.Current.GetAgent().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*agent.Name)(nil)
 }
 
-func (h *WatchAgentDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchAgentResponse)
+func (h *WatchAgentDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAgentResponse) []*agent.Name
+		OverrideExtractResourceNames(*WatchAgentRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchAgentDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchAgentDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchAgentRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchAgentRequest) *agent.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchAgentDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAgentResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAgentResponse) *agent.ParentName
+		OverrideExtractResourceName(*WatchAgentResponse) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *agent.AgentChange_Added_:
+				return tResChange.Added.GetAgent().GetName()
+			case *agent.AgentChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *agent.AgentChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *agent.AgentChange_Current_:
+				return tResChange.Current.GetAgent().GetName()
+			}
+		}
+	}
+	return (*agent.Name)(nil)
+}
+
+func (h *WatchAgentDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchAgentResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchAgentResponse) []*agent.Name
+	})
+	if ok {
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchAgentDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchAgentResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchAgentResponse) *agent.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -753,15 +779,15 @@ func (d *WatchAgentsDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchAgentsDescriptor) IsCollectionSubject() bool {
+func (d *WatchAgentsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchAgentsDescriptor) IsPluralSubject() bool {
+func (d *WatchAgentsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchAgentsDescriptor) HasSubjectResource() bool {
+func (d *WatchAgentsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -801,7 +827,7 @@ func (d *WatchAgentsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *WatchAgentsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchAgentsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -813,91 +839,97 @@ func (d *WatchAgentsDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &WatchAgentsDescriptorServerMsgHandle{}
 }
 
-func (h *WatchAgentsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchAgentsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAgentsRequest) *agent.Name
+		OverrideExtractResourceName(*WatchAgentsRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchAgentsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchAgentsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAgentsRequest) []*agent.Name
+		OverrideExtractResourceNames(*WatchAgentsRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchAgentsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchAgentsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAgentsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAgentsRequest) *agent.ParentName
+		OverrideExtractCollectionName(*WatchAgentsRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*agent.ParentName)(nil)
 }
 
-func (h *WatchAgentsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchAgentsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAgentsResponse) *agent.Name
+		OverrideExtractResourceName(*WatchAgentsResponse) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchAgentsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchAgentsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAgentsResponse) []*agent.Name
+		OverrideExtractResourceNames(*WatchAgentsResponse) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetAgentChanges()
-	list := make(agent.AgentNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *agent.AgentChange_Added_:
-			list = append(list, tResChange.Added.GetAgent().GetName())
-		case *agent.AgentChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *agent.AgentChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *agent.AgentChange_Current_:
-			list = append(list, tResChange.Current.GetAgent().GetName())
+	{
+		if resChanges := typedMsg.GetAgentChanges(); len(resChanges) > 0 {
+			list := make(agent.AgentNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *agent.AgentChange_Added_:
+					list = append(list, tResChange.Added.GetAgent().GetName())
+				case *agent.AgentChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *agent.AgentChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *agent.AgentChange_Current_:
+					list = append(list, tResChange.Current.GetAgent().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (agent.AgentNameList)(nil)
 }
 
-func (h *WatchAgentsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchAgentsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAgentsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAgentsResponse) *agent.ParentName
+		OverrideExtractCollectionName(*WatchAgentsResponse) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -932,15 +964,15 @@ func (d *CreateAgentDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateAgentDescriptor) IsCollectionSubject() bool {
+func (d *CreateAgentDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateAgentDescriptor) IsPluralSubject() bool {
+func (d *CreateAgentDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateAgentDescriptor) HasSubjectResource() bool {
+func (d *CreateAgentDescriptor) HasResource() bool {
 	return true
 }
 
@@ -980,7 +1012,7 @@ func (d *CreateAgentDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *CreateAgentDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateAgentDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -992,77 +1024,90 @@ func (d *CreateAgentDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &CreateAgentDescriptorServerMsgHandle{}
 }
 
-func (h *CreateAgentDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateAgentDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateAgentRequest) *agent.Name
+		OverrideExtractResourceName(*CreateAgentRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetAgent().GetName()
+	{
+		res := typedMsg.GetAgent()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*agent.Name)(nil)
 }
 
-func (h *CreateAgentDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateAgentDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateAgentRequest) []*agent.Name
+		OverrideExtractResourceNames(*CreateAgentRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateAgentDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateAgentDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateAgentRequest) *agent.ParentName
+		OverrideExtractCollectionName(*CreateAgentRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*agent.ParentName)(nil)
 }
 
-func (h *CreateAgentDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateAgentDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*agent.Agent) *agent.Name
+		OverrideExtractResourceName(*agent.Agent) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*agent.Name)(nil)
 }
 
-func (h *CreateAgentDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateAgentDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*agent.Agent) []*agent.Name
+		OverrideExtractResourceNames(*agent.Agent) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateAgentDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateAgentDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*agent.Agent) *agent.ParentName
+		OverrideExtractCollectionName(*agent.Agent) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1097,15 +1142,15 @@ func (d *UpdateAgentDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateAgentDescriptor) IsCollectionSubject() bool {
+func (d *UpdateAgentDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateAgentDescriptor) IsPluralSubject() bool {
+func (d *UpdateAgentDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateAgentDescriptor) HasSubjectResource() bool {
+func (d *UpdateAgentDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1145,7 +1190,7 @@ func (d *UpdateAgentDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *UpdateAgentDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateAgentDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -1157,74 +1202,85 @@ func (d *UpdateAgentDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &UpdateAgentDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateAgentDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAgentDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateAgentRequest) *agent.Name
+		OverrideExtractResourceName(*UpdateAgentRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetAgent().GetName()
+	{
+		res := typedMsg.GetAgent()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*agent.Name)(nil)
 }
 
-func (h *UpdateAgentDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateAgentDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateAgentRequest) []*agent.Name
+		OverrideExtractResourceNames(*UpdateAgentRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateAgentDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAgentDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateAgentRequest) *agent.ParentName
+		OverrideExtractCollectionName(*UpdateAgentRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateAgentDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAgentDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*agent.Agent) *agent.Name
+		OverrideExtractResourceName(*agent.Agent) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*agent.Name)(nil)
 }
 
-func (h *UpdateAgentDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateAgentDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*agent.Agent) []*agent.Name
+		OverrideExtractResourceNames(*agent.Agent) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateAgentDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAgentDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*agent.Agent)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*agent.Agent) *agent.ParentName
+		OverrideExtractCollectionName(*agent.Agent) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1259,15 +1315,15 @@ func (d *DeleteAgentDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteAgentDescriptor) IsCollectionSubject() bool {
+func (d *DeleteAgentDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteAgentDescriptor) IsPluralSubject() bool {
+func (d *DeleteAgentDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteAgentDescriptor) HasSubjectResource() bool {
+func (d *DeleteAgentDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1307,7 +1363,7 @@ func (d *DeleteAgentDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *DeleteAgentDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteAgentDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -1319,77 +1375,79 @@ func (d *DeleteAgentDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &DeleteAgentDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteAgentDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAgentDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteAgentRequest) *agent.Name
+		OverrideExtractResourceName(*DeleteAgentRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*agent.Name)(nil)
 }
 
-func (h *DeleteAgentDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteAgentDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteAgentRequest) []*agent.Name
+		OverrideExtractResourceNames(*DeleteAgentRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteAgentDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAgentDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteAgentRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteAgentRequest) *agent.ParentName
+		OverrideExtractCollectionName(*DeleteAgentRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteAgentDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAgentDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *agent.Name
+		OverrideExtractResourceName(*empty.Empty) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteAgentDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteAgentDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*agent.Name
+		OverrideExtractResourceNames(*empty.Empty) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteAgentDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAgentDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *agent.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1424,15 +1482,15 @@ func (d *ActivationDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *ActivationDescriptor) IsCollectionSubject() bool {
+func (d *ActivationDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ActivationDescriptor) IsPluralSubject() bool {
+func (d *ActivationDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *ActivationDescriptor) HasSubjectResource() bool {
+func (d *ActivationDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1472,7 +1530,7 @@ func (d *ActivationDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return agentServiceDescriptor
 }
 
-func (d *ActivationDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ActivationDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return agent.GetDescriptor()
 }
 
@@ -1484,74 +1542,74 @@ func (d *ActivationDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &ActivationDescriptorServerMsgHandle{}
 }
 
-func (h *ActivationDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ActivationDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ActivationRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ActivationRequest) *agent.Name
+		OverrideExtractResourceName(*ActivationRequest) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ActivationDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ActivationDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ActivationRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ActivationRequest) []*agent.Name
+		OverrideExtractResourceNames(*ActivationRequest) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ActivationDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ActivationDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ActivationRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ActivationRequest) *agent.ParentName
+		OverrideExtractCollectionName(*ActivationRequest) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ActivationDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ActivationDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ActivationResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ActivationResponse) *agent.Name
+		OverrideExtractResourceName(*ActivationResponse) *agent.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ActivationDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ActivationDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ActivationResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ActivationResponse) []*agent.Name
+		OverrideExtractResourceNames(*ActivationResponse) []*agent.Name
 	})
 	if ok {
-		return agent.AgentNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return agent.AgentNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ActivationDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ActivationDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ActivationResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ActivationResponse) *agent.ParentName
+		OverrideExtractCollectionName(*ActivationResponse) *agent.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

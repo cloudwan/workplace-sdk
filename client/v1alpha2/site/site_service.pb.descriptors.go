@@ -69,15 +69,15 @@ func (d *GetSiteDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetSiteDescriptor) IsCollectionSubject() bool {
+func (d *GetSiteDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetSiteDescriptor) IsPluralSubject() bool {
+func (d *GetSiteDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetSiteDescriptor) HasSubjectResource() bool {
+func (d *GetSiteDescriptor) HasResource() bool {
 	return true
 }
 
@@ -117,7 +117,7 @@ func (d *GetSiteDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *GetSiteDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetSiteDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -129,77 +129,84 @@ func (d *GetSiteDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgHan
 	return &GetSiteDescriptorServerMsgHandle{}
 }
 
-func (h *GetSiteDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetSiteDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetSiteRequest) *site.Name
+		OverrideExtractResourceName(*GetSiteRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*site.Name)(nil)
 }
 
-func (h *GetSiteDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetSiteDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetSiteRequest) []*site.Name
+		OverrideExtractResourceNames(*GetSiteRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetSiteDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetSiteDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetSiteRequest) *site.ParentName
+		OverrideExtractCollectionName(*GetSiteRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetSiteDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetSiteDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*site.Site) *site.Name
+		OverrideExtractResourceName(*site.Site) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*site.Name)(nil)
 }
 
-func (h *GetSiteDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetSiteDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*site.Site) []*site.Name
+		OverrideExtractResourceNames(*site.Site) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetSiteDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetSiteDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*site.Site) *site.ParentName
+		OverrideExtractCollectionName(*site.Site) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -234,15 +241,15 @@ func (d *BatchGetSitesDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetSitesDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetSitesDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetSitesDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetSitesDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetSitesDescriptor) HasSubjectResource() bool {
+func (d *BatchGetSitesDescriptor) HasResource() bool {
 	return true
 }
 
@@ -282,7 +289,7 @@ func (d *BatchGetSitesDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *BatchGetSitesDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetSitesDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -294,86 +301,92 @@ func (d *BatchGetSitesDescriptor) GetServerMsgReflectHandle() gotenclient.Method
 	return &BatchGetSitesDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetSitesDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetSitesDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetSitesRequest) *site.Name
+		OverrideExtractResourceName(*BatchGetSitesRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetSitesDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetSitesDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetSitesRequest) []*site.Name
+		OverrideExtractResourceNames(*BatchGetSitesRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(site.SiteNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(site.SiteNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (site.SiteNameList)(nil)
 }
 
-func (h *BatchGetSitesDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetSitesDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetSitesRequest) *site.ParentName
+		OverrideExtractCollectionName(*BatchGetSitesRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetSitesDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetSitesDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetSitesResponse) *site.Name
+		OverrideExtractResourceName(*BatchGetSitesResponse) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetSitesDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetSitesDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetSitesResponse) []*site.Name
+		OverrideExtractResourceNames(*BatchGetSitesResponse) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetSites()
-	list := make(site.SiteNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetSites(); len(resources) > 0 {
+			list := make(site.SiteNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (site.SiteNameList)(nil)
 }
 
-func (h *BatchGetSitesDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetSitesDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetSitesResponse) *site.ParentName
+		OverrideExtractCollectionName(*BatchGetSitesResponse) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -408,15 +421,15 @@ func (d *ListSitesDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListSitesDescriptor) IsCollectionSubject() bool {
+func (d *ListSitesDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListSitesDescriptor) IsPluralSubject() bool {
+func (d *ListSitesDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListSitesDescriptor) HasSubjectResource() bool {
+func (d *ListSitesDescriptor) HasResource() bool {
 	return true
 }
 
@@ -456,7 +469,7 @@ func (d *ListSitesDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *ListSitesDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListSitesDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -468,79 +481,88 @@ func (d *ListSitesDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgH
 	return &ListSitesDescriptorServerMsgHandle{}
 }
 
-func (h *ListSitesDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListSitesDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListSitesRequest) *site.Name
+		OverrideExtractResourceName(*ListSitesRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListSitesDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListSitesDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListSitesRequest) []*site.Name
+		OverrideExtractResourceNames(*ListSitesRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListSitesDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListSitesDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListSitesRequest) *site.ParentName
+		OverrideExtractCollectionName(*ListSitesRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*site.ParentName)(nil)
 }
 
-func (h *ListSitesDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListSitesDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListSitesResponse) *site.Name
+		OverrideExtractResourceName(*ListSitesResponse) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListSitesDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListSitesDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListSitesResponse) []*site.Name
+		OverrideExtractResourceNames(*ListSitesResponse) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetSites()
-	list := make(site.SiteNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetSites(); len(resources) > 0 {
+			list := make(site.SiteNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (site.SiteNameList)(nil)
 }
 
-func (h *ListSitesDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListSitesDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListSitesResponse) *site.ParentName
+		OverrideExtractCollectionName(*ListSitesResponse) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -575,15 +597,15 @@ func (d *WatchSiteDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchSiteDescriptor) IsCollectionSubject() bool {
+func (d *WatchSiteDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchSiteDescriptor) IsPluralSubject() bool {
+func (d *WatchSiteDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchSiteDescriptor) HasSubjectResource() bool {
+func (d *WatchSiteDescriptor) HasResource() bool {
 	return true
 }
 
@@ -623,7 +645,7 @@ func (d *WatchSiteDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *WatchSiteDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchSiteDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -635,89 +657,93 @@ func (d *WatchSiteDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgH
 	return &WatchSiteDescriptorServerMsgHandle{}
 }
 
-func (h *WatchSiteDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchSiteDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchSiteRequest) *site.Name
+		OverrideExtractResourceName(*WatchSiteRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*site.Name)(nil)
-}
-
-func (h *WatchSiteDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchSiteRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchSiteRequest) []*site.Name
-	})
-	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchSiteDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchSiteRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchSiteRequest) *site.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchSiteDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchSiteResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchSiteResponse) *site.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *site.SiteChange_Added_:
-			return tResChange.Added.GetSite().GetName()
-		case *site.SiteChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *site.SiteChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *site.SiteChange_Current_:
-			return tResChange.Current.GetSite().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*site.Name)(nil)
 }
 
-func (h *WatchSiteDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchSiteResponse)
+func (h *WatchSiteDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchSiteResponse) []*site.Name
+		OverrideExtractResourceNames(*WatchSiteRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchSiteDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchSiteDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchSiteRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchSiteRequest) *site.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchSiteDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchSiteResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchSiteResponse) *site.ParentName
+		OverrideExtractResourceName(*WatchSiteResponse) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *site.SiteChange_Added_:
+				return tResChange.Added.GetSite().GetName()
+			case *site.SiteChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *site.SiteChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *site.SiteChange_Current_:
+				return tResChange.Current.GetSite().GetName()
+			}
+		}
+	}
+	return (*site.Name)(nil)
+}
+
+func (h *WatchSiteDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchSiteResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchSiteResponse) []*site.Name
+	})
+	if ok {
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchSiteDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchSiteResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchSiteResponse) *site.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -752,15 +778,15 @@ func (d *WatchSitesDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchSitesDescriptor) IsCollectionSubject() bool {
+func (d *WatchSitesDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchSitesDescriptor) IsPluralSubject() bool {
+func (d *WatchSitesDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchSitesDescriptor) HasSubjectResource() bool {
+func (d *WatchSitesDescriptor) HasResource() bool {
 	return true
 }
 
@@ -800,7 +826,7 @@ func (d *WatchSitesDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *WatchSitesDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchSitesDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -812,91 +838,97 @@ func (d *WatchSitesDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &WatchSitesDescriptorServerMsgHandle{}
 }
 
-func (h *WatchSitesDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchSitesDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchSitesRequest) *site.Name
+		OverrideExtractResourceName(*WatchSitesRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchSitesDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchSitesDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchSitesRequest) []*site.Name
+		OverrideExtractResourceNames(*WatchSitesRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchSitesDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchSitesDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchSitesRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchSitesRequest) *site.ParentName
+		OverrideExtractCollectionName(*WatchSitesRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*site.ParentName)(nil)
 }
 
-func (h *WatchSitesDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchSitesDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchSitesResponse) *site.Name
+		OverrideExtractResourceName(*WatchSitesResponse) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchSitesDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchSitesDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchSitesResponse) []*site.Name
+		OverrideExtractResourceNames(*WatchSitesResponse) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetSiteChanges()
-	list := make(site.SiteNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *site.SiteChange_Added_:
-			list = append(list, tResChange.Added.GetSite().GetName())
-		case *site.SiteChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *site.SiteChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *site.SiteChange_Current_:
-			list = append(list, tResChange.Current.GetSite().GetName())
+	{
+		if resChanges := typedMsg.GetSiteChanges(); len(resChanges) > 0 {
+			list := make(site.SiteNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *site.SiteChange_Added_:
+					list = append(list, tResChange.Added.GetSite().GetName())
+				case *site.SiteChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *site.SiteChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *site.SiteChange_Current_:
+					list = append(list, tResChange.Current.GetSite().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (site.SiteNameList)(nil)
 }
 
-func (h *WatchSitesDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchSitesDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchSitesResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchSitesResponse) *site.ParentName
+		OverrideExtractCollectionName(*WatchSitesResponse) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -931,15 +963,15 @@ func (d *CreateSiteDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateSiteDescriptor) IsCollectionSubject() bool {
+func (d *CreateSiteDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateSiteDescriptor) IsPluralSubject() bool {
+func (d *CreateSiteDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateSiteDescriptor) HasSubjectResource() bool {
+func (d *CreateSiteDescriptor) HasResource() bool {
 	return true
 }
 
@@ -979,7 +1011,7 @@ func (d *CreateSiteDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *CreateSiteDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateSiteDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -991,77 +1023,90 @@ func (d *CreateSiteDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &CreateSiteDescriptorServerMsgHandle{}
 }
 
-func (h *CreateSiteDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateSiteDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateSiteRequest) *site.Name
+		OverrideExtractResourceName(*CreateSiteRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetSite().GetName()
+	{
+		res := typedMsg.GetSite()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*site.Name)(nil)
 }
 
-func (h *CreateSiteDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateSiteDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateSiteRequest) []*site.Name
+		OverrideExtractResourceNames(*CreateSiteRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateSiteDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateSiteDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateSiteRequest) *site.ParentName
+		OverrideExtractCollectionName(*CreateSiteRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*site.ParentName)(nil)
 }
 
-func (h *CreateSiteDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateSiteDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*site.Site) *site.Name
+		OverrideExtractResourceName(*site.Site) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*site.Name)(nil)
 }
 
-func (h *CreateSiteDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateSiteDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*site.Site) []*site.Name
+		OverrideExtractResourceNames(*site.Site) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateSiteDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateSiteDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*site.Site) *site.ParentName
+		OverrideExtractCollectionName(*site.Site) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1096,15 +1141,15 @@ func (d *UpdateSiteDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateSiteDescriptor) IsCollectionSubject() bool {
+func (d *UpdateSiteDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateSiteDescriptor) IsPluralSubject() bool {
+func (d *UpdateSiteDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateSiteDescriptor) HasSubjectResource() bool {
+func (d *UpdateSiteDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1144,7 +1189,7 @@ func (d *UpdateSiteDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *UpdateSiteDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateSiteDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -1156,74 +1201,85 @@ func (d *UpdateSiteDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &UpdateSiteDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateSiteDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateSiteDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateSiteRequest) *site.Name
+		OverrideExtractResourceName(*UpdateSiteRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetSite().GetName()
+	{
+		res := typedMsg.GetSite()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*site.Name)(nil)
 }
 
-func (h *UpdateSiteDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateSiteDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateSiteRequest) []*site.Name
+		OverrideExtractResourceNames(*UpdateSiteRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateSiteDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateSiteDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateSiteRequest) *site.ParentName
+		OverrideExtractCollectionName(*UpdateSiteRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateSiteDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateSiteDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*site.Site) *site.Name
+		OverrideExtractResourceName(*site.Site) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*site.Name)(nil)
 }
 
-func (h *UpdateSiteDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateSiteDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*site.Site) []*site.Name
+		OverrideExtractResourceNames(*site.Site) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateSiteDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateSiteDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*site.Site)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*site.Site) *site.ParentName
+		OverrideExtractCollectionName(*site.Site) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1258,15 +1314,15 @@ func (d *DeleteSiteDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteSiteDescriptor) IsCollectionSubject() bool {
+func (d *DeleteSiteDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteSiteDescriptor) IsPluralSubject() bool {
+func (d *DeleteSiteDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteSiteDescriptor) HasSubjectResource() bool {
+func (d *DeleteSiteDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1306,7 +1362,7 @@ func (d *DeleteSiteDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return siteServiceDescriptor
 }
 
-func (d *DeleteSiteDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteSiteDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return site.GetDescriptor()
 }
 
@@ -1318,77 +1374,79 @@ func (d *DeleteSiteDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &DeleteSiteDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteSiteDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteSiteDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteSiteRequest) *site.Name
+		OverrideExtractResourceName(*DeleteSiteRequest) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*site.Name)(nil)
 }
 
-func (h *DeleteSiteDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteSiteDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteSiteRequest) []*site.Name
+		OverrideExtractResourceNames(*DeleteSiteRequest) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteSiteDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteSiteDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteSiteRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteSiteRequest) *site.ParentName
+		OverrideExtractCollectionName(*DeleteSiteRequest) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteSiteDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteSiteDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *site.Name
+		OverrideExtractResourceName(*empty.Empty) *site.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteSiteDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteSiteDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*site.Name
+		OverrideExtractResourceNames(*empty.Empty) []*site.Name
 	})
 	if ok {
-		return site.SiteNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return site.SiteNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteSiteDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteSiteDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *site.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *site.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

@@ -318,7 +318,6 @@ type BatchGetFloorsRequest_FieldMask struct {
 
 func FullBatchGetFloorsRequest_FieldMask() *BatchGetFloorsRequest_FieldMask {
 	res := &BatchGetFloorsRequest_FieldMask{}
-	res.Paths = append(res.Paths, &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorParent})
 	res.Paths = append(res.Paths, &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorNames})
 	res.Paths = append(res.Paths, &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorFieldMask})
 	res.Paths = append(res.Paths, &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorView})
@@ -365,7 +364,7 @@ func (fieldMask *BatchGetFloorsRequest_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 4)
+	presentSelectors := make([]bool, 3)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*BatchGetFloorsRequest_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -395,7 +394,7 @@ func (fieldMask *BatchGetFloorsRequest_FieldMask) Reset() {
 
 func (fieldMask *BatchGetFloorsRequest_FieldMask) Subtract(other *BatchGetFloorsRequest_FieldMask) *BatchGetFloorsRequest_FieldMask {
 	result := &BatchGetFloorsRequest_FieldMask{}
-	removedSelectors := make([]bool, 4)
+	removedSelectors := make([]bool, 3)
 
 	for _, path := range other.GetPaths() {
 		switch tp := path.(type) {
@@ -549,8 +548,6 @@ func (fieldMask *BatchGetFloorsRequest_FieldMask) Project(source *BatchGetFloors
 		switch tp := p.(type) {
 		case *BatchGetFloorsRequest_FieldTerminalPath:
 			switch tp.selector {
-			case BatchGetFloorsRequest_FieldPathSelectorParent:
-				result.Parent = source.Parent
 			case BatchGetFloorsRequest_FieldPathSelectorNames:
 				result.Names = source.Names
 			case BatchGetFloorsRequest_FieldPathSelectorFieldMask:

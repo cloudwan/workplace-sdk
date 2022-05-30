@@ -98,9 +98,6 @@ type BatchGetDeviceGroupsRequestFieldPathBuilder struct{}
 func NewBatchGetDeviceGroupsRequestFieldPathBuilder() BatchGetDeviceGroupsRequestFieldPathBuilder {
 	return BatchGetDeviceGroupsRequestFieldPathBuilder{}
 }
-func (BatchGetDeviceGroupsRequestFieldPathBuilder) Parent() BatchGetDeviceGroupsRequestPathSelectorParent {
-	return BatchGetDeviceGroupsRequestPathSelectorParent{}
-}
 func (BatchGetDeviceGroupsRequestFieldPathBuilder) Names() BatchGetDeviceGroupsRequestPathSelectorNames {
 	return BatchGetDeviceGroupsRequestPathSelectorNames{}
 }
@@ -109,20 +106,6 @@ func (BatchGetDeviceGroupsRequestFieldPathBuilder) FieldMask() BatchGetDeviceGro
 }
 func (BatchGetDeviceGroupsRequestFieldPathBuilder) View() BatchGetDeviceGroupsRequestPathSelectorView {
 	return BatchGetDeviceGroupsRequestPathSelectorView{}
-}
-
-type BatchGetDeviceGroupsRequestPathSelectorParent struct{}
-
-func (BatchGetDeviceGroupsRequestPathSelectorParent) FieldPath() *BatchGetDeviceGroupsRequest_FieldTerminalPath {
-	return &BatchGetDeviceGroupsRequest_FieldTerminalPath{selector: BatchGetDeviceGroupsRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetDeviceGroupsRequestPathSelectorParent) WithValue(value *device_group.Reference) *BatchGetDeviceGroupsRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetDeviceGroupsRequestPathSelectorParent) WithArrayOfValues(values []*device_group.Reference) *BatchGetDeviceGroupsRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetDeviceGroupsRequestPathSelectorNames struct{}

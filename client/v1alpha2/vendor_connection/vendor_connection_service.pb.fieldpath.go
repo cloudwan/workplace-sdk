@@ -542,16 +542,13 @@ type BatchGetVendorConnectionsRequest_FieldPath interface {
 type BatchGetVendorConnectionsRequest_FieldPathSelector int32
 
 const (
-	BatchGetVendorConnectionsRequest_FieldPathSelectorParent    BatchGetVendorConnectionsRequest_FieldPathSelector = 0
-	BatchGetVendorConnectionsRequest_FieldPathSelectorNames     BatchGetVendorConnectionsRequest_FieldPathSelector = 1
-	BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask BatchGetVendorConnectionsRequest_FieldPathSelector = 2
-	BatchGetVendorConnectionsRequest_FieldPathSelectorView      BatchGetVendorConnectionsRequest_FieldPathSelector = 3
+	BatchGetVendorConnectionsRequest_FieldPathSelectorNames     BatchGetVendorConnectionsRequest_FieldPathSelector = 0
+	BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask BatchGetVendorConnectionsRequest_FieldPathSelector = 1
+	BatchGetVendorConnectionsRequest_FieldPathSelectorView      BatchGetVendorConnectionsRequest_FieldPathSelector = 2
 )
 
 func (s BatchGetVendorConnectionsRequest_FieldPathSelector) String() string {
 	switch s {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		return "parent"
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		return "names"
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -569,8 +566,6 @@ func BuildBatchGetVendorConnectionsRequest_FieldPath(fp gotenobject.RawFieldPath
 	}
 	if len(fp) == 1 {
 		switch fp[0] {
-		case "parent":
-			return &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorParent}, nil
 		case "names":
 			return &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorNames}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -622,10 +617,6 @@ func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) JSONString() strin
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) Get(source *BatchGetVendorConnectionsRequest) (values []interface{}) {
 	if source != nil {
 		switch fp.selector {
-		case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-			if source.Parent != nil {
-				values = append(values, source.Parent)
-			}
 		case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 			for _, value := range source.GetNames() {
 				values = append(values, value)
@@ -650,9 +641,6 @@ func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) GetRaw(source prot
 // GetSingle returns value pointed by specific field of from source BatchGetVendorConnectionsRequest
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) GetSingle(source *BatchGetVendorConnectionsRequest) (interface{}, bool) {
 	switch fp.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		res := source.GetParent()
-		return res, res != nil
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		res := source.GetNames()
 		return res, res != nil
@@ -673,8 +661,6 @@ func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) GetSingleRaw(sourc
 // GetDefault returns a default value of the field type
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) GetDefault() interface{} {
 	switch fp.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		return (*vendor_connection.Reference)(nil)
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		return ([]*vendor_connection.Reference)(nil)
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -689,8 +675,6 @@ func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) GetDefault() inter
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) ClearValue(item *BatchGetVendorConnectionsRequest) {
 	if item != nil {
 		switch fp.selector {
-		case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-			item.Parent = nil
 		case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 			item.Names = nil
 		case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -709,16 +693,13 @@ func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) ClearValueRaw(item
 
 // IsLeaf - whether field path is holds simple value
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) IsLeaf() bool {
-	return fp.selector == BatchGetVendorConnectionsRequest_FieldPathSelectorParent ||
-		fp.selector == BatchGetVendorConnectionsRequest_FieldPathSelectorNames ||
+	return fp.selector == BatchGetVendorConnectionsRequest_FieldPathSelectorNames ||
 		fp.selector == BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == BatchGetVendorConnectionsRequest_FieldPathSelectorView
 }
 
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetVendorConnectionsRequest_FieldPathValue {
 	switch fp.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		return &BatchGetVendorConnectionsRequest_FieldTerminalPathValue{BatchGetVendorConnectionsRequest_FieldTerminalPath: *fp, value: value.(*vendor_connection.Reference)}
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		return &BatchGetVendorConnectionsRequest_FieldTerminalPathValue{BatchGetVendorConnectionsRequest_FieldTerminalPath: *fp, value: value.([]*vendor_connection.Reference)}
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -737,8 +718,6 @@ func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) WithRawIValue(valu
 func (fp *BatchGetVendorConnectionsRequest_FieldTerminalPath) WithIArrayOfValues(values interface{}) BatchGetVendorConnectionsRequest_FieldPathArrayOfValues {
 	fpaov := &BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues{BatchGetVendorConnectionsRequest_FieldTerminalPath: *fp}
 	switch fp.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		return &BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues{BatchGetVendorConnectionsRequest_FieldTerminalPath: *fp, values: values.([]*vendor_connection.Reference)}
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		return &BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues{BatchGetVendorConnectionsRequest_FieldTerminalPath: *fp, values: values.([][]*vendor_connection.Reference)}
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -807,10 +786,6 @@ var _ BatchGetVendorConnectionsRequest_FieldPathValue = (*BatchGetVendorConnecti
 func (fpv *BatchGetVendorConnectionsRequest_FieldTerminalPathValue) GetRawValue() interface{} {
 	return fpv.value
 }
-func (fpv *BatchGetVendorConnectionsRequest_FieldTerminalPathValue) AsParentValue() (*vendor_connection.Reference, bool) {
-	res, ok := fpv.value.(*vendor_connection.Reference)
-	return res, ok
-}
 func (fpv *BatchGetVendorConnectionsRequest_FieldTerminalPathValue) AsNamesValue() ([]*vendor_connection.Reference, bool) {
 	res, ok := fpv.value.([]*vendor_connection.Reference)
 	return res, ok
@@ -830,8 +805,6 @@ func (fpv *BatchGetVendorConnectionsRequest_FieldTerminalPathValue) SetTo(target
 		*target = new(BatchGetVendorConnectionsRequest)
 	}
 	switch fpv.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		(*target).Parent = fpv.value.(*vendor_connection.Reference)
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		(*target).Names = fpv.value.([]*vendor_connection.Reference)
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -851,25 +824,6 @@ func (fpv *BatchGetVendorConnectionsRequest_FieldTerminalPathValue) SetToRaw(tar
 // CompareWith compares value in the 'BatchGetVendorConnectionsRequest_FieldTerminalPathValue' with the value under path in 'BatchGetVendorConnectionsRequest'.
 func (fpv *BatchGetVendorConnectionsRequest_FieldTerminalPathValue) CompareWith(source *BatchGetVendorConnectionsRequest) (int, bool) {
 	switch fpv.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		leftValue := fpv.value.(*vendor_connection.Reference)
-		rightValue := source.GetParent()
-		if leftValue == nil {
-			if rightValue != nil {
-				return -1, true
-			}
-			return 0, true
-		}
-		if rightValue == nil {
-			return 1, true
-		}
-		if leftValue.String() == rightValue.String() {
-			return 0, true
-		} else if leftValue.String() < rightValue.String() {
-			return -1, true
-		} else {
-			return 1, true
-		}
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		return 0, false
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -992,10 +946,6 @@ var _ BatchGetVendorConnectionsRequest_FieldPathArrayOfValues = (*BatchGetVendor
 
 func (fpaov *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues) GetRawValues() (values []interface{}) {
 	switch fpaov.selector {
-	case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-		for _, v := range fpaov.values.([]*vendor_connection.Reference) {
-			values = append(values, v)
-		}
 	case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 		for _, v := range fpaov.values.([][]*vendor_connection.Reference) {
 			values = append(values, v)
@@ -1010,10 +960,6 @@ func (fpaov *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues) Ge
 		}
 	}
 	return
-}
-func (fpaov *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues) AsParentArrayOfValues() ([]*vendor_connection.Reference, bool) {
-	res, ok := fpaov.values.([]*vendor_connection.Reference)
-	return res, ok
 }
 func (fpaov *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues) AsNamesArrayOfValues() ([][]*vendor_connection.Reference, bool) {
 	res, ok := fpaov.values.([][]*vendor_connection.Reference)

@@ -552,16 +552,13 @@ type BatchGetPropertiesRequest_FieldPath interface {
 type BatchGetPropertiesRequest_FieldPathSelector int32
 
 const (
-	BatchGetPropertiesRequest_FieldPathSelectorParent    BatchGetPropertiesRequest_FieldPathSelector = 0
-	BatchGetPropertiesRequest_FieldPathSelectorNames     BatchGetPropertiesRequest_FieldPathSelector = 1
-	BatchGetPropertiesRequest_FieldPathSelectorFieldMask BatchGetPropertiesRequest_FieldPathSelector = 2
-	BatchGetPropertiesRequest_FieldPathSelectorView      BatchGetPropertiesRequest_FieldPathSelector = 3
+	BatchGetPropertiesRequest_FieldPathSelectorNames     BatchGetPropertiesRequest_FieldPathSelector = 0
+	BatchGetPropertiesRequest_FieldPathSelectorFieldMask BatchGetPropertiesRequest_FieldPathSelector = 1
+	BatchGetPropertiesRequest_FieldPathSelectorView      BatchGetPropertiesRequest_FieldPathSelector = 2
 )
 
 func (s BatchGetPropertiesRequest_FieldPathSelector) String() string {
 	switch s {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		return "parent"
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		return "names"
 	case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -579,8 +576,6 @@ func BuildBatchGetPropertiesRequest_FieldPath(fp gotenobject.RawFieldPath) (Batc
 	}
 	if len(fp) == 1 {
 		switch fp[0] {
-		case "parent":
-			return &BatchGetPropertiesRequest_FieldTerminalPath{selector: BatchGetPropertiesRequest_FieldPathSelectorParent}, nil
 		case "names":
 			return &BatchGetPropertiesRequest_FieldTerminalPath{selector: BatchGetPropertiesRequest_FieldPathSelectorNames}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -632,10 +627,6 @@ func (fp *BatchGetPropertiesRequest_FieldTerminalPath) JSONString() string {
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) Get(source *BatchGetPropertiesRequest) (values []interface{}) {
 	if source != nil {
 		switch fp.selector {
-		case BatchGetPropertiesRequest_FieldPathSelectorParent:
-			if source.Parent != nil {
-				values = append(values, source.Parent)
-			}
 		case BatchGetPropertiesRequest_FieldPathSelectorNames:
 			for _, value := range source.GetNames() {
 				values = append(values, value)
@@ -660,9 +651,6 @@ func (fp *BatchGetPropertiesRequest_FieldTerminalPath) GetRaw(source proto.Messa
 // GetSingle returns value pointed by specific field of from source BatchGetPropertiesRequest
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) GetSingle(source *BatchGetPropertiesRequest) (interface{}, bool) {
 	switch fp.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		res := source.GetParent()
-		return res, res != nil
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		res := source.GetNames()
 		return res, res != nil
@@ -683,8 +671,6 @@ func (fp *BatchGetPropertiesRequest_FieldTerminalPath) GetSingleRaw(source proto
 // GetDefault returns a default value of the field type
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) GetDefault() interface{} {
 	switch fp.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		return (*property.Reference)(nil)
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		return ([]*property.Reference)(nil)
 	case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -699,8 +685,6 @@ func (fp *BatchGetPropertiesRequest_FieldTerminalPath) GetDefault() interface{} 
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) ClearValue(item *BatchGetPropertiesRequest) {
 	if item != nil {
 		switch fp.selector {
-		case BatchGetPropertiesRequest_FieldPathSelectorParent:
-			item.Parent = nil
 		case BatchGetPropertiesRequest_FieldPathSelectorNames:
 			item.Names = nil
 		case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -719,16 +703,13 @@ func (fp *BatchGetPropertiesRequest_FieldTerminalPath) ClearValueRaw(item proto.
 
 // IsLeaf - whether field path is holds simple value
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) IsLeaf() bool {
-	return fp.selector == BatchGetPropertiesRequest_FieldPathSelectorParent ||
-		fp.selector == BatchGetPropertiesRequest_FieldPathSelectorNames ||
+	return fp.selector == BatchGetPropertiesRequest_FieldPathSelectorNames ||
 		fp.selector == BatchGetPropertiesRequest_FieldPathSelectorFieldMask ||
 		fp.selector == BatchGetPropertiesRequest_FieldPathSelectorView
 }
 
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetPropertiesRequest_FieldPathValue {
 	switch fp.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		return &BatchGetPropertiesRequest_FieldTerminalPathValue{BatchGetPropertiesRequest_FieldTerminalPath: *fp, value: value.(*property.Reference)}
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		return &BatchGetPropertiesRequest_FieldTerminalPathValue{BatchGetPropertiesRequest_FieldTerminalPath: *fp, value: value.([]*property.Reference)}
 	case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -747,8 +728,6 @@ func (fp *BatchGetPropertiesRequest_FieldTerminalPath) WithRawIValue(value inter
 func (fp *BatchGetPropertiesRequest_FieldTerminalPath) WithIArrayOfValues(values interface{}) BatchGetPropertiesRequest_FieldPathArrayOfValues {
 	fpaov := &BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues{BatchGetPropertiesRequest_FieldTerminalPath: *fp}
 	switch fp.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		return &BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues{BatchGetPropertiesRequest_FieldTerminalPath: *fp, values: values.([]*property.Reference)}
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		return &BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues{BatchGetPropertiesRequest_FieldTerminalPath: *fp, values: values.([][]*property.Reference)}
 	case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -817,10 +796,6 @@ var _ BatchGetPropertiesRequest_FieldPathValue = (*BatchGetPropertiesRequest_Fie
 func (fpv *BatchGetPropertiesRequest_FieldTerminalPathValue) GetRawValue() interface{} {
 	return fpv.value
 }
-func (fpv *BatchGetPropertiesRequest_FieldTerminalPathValue) AsParentValue() (*property.Reference, bool) {
-	res, ok := fpv.value.(*property.Reference)
-	return res, ok
-}
 func (fpv *BatchGetPropertiesRequest_FieldTerminalPathValue) AsNamesValue() ([]*property.Reference, bool) {
 	res, ok := fpv.value.([]*property.Reference)
 	return res, ok
@@ -840,8 +815,6 @@ func (fpv *BatchGetPropertiesRequest_FieldTerminalPathValue) SetTo(target **Batc
 		*target = new(BatchGetPropertiesRequest)
 	}
 	switch fpv.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		(*target).Parent = fpv.value.(*property.Reference)
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		(*target).Names = fpv.value.([]*property.Reference)
 	case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -861,25 +834,6 @@ func (fpv *BatchGetPropertiesRequest_FieldTerminalPathValue) SetToRaw(target pro
 // CompareWith compares value in the 'BatchGetPropertiesRequest_FieldTerminalPathValue' with the value under path in 'BatchGetPropertiesRequest'.
 func (fpv *BatchGetPropertiesRequest_FieldTerminalPathValue) CompareWith(source *BatchGetPropertiesRequest) (int, bool) {
 	switch fpv.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		leftValue := fpv.value.(*property.Reference)
-		rightValue := source.GetParent()
-		if leftValue == nil {
-			if rightValue != nil {
-				return -1, true
-			}
-			return 0, true
-		}
-		if rightValue == nil {
-			return 1, true
-		}
-		if leftValue.String() == rightValue.String() {
-			return 0, true
-		} else if leftValue.String() < rightValue.String() {
-			return -1, true
-		} else {
-			return 1, true
-		}
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		return 0, false
 	case BatchGetPropertiesRequest_FieldPathSelectorFieldMask:
@@ -1002,10 +956,6 @@ var _ BatchGetPropertiesRequest_FieldPathArrayOfValues = (*BatchGetPropertiesReq
 
 func (fpaov *BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues) GetRawValues() (values []interface{}) {
 	switch fpaov.selector {
-	case BatchGetPropertiesRequest_FieldPathSelectorParent:
-		for _, v := range fpaov.values.([]*property.Reference) {
-			values = append(values, v)
-		}
 	case BatchGetPropertiesRequest_FieldPathSelectorNames:
 		for _, v := range fpaov.values.([][]*property.Reference) {
 			values = append(values, v)
@@ -1020,10 +970,6 @@ func (fpaov *BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues) GetRawVal
 		}
 	}
 	return
-}
-func (fpaov *BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues) AsParentArrayOfValues() ([]*property.Reference, bool) {
-	res, ok := fpaov.values.([]*property.Reference)
-	return res, ok
 }
 func (fpaov *BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues) AsNamesArrayOfValues() ([][]*property.Reference, bool) {
 	res, ok := fpaov.values.([][]*property.Reference)

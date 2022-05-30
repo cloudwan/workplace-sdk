@@ -33,9 +33,6 @@ message GetZoneRequest {
 // Request message for method
 // [BatchGetZones][ntt.workplace.v1alpha2.BatchGetZones]
 message BatchGetZonesRequest {
-  // Optional parent ntt.workplace.v1alpha2.Zone
-  string parent = 1;
-
   // Names of Zones
   repeated string names = 2;
 
@@ -46,6 +43,8 @@ message BatchGetZonesRequest {
   // View defines list of standard response fields present in response items.
   // Additional fields can be amended by request field field_mask
   goten.view.View view = 4;
+
+  reserved 1;
 }
 
 // BatchGetZonesResponse
@@ -315,19 +314,7 @@ service ZoneService {
   // BatchGetZones
   rpc BatchGetZones(BatchGetZonesRequest) returns (BatchGetZonesResponse) {
     option (google.api.http) = {
-      get : "/v1alpha2/{parent=projects/*/regions/*/sites/*}/zones:batchGet"
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/"
-              "zones:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "floors/*}/zones:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "floors/*/areas/*}/zones:batchGet"
-      >
+      get : "/v1alpha2/zones:batchGet"
     };
   }
 

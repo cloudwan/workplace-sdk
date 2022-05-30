@@ -110,9 +110,6 @@ type BatchGetZonesRequestFieldPathBuilder struct{}
 func NewBatchGetZonesRequestFieldPathBuilder() BatchGetZonesRequestFieldPathBuilder {
 	return BatchGetZonesRequestFieldPathBuilder{}
 }
-func (BatchGetZonesRequestFieldPathBuilder) Parent() BatchGetZonesRequestPathSelectorParent {
-	return BatchGetZonesRequestPathSelectorParent{}
-}
 func (BatchGetZonesRequestFieldPathBuilder) Names() BatchGetZonesRequestPathSelectorNames {
 	return BatchGetZonesRequestPathSelectorNames{}
 }
@@ -121,20 +118,6 @@ func (BatchGetZonesRequestFieldPathBuilder) FieldMask() BatchGetZonesRequestPath
 }
 func (BatchGetZonesRequestFieldPathBuilder) View() BatchGetZonesRequestPathSelectorView {
 	return BatchGetZonesRequestPathSelectorView{}
-}
-
-type BatchGetZonesRequestPathSelectorParent struct{}
-
-func (BatchGetZonesRequestPathSelectorParent) FieldPath() *BatchGetZonesRequest_FieldTerminalPath {
-	return &BatchGetZonesRequest_FieldTerminalPath{selector: BatchGetZonesRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetZonesRequestPathSelectorParent) WithValue(value *zone.Reference) *BatchGetZonesRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetZonesRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetZonesRequestPathSelectorParent) WithArrayOfValues(values []*zone.Reference) *BatchGetZonesRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetZonesRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetZonesRequestPathSelectorNames struct{}

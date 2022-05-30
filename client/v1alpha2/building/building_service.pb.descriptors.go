@@ -69,15 +69,15 @@ func (d *GetBuildingDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetBuildingDescriptor) IsCollectionSubject() bool {
+func (d *GetBuildingDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetBuildingDescriptor) IsPluralSubject() bool {
+func (d *GetBuildingDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetBuildingDescriptor) HasSubjectResource() bool {
+func (d *GetBuildingDescriptor) HasResource() bool {
 	return true
 }
 
@@ -117,7 +117,7 @@ func (d *GetBuildingDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return buildingServiceDescriptor
 }
 
-func (d *GetBuildingDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetBuildingDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -129,77 +129,84 @@ func (d *GetBuildingDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &GetBuildingDescriptorServerMsgHandle{}
 }
 
-func (h *GetBuildingDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetBuildingDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetBuildingRequest) *building.Name
+		OverrideExtractResourceName(*GetBuildingRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*building.Name)(nil)
 }
 
-func (h *GetBuildingDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetBuildingDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetBuildingRequest) []*building.Name
+		OverrideExtractResourceNames(*GetBuildingRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetBuildingDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetBuildingDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetBuildingRequest) *building.ParentName
+		OverrideExtractCollectionName(*GetBuildingRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetBuildingDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetBuildingDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*building.Building) *building.Name
+		OverrideExtractResourceName(*building.Building) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*building.Name)(nil)
 }
 
-func (h *GetBuildingDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetBuildingDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*building.Building) []*building.Name
+		OverrideExtractResourceNames(*building.Building) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetBuildingDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetBuildingDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*building.Building) *building.ParentName
+		OverrideExtractCollectionName(*building.Building) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -234,15 +241,15 @@ func (d *BatchGetBuildingsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetBuildingsDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetBuildingsDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetBuildingsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetBuildingsDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetBuildingsDescriptor) HasSubjectResource() bool {
+func (d *BatchGetBuildingsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -282,7 +289,7 @@ func (d *BatchGetBuildingsDescriptor) GetApiDescriptor() gotenclient.ApiDescript
 	return buildingServiceDescriptor
 }
 
-func (d *BatchGetBuildingsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetBuildingsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -294,86 +301,92 @@ func (d *BatchGetBuildingsDescriptor) GetServerMsgReflectHandle() gotenclient.Me
 	return &BatchGetBuildingsDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetBuildingsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetBuildingsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetBuildingsRequest) *building.Name
+		OverrideExtractResourceName(*BatchGetBuildingsRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetBuildingsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetBuildingsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetBuildingsRequest) []*building.Name
+		OverrideExtractResourceNames(*BatchGetBuildingsRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(building.BuildingNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(building.BuildingNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (building.BuildingNameList)(nil)
 }
 
-func (h *BatchGetBuildingsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetBuildingsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetBuildingsRequest) *building.ParentName
+		OverrideExtractCollectionName(*BatchGetBuildingsRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetBuildingsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetBuildingsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetBuildingsResponse) *building.Name
+		OverrideExtractResourceName(*BatchGetBuildingsResponse) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetBuildingsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetBuildingsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetBuildingsResponse) []*building.Name
+		OverrideExtractResourceNames(*BatchGetBuildingsResponse) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetBuildings()
-	list := make(building.BuildingNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetBuildings(); len(resources) > 0 {
+			list := make(building.BuildingNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (building.BuildingNameList)(nil)
 }
 
-func (h *BatchGetBuildingsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetBuildingsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetBuildingsResponse) *building.ParentName
+		OverrideExtractCollectionName(*BatchGetBuildingsResponse) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -408,15 +421,15 @@ func (d *ListBuildingsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListBuildingsDescriptor) IsCollectionSubject() bool {
+func (d *ListBuildingsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListBuildingsDescriptor) IsPluralSubject() bool {
+func (d *ListBuildingsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListBuildingsDescriptor) HasSubjectResource() bool {
+func (d *ListBuildingsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -456,7 +469,7 @@ func (d *ListBuildingsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return buildingServiceDescriptor
 }
 
-func (d *ListBuildingsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListBuildingsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -468,79 +481,88 @@ func (d *ListBuildingsDescriptor) GetServerMsgReflectHandle() gotenclient.Method
 	return &ListBuildingsDescriptorServerMsgHandle{}
 }
 
-func (h *ListBuildingsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListBuildingsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListBuildingsRequest) *building.Name
+		OverrideExtractResourceName(*ListBuildingsRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListBuildingsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListBuildingsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListBuildingsRequest) []*building.Name
+		OverrideExtractResourceNames(*ListBuildingsRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListBuildingsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListBuildingsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListBuildingsRequest) *building.ParentName
+		OverrideExtractCollectionName(*ListBuildingsRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*building.ParentName)(nil)
 }
 
-func (h *ListBuildingsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListBuildingsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListBuildingsResponse) *building.Name
+		OverrideExtractResourceName(*ListBuildingsResponse) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListBuildingsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListBuildingsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListBuildingsResponse) []*building.Name
+		OverrideExtractResourceNames(*ListBuildingsResponse) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetBuildings()
-	list := make(building.BuildingNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetBuildings(); len(resources) > 0 {
+			list := make(building.BuildingNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (building.BuildingNameList)(nil)
 }
 
-func (h *ListBuildingsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListBuildingsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListBuildingsResponse) *building.ParentName
+		OverrideExtractCollectionName(*ListBuildingsResponse) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -575,15 +597,15 @@ func (d *WatchBuildingDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchBuildingDescriptor) IsCollectionSubject() bool {
+func (d *WatchBuildingDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchBuildingDescriptor) IsPluralSubject() bool {
+func (d *WatchBuildingDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchBuildingDescriptor) HasSubjectResource() bool {
+func (d *WatchBuildingDescriptor) HasResource() bool {
 	return true
 }
 
@@ -623,7 +645,7 @@ func (d *WatchBuildingDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return buildingServiceDescriptor
 }
 
-func (d *WatchBuildingDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchBuildingDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -635,89 +657,93 @@ func (d *WatchBuildingDescriptor) GetServerMsgReflectHandle() gotenclient.Method
 	return &WatchBuildingDescriptorServerMsgHandle{}
 }
 
-func (h *WatchBuildingDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchBuildingDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchBuildingRequest) *building.Name
+		OverrideExtractResourceName(*WatchBuildingRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*building.Name)(nil)
-}
-
-func (h *WatchBuildingDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchBuildingRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchBuildingRequest) []*building.Name
-	})
-	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchBuildingDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchBuildingRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchBuildingRequest) *building.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchBuildingDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchBuildingResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchBuildingResponse) *building.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *building.BuildingChange_Added_:
-			return tResChange.Added.GetBuilding().GetName()
-		case *building.BuildingChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *building.BuildingChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *building.BuildingChange_Current_:
-			return tResChange.Current.GetBuilding().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*building.Name)(nil)
 }
 
-func (h *WatchBuildingDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchBuildingResponse)
+func (h *WatchBuildingDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchBuildingResponse) []*building.Name
+		OverrideExtractResourceNames(*WatchBuildingRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchBuildingDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchBuildingDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchBuildingRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchBuildingRequest) *building.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchBuildingDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchBuildingResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchBuildingResponse) *building.ParentName
+		OverrideExtractResourceName(*WatchBuildingResponse) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *building.BuildingChange_Added_:
+				return tResChange.Added.GetBuilding().GetName()
+			case *building.BuildingChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *building.BuildingChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *building.BuildingChange_Current_:
+				return tResChange.Current.GetBuilding().GetName()
+			}
+		}
+	}
+	return (*building.Name)(nil)
+}
+
+func (h *WatchBuildingDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchBuildingResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchBuildingResponse) []*building.Name
+	})
+	if ok {
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchBuildingDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchBuildingResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchBuildingResponse) *building.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -752,15 +778,15 @@ func (d *WatchBuildingsDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchBuildingsDescriptor) IsCollectionSubject() bool {
+func (d *WatchBuildingsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchBuildingsDescriptor) IsPluralSubject() bool {
+func (d *WatchBuildingsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchBuildingsDescriptor) HasSubjectResource() bool {
+func (d *WatchBuildingsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -800,7 +826,7 @@ func (d *WatchBuildingsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return buildingServiceDescriptor
 }
 
-func (d *WatchBuildingsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchBuildingsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -812,91 +838,97 @@ func (d *WatchBuildingsDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &WatchBuildingsDescriptorServerMsgHandle{}
 }
 
-func (h *WatchBuildingsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchBuildingsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchBuildingsRequest) *building.Name
+		OverrideExtractResourceName(*WatchBuildingsRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchBuildingsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchBuildingsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchBuildingsRequest) []*building.Name
+		OverrideExtractResourceNames(*WatchBuildingsRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchBuildingsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchBuildingsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchBuildingsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchBuildingsRequest) *building.ParentName
+		OverrideExtractCollectionName(*WatchBuildingsRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*building.ParentName)(nil)
 }
 
-func (h *WatchBuildingsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchBuildingsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchBuildingsResponse) *building.Name
+		OverrideExtractResourceName(*WatchBuildingsResponse) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchBuildingsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchBuildingsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchBuildingsResponse) []*building.Name
+		OverrideExtractResourceNames(*WatchBuildingsResponse) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetBuildingChanges()
-	list := make(building.BuildingNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *building.BuildingChange_Added_:
-			list = append(list, tResChange.Added.GetBuilding().GetName())
-		case *building.BuildingChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *building.BuildingChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *building.BuildingChange_Current_:
-			list = append(list, tResChange.Current.GetBuilding().GetName())
+	{
+		if resChanges := typedMsg.GetBuildingChanges(); len(resChanges) > 0 {
+			list := make(building.BuildingNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *building.BuildingChange_Added_:
+					list = append(list, tResChange.Added.GetBuilding().GetName())
+				case *building.BuildingChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *building.BuildingChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *building.BuildingChange_Current_:
+					list = append(list, tResChange.Current.GetBuilding().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (building.BuildingNameList)(nil)
 }
 
-func (h *WatchBuildingsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchBuildingsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchBuildingsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchBuildingsResponse) *building.ParentName
+		OverrideExtractCollectionName(*WatchBuildingsResponse) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -931,15 +963,15 @@ func (d *CreateBuildingDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateBuildingDescriptor) IsCollectionSubject() bool {
+func (d *CreateBuildingDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateBuildingDescriptor) IsPluralSubject() bool {
+func (d *CreateBuildingDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateBuildingDescriptor) HasSubjectResource() bool {
+func (d *CreateBuildingDescriptor) HasResource() bool {
 	return true
 }
 
@@ -979,7 +1011,7 @@ func (d *CreateBuildingDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return buildingServiceDescriptor
 }
 
-func (d *CreateBuildingDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateBuildingDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -991,77 +1023,90 @@ func (d *CreateBuildingDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &CreateBuildingDescriptorServerMsgHandle{}
 }
 
-func (h *CreateBuildingDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateBuildingDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateBuildingRequest) *building.Name
+		OverrideExtractResourceName(*CreateBuildingRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetBuilding().GetName()
+	{
+		res := typedMsg.GetBuilding()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*building.Name)(nil)
 }
 
-func (h *CreateBuildingDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateBuildingDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateBuildingRequest) []*building.Name
+		OverrideExtractResourceNames(*CreateBuildingRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateBuildingDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateBuildingDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateBuildingRequest) *building.ParentName
+		OverrideExtractCollectionName(*CreateBuildingRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*building.ParentName)(nil)
 }
 
-func (h *CreateBuildingDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateBuildingDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*building.Building) *building.Name
+		OverrideExtractResourceName(*building.Building) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*building.Name)(nil)
 }
 
-func (h *CreateBuildingDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateBuildingDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*building.Building) []*building.Name
+		OverrideExtractResourceNames(*building.Building) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateBuildingDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateBuildingDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*building.Building) *building.ParentName
+		OverrideExtractCollectionName(*building.Building) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1096,15 +1141,15 @@ func (d *UpdateBuildingDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateBuildingDescriptor) IsCollectionSubject() bool {
+func (d *UpdateBuildingDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateBuildingDescriptor) IsPluralSubject() bool {
+func (d *UpdateBuildingDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateBuildingDescriptor) HasSubjectResource() bool {
+func (d *UpdateBuildingDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1144,7 +1189,7 @@ func (d *UpdateBuildingDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return buildingServiceDescriptor
 }
 
-func (d *UpdateBuildingDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateBuildingDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -1156,74 +1201,85 @@ func (d *UpdateBuildingDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &UpdateBuildingDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateBuildingDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateBuildingDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateBuildingRequest) *building.Name
+		OverrideExtractResourceName(*UpdateBuildingRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetBuilding().GetName()
+	{
+		res := typedMsg.GetBuilding()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*building.Name)(nil)
 }
 
-func (h *UpdateBuildingDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateBuildingDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateBuildingRequest) []*building.Name
+		OverrideExtractResourceNames(*UpdateBuildingRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateBuildingDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateBuildingDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateBuildingRequest) *building.ParentName
+		OverrideExtractCollectionName(*UpdateBuildingRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateBuildingDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateBuildingDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*building.Building) *building.Name
+		OverrideExtractResourceName(*building.Building) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*building.Name)(nil)
 }
 
-func (h *UpdateBuildingDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateBuildingDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*building.Building) []*building.Name
+		OverrideExtractResourceNames(*building.Building) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateBuildingDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateBuildingDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*building.Building)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*building.Building) *building.ParentName
+		OverrideExtractCollectionName(*building.Building) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1258,15 +1314,15 @@ func (d *DeleteBuildingDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteBuildingDescriptor) IsCollectionSubject() bool {
+func (d *DeleteBuildingDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteBuildingDescriptor) IsPluralSubject() bool {
+func (d *DeleteBuildingDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteBuildingDescriptor) HasSubjectResource() bool {
+func (d *DeleteBuildingDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1306,7 +1362,7 @@ func (d *DeleteBuildingDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return buildingServiceDescriptor
 }
 
-func (d *DeleteBuildingDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteBuildingDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return building.GetDescriptor()
 }
 
@@ -1318,77 +1374,79 @@ func (d *DeleteBuildingDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &DeleteBuildingDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteBuildingDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteBuildingDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteBuildingRequest) *building.Name
+		OverrideExtractResourceName(*DeleteBuildingRequest) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*building.Name)(nil)
 }
 
-func (h *DeleteBuildingDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteBuildingDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteBuildingRequest) []*building.Name
+		OverrideExtractResourceNames(*DeleteBuildingRequest) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteBuildingDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteBuildingDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteBuildingRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteBuildingRequest) *building.ParentName
+		OverrideExtractCollectionName(*DeleteBuildingRequest) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteBuildingDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteBuildingDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *building.Name
+		OverrideExtractResourceName(*empty.Empty) *building.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteBuildingDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteBuildingDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*building.Name
+		OverrideExtractResourceNames(*empty.Empty) []*building.Name
 	})
 	if ok {
-		return building.BuildingNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return building.BuildingNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteBuildingDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteBuildingDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *building.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *building.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

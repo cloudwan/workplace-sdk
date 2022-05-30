@@ -102,9 +102,6 @@ type BatchGetSitesRequestFieldPathBuilder struct{}
 func NewBatchGetSitesRequestFieldPathBuilder() BatchGetSitesRequestFieldPathBuilder {
 	return BatchGetSitesRequestFieldPathBuilder{}
 }
-func (BatchGetSitesRequestFieldPathBuilder) Parent() BatchGetSitesRequestPathSelectorParent {
-	return BatchGetSitesRequestPathSelectorParent{}
-}
 func (BatchGetSitesRequestFieldPathBuilder) Names() BatchGetSitesRequestPathSelectorNames {
 	return BatchGetSitesRequestPathSelectorNames{}
 }
@@ -113,20 +110,6 @@ func (BatchGetSitesRequestFieldPathBuilder) FieldMask() BatchGetSitesRequestPath
 }
 func (BatchGetSitesRequestFieldPathBuilder) View() BatchGetSitesRequestPathSelectorView {
 	return BatchGetSitesRequestPathSelectorView{}
-}
-
-type BatchGetSitesRequestPathSelectorParent struct{}
-
-func (BatchGetSitesRequestPathSelectorParent) FieldPath() *BatchGetSitesRequest_FieldTerminalPath {
-	return &BatchGetSitesRequest_FieldTerminalPath{selector: BatchGetSitesRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetSitesRequestPathSelectorParent) WithValue(value *site.Reference) *BatchGetSitesRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetSitesRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetSitesRequestPathSelectorParent) WithArrayOfValues(values []*site.Reference) *BatchGetSitesRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetSitesRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetSitesRequestPathSelectorNames struct{}

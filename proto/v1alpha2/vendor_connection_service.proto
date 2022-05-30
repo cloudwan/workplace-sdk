@@ -35,9 +35,6 @@ message GetVendorConnectionRequest {
 // Request message for method
 // [BatchGetVendorConnections][ntt.workplace.v1alpha2.BatchGetVendorConnections]
 message BatchGetVendorConnectionsRequest {
-  // Optional parent ntt.workplace.v1alpha2.VendorConnection
-  string parent = 1;
-
   // Names of VendorConnections
   repeated string names = 2;
 
@@ -48,6 +45,8 @@ message BatchGetVendorConnectionsRequest {
   // View defines list of standard response fields present in response items.
   // Additional fields can be amended by request field field_mask
   goten.view.View view = 4;
+
+  reserved 1;
 }
 
 // BatchGetVendorConnectionsResponse
@@ -314,7 +313,7 @@ service VendorConnectionService {
   rpc BatchGetVendorConnections(BatchGetVendorConnectionsRequest)
       returns (BatchGetVendorConnectionsResponse) {
     option (google.api.http) = {
-      get : "/v1alpha2/{parent=projects/*}/vendorConnections:batchGet"
+      get : "/v1alpha2/vendorConnections:batchGet"
     };
   }
 

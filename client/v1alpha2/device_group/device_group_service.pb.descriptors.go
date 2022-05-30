@@ -69,15 +69,15 @@ func (d *GetDeviceGroupDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetDeviceGroupDescriptor) IsCollectionSubject() bool {
+func (d *GetDeviceGroupDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetDeviceGroupDescriptor) IsPluralSubject() bool {
+func (d *GetDeviceGroupDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetDeviceGroupDescriptor) HasSubjectResource() bool {
+func (d *GetDeviceGroupDescriptor) HasResource() bool {
 	return true
 }
 
@@ -117,7 +117,7 @@ func (d *GetDeviceGroupDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return deviceGroupServiceDescriptor
 }
 
-func (d *GetDeviceGroupDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetDeviceGroupDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -129,77 +129,84 @@ func (d *GetDeviceGroupDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &GetDeviceGroupDescriptorServerMsgHandle{}
 }
 
-func (h *GetDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetDeviceGroupDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetDeviceGroupRequest) *device_group.Name
+		OverrideExtractResourceName(*GetDeviceGroupRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*device_group.Name)(nil)
 }
 
-func (h *GetDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetDeviceGroupDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetDeviceGroupRequest) []*device_group.Name
+		OverrideExtractResourceNames(*GetDeviceGroupRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetDeviceGroupDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetDeviceGroupDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetDeviceGroupRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*GetDeviceGroupRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetDeviceGroupDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*device_group.DeviceGroup) *device_group.Name
+		OverrideExtractResourceName(*device_group.DeviceGroup) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*device_group.Name)(nil)
 }
 
-func (h *GetDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetDeviceGroupDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*device_group.DeviceGroup) []*device_group.Name
+		OverrideExtractResourceNames(*device_group.DeviceGroup) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetDeviceGroupDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetDeviceGroupDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*device_group.DeviceGroup) *device_group.ParentName
+		OverrideExtractCollectionName(*device_group.DeviceGroup) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -234,15 +241,15 @@ func (d *BatchGetDeviceGroupsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetDeviceGroupsDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetDeviceGroupsDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetDeviceGroupsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetDeviceGroupsDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetDeviceGroupsDescriptor) HasSubjectResource() bool {
+func (d *BatchGetDeviceGroupsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -282,7 +289,7 @@ func (d *BatchGetDeviceGroupsDescriptor) GetApiDescriptor() gotenclient.ApiDescr
 	return deviceGroupServiceDescriptor
 }
 
-func (d *BatchGetDeviceGroupsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetDeviceGroupsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -294,86 +301,92 @@ func (d *BatchGetDeviceGroupsDescriptor) GetServerMsgReflectHandle() gotenclient
 	return &BatchGetDeviceGroupsDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetDeviceGroupsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetDeviceGroupsRequest) *device_group.Name
+		OverrideExtractResourceName(*BatchGetDeviceGroupsRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetDeviceGroupsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetDeviceGroupsRequest) []*device_group.Name
+		OverrideExtractResourceNames(*BatchGetDeviceGroupsRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(device_group.DeviceGroupNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(device_group.DeviceGroupNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (device_group.DeviceGroupNameList)(nil)
 }
 
-func (h *BatchGetDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetDeviceGroupsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetDeviceGroupsRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*BatchGetDeviceGroupsRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetDeviceGroupsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetDeviceGroupsResponse) *device_group.Name
+		OverrideExtractResourceName(*BatchGetDeviceGroupsResponse) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetDeviceGroupsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetDeviceGroupsResponse) []*device_group.Name
+		OverrideExtractResourceNames(*BatchGetDeviceGroupsResponse) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetDeviceGroups()
-	list := make(device_group.DeviceGroupNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetDeviceGroups(); len(resources) > 0 {
+			list := make(device_group.DeviceGroupNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (device_group.DeviceGroupNameList)(nil)
 }
 
-func (h *BatchGetDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetDeviceGroupsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetDeviceGroupsResponse) *device_group.ParentName
+		OverrideExtractCollectionName(*BatchGetDeviceGroupsResponse) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -408,15 +421,15 @@ func (d *ListDeviceGroupsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListDeviceGroupsDescriptor) IsCollectionSubject() bool {
+func (d *ListDeviceGroupsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListDeviceGroupsDescriptor) IsPluralSubject() bool {
+func (d *ListDeviceGroupsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListDeviceGroupsDescriptor) HasSubjectResource() bool {
+func (d *ListDeviceGroupsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -456,7 +469,7 @@ func (d *ListDeviceGroupsDescriptor) GetApiDescriptor() gotenclient.ApiDescripto
 	return deviceGroupServiceDescriptor
 }
 
-func (d *ListDeviceGroupsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListDeviceGroupsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -468,79 +481,88 @@ func (d *ListDeviceGroupsDescriptor) GetServerMsgReflectHandle() gotenclient.Met
 	return &ListDeviceGroupsDescriptorServerMsgHandle{}
 }
 
-func (h *ListDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListDeviceGroupsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListDeviceGroupsRequest) *device_group.Name
+		OverrideExtractResourceName(*ListDeviceGroupsRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListDeviceGroupsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListDeviceGroupsRequest) []*device_group.Name
+		OverrideExtractResourceNames(*ListDeviceGroupsRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListDeviceGroupsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListDeviceGroupsRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*ListDeviceGroupsRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*device_group.ParentName)(nil)
 }
 
-func (h *ListDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListDeviceGroupsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListDeviceGroupsResponse) *device_group.Name
+		OverrideExtractResourceName(*ListDeviceGroupsResponse) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListDeviceGroupsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListDeviceGroupsResponse) []*device_group.Name
+		OverrideExtractResourceNames(*ListDeviceGroupsResponse) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetDeviceGroups()
-	list := make(device_group.DeviceGroupNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetDeviceGroups(); len(resources) > 0 {
+			list := make(device_group.DeviceGroupNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (device_group.DeviceGroupNameList)(nil)
 }
 
-func (h *ListDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListDeviceGroupsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListDeviceGroupsResponse) *device_group.ParentName
+		OverrideExtractCollectionName(*ListDeviceGroupsResponse) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -575,15 +597,15 @@ func (d *WatchDeviceGroupDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchDeviceGroupDescriptor) IsCollectionSubject() bool {
+func (d *WatchDeviceGroupDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchDeviceGroupDescriptor) IsPluralSubject() bool {
+func (d *WatchDeviceGroupDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchDeviceGroupDescriptor) HasSubjectResource() bool {
+func (d *WatchDeviceGroupDescriptor) HasResource() bool {
 	return true
 }
 
@@ -623,7 +645,7 @@ func (d *WatchDeviceGroupDescriptor) GetApiDescriptor() gotenclient.ApiDescripto
 	return deviceGroupServiceDescriptor
 }
 
-func (d *WatchDeviceGroupDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchDeviceGroupDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -635,89 +657,93 @@ func (d *WatchDeviceGroupDescriptor) GetServerMsgReflectHandle() gotenclient.Met
 	return &WatchDeviceGroupDescriptorServerMsgHandle{}
 }
 
-func (h *WatchDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchDeviceGroupDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchDeviceGroupRequest) *device_group.Name
+		OverrideExtractResourceName(*WatchDeviceGroupRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*device_group.Name)(nil)
-}
-
-func (h *WatchDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchDeviceGroupRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchDeviceGroupRequest) []*device_group.Name
-	})
-	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchDeviceGroupDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchDeviceGroupRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchDeviceGroupRequest) *device_group.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchDeviceGroupResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchDeviceGroupResponse) *device_group.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *device_group.DeviceGroupChange_Added_:
-			return tResChange.Added.GetDeviceGroup().GetName()
-		case *device_group.DeviceGroupChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *device_group.DeviceGroupChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *device_group.DeviceGroupChange_Current_:
-			return tResChange.Current.GetDeviceGroup().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*device_group.Name)(nil)
 }
 
-func (h *WatchDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchDeviceGroupResponse)
+func (h *WatchDeviceGroupDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchDeviceGroupResponse) []*device_group.Name
+		OverrideExtractResourceNames(*WatchDeviceGroupRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchDeviceGroupDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchDeviceGroupDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchDeviceGroupRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchDeviceGroupRequest) *device_group.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchDeviceGroupDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchDeviceGroupResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchDeviceGroupResponse) *device_group.ParentName
+		OverrideExtractResourceName(*WatchDeviceGroupResponse) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *device_group.DeviceGroupChange_Added_:
+				return tResChange.Added.GetDeviceGroup().GetName()
+			case *device_group.DeviceGroupChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *device_group.DeviceGroupChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *device_group.DeviceGroupChange_Current_:
+				return tResChange.Current.GetDeviceGroup().GetName()
+			}
+		}
+	}
+	return (*device_group.Name)(nil)
+}
+
+func (h *WatchDeviceGroupDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchDeviceGroupResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchDeviceGroupResponse) []*device_group.Name
+	})
+	if ok {
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchDeviceGroupDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchDeviceGroupResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchDeviceGroupResponse) *device_group.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -752,15 +778,15 @@ func (d *WatchDeviceGroupsDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchDeviceGroupsDescriptor) IsCollectionSubject() bool {
+func (d *WatchDeviceGroupsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchDeviceGroupsDescriptor) IsPluralSubject() bool {
+func (d *WatchDeviceGroupsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchDeviceGroupsDescriptor) HasSubjectResource() bool {
+func (d *WatchDeviceGroupsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -800,7 +826,7 @@ func (d *WatchDeviceGroupsDescriptor) GetApiDescriptor() gotenclient.ApiDescript
 	return deviceGroupServiceDescriptor
 }
 
-func (d *WatchDeviceGroupsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchDeviceGroupsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -812,91 +838,97 @@ func (d *WatchDeviceGroupsDescriptor) GetServerMsgReflectHandle() gotenclient.Me
 	return &WatchDeviceGroupsDescriptorServerMsgHandle{}
 }
 
-func (h *WatchDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchDeviceGroupsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchDeviceGroupsRequest) *device_group.Name
+		OverrideExtractResourceName(*WatchDeviceGroupsRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchDeviceGroupsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchDeviceGroupsRequest) []*device_group.Name
+		OverrideExtractResourceNames(*WatchDeviceGroupsRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchDeviceGroupsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchDeviceGroupsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchDeviceGroupsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchDeviceGroupsRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*WatchDeviceGroupsRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*device_group.ParentName)(nil)
 }
 
-func (h *WatchDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchDeviceGroupsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchDeviceGroupsResponse) *device_group.Name
+		OverrideExtractResourceName(*WatchDeviceGroupsResponse) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchDeviceGroupsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchDeviceGroupsResponse) []*device_group.Name
+		OverrideExtractResourceNames(*WatchDeviceGroupsResponse) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetDeviceGroupChanges()
-	list := make(device_group.DeviceGroupNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *device_group.DeviceGroupChange_Added_:
-			list = append(list, tResChange.Added.GetDeviceGroup().GetName())
-		case *device_group.DeviceGroupChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *device_group.DeviceGroupChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *device_group.DeviceGroupChange_Current_:
-			list = append(list, tResChange.Current.GetDeviceGroup().GetName())
+	{
+		if resChanges := typedMsg.GetDeviceGroupChanges(); len(resChanges) > 0 {
+			list := make(device_group.DeviceGroupNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *device_group.DeviceGroupChange_Added_:
+					list = append(list, tResChange.Added.GetDeviceGroup().GetName())
+				case *device_group.DeviceGroupChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *device_group.DeviceGroupChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *device_group.DeviceGroupChange_Current_:
+					list = append(list, tResChange.Current.GetDeviceGroup().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (device_group.DeviceGroupNameList)(nil)
 }
 
-func (h *WatchDeviceGroupsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchDeviceGroupsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchDeviceGroupsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchDeviceGroupsResponse) *device_group.ParentName
+		OverrideExtractCollectionName(*WatchDeviceGroupsResponse) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -931,15 +963,15 @@ func (d *CreateDeviceGroupDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateDeviceGroupDescriptor) IsCollectionSubject() bool {
+func (d *CreateDeviceGroupDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateDeviceGroupDescriptor) IsPluralSubject() bool {
+func (d *CreateDeviceGroupDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateDeviceGroupDescriptor) HasSubjectResource() bool {
+func (d *CreateDeviceGroupDescriptor) HasResource() bool {
 	return true
 }
 
@@ -979,7 +1011,7 @@ func (d *CreateDeviceGroupDescriptor) GetApiDescriptor() gotenclient.ApiDescript
 	return deviceGroupServiceDescriptor
 }
 
-func (d *CreateDeviceGroupDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateDeviceGroupDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -991,77 +1023,90 @@ func (d *CreateDeviceGroupDescriptor) GetServerMsgReflectHandle() gotenclient.Me
 	return &CreateDeviceGroupDescriptorServerMsgHandle{}
 }
 
-func (h *CreateDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateDeviceGroupDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateDeviceGroupRequest) *device_group.Name
+		OverrideExtractResourceName(*CreateDeviceGroupRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetDeviceGroup().GetName()
+	{
+		res := typedMsg.GetDeviceGroup()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*device_group.Name)(nil)
 }
 
-func (h *CreateDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateDeviceGroupDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateDeviceGroupRequest) []*device_group.Name
+		OverrideExtractResourceNames(*CreateDeviceGroupRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateDeviceGroupDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateDeviceGroupDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateDeviceGroupRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*CreateDeviceGroupRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*device_group.ParentName)(nil)
 }
 
-func (h *CreateDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateDeviceGroupDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*device_group.DeviceGroup) *device_group.Name
+		OverrideExtractResourceName(*device_group.DeviceGroup) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*device_group.Name)(nil)
 }
 
-func (h *CreateDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateDeviceGroupDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*device_group.DeviceGroup) []*device_group.Name
+		OverrideExtractResourceNames(*device_group.DeviceGroup) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateDeviceGroupDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateDeviceGroupDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*device_group.DeviceGroup) *device_group.ParentName
+		OverrideExtractCollectionName(*device_group.DeviceGroup) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1096,15 +1141,15 @@ func (d *UpdateDeviceGroupDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateDeviceGroupDescriptor) IsCollectionSubject() bool {
+func (d *UpdateDeviceGroupDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateDeviceGroupDescriptor) IsPluralSubject() bool {
+func (d *UpdateDeviceGroupDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateDeviceGroupDescriptor) HasSubjectResource() bool {
+func (d *UpdateDeviceGroupDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1144,7 +1189,7 @@ func (d *UpdateDeviceGroupDescriptor) GetApiDescriptor() gotenclient.ApiDescript
 	return deviceGroupServiceDescriptor
 }
 
-func (d *UpdateDeviceGroupDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateDeviceGroupDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -1156,74 +1201,85 @@ func (d *UpdateDeviceGroupDescriptor) GetServerMsgReflectHandle() gotenclient.Me
 	return &UpdateDeviceGroupDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateDeviceGroupDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateDeviceGroupRequest) *device_group.Name
+		OverrideExtractResourceName(*UpdateDeviceGroupRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetDeviceGroup().GetName()
+	{
+		res := typedMsg.GetDeviceGroup()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*device_group.Name)(nil)
 }
 
-func (h *UpdateDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateDeviceGroupDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateDeviceGroupRequest) []*device_group.Name
+		OverrideExtractResourceNames(*UpdateDeviceGroupRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateDeviceGroupDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateDeviceGroupDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateDeviceGroupRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*UpdateDeviceGroupRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateDeviceGroupDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*device_group.DeviceGroup) *device_group.Name
+		OverrideExtractResourceName(*device_group.DeviceGroup) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*device_group.Name)(nil)
 }
 
-func (h *UpdateDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateDeviceGroupDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*device_group.DeviceGroup) []*device_group.Name
+		OverrideExtractResourceNames(*device_group.DeviceGroup) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateDeviceGroupDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateDeviceGroupDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*device_group.DeviceGroup)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*device_group.DeviceGroup) *device_group.ParentName
+		OverrideExtractCollectionName(*device_group.DeviceGroup) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1258,15 +1314,15 @@ func (d *DeleteDeviceGroupDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteDeviceGroupDescriptor) IsCollectionSubject() bool {
+func (d *DeleteDeviceGroupDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteDeviceGroupDescriptor) IsPluralSubject() bool {
+func (d *DeleteDeviceGroupDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteDeviceGroupDescriptor) HasSubjectResource() bool {
+func (d *DeleteDeviceGroupDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1306,7 +1362,7 @@ func (d *DeleteDeviceGroupDescriptor) GetApiDescriptor() gotenclient.ApiDescript
 	return deviceGroupServiceDescriptor
 }
 
-func (d *DeleteDeviceGroupDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteDeviceGroupDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return device_group.GetDescriptor()
 }
 
@@ -1318,77 +1374,79 @@ func (d *DeleteDeviceGroupDescriptor) GetServerMsgReflectHandle() gotenclient.Me
 	return &DeleteDeviceGroupDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteDeviceGroupDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteDeviceGroupRequest) *device_group.Name
+		OverrideExtractResourceName(*DeleteDeviceGroupRequest) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*device_group.Name)(nil)
 }
 
-func (h *DeleteDeviceGroupDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteDeviceGroupDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteDeviceGroupRequest) []*device_group.Name
+		OverrideExtractResourceNames(*DeleteDeviceGroupRequest) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteDeviceGroupDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteDeviceGroupDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteDeviceGroupRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteDeviceGroupRequest) *device_group.ParentName
+		OverrideExtractCollectionName(*DeleteDeviceGroupRequest) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteDeviceGroupDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *device_group.Name
+		OverrideExtractResourceName(*empty.Empty) *device_group.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteDeviceGroupDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteDeviceGroupDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*device_group.Name
+		OverrideExtractResourceNames(*empty.Empty) []*device_group.Name
 	})
 	if ok {
-		return device_group.DeviceGroupNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return device_group.DeviceGroupNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteDeviceGroupDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteDeviceGroupDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *device_group.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *device_group.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

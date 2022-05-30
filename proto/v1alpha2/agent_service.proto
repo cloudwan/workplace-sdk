@@ -34,9 +34,6 @@ message GetAgentRequest {
 // Request message for method
 // [BatchGetAgents][ntt.workplace.v1alpha2.BatchGetAgents]
 message BatchGetAgentsRequest {
-  // Optional parent ntt.workplace.v1alpha2.Agent
-  string parent = 1;
-
   // Names of Agents
   repeated string names = 2;
 
@@ -47,6 +44,8 @@ message BatchGetAgentsRequest {
   // View defines list of standard response fields present in response items.
   // Additional fields can be amended by request field field_mask
   goten.view.View view = 4;
+
+  reserved 1;
 }
 
 // BatchGetAgentsResponse
@@ -304,7 +303,7 @@ service AgentService {
   // BatchGetAgents
   rpc BatchGetAgents(BatchGetAgentsRequest) returns (BatchGetAgentsResponse) {
     option (google.api.http) = {
-      get : "/v1alpha2/{parent=projects/*/regions/*}/agents:batchGet"
+      get : "/v1alpha2/agents:batchGet"
     };
   }
 
@@ -355,7 +354,7 @@ service AgentService {
   // Activation
   rpc Activation(stream ActivationRequest) returns (stream ActivationResponse) {
     option (google.api.http) = {
-      post : "/v1alpha2/{parent=projects/*/regions/*}/agents:activation"
+      post : "/v1alpha2/agents:activation"
     };
   }
 }

@@ -118,9 +118,6 @@ type BatchGetPropertiesRequestFieldPathBuilder struct{}
 func NewBatchGetPropertiesRequestFieldPathBuilder() BatchGetPropertiesRequestFieldPathBuilder {
 	return BatchGetPropertiesRequestFieldPathBuilder{}
 }
-func (BatchGetPropertiesRequestFieldPathBuilder) Parent() BatchGetPropertiesRequestPathSelectorParent {
-	return BatchGetPropertiesRequestPathSelectorParent{}
-}
 func (BatchGetPropertiesRequestFieldPathBuilder) Names() BatchGetPropertiesRequestPathSelectorNames {
 	return BatchGetPropertiesRequestPathSelectorNames{}
 }
@@ -129,20 +126,6 @@ func (BatchGetPropertiesRequestFieldPathBuilder) FieldMask() BatchGetPropertiesR
 }
 func (BatchGetPropertiesRequestFieldPathBuilder) View() BatchGetPropertiesRequestPathSelectorView {
 	return BatchGetPropertiesRequestPathSelectorView{}
-}
-
-type BatchGetPropertiesRequestPathSelectorParent struct{}
-
-func (BatchGetPropertiesRequestPathSelectorParent) FieldPath() *BatchGetPropertiesRequest_FieldTerminalPath {
-	return &BatchGetPropertiesRequest_FieldTerminalPath{selector: BatchGetPropertiesRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetPropertiesRequestPathSelectorParent) WithValue(value *property.Reference) *BatchGetPropertiesRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetPropertiesRequestPathSelectorParent) WithArrayOfValues(values []*property.Reference) *BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetPropertiesRequestPathSelectorNames struct{}

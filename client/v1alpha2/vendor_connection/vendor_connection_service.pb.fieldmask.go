@@ -318,7 +318,6 @@ type BatchGetVendorConnectionsRequest_FieldMask struct {
 
 func FullBatchGetVendorConnectionsRequest_FieldMask() *BatchGetVendorConnectionsRequest_FieldMask {
 	res := &BatchGetVendorConnectionsRequest_FieldMask{}
-	res.Paths = append(res.Paths, &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorParent})
 	res.Paths = append(res.Paths, &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorNames})
 	res.Paths = append(res.Paths, &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask})
 	res.Paths = append(res.Paths, &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorView})
@@ -365,7 +364,7 @@ func (fieldMask *BatchGetVendorConnectionsRequest_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 4)
+	presentSelectors := make([]bool, 3)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*BatchGetVendorConnectionsRequest_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -395,7 +394,7 @@ func (fieldMask *BatchGetVendorConnectionsRequest_FieldMask) Reset() {
 
 func (fieldMask *BatchGetVendorConnectionsRequest_FieldMask) Subtract(other *BatchGetVendorConnectionsRequest_FieldMask) *BatchGetVendorConnectionsRequest_FieldMask {
 	result := &BatchGetVendorConnectionsRequest_FieldMask{}
-	removedSelectors := make([]bool, 4)
+	removedSelectors := make([]bool, 3)
 
 	for _, path := range other.GetPaths() {
 		switch tp := path.(type) {
@@ -549,8 +548,6 @@ func (fieldMask *BatchGetVendorConnectionsRequest_FieldMask) Project(source *Bat
 		switch tp := p.(type) {
 		case *BatchGetVendorConnectionsRequest_FieldTerminalPath:
 			switch tp.selector {
-			case BatchGetVendorConnectionsRequest_FieldPathSelectorParent:
-				result.Parent = source.Parent
 			case BatchGetVendorConnectionsRequest_FieldPathSelectorNames:
 				result.Names = source.Names
 			case BatchGetVendorConnectionsRequest_FieldPathSelectorFieldMask:

@@ -542,16 +542,13 @@ type BatchGetBuildingsRequest_FieldPath interface {
 type BatchGetBuildingsRequest_FieldPathSelector int32
 
 const (
-	BatchGetBuildingsRequest_FieldPathSelectorParent    BatchGetBuildingsRequest_FieldPathSelector = 0
-	BatchGetBuildingsRequest_FieldPathSelectorNames     BatchGetBuildingsRequest_FieldPathSelector = 1
-	BatchGetBuildingsRequest_FieldPathSelectorFieldMask BatchGetBuildingsRequest_FieldPathSelector = 2
-	BatchGetBuildingsRequest_FieldPathSelectorView      BatchGetBuildingsRequest_FieldPathSelector = 3
+	BatchGetBuildingsRequest_FieldPathSelectorNames     BatchGetBuildingsRequest_FieldPathSelector = 0
+	BatchGetBuildingsRequest_FieldPathSelectorFieldMask BatchGetBuildingsRequest_FieldPathSelector = 1
+	BatchGetBuildingsRequest_FieldPathSelectorView      BatchGetBuildingsRequest_FieldPathSelector = 2
 )
 
 func (s BatchGetBuildingsRequest_FieldPathSelector) String() string {
 	switch s {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		return "parent"
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		return "names"
 	case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -569,8 +566,6 @@ func BuildBatchGetBuildingsRequest_FieldPath(fp gotenobject.RawFieldPath) (Batch
 	}
 	if len(fp) == 1 {
 		switch fp[0] {
-		case "parent":
-			return &BatchGetBuildingsRequest_FieldTerminalPath{selector: BatchGetBuildingsRequest_FieldPathSelectorParent}, nil
 		case "names":
 			return &BatchGetBuildingsRequest_FieldTerminalPath{selector: BatchGetBuildingsRequest_FieldPathSelectorNames}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -622,10 +617,6 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) JSONString() string {
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) Get(source *BatchGetBuildingsRequest) (values []interface{}) {
 	if source != nil {
 		switch fp.selector {
-		case BatchGetBuildingsRequest_FieldPathSelectorParent:
-			if source.Parent != nil {
-				values = append(values, source.Parent)
-			}
 		case BatchGetBuildingsRequest_FieldPathSelectorNames:
 			for _, value := range source.GetNames() {
 				values = append(values, value)
@@ -650,9 +641,6 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) GetRaw(source proto.Messag
 // GetSingle returns value pointed by specific field of from source BatchGetBuildingsRequest
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) GetSingle(source *BatchGetBuildingsRequest) (interface{}, bool) {
 	switch fp.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		res := source.GetParent()
-		return res, res != nil
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		res := source.GetNames()
 		return res, res != nil
@@ -673,8 +661,6 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) GetSingleRaw(source proto.
 // GetDefault returns a default value of the field type
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) GetDefault() interface{} {
 	switch fp.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		return (*building.Reference)(nil)
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		return ([]*building.Reference)(nil)
 	case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -689,8 +675,6 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) GetDefault() interface{} {
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) ClearValue(item *BatchGetBuildingsRequest) {
 	if item != nil {
 		switch fp.selector {
-		case BatchGetBuildingsRequest_FieldPathSelectorParent:
-			item.Parent = nil
 		case BatchGetBuildingsRequest_FieldPathSelectorNames:
 			item.Names = nil
 		case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -709,16 +693,13 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) ClearValueRaw(item proto.M
 
 // IsLeaf - whether field path is holds simple value
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) IsLeaf() bool {
-	return fp.selector == BatchGetBuildingsRequest_FieldPathSelectorParent ||
-		fp.selector == BatchGetBuildingsRequest_FieldPathSelectorNames ||
+	return fp.selector == BatchGetBuildingsRequest_FieldPathSelectorNames ||
 		fp.selector == BatchGetBuildingsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == BatchGetBuildingsRequest_FieldPathSelectorView
 }
 
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetBuildingsRequest_FieldPathValue {
 	switch fp.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		return &BatchGetBuildingsRequest_FieldTerminalPathValue{BatchGetBuildingsRequest_FieldTerminalPath: *fp, value: value.(*building.Reference)}
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		return &BatchGetBuildingsRequest_FieldTerminalPathValue{BatchGetBuildingsRequest_FieldTerminalPath: *fp, value: value.([]*building.Reference)}
 	case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -737,8 +718,6 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) WithRawIValue(value interf
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) WithIArrayOfValues(values interface{}) BatchGetBuildingsRequest_FieldPathArrayOfValues {
 	fpaov := &BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues{BatchGetBuildingsRequest_FieldTerminalPath: *fp}
 	switch fp.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		return &BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues{BatchGetBuildingsRequest_FieldTerminalPath: *fp, values: values.([]*building.Reference)}
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		return &BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues{BatchGetBuildingsRequest_FieldTerminalPath: *fp, values: values.([][]*building.Reference)}
 	case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -807,10 +786,6 @@ var _ BatchGetBuildingsRequest_FieldPathValue = (*BatchGetBuildingsRequest_Field
 func (fpv *BatchGetBuildingsRequest_FieldTerminalPathValue) GetRawValue() interface{} {
 	return fpv.value
 }
-func (fpv *BatchGetBuildingsRequest_FieldTerminalPathValue) AsParentValue() (*building.Reference, bool) {
-	res, ok := fpv.value.(*building.Reference)
-	return res, ok
-}
 func (fpv *BatchGetBuildingsRequest_FieldTerminalPathValue) AsNamesValue() ([]*building.Reference, bool) {
 	res, ok := fpv.value.([]*building.Reference)
 	return res, ok
@@ -830,8 +805,6 @@ func (fpv *BatchGetBuildingsRequest_FieldTerminalPathValue) SetTo(target **Batch
 		*target = new(BatchGetBuildingsRequest)
 	}
 	switch fpv.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		(*target).Parent = fpv.value.(*building.Reference)
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		(*target).Names = fpv.value.([]*building.Reference)
 	case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -851,25 +824,6 @@ func (fpv *BatchGetBuildingsRequest_FieldTerminalPathValue) SetToRaw(target prot
 // CompareWith compares value in the 'BatchGetBuildingsRequest_FieldTerminalPathValue' with the value under path in 'BatchGetBuildingsRequest'.
 func (fpv *BatchGetBuildingsRequest_FieldTerminalPathValue) CompareWith(source *BatchGetBuildingsRequest) (int, bool) {
 	switch fpv.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		leftValue := fpv.value.(*building.Reference)
-		rightValue := source.GetParent()
-		if leftValue == nil {
-			if rightValue != nil {
-				return -1, true
-			}
-			return 0, true
-		}
-		if rightValue == nil {
-			return 1, true
-		}
-		if leftValue.String() == rightValue.String() {
-			return 0, true
-		} else if leftValue.String() < rightValue.String() {
-			return -1, true
-		} else {
-			return 1, true
-		}
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		return 0, false
 	case BatchGetBuildingsRequest_FieldPathSelectorFieldMask:
@@ -992,10 +946,6 @@ var _ BatchGetBuildingsRequest_FieldPathArrayOfValues = (*BatchGetBuildingsReque
 
 func (fpaov *BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues) GetRawValues() (values []interface{}) {
 	switch fpaov.selector {
-	case BatchGetBuildingsRequest_FieldPathSelectorParent:
-		for _, v := range fpaov.values.([]*building.Reference) {
-			values = append(values, v)
-		}
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
 		for _, v := range fpaov.values.([][]*building.Reference) {
 			values = append(values, v)
@@ -1010,10 +960,6 @@ func (fpaov *BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues) GetRawValu
 		}
 	}
 	return
-}
-func (fpaov *BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues) AsParentArrayOfValues() ([]*building.Reference, bool) {
-	res, ok := fpaov.values.([]*building.Reference)
-	return res, ok
 }
 func (fpaov *BatchGetBuildingsRequest_FieldTerminalPathArrayOfValues) AsNamesArrayOfValues() ([][]*building.Reference, bool) {
 	res, ok := fpaov.values.([][]*building.Reference)

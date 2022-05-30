@@ -152,9 +152,6 @@ func (o *BatchGetSitesRequest) MakeDiffFieldMask(other *BatchGetSitesRequest) *B
 	}
 
 	res := &BatchGetSitesRequest_FieldMask{}
-	if o.GetParent().String() != other.GetParent().String() {
-		res.Paths = append(res.Paths, &BatchGetSitesRequest_FieldTerminalPath{selector: BatchGetSitesRequest_FieldPathSelectorParent})
-	}
 
 	if len(o.GetNames()) == len(other.GetNames()) {
 		for i, lValue := range o.GetNames() {
@@ -185,16 +182,6 @@ func (o *BatchGetSitesRequest) Clone() *BatchGetSitesRequest {
 		return nil
 	}
 	result := &BatchGetSitesRequest{}
-	if o.Parent == nil {
-		result.Parent = nil
-	} else if data, err := o.Parent.ProtoString(); err != nil {
-		panic(err)
-	} else {
-		result.Parent = &site.Reference{}
-		if err := result.Parent.ParseProtoString(data); err != nil {
-			panic(err)
-		}
-	}
 	result.Names = make([]*site.Reference, len(o.Names))
 	for i, sourceValue := range o.Names {
 		if sourceValue == nil {
@@ -218,18 +205,6 @@ func (o *BatchGetSitesRequest) CloneRaw() gotenobject.GotenObjectExt {
 }
 
 func (o *BatchGetSitesRequest) Merge(source *BatchGetSitesRequest) {
-	if source.GetParent() != nil {
-		if data, err := source.GetParent().ProtoString(); err != nil {
-			panic(err)
-		} else {
-			o.Parent = &site.Reference{}
-			if err := o.Parent.ParseProtoString(data); err != nil {
-				panic(err)
-			}
-		}
-	} else {
-		o.Parent = nil
-	}
 	for _, sourceValue := range source.GetNames() {
 		exists := false
 		for _, currentValue := range o.Names {

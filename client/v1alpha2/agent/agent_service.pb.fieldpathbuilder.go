@@ -102,9 +102,6 @@ type BatchGetAgentsRequestFieldPathBuilder struct{}
 func NewBatchGetAgentsRequestFieldPathBuilder() BatchGetAgentsRequestFieldPathBuilder {
 	return BatchGetAgentsRequestFieldPathBuilder{}
 }
-func (BatchGetAgentsRequestFieldPathBuilder) Parent() BatchGetAgentsRequestPathSelectorParent {
-	return BatchGetAgentsRequestPathSelectorParent{}
-}
 func (BatchGetAgentsRequestFieldPathBuilder) Names() BatchGetAgentsRequestPathSelectorNames {
 	return BatchGetAgentsRequestPathSelectorNames{}
 }
@@ -113,20 +110,6 @@ func (BatchGetAgentsRequestFieldPathBuilder) FieldMask() BatchGetAgentsRequestPa
 }
 func (BatchGetAgentsRequestFieldPathBuilder) View() BatchGetAgentsRequestPathSelectorView {
 	return BatchGetAgentsRequestPathSelectorView{}
-}
-
-type BatchGetAgentsRequestPathSelectorParent struct{}
-
-func (BatchGetAgentsRequestPathSelectorParent) FieldPath() *BatchGetAgentsRequest_FieldTerminalPath {
-	return &BatchGetAgentsRequest_FieldTerminalPath{selector: BatchGetAgentsRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetAgentsRequestPathSelectorParent) WithValue(value *agent.Reference) *BatchGetAgentsRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetAgentsRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetAgentsRequestPathSelectorParent) WithArrayOfValues(values []*agent.Reference) *BatchGetAgentsRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetAgentsRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetAgentsRequestPathSelectorNames struct{}

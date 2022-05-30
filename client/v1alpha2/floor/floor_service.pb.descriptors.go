@@ -69,15 +69,15 @@ func (d *GetFloorDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetFloorDescriptor) IsCollectionSubject() bool {
+func (d *GetFloorDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetFloorDescriptor) IsPluralSubject() bool {
+func (d *GetFloorDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetFloorDescriptor) HasSubjectResource() bool {
+func (d *GetFloorDescriptor) HasResource() bool {
 	return true
 }
 
@@ -117,7 +117,7 @@ func (d *GetFloorDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *GetFloorDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetFloorDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -129,77 +129,84 @@ func (d *GetFloorDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgHa
 	return &GetFloorDescriptorServerMsgHandle{}
 }
 
-func (h *GetFloorDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetFloorDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetFloorRequest) *floor.Name
+		OverrideExtractResourceName(*GetFloorRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*floor.Name)(nil)
 }
 
-func (h *GetFloorDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetFloorDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetFloorRequest) []*floor.Name
+		OverrideExtractResourceNames(*GetFloorRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetFloorDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetFloorDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetFloorRequest) *floor.ParentName
+		OverrideExtractCollectionName(*GetFloorRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetFloorDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetFloorDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*floor.Floor) *floor.Name
+		OverrideExtractResourceName(*floor.Floor) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*floor.Name)(nil)
 }
 
-func (h *GetFloorDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetFloorDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*floor.Floor) []*floor.Name
+		OverrideExtractResourceNames(*floor.Floor) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetFloorDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetFloorDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*floor.Floor) *floor.ParentName
+		OverrideExtractCollectionName(*floor.Floor) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -234,15 +241,15 @@ func (d *BatchGetFloorsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetFloorsDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetFloorsDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetFloorsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetFloorsDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetFloorsDescriptor) HasSubjectResource() bool {
+func (d *BatchGetFloorsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -282,7 +289,7 @@ func (d *BatchGetFloorsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor 
 	return floorServiceDescriptor
 }
 
-func (d *BatchGetFloorsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetFloorsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -294,86 +301,92 @@ func (d *BatchGetFloorsDescriptor) GetServerMsgReflectHandle() gotenclient.Metho
 	return &BatchGetFloorsDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetFloorsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetFloorsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetFloorsRequest) *floor.Name
+		OverrideExtractResourceName(*BatchGetFloorsRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetFloorsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetFloorsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetFloorsRequest) []*floor.Name
+		OverrideExtractResourceNames(*BatchGetFloorsRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(floor.FloorNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(floor.FloorNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (floor.FloorNameList)(nil)
 }
 
-func (h *BatchGetFloorsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetFloorsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetFloorsRequest) *floor.ParentName
+		OverrideExtractCollectionName(*BatchGetFloorsRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetFloorsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetFloorsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetFloorsResponse) *floor.Name
+		OverrideExtractResourceName(*BatchGetFloorsResponse) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetFloorsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetFloorsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetFloorsResponse) []*floor.Name
+		OverrideExtractResourceNames(*BatchGetFloorsResponse) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetFloors()
-	list := make(floor.FloorNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetFloors(); len(resources) > 0 {
+			list := make(floor.FloorNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (floor.FloorNameList)(nil)
 }
 
-func (h *BatchGetFloorsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetFloorsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetFloorsResponse) *floor.ParentName
+		OverrideExtractCollectionName(*BatchGetFloorsResponse) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -408,15 +421,15 @@ func (d *ListFloorsDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListFloorsDescriptor) IsCollectionSubject() bool {
+func (d *ListFloorsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListFloorsDescriptor) IsPluralSubject() bool {
+func (d *ListFloorsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListFloorsDescriptor) HasSubjectResource() bool {
+func (d *ListFloorsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -456,7 +469,7 @@ func (d *ListFloorsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *ListFloorsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListFloorsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -468,79 +481,88 @@ func (d *ListFloorsDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &ListFloorsDescriptorServerMsgHandle{}
 }
 
-func (h *ListFloorsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListFloorsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListFloorsRequest) *floor.Name
+		OverrideExtractResourceName(*ListFloorsRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListFloorsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListFloorsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListFloorsRequest) []*floor.Name
+		OverrideExtractResourceNames(*ListFloorsRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListFloorsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListFloorsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListFloorsRequest) *floor.ParentName
+		OverrideExtractCollectionName(*ListFloorsRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*floor.ParentName)(nil)
 }
 
-func (h *ListFloorsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListFloorsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListFloorsResponse) *floor.Name
+		OverrideExtractResourceName(*ListFloorsResponse) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListFloorsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListFloorsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListFloorsResponse) []*floor.Name
+		OverrideExtractResourceNames(*ListFloorsResponse) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetFloors()
-	list := make(floor.FloorNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetFloors(); len(resources) > 0 {
+			list := make(floor.FloorNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (floor.FloorNameList)(nil)
 }
 
-func (h *ListFloorsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListFloorsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListFloorsResponse) *floor.ParentName
+		OverrideExtractCollectionName(*ListFloorsResponse) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -575,15 +597,15 @@ func (d *WatchFloorDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchFloorDescriptor) IsCollectionSubject() bool {
+func (d *WatchFloorDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchFloorDescriptor) IsPluralSubject() bool {
+func (d *WatchFloorDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchFloorDescriptor) HasSubjectResource() bool {
+func (d *WatchFloorDescriptor) HasResource() bool {
 	return true
 }
 
@@ -623,7 +645,7 @@ func (d *WatchFloorDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *WatchFloorDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchFloorDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -635,89 +657,93 @@ func (d *WatchFloorDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &WatchFloorDescriptorServerMsgHandle{}
 }
 
-func (h *WatchFloorDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchFloorDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchFloorRequest) *floor.Name
+		OverrideExtractResourceName(*WatchFloorRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*floor.Name)(nil)
-}
-
-func (h *WatchFloorDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchFloorRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchFloorRequest) []*floor.Name
-	})
-	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchFloorDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchFloorRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchFloorRequest) *floor.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchFloorDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchFloorResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchFloorResponse) *floor.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *floor.FloorChange_Added_:
-			return tResChange.Added.GetFloor().GetName()
-		case *floor.FloorChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *floor.FloorChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *floor.FloorChange_Current_:
-			return tResChange.Current.GetFloor().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*floor.Name)(nil)
 }
 
-func (h *WatchFloorDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchFloorResponse)
+func (h *WatchFloorDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchFloorResponse) []*floor.Name
+		OverrideExtractResourceNames(*WatchFloorRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchFloorDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchFloorDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchFloorRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchFloorRequest) *floor.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchFloorDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchFloorResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchFloorResponse) *floor.ParentName
+		OverrideExtractResourceName(*WatchFloorResponse) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *floor.FloorChange_Added_:
+				return tResChange.Added.GetFloor().GetName()
+			case *floor.FloorChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *floor.FloorChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *floor.FloorChange_Current_:
+				return tResChange.Current.GetFloor().GetName()
+			}
+		}
+	}
+	return (*floor.Name)(nil)
+}
+
+func (h *WatchFloorDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchFloorResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchFloorResponse) []*floor.Name
+	})
+	if ok {
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchFloorDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchFloorResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchFloorResponse) *floor.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -752,15 +778,15 @@ func (d *WatchFloorsDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchFloorsDescriptor) IsCollectionSubject() bool {
+func (d *WatchFloorsDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchFloorsDescriptor) IsPluralSubject() bool {
+func (d *WatchFloorsDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchFloorsDescriptor) HasSubjectResource() bool {
+func (d *WatchFloorsDescriptor) HasResource() bool {
 	return true
 }
 
@@ -800,7 +826,7 @@ func (d *WatchFloorsDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *WatchFloorsDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchFloorsDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -812,91 +838,97 @@ func (d *WatchFloorsDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &WatchFloorsDescriptorServerMsgHandle{}
 }
 
-func (h *WatchFloorsDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchFloorsDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchFloorsRequest) *floor.Name
+		OverrideExtractResourceName(*WatchFloorsRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchFloorsDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchFloorsDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchFloorsRequest) []*floor.Name
+		OverrideExtractResourceNames(*WatchFloorsRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchFloorsDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchFloorsDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchFloorsRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchFloorsRequest) *floor.ParentName
+		OverrideExtractCollectionName(*WatchFloorsRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*floor.ParentName)(nil)
 }
 
-func (h *WatchFloorsDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchFloorsDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchFloorsResponse) *floor.Name
+		OverrideExtractResourceName(*WatchFloorsResponse) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchFloorsDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchFloorsDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchFloorsResponse) []*floor.Name
+		OverrideExtractResourceNames(*WatchFloorsResponse) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetFloorChanges()
-	list := make(floor.FloorNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *floor.FloorChange_Added_:
-			list = append(list, tResChange.Added.GetFloor().GetName())
-		case *floor.FloorChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *floor.FloorChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *floor.FloorChange_Current_:
-			list = append(list, tResChange.Current.GetFloor().GetName())
+	{
+		if resChanges := typedMsg.GetFloorChanges(); len(resChanges) > 0 {
+			list := make(floor.FloorNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *floor.FloorChange_Added_:
+					list = append(list, tResChange.Added.GetFloor().GetName())
+				case *floor.FloorChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *floor.FloorChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *floor.FloorChange_Current_:
+					list = append(list, tResChange.Current.GetFloor().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (floor.FloorNameList)(nil)
 }
 
-func (h *WatchFloorsDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchFloorsDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchFloorsResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchFloorsResponse) *floor.ParentName
+		OverrideExtractCollectionName(*WatchFloorsResponse) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -931,15 +963,15 @@ func (d *CreateFloorDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateFloorDescriptor) IsCollectionSubject() bool {
+func (d *CreateFloorDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateFloorDescriptor) IsPluralSubject() bool {
+func (d *CreateFloorDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateFloorDescriptor) HasSubjectResource() bool {
+func (d *CreateFloorDescriptor) HasResource() bool {
 	return true
 }
 
@@ -979,7 +1011,7 @@ func (d *CreateFloorDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *CreateFloorDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateFloorDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -991,77 +1023,90 @@ func (d *CreateFloorDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &CreateFloorDescriptorServerMsgHandle{}
 }
 
-func (h *CreateFloorDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateFloorDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateFloorRequest) *floor.Name
+		OverrideExtractResourceName(*CreateFloorRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetFloor().GetName()
+	{
+		res := typedMsg.GetFloor()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*floor.Name)(nil)
 }
 
-func (h *CreateFloorDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateFloorDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateFloorRequest) []*floor.Name
+		OverrideExtractResourceNames(*CreateFloorRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateFloorDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateFloorDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateFloorRequest) *floor.ParentName
+		OverrideExtractCollectionName(*CreateFloorRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*floor.ParentName)(nil)
 }
 
-func (h *CreateFloorDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateFloorDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*floor.Floor) *floor.Name
+		OverrideExtractResourceName(*floor.Floor) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*floor.Name)(nil)
 }
 
-func (h *CreateFloorDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateFloorDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*floor.Floor) []*floor.Name
+		OverrideExtractResourceNames(*floor.Floor) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateFloorDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateFloorDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*floor.Floor) *floor.ParentName
+		OverrideExtractCollectionName(*floor.Floor) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1096,15 +1141,15 @@ func (d *UpdateFloorDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateFloorDescriptor) IsCollectionSubject() bool {
+func (d *UpdateFloorDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateFloorDescriptor) IsPluralSubject() bool {
+func (d *UpdateFloorDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateFloorDescriptor) HasSubjectResource() bool {
+func (d *UpdateFloorDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1144,7 +1189,7 @@ func (d *UpdateFloorDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *UpdateFloorDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateFloorDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -1156,74 +1201,85 @@ func (d *UpdateFloorDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &UpdateFloorDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateFloorDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateFloorDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateFloorRequest) *floor.Name
+		OverrideExtractResourceName(*UpdateFloorRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetFloor().GetName()
+	{
+		res := typedMsg.GetFloor()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*floor.Name)(nil)
 }
 
-func (h *UpdateFloorDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateFloorDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateFloorRequest) []*floor.Name
+		OverrideExtractResourceNames(*UpdateFloorRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateFloorDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateFloorDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateFloorRequest) *floor.ParentName
+		OverrideExtractCollectionName(*UpdateFloorRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateFloorDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateFloorDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*floor.Floor) *floor.Name
+		OverrideExtractResourceName(*floor.Floor) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*floor.Name)(nil)
 }
 
-func (h *UpdateFloorDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateFloorDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*floor.Floor) []*floor.Name
+		OverrideExtractResourceNames(*floor.Floor) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateFloorDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateFloorDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*floor.Floor)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*floor.Floor) *floor.ParentName
+		OverrideExtractCollectionName(*floor.Floor) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1258,15 +1314,15 @@ func (d *DeleteFloorDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteFloorDescriptor) IsCollectionSubject() bool {
+func (d *DeleteFloorDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteFloorDescriptor) IsPluralSubject() bool {
+func (d *DeleteFloorDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteFloorDescriptor) HasSubjectResource() bool {
+func (d *DeleteFloorDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1306,7 +1362,7 @@ func (d *DeleteFloorDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return floorServiceDescriptor
 }
 
-func (d *DeleteFloorDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteFloorDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return floor.GetDescriptor()
 }
 
@@ -1318,77 +1374,79 @@ func (d *DeleteFloorDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMs
 	return &DeleteFloorDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteFloorDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteFloorDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteFloorRequest) *floor.Name
+		OverrideExtractResourceName(*DeleteFloorRequest) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*floor.Name)(nil)
 }
 
-func (h *DeleteFloorDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteFloorDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteFloorRequest) []*floor.Name
+		OverrideExtractResourceNames(*DeleteFloorRequest) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteFloorDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteFloorDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteFloorRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteFloorRequest) *floor.ParentName
+		OverrideExtractCollectionName(*DeleteFloorRequest) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteFloorDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteFloorDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *floor.Name
+		OverrideExtractResourceName(*empty.Empty) *floor.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteFloorDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteFloorDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*floor.Name
+		OverrideExtractResourceNames(*empty.Empty) []*floor.Name
 	})
 	if ok {
-		return floor.FloorNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return floor.FloorNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteFloorDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteFloorDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *floor.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *floor.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

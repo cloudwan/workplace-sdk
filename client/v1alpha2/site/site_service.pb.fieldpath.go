@@ -542,16 +542,13 @@ type BatchGetSitesRequest_FieldPath interface {
 type BatchGetSitesRequest_FieldPathSelector int32
 
 const (
-	BatchGetSitesRequest_FieldPathSelectorParent    BatchGetSitesRequest_FieldPathSelector = 0
-	BatchGetSitesRequest_FieldPathSelectorNames     BatchGetSitesRequest_FieldPathSelector = 1
-	BatchGetSitesRequest_FieldPathSelectorFieldMask BatchGetSitesRequest_FieldPathSelector = 2
-	BatchGetSitesRequest_FieldPathSelectorView      BatchGetSitesRequest_FieldPathSelector = 3
+	BatchGetSitesRequest_FieldPathSelectorNames     BatchGetSitesRequest_FieldPathSelector = 0
+	BatchGetSitesRequest_FieldPathSelectorFieldMask BatchGetSitesRequest_FieldPathSelector = 1
+	BatchGetSitesRequest_FieldPathSelectorView      BatchGetSitesRequest_FieldPathSelector = 2
 )
 
 func (s BatchGetSitesRequest_FieldPathSelector) String() string {
 	switch s {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		return "parent"
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		return "names"
 	case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -569,8 +566,6 @@ func BuildBatchGetSitesRequest_FieldPath(fp gotenobject.RawFieldPath) (BatchGetS
 	}
 	if len(fp) == 1 {
 		switch fp[0] {
-		case "parent":
-			return &BatchGetSitesRequest_FieldTerminalPath{selector: BatchGetSitesRequest_FieldPathSelectorParent}, nil
 		case "names":
 			return &BatchGetSitesRequest_FieldTerminalPath{selector: BatchGetSitesRequest_FieldPathSelectorNames}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -622,10 +617,6 @@ func (fp *BatchGetSitesRequest_FieldTerminalPath) JSONString() string {
 func (fp *BatchGetSitesRequest_FieldTerminalPath) Get(source *BatchGetSitesRequest) (values []interface{}) {
 	if source != nil {
 		switch fp.selector {
-		case BatchGetSitesRequest_FieldPathSelectorParent:
-			if source.Parent != nil {
-				values = append(values, source.Parent)
-			}
 		case BatchGetSitesRequest_FieldPathSelectorNames:
 			for _, value := range source.GetNames() {
 				values = append(values, value)
@@ -650,9 +641,6 @@ func (fp *BatchGetSitesRequest_FieldTerminalPath) GetRaw(source proto.Message) [
 // GetSingle returns value pointed by specific field of from source BatchGetSitesRequest
 func (fp *BatchGetSitesRequest_FieldTerminalPath) GetSingle(source *BatchGetSitesRequest) (interface{}, bool) {
 	switch fp.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		res := source.GetParent()
-		return res, res != nil
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		res := source.GetNames()
 		return res, res != nil
@@ -673,8 +661,6 @@ func (fp *BatchGetSitesRequest_FieldTerminalPath) GetSingleRaw(source proto.Mess
 // GetDefault returns a default value of the field type
 func (fp *BatchGetSitesRequest_FieldTerminalPath) GetDefault() interface{} {
 	switch fp.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		return (*site.Reference)(nil)
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		return ([]*site.Reference)(nil)
 	case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -689,8 +675,6 @@ func (fp *BatchGetSitesRequest_FieldTerminalPath) GetDefault() interface{} {
 func (fp *BatchGetSitesRequest_FieldTerminalPath) ClearValue(item *BatchGetSitesRequest) {
 	if item != nil {
 		switch fp.selector {
-		case BatchGetSitesRequest_FieldPathSelectorParent:
-			item.Parent = nil
 		case BatchGetSitesRequest_FieldPathSelectorNames:
 			item.Names = nil
 		case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -709,16 +693,13 @@ func (fp *BatchGetSitesRequest_FieldTerminalPath) ClearValueRaw(item proto.Messa
 
 // IsLeaf - whether field path is holds simple value
 func (fp *BatchGetSitesRequest_FieldTerminalPath) IsLeaf() bool {
-	return fp.selector == BatchGetSitesRequest_FieldPathSelectorParent ||
-		fp.selector == BatchGetSitesRequest_FieldPathSelectorNames ||
+	return fp.selector == BatchGetSitesRequest_FieldPathSelectorNames ||
 		fp.selector == BatchGetSitesRequest_FieldPathSelectorFieldMask ||
 		fp.selector == BatchGetSitesRequest_FieldPathSelectorView
 }
 
 func (fp *BatchGetSitesRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetSitesRequest_FieldPathValue {
 	switch fp.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		return &BatchGetSitesRequest_FieldTerminalPathValue{BatchGetSitesRequest_FieldTerminalPath: *fp, value: value.(*site.Reference)}
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		return &BatchGetSitesRequest_FieldTerminalPathValue{BatchGetSitesRequest_FieldTerminalPath: *fp, value: value.([]*site.Reference)}
 	case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -737,8 +718,6 @@ func (fp *BatchGetSitesRequest_FieldTerminalPath) WithRawIValue(value interface{
 func (fp *BatchGetSitesRequest_FieldTerminalPath) WithIArrayOfValues(values interface{}) BatchGetSitesRequest_FieldPathArrayOfValues {
 	fpaov := &BatchGetSitesRequest_FieldTerminalPathArrayOfValues{BatchGetSitesRequest_FieldTerminalPath: *fp}
 	switch fp.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		return &BatchGetSitesRequest_FieldTerminalPathArrayOfValues{BatchGetSitesRequest_FieldTerminalPath: *fp, values: values.([]*site.Reference)}
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		return &BatchGetSitesRequest_FieldTerminalPathArrayOfValues{BatchGetSitesRequest_FieldTerminalPath: *fp, values: values.([][]*site.Reference)}
 	case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -807,10 +786,6 @@ var _ BatchGetSitesRequest_FieldPathValue = (*BatchGetSitesRequest_FieldTerminal
 func (fpv *BatchGetSitesRequest_FieldTerminalPathValue) GetRawValue() interface{} {
 	return fpv.value
 }
-func (fpv *BatchGetSitesRequest_FieldTerminalPathValue) AsParentValue() (*site.Reference, bool) {
-	res, ok := fpv.value.(*site.Reference)
-	return res, ok
-}
 func (fpv *BatchGetSitesRequest_FieldTerminalPathValue) AsNamesValue() ([]*site.Reference, bool) {
 	res, ok := fpv.value.([]*site.Reference)
 	return res, ok
@@ -830,8 +805,6 @@ func (fpv *BatchGetSitesRequest_FieldTerminalPathValue) SetTo(target **BatchGetS
 		*target = new(BatchGetSitesRequest)
 	}
 	switch fpv.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		(*target).Parent = fpv.value.(*site.Reference)
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		(*target).Names = fpv.value.([]*site.Reference)
 	case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -851,25 +824,6 @@ func (fpv *BatchGetSitesRequest_FieldTerminalPathValue) SetToRaw(target proto.Me
 // CompareWith compares value in the 'BatchGetSitesRequest_FieldTerminalPathValue' with the value under path in 'BatchGetSitesRequest'.
 func (fpv *BatchGetSitesRequest_FieldTerminalPathValue) CompareWith(source *BatchGetSitesRequest) (int, bool) {
 	switch fpv.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		leftValue := fpv.value.(*site.Reference)
-		rightValue := source.GetParent()
-		if leftValue == nil {
-			if rightValue != nil {
-				return -1, true
-			}
-			return 0, true
-		}
-		if rightValue == nil {
-			return 1, true
-		}
-		if leftValue.String() == rightValue.String() {
-			return 0, true
-		} else if leftValue.String() < rightValue.String() {
-			return -1, true
-		} else {
-			return 1, true
-		}
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		return 0, false
 	case BatchGetSitesRequest_FieldPathSelectorFieldMask:
@@ -992,10 +946,6 @@ var _ BatchGetSitesRequest_FieldPathArrayOfValues = (*BatchGetSitesRequest_Field
 
 func (fpaov *BatchGetSitesRequest_FieldTerminalPathArrayOfValues) GetRawValues() (values []interface{}) {
 	switch fpaov.selector {
-	case BatchGetSitesRequest_FieldPathSelectorParent:
-		for _, v := range fpaov.values.([]*site.Reference) {
-			values = append(values, v)
-		}
 	case BatchGetSitesRequest_FieldPathSelectorNames:
 		for _, v := range fpaov.values.([][]*site.Reference) {
 			values = append(values, v)
@@ -1010,10 +960,6 @@ func (fpaov *BatchGetSitesRequest_FieldTerminalPathArrayOfValues) GetRawValues()
 		}
 	}
 	return
-}
-func (fpaov *BatchGetSitesRequest_FieldTerminalPathArrayOfValues) AsParentArrayOfValues() ([]*site.Reference, bool) {
-	res, ok := fpaov.values.([]*site.Reference)
-	return res, ok
 }
 func (fpaov *BatchGetSitesRequest_FieldTerminalPathArrayOfValues) AsNamesArrayOfValues() ([][]*site.Reference, bool) {
 	res, ok := fpaov.values.([][]*site.Reference)

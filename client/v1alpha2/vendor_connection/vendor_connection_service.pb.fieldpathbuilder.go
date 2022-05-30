@@ -102,9 +102,6 @@ type BatchGetVendorConnectionsRequestFieldPathBuilder struct{}
 func NewBatchGetVendorConnectionsRequestFieldPathBuilder() BatchGetVendorConnectionsRequestFieldPathBuilder {
 	return BatchGetVendorConnectionsRequestFieldPathBuilder{}
 }
-func (BatchGetVendorConnectionsRequestFieldPathBuilder) Parent() BatchGetVendorConnectionsRequestPathSelectorParent {
-	return BatchGetVendorConnectionsRequestPathSelectorParent{}
-}
 func (BatchGetVendorConnectionsRequestFieldPathBuilder) Names() BatchGetVendorConnectionsRequestPathSelectorNames {
 	return BatchGetVendorConnectionsRequestPathSelectorNames{}
 }
@@ -113,20 +110,6 @@ func (BatchGetVendorConnectionsRequestFieldPathBuilder) FieldMask() BatchGetVend
 }
 func (BatchGetVendorConnectionsRequestFieldPathBuilder) View() BatchGetVendorConnectionsRequestPathSelectorView {
 	return BatchGetVendorConnectionsRequestPathSelectorView{}
-}
-
-type BatchGetVendorConnectionsRequestPathSelectorParent struct{}
-
-func (BatchGetVendorConnectionsRequestPathSelectorParent) FieldPath() *BatchGetVendorConnectionsRequest_FieldTerminalPath {
-	return &BatchGetVendorConnectionsRequest_FieldTerminalPath{selector: BatchGetVendorConnectionsRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetVendorConnectionsRequestPathSelectorParent) WithValue(value *vendor_connection.Reference) *BatchGetVendorConnectionsRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetVendorConnectionsRequestPathSelectorParent) WithArrayOfValues(values []*vendor_connection.Reference) *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetVendorConnectionsRequestPathSelectorNames struct{}

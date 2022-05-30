@@ -33,9 +33,6 @@ message GetBuildingRequest {
 // Request message for method
 // [BatchGetBuildings][ntt.workplace.v1alpha2.BatchGetBuildings]
 message BatchGetBuildingsRequest {
-  // Optional parent ntt.workplace.v1alpha2.Building
-  string parent = 1;
-
   // Names of Buildings
   repeated string names = 2;
 
@@ -46,6 +43,8 @@ message BatchGetBuildingsRequest {
   // View defines list of standard response fields present in response items.
   // Additional fields can be amended by request field field_mask
   goten.view.View view = 4;
+
+  reserved 1;
 }
 
 // BatchGetBuildingsResponse
@@ -311,7 +310,7 @@ service BuildingService {
   rpc BatchGetBuildings(BatchGetBuildingsRequest)
       returns (BatchGetBuildingsResponse) {
     option (google.api.http) = {
-      get : "/v1alpha2/{parent=projects/*/regions/*/sites/*}/buildings:batchGet"
+      get : "/v1alpha2/buildings:batchGet"
     };
   }
 

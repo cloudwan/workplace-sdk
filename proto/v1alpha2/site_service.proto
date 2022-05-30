@@ -33,9 +33,6 @@ message GetSiteRequest {
 // Request message for method
 // [BatchGetSites][ntt.workplace.v1alpha2.BatchGetSites]
 message BatchGetSitesRequest {
-  // Optional parent ntt.workplace.v1alpha2.Site
-  string parent = 1;
-
   // Names of Sites
   repeated string names = 2;
 
@@ -46,6 +43,8 @@ message BatchGetSitesRequest {
   // View defines list of standard response fields present in response items.
   // Additional fields can be amended by request field field_mask
   goten.view.View view = 4;
+
+  reserved 1;
 }
 
 // BatchGetSitesResponse
@@ -303,7 +302,7 @@ service SiteService {
   // BatchGetSites
   rpc BatchGetSites(BatchGetSitesRequest) returns (BatchGetSitesResponse) {
     option (google.api.http) = {
-      get : "/v1alpha2/{parent=projects/*/regions/*}/sites:batchGet"
+      get : "/v1alpha2/sites:batchGet"
     };
   }
 

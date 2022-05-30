@@ -69,15 +69,15 @@ func (d *GetAreaDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *GetAreaDescriptor) IsCollectionSubject() bool {
+func (d *GetAreaDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *GetAreaDescriptor) IsPluralSubject() bool {
+func (d *GetAreaDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *GetAreaDescriptor) HasSubjectResource() bool {
+func (d *GetAreaDescriptor) HasResource() bool {
 	return true
 }
 
@@ -117,7 +117,7 @@ func (d *GetAreaDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *GetAreaDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *GetAreaDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -129,77 +129,84 @@ func (d *GetAreaDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgHan
 	return &GetAreaDescriptorServerMsgHandle{}
 }
 
-func (h *GetAreaDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetAreaDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*GetAreaRequest) *area.Name
+		OverrideExtractResourceName(*GetAreaRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*area.Name)(nil)
 }
 
-func (h *GetAreaDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetAreaDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*GetAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*GetAreaRequest) []*area.Name
+		OverrideExtractResourceNames(*GetAreaRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetAreaDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetAreaDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*GetAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*GetAreaRequest) *area.ParentName
+		OverrideExtractCollectionName(*GetAreaRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *GetAreaDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *GetAreaDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*area.Area) *area.Name
+		OverrideExtractResourceName(*area.Area) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*area.Name)(nil)
 }
 
-func (h *GetAreaDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *GetAreaDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*area.Area) []*area.Name
+		OverrideExtractResourceNames(*area.Area) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *GetAreaDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *GetAreaDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*area.Area) *area.ParentName
+		OverrideExtractCollectionName(*area.Area) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -234,15 +241,15 @@ func (d *BatchGetAreasDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *BatchGetAreasDescriptor) IsCollectionSubject() bool {
+func (d *BatchGetAreasDescriptor) IsCollection() bool {
+	return false
+}
+
+func (d *BatchGetAreasDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *BatchGetAreasDescriptor) IsPluralSubject() bool {
-	return true
-}
-
-func (d *BatchGetAreasDescriptor) HasSubjectResource() bool {
+func (d *BatchGetAreasDescriptor) HasResource() bool {
 	return true
 }
 
@@ -282,7 +289,7 @@ func (d *BatchGetAreasDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *BatchGetAreasDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *BatchGetAreasDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -294,86 +301,92 @@ func (d *BatchGetAreasDescriptor) GetServerMsgReflectHandle() gotenclient.Method
 	return &BatchGetAreasDescriptorServerMsgHandle{}
 }
 
-func (h *BatchGetAreasDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAreasDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetAreasRequest) *area.Name
+		OverrideExtractResourceName(*BatchGetAreasRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetAreasDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetAreasDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetAreasRequest) []*area.Name
+		OverrideExtractResourceNames(*BatchGetAreasRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	if refs := typedMsg.GetNames(); len(refs) > 0 {
-		list := make(area.AreaNameList, 0, len(refs))
-		for _, ref := range refs {
-			list = append(list, &ref.Name)
+	{
+		if refs := typedMsg.GetNames(); len(refs) > 0 {
+			list := make(area.AreaNameList, 0, len(refs))
+			for _, ref := range refs {
+				list = append(list, &ref.Name)
+			}
+			return list
 		}
-		return list
 	}
 	return (area.AreaNameList)(nil)
 }
 
-func (h *BatchGetAreasDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAreasDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetAreasRequest) *area.ParentName
+		OverrideExtractCollectionName(*BatchGetAreasRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetAreasDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAreasDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*BatchGetAreasResponse) *area.Name
+		OverrideExtractResourceName(*BatchGetAreasResponse) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *BatchGetAreasDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *BatchGetAreasDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*BatchGetAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*BatchGetAreasResponse) []*area.Name
+		OverrideExtractResourceNames(*BatchGetAreasResponse) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetAreas()
-	list := make(area.AreaNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetAreas(); len(resources) > 0 {
+			list := make(area.AreaNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (area.AreaNameList)(nil)
 }
 
-func (h *BatchGetAreasDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *BatchGetAreasDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*BatchGetAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*BatchGetAreasResponse) *area.ParentName
+		OverrideExtractCollectionName(*BatchGetAreasResponse) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -408,15 +421,15 @@ func (d *ListAreasDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *ListAreasDescriptor) IsCollectionSubject() bool {
+func (d *ListAreasDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *ListAreasDescriptor) IsPluralSubject() bool {
+func (d *ListAreasDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *ListAreasDescriptor) HasSubjectResource() bool {
+func (d *ListAreasDescriptor) HasResource() bool {
 	return true
 }
 
@@ -456,7 +469,7 @@ func (d *ListAreasDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *ListAreasDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *ListAreasDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -468,79 +481,88 @@ func (d *ListAreasDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgH
 	return &ListAreasDescriptorServerMsgHandle{}
 }
 
-func (h *ListAreasDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListAreasDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListAreasRequest) *area.Name
+		OverrideExtractResourceName(*ListAreasRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListAreasDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListAreasDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListAreasRequest) []*area.Name
+		OverrideExtractResourceNames(*ListAreasRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *ListAreasDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListAreasDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListAreasRequest) *area.ParentName
+		OverrideExtractCollectionName(*ListAreasRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	return typedMsg.GetParent()
+	{
+		if parentName := typedMsg.GetParent(); parentName != nil {
+			return parentName
+		}
+	}
+	return (*area.ParentName)(nil)
 }
 
-func (h *ListAreasDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *ListAreasDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*ListAreasResponse) *area.Name
+		OverrideExtractResourceName(*ListAreasResponse) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *ListAreasDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *ListAreasDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*ListAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*ListAreasResponse) []*area.Name
+		OverrideExtractResourceNames(*ListAreasResponse) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resources := typedMsg.GetAreas()
-	list := make(area.AreaNameList, 0, len(resources))
-	for _, res := range resources {
-		list = append(list, res.GetName())
+	{
+		if resources := typedMsg.GetAreas(); len(resources) > 0 {
+			list := make(area.AreaNameList, 0, len(resources))
+			for _, res := range resources {
+				list = append(list, res.GetName())
+			}
+			return list
+		}
 	}
-	return list
+	return (area.AreaNameList)(nil)
 }
 
-func (h *ListAreasDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *ListAreasDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*ListAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*ListAreasResponse) *area.ParentName
+		OverrideExtractCollectionName(*ListAreasResponse) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -575,15 +597,15 @@ func (d *WatchAreaDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchAreaDescriptor) IsCollectionSubject() bool {
+func (d *WatchAreaDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *WatchAreaDescriptor) IsPluralSubject() bool {
+func (d *WatchAreaDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *WatchAreaDescriptor) HasSubjectResource() bool {
+func (d *WatchAreaDescriptor) HasResource() bool {
 	return true
 }
 
@@ -623,7 +645,7 @@ func (d *WatchAreaDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *WatchAreaDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchAreaDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -635,89 +657,93 @@ func (d *WatchAreaDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsgH
 	return &WatchAreaDescriptorServerMsgHandle{}
 }
 
-func (h *WatchAreaDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchAreaDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAreaRequest) *area.Name
+		OverrideExtractResourceName(*WatchAreaRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
-	}
-	return (*area.Name)(nil)
-}
-
-func (h *WatchAreaDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchAreaRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAreaRequest) []*area.Name
-	})
-	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
-	}
-	return nil
-}
-
-func (h *WatchAreaDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchAreaRequest)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAreaRequest) *area.ParentName
-	})
-	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
-	}
-	return nil
-}
-
-func (h *WatchAreaDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
-	typedMsg := msg.(*WatchAreaResponse)
-	var asInterface interface{} = h
-	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAreaResponse) *area.Name
-	})
-	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
-	}
-	if typedMsg.GetChange() != nil {
-		switch tResChange := typedMsg.GetChange().ChangeType.(type) {
-		case *area.AreaChange_Added_:
-			return tResChange.Added.GetArea().GetName()
-		case *area.AreaChange_Modified_:
-			return tResChange.Modified.GetName()
-		case *area.AreaChange_Removed_:
-			return tResChange.Removed.GetName()
-		case *area.AreaChange_Current_:
-			return tResChange.Current.GetArea().GetName()
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
 		}
 	}
 	return (*area.Name)(nil)
 }
 
-func (h *WatchAreaDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
-	typedMsg := msg.(*WatchAreaResponse)
+func (h *WatchAreaDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAreaResponse) []*area.Name
+		OverrideExtractResourceNames(*WatchAreaRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchAreaDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchAreaDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchAreaRequest)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchAreaRequest) *area.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
+	}
+	return nil
+}
+
+func (h *WatchAreaDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAreaResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAreaResponse) *area.ParentName
+		OverrideExtractResourceName(*WatchAreaResponse) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
+	}
+	{
+		if resChange := typedMsg.GetChange(); resChange != nil {
+			switch tResChange := resChange.ChangeType.(type) {
+			case *area.AreaChange_Added_:
+				return tResChange.Added.GetArea().GetName()
+			case *area.AreaChange_Modified_:
+				return tResChange.Modified.GetName()
+			case *area.AreaChange_Removed_:
+				return tResChange.Removed.GetName()
+			case *area.AreaChange_Current_:
+				return tResChange.Current.GetArea().GetName()
+			}
+		}
+	}
+	return (*area.Name)(nil)
+}
+
+func (h *WatchAreaDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
+	typedMsg := msg.(*WatchAreaResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractResourceNames(*WatchAreaResponse) []*area.Name
+	})
+	if ok {
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
+	}
+	return nil
+}
+
+func (h *WatchAreaDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
+	typedMsg := msg.(*WatchAreaResponse)
+	var asInterface interface{} = h
+	override, ok := asInterface.(interface {
+		OverrideExtractCollectionName(*WatchAreaResponse) *area.ParentName
+	})
+	if ok {
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -752,15 +778,15 @@ func (d *WatchAreasDescriptor) IsServerStream() bool {
 	return true
 }
 
-func (d *WatchAreasDescriptor) IsCollectionSubject() bool {
+func (d *WatchAreasDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *WatchAreasDescriptor) IsPluralSubject() bool {
+func (d *WatchAreasDescriptor) IsPlural() bool {
 	return true
 }
 
-func (d *WatchAreasDescriptor) HasSubjectResource() bool {
+func (d *WatchAreasDescriptor) HasResource() bool {
 	return true
 }
 
@@ -800,7 +826,7 @@ func (d *WatchAreasDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *WatchAreasDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *WatchAreasDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -812,91 +838,97 @@ func (d *WatchAreasDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &WatchAreasDescriptorServerMsgHandle{}
 }
 
-func (h *WatchAreasDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchAreasDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAreasRequest) *area.Name
+		OverrideExtractResourceName(*WatchAreasRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchAreasDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchAreasDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAreasRequest) []*area.Name
+		OverrideExtractResourceNames(*WatchAreasRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *WatchAreasDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchAreasDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAreasRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAreasRequest) *area.ParentName
+		OverrideExtractCollectionName(*WatchAreasRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*area.ParentName)(nil)
 }
 
-func (h *WatchAreasDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *WatchAreasDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*WatchAreasResponse) *area.Name
+		OverrideExtractResourceName(*WatchAreasResponse) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *WatchAreasDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *WatchAreasDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*WatchAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*WatchAreasResponse) []*area.Name
+		OverrideExtractResourceNames(*WatchAreasResponse) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
-	resourceChanges := typedMsg.GetAreaChanges()
-	list := make(area.AreaNameList, 0, len(resourceChanges))
-	for _, resChange := range resourceChanges {
-		switch tResChange := resChange.ChangeType.(type) {
-		case *area.AreaChange_Added_:
-			list = append(list, tResChange.Added.GetArea().GetName())
-		case *area.AreaChange_Modified_:
-			list = append(list, tResChange.Modified.GetName())
-		case *area.AreaChange_Removed_:
-			list = append(list, tResChange.Removed.GetName())
-		case *area.AreaChange_Current_:
-			list = append(list, tResChange.Current.GetArea().GetName())
+	{
+		if resChanges := typedMsg.GetAreaChanges(); len(resChanges) > 0 {
+			list := make(area.AreaNameList, 0, len(resChanges))
+			for _, resChange := range resChanges {
+				switch tResChange := resChange.ChangeType.(type) {
+				case *area.AreaChange_Added_:
+					list = append(list, tResChange.Added.GetArea().GetName())
+				case *area.AreaChange_Modified_:
+					list = append(list, tResChange.Modified.GetName())
+				case *area.AreaChange_Removed_:
+					list = append(list, tResChange.Removed.GetName())
+				case *area.AreaChange_Current_:
+					list = append(list, tResChange.Current.GetArea().GetName())
+				}
+			}
+			return list
 		}
 	}
-	return list
+	return (area.AreaNameList)(nil)
 }
 
-func (h *WatchAreasDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *WatchAreasDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*WatchAreasResponse)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*WatchAreasResponse) *area.ParentName
+		OverrideExtractCollectionName(*WatchAreasResponse) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -931,15 +963,15 @@ func (d *CreateAreaDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *CreateAreaDescriptor) IsCollectionSubject() bool {
+func (d *CreateAreaDescriptor) IsCollection() bool {
 	return true
 }
 
-func (d *CreateAreaDescriptor) IsPluralSubject() bool {
+func (d *CreateAreaDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *CreateAreaDescriptor) HasSubjectResource() bool {
+func (d *CreateAreaDescriptor) HasResource() bool {
 	return true
 }
 
@@ -979,7 +1011,7 @@ func (d *CreateAreaDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *CreateAreaDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *CreateAreaDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -991,77 +1023,90 @@ func (d *CreateAreaDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &CreateAreaDescriptorServerMsgHandle{}
 }
 
-func (h *CreateAreaDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateAreaDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*CreateAreaRequest) *area.Name
+		OverrideExtractResourceName(*CreateAreaRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetArea().GetName()
+	{
+		res := typedMsg.GetArea()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*area.Name)(nil)
 }
 
-func (h *CreateAreaDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateAreaDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*CreateAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*CreateAreaRequest) []*area.Name
+		OverrideExtractResourceNames(*CreateAreaRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateAreaDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateAreaDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*CreateAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*CreateAreaRequest) *area.ParentName
+		OverrideExtractCollectionName(*CreateAreaRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
-	if ref := typedMsg.GetParent(); ref != nil {
-		return &ref.ParentName
+	{
+		if ref := typedMsg.GetParent(); ref != nil {
+			return &ref.ParentName
+		}
 	}
 	return (*area.ParentName)(nil)
 }
 
-func (h *CreateAreaDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *CreateAreaDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*area.Area) *area.Name
+		OverrideExtractResourceName(*area.Area) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*area.Name)(nil)
 }
 
-func (h *CreateAreaDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *CreateAreaDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*area.Area) []*area.Name
+		OverrideExtractResourceNames(*area.Area) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *CreateAreaDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *CreateAreaDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*area.Area) *area.ParentName
+		OverrideExtractCollectionName(*area.Area) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1096,15 +1141,15 @@ func (d *UpdateAreaDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *UpdateAreaDescriptor) IsCollectionSubject() bool {
+func (d *UpdateAreaDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *UpdateAreaDescriptor) IsPluralSubject() bool {
+func (d *UpdateAreaDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *UpdateAreaDescriptor) HasSubjectResource() bool {
+func (d *UpdateAreaDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1144,7 +1189,7 @@ func (d *UpdateAreaDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *UpdateAreaDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *UpdateAreaDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -1156,74 +1201,85 @@ func (d *UpdateAreaDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &UpdateAreaDescriptorServerMsgHandle{}
 }
 
-func (h *UpdateAreaDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAreaDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*UpdateAreaRequest) *area.Name
+		OverrideExtractResourceName(*UpdateAreaRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetArea().GetName()
+	{
+		res := typedMsg.GetArea()
+		if name := res.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*area.Name)(nil)
 }
 
-func (h *UpdateAreaDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateAreaDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*UpdateAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*UpdateAreaRequest) []*area.Name
+		OverrideExtractResourceNames(*UpdateAreaRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateAreaDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAreaDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*UpdateAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*UpdateAreaRequest) *area.ParentName
+		OverrideExtractCollectionName(*UpdateAreaRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *UpdateAreaDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAreaDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*area.Area) *area.Name
+		OverrideExtractResourceName(*area.Area) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	return typedMsg.GetName()
+	{
+		if name := typedMsg.GetName(); name != nil {
+			return name
+		}
+	}
+	return (*area.Name)(nil)
 }
 
-func (h *UpdateAreaDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *UpdateAreaDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*area.Area) []*area.Name
+		OverrideExtractResourceNames(*area.Area) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *UpdateAreaDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *UpdateAreaDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*area.Area)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*area.Area) *area.ParentName
+		OverrideExtractCollectionName(*area.Area) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
@@ -1258,15 +1314,15 @@ func (d *DeleteAreaDescriptor) IsServerStream() bool {
 	return false
 }
 
-func (d *DeleteAreaDescriptor) IsCollectionSubject() bool {
+func (d *DeleteAreaDescriptor) IsCollection() bool {
 	return false
 }
 
-func (d *DeleteAreaDescriptor) IsPluralSubject() bool {
+func (d *DeleteAreaDescriptor) IsPlural() bool {
 	return false
 }
 
-func (d *DeleteAreaDescriptor) HasSubjectResource() bool {
+func (d *DeleteAreaDescriptor) HasResource() bool {
 	return true
 }
 
@@ -1306,7 +1362,7 @@ func (d *DeleteAreaDescriptor) GetApiDescriptor() gotenclient.ApiDescriptor {
 	return areaServiceDescriptor
 }
 
-func (d *DeleteAreaDescriptor) GetSubjectResourceDescriptor() gotenresource.Descriptor {
+func (d *DeleteAreaDescriptor) GetResourceDescriptor() gotenresource.Descriptor {
 	return area.GetDescriptor()
 }
 
@@ -1318,77 +1374,79 @@ func (d *DeleteAreaDescriptor) GetServerMsgReflectHandle() gotenclient.MethodMsg
 	return &DeleteAreaDescriptorServerMsgHandle{}
 }
 
-func (h *DeleteAreaDescriptorClientMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAreaDescriptorClientMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*DeleteAreaRequest) *area.Name
+		OverrideExtractResourceName(*DeleteAreaRequest) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
-	if ref := typedMsg.GetName(); ref != nil {
-		return &ref.Name
+	{
+		if ref := typedMsg.GetName(); ref != nil {
+			return &ref.Name
+		}
 	}
 	return (*area.Name)(nil)
 }
 
-func (h *DeleteAreaDescriptorClientMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteAreaDescriptorClientMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*DeleteAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*DeleteAreaRequest) []*area.Name
+		OverrideExtractResourceNames(*DeleteAreaRequest) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteAreaDescriptorClientMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAreaDescriptorClientMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*DeleteAreaRequest)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*DeleteAreaRequest) *area.ParentName
+		OverrideExtractCollectionName(*DeleteAreaRequest) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteAreaDescriptorServerMsgHandle) ExtractSubjectResourceName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAreaDescriptorServerMsgHandle) ExtractResourceName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceName(*empty.Empty) *area.Name
+		OverrideExtractResourceName(*empty.Empty) *area.Name
 	})
 	if ok {
-		return override.OverrideExtractSubjectResourceName(typedMsg)
+		return override.OverrideExtractResourceName(typedMsg)
 	}
 	return nil
 }
 
-func (h *DeleteAreaDescriptorServerMsgHandle) ExtractSubjectResourceNames(msg proto.Message) gotenresource.NameList {
+func (h *DeleteAreaDescriptorServerMsgHandle) ExtractResourceNames(msg proto.Message) gotenresource.NameList {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectResourceNames(*empty.Empty) []*area.Name
+		OverrideExtractResourceNames(*empty.Empty) []*area.Name
 	})
 	if ok {
-		return area.AreaNameList(override.OverrideExtractSubjectResourceNames(typedMsg))
+		return area.AreaNameList(override.OverrideExtractResourceNames(typedMsg))
 	}
 	return nil
 }
 
-func (h *DeleteAreaDescriptorServerMsgHandle) ExtractSubjectCollectionName(msg proto.Message) gotenresource.Name {
+func (h *DeleteAreaDescriptorServerMsgHandle) ExtractCollectionName(msg proto.Message) gotenresource.Name {
 	typedMsg := msg.(*empty.Empty)
 	var asInterface interface{} = h
 	override, ok := asInterface.(interface {
-		OverrideExtractSubjectCollectionName(*empty.Empty) *area.ParentName
+		OverrideExtractCollectionName(*empty.Empty) *area.ParentName
 	})
 	if ok {
-		return override.OverrideExtractSubjectCollectionName(typedMsg)
+		return override.OverrideExtractCollectionName(typedMsg)
 	}
 	return nil
 }

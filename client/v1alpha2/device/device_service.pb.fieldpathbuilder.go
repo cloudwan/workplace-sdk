@@ -116,9 +116,6 @@ type BatchGetDevicesRequestFieldPathBuilder struct{}
 func NewBatchGetDevicesRequestFieldPathBuilder() BatchGetDevicesRequestFieldPathBuilder {
 	return BatchGetDevicesRequestFieldPathBuilder{}
 }
-func (BatchGetDevicesRequestFieldPathBuilder) Parent() BatchGetDevicesRequestPathSelectorParent {
-	return BatchGetDevicesRequestPathSelectorParent{}
-}
 func (BatchGetDevicesRequestFieldPathBuilder) Names() BatchGetDevicesRequestPathSelectorNames {
 	return BatchGetDevicesRequestPathSelectorNames{}
 }
@@ -127,20 +124,6 @@ func (BatchGetDevicesRequestFieldPathBuilder) FieldMask() BatchGetDevicesRequest
 }
 func (BatchGetDevicesRequestFieldPathBuilder) View() BatchGetDevicesRequestPathSelectorView {
 	return BatchGetDevicesRequestPathSelectorView{}
-}
-
-type BatchGetDevicesRequestPathSelectorParent struct{}
-
-func (BatchGetDevicesRequestPathSelectorParent) FieldPath() *BatchGetDevicesRequest_FieldTerminalPath {
-	return &BatchGetDevicesRequest_FieldTerminalPath{selector: BatchGetDevicesRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetDevicesRequestPathSelectorParent) WithValue(value *device.Reference) *BatchGetDevicesRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetDevicesRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetDevicesRequestPathSelectorParent) WithArrayOfValues(values []*device.Reference) *BatchGetDevicesRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDevicesRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetDevicesRequestPathSelectorNames struct{}

@@ -106,9 +106,6 @@ type BatchGetFloorsRequestFieldPathBuilder struct{}
 func NewBatchGetFloorsRequestFieldPathBuilder() BatchGetFloorsRequestFieldPathBuilder {
 	return BatchGetFloorsRequestFieldPathBuilder{}
 }
-func (BatchGetFloorsRequestFieldPathBuilder) Parent() BatchGetFloorsRequestPathSelectorParent {
-	return BatchGetFloorsRequestPathSelectorParent{}
-}
 func (BatchGetFloorsRequestFieldPathBuilder) Names() BatchGetFloorsRequestPathSelectorNames {
 	return BatchGetFloorsRequestPathSelectorNames{}
 }
@@ -117,20 +114,6 @@ func (BatchGetFloorsRequestFieldPathBuilder) FieldMask() BatchGetFloorsRequestPa
 }
 func (BatchGetFloorsRequestFieldPathBuilder) View() BatchGetFloorsRequestPathSelectorView {
 	return BatchGetFloorsRequestPathSelectorView{}
-}
-
-type BatchGetFloorsRequestPathSelectorParent struct{}
-
-func (BatchGetFloorsRequestPathSelectorParent) FieldPath() *BatchGetFloorsRequest_FieldTerminalPath {
-	return &BatchGetFloorsRequest_FieldTerminalPath{selector: BatchGetFloorsRequest_FieldPathSelectorParent}
-}
-
-func (s BatchGetFloorsRequestPathSelectorParent) WithValue(value *floor.Reference) *BatchGetFloorsRequest_FieldTerminalPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetFloorsRequest_FieldTerminalPathValue)
-}
-
-func (s BatchGetFloorsRequestPathSelectorParent) WithArrayOfValues(values []*floor.Reference) *BatchGetFloorsRequest_FieldTerminalPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetFloorsRequest_FieldTerminalPathArrayOfValues)
 }
 
 type BatchGetFloorsRequestPathSelectorNames struct{}

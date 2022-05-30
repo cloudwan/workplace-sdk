@@ -158,9 +158,6 @@ func (o *BatchGetZonesRequest) MakeDiffFieldMask(other *BatchGetZonesRequest) *B
 	}
 
 	res := &BatchGetZonesRequest_FieldMask{}
-	if o.GetParent().String() != other.GetParent().String() {
-		res.Paths = append(res.Paths, &BatchGetZonesRequest_FieldTerminalPath{selector: BatchGetZonesRequest_FieldPathSelectorParent})
-	}
 
 	if len(o.GetNames()) == len(other.GetNames()) {
 		for i, lValue := range o.GetNames() {
@@ -191,16 +188,6 @@ func (o *BatchGetZonesRequest) Clone() *BatchGetZonesRequest {
 		return nil
 	}
 	result := &BatchGetZonesRequest{}
-	if o.Parent == nil {
-		result.Parent = nil
-	} else if data, err := o.Parent.ProtoString(); err != nil {
-		panic(err)
-	} else {
-		result.Parent = &zone.Reference{}
-		if err := result.Parent.ParseProtoString(data); err != nil {
-			panic(err)
-		}
-	}
 	result.Names = make([]*zone.Reference, len(o.Names))
 	for i, sourceValue := range o.Names {
 		if sourceValue == nil {
@@ -224,18 +211,6 @@ func (o *BatchGetZonesRequest) CloneRaw() gotenobject.GotenObjectExt {
 }
 
 func (o *BatchGetZonesRequest) Merge(source *BatchGetZonesRequest) {
-	if source.GetParent() != nil {
-		if data, err := source.GetParent().ProtoString(); err != nil {
-			panic(err)
-		} else {
-			o.Parent = &zone.Reference{}
-			if err := o.Parent.ParseProtoString(data); err != nil {
-				panic(err)
-			}
-		}
-	} else {
-		o.Parent = nil
-	}
 	for _, sourceValue := range source.GetNames() {
 		exists := false
 		for _, currentValue := range o.Names {

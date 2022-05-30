@@ -542,16 +542,13 @@ type BatchGetAreasRequest_FieldPath interface {
 type BatchGetAreasRequest_FieldPathSelector int32
 
 const (
-	BatchGetAreasRequest_FieldPathSelectorParent    BatchGetAreasRequest_FieldPathSelector = 0
-	BatchGetAreasRequest_FieldPathSelectorNames     BatchGetAreasRequest_FieldPathSelector = 1
-	BatchGetAreasRequest_FieldPathSelectorFieldMask BatchGetAreasRequest_FieldPathSelector = 2
-	BatchGetAreasRequest_FieldPathSelectorView      BatchGetAreasRequest_FieldPathSelector = 3
+	BatchGetAreasRequest_FieldPathSelectorNames     BatchGetAreasRequest_FieldPathSelector = 0
+	BatchGetAreasRequest_FieldPathSelectorFieldMask BatchGetAreasRequest_FieldPathSelector = 1
+	BatchGetAreasRequest_FieldPathSelectorView      BatchGetAreasRequest_FieldPathSelector = 2
 )
 
 func (s BatchGetAreasRequest_FieldPathSelector) String() string {
 	switch s {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		return "parent"
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		return "names"
 	case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -569,8 +566,6 @@ func BuildBatchGetAreasRequest_FieldPath(fp gotenobject.RawFieldPath) (BatchGetA
 	}
 	if len(fp) == 1 {
 		switch fp[0] {
-		case "parent":
-			return &BatchGetAreasRequest_FieldTerminalPath{selector: BatchGetAreasRequest_FieldPathSelectorParent}, nil
 		case "names":
 			return &BatchGetAreasRequest_FieldTerminalPath{selector: BatchGetAreasRequest_FieldPathSelectorNames}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -622,10 +617,6 @@ func (fp *BatchGetAreasRequest_FieldTerminalPath) JSONString() string {
 func (fp *BatchGetAreasRequest_FieldTerminalPath) Get(source *BatchGetAreasRequest) (values []interface{}) {
 	if source != nil {
 		switch fp.selector {
-		case BatchGetAreasRequest_FieldPathSelectorParent:
-			if source.Parent != nil {
-				values = append(values, source.Parent)
-			}
 		case BatchGetAreasRequest_FieldPathSelectorNames:
 			for _, value := range source.GetNames() {
 				values = append(values, value)
@@ -650,9 +641,6 @@ func (fp *BatchGetAreasRequest_FieldTerminalPath) GetRaw(source proto.Message) [
 // GetSingle returns value pointed by specific field of from source BatchGetAreasRequest
 func (fp *BatchGetAreasRequest_FieldTerminalPath) GetSingle(source *BatchGetAreasRequest) (interface{}, bool) {
 	switch fp.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		res := source.GetParent()
-		return res, res != nil
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		res := source.GetNames()
 		return res, res != nil
@@ -673,8 +661,6 @@ func (fp *BatchGetAreasRequest_FieldTerminalPath) GetSingleRaw(source proto.Mess
 // GetDefault returns a default value of the field type
 func (fp *BatchGetAreasRequest_FieldTerminalPath) GetDefault() interface{} {
 	switch fp.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		return (*area.Reference)(nil)
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		return ([]*area.Reference)(nil)
 	case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -689,8 +675,6 @@ func (fp *BatchGetAreasRequest_FieldTerminalPath) GetDefault() interface{} {
 func (fp *BatchGetAreasRequest_FieldTerminalPath) ClearValue(item *BatchGetAreasRequest) {
 	if item != nil {
 		switch fp.selector {
-		case BatchGetAreasRequest_FieldPathSelectorParent:
-			item.Parent = nil
 		case BatchGetAreasRequest_FieldPathSelectorNames:
 			item.Names = nil
 		case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -709,16 +693,13 @@ func (fp *BatchGetAreasRequest_FieldTerminalPath) ClearValueRaw(item proto.Messa
 
 // IsLeaf - whether field path is holds simple value
 func (fp *BatchGetAreasRequest_FieldTerminalPath) IsLeaf() bool {
-	return fp.selector == BatchGetAreasRequest_FieldPathSelectorParent ||
-		fp.selector == BatchGetAreasRequest_FieldPathSelectorNames ||
+	return fp.selector == BatchGetAreasRequest_FieldPathSelectorNames ||
 		fp.selector == BatchGetAreasRequest_FieldPathSelectorFieldMask ||
 		fp.selector == BatchGetAreasRequest_FieldPathSelectorView
 }
 
 func (fp *BatchGetAreasRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetAreasRequest_FieldPathValue {
 	switch fp.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		return &BatchGetAreasRequest_FieldTerminalPathValue{BatchGetAreasRequest_FieldTerminalPath: *fp, value: value.(*area.Reference)}
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		return &BatchGetAreasRequest_FieldTerminalPathValue{BatchGetAreasRequest_FieldTerminalPath: *fp, value: value.([]*area.Reference)}
 	case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -737,8 +718,6 @@ func (fp *BatchGetAreasRequest_FieldTerminalPath) WithRawIValue(value interface{
 func (fp *BatchGetAreasRequest_FieldTerminalPath) WithIArrayOfValues(values interface{}) BatchGetAreasRequest_FieldPathArrayOfValues {
 	fpaov := &BatchGetAreasRequest_FieldTerminalPathArrayOfValues{BatchGetAreasRequest_FieldTerminalPath: *fp}
 	switch fp.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		return &BatchGetAreasRequest_FieldTerminalPathArrayOfValues{BatchGetAreasRequest_FieldTerminalPath: *fp, values: values.([]*area.Reference)}
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		return &BatchGetAreasRequest_FieldTerminalPathArrayOfValues{BatchGetAreasRequest_FieldTerminalPath: *fp, values: values.([][]*area.Reference)}
 	case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -807,10 +786,6 @@ var _ BatchGetAreasRequest_FieldPathValue = (*BatchGetAreasRequest_FieldTerminal
 func (fpv *BatchGetAreasRequest_FieldTerminalPathValue) GetRawValue() interface{} {
 	return fpv.value
 }
-func (fpv *BatchGetAreasRequest_FieldTerminalPathValue) AsParentValue() (*area.Reference, bool) {
-	res, ok := fpv.value.(*area.Reference)
-	return res, ok
-}
 func (fpv *BatchGetAreasRequest_FieldTerminalPathValue) AsNamesValue() ([]*area.Reference, bool) {
 	res, ok := fpv.value.([]*area.Reference)
 	return res, ok
@@ -830,8 +805,6 @@ func (fpv *BatchGetAreasRequest_FieldTerminalPathValue) SetTo(target **BatchGetA
 		*target = new(BatchGetAreasRequest)
 	}
 	switch fpv.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		(*target).Parent = fpv.value.(*area.Reference)
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		(*target).Names = fpv.value.([]*area.Reference)
 	case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -851,25 +824,6 @@ func (fpv *BatchGetAreasRequest_FieldTerminalPathValue) SetToRaw(target proto.Me
 // CompareWith compares value in the 'BatchGetAreasRequest_FieldTerminalPathValue' with the value under path in 'BatchGetAreasRequest'.
 func (fpv *BatchGetAreasRequest_FieldTerminalPathValue) CompareWith(source *BatchGetAreasRequest) (int, bool) {
 	switch fpv.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		leftValue := fpv.value.(*area.Reference)
-		rightValue := source.GetParent()
-		if leftValue == nil {
-			if rightValue != nil {
-				return -1, true
-			}
-			return 0, true
-		}
-		if rightValue == nil {
-			return 1, true
-		}
-		if leftValue.String() == rightValue.String() {
-			return 0, true
-		} else if leftValue.String() < rightValue.String() {
-			return -1, true
-		} else {
-			return 1, true
-		}
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		return 0, false
 	case BatchGetAreasRequest_FieldPathSelectorFieldMask:
@@ -992,10 +946,6 @@ var _ BatchGetAreasRequest_FieldPathArrayOfValues = (*BatchGetAreasRequest_Field
 
 func (fpaov *BatchGetAreasRequest_FieldTerminalPathArrayOfValues) GetRawValues() (values []interface{}) {
 	switch fpaov.selector {
-	case BatchGetAreasRequest_FieldPathSelectorParent:
-		for _, v := range fpaov.values.([]*area.Reference) {
-			values = append(values, v)
-		}
 	case BatchGetAreasRequest_FieldPathSelectorNames:
 		for _, v := range fpaov.values.([][]*area.Reference) {
 			values = append(values, v)
@@ -1010,10 +960,6 @@ func (fpaov *BatchGetAreasRequest_FieldTerminalPathArrayOfValues) GetRawValues()
 		}
 	}
 	return
-}
-func (fpaov *BatchGetAreasRequest_FieldTerminalPathArrayOfValues) AsParentArrayOfValues() ([]*area.Reference, bool) {
-	res, ok := fpaov.values.([]*area.Reference)
-	return res, ok
 }
 func (fpaov *BatchGetAreasRequest_FieldTerminalPathArrayOfValues) AsNamesArrayOfValues() ([][]*area.Reference, bool) {
 	res, ok := fpaov.values.([][]*area.Reference)

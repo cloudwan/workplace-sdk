@@ -33,9 +33,6 @@ message GetPropertyRequest {
 // Request message for method
 // [BatchGetProperties][ntt.workplace.v1alpha2.BatchGetProperties]
 message BatchGetPropertiesRequest {
-  // Optional parent ntt.workplace.v1alpha2.Property
-  string parent = 1;
-
   // Names of Properties
   repeated string names = 2;
 
@@ -46,6 +43,8 @@ message BatchGetPropertiesRequest {
   // View defines list of standard response fields present in response items.
   // Additional fields can be amended by request field field_mask
   goten.view.View view = 4;
+
+  reserved 1;
 }
 
 // BatchGetPropertiesResponse
@@ -343,40 +342,7 @@ service PropertyService {
   rpc BatchGetProperties(BatchGetPropertiesRequest)
       returns (BatchGetPropertiesResponse) {
     option (google.api.http) = {
-      get : "/v1alpha2/{parent=projects/*/regions/*/sites/*}/"
-            "properties:batchGet"
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/"
-              "properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "floors/*}/properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "floors/*/areas/*}/properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/zones/*}/"
-              "properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "zones/*}/properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "floors/*/zones/*}/properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/"
-              "floors/*/areas/*/zones/*}/properties:batchGet"
-      >
-      additional_bindings : <
-        get : "/v1alpha2/{parent=projects/*/regions/*/sites/*/devices/*}/"
-              "properties:batchGet"
-      >
+      get : "/v1alpha2/properties:batchGet"
     };
   }
 
