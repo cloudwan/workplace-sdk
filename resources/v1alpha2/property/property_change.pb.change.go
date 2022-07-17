@@ -104,7 +104,7 @@ func (c *PropertyChange) GetProperty() *Property {
 	return nil
 }
 
-func (c *PropertyChange) GetResource() gotenresource.Resource {
+func (c *PropertyChange) GetRawResource() gotenresource.Resource {
 	return c.GetProperty()
 }
 

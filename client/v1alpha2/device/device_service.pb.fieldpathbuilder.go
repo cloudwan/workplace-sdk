@@ -7,10 +7,9 @@ package device_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -32,10 +31,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &duration.Duration{}
 	_ = &empty.Empty{}
@@ -1537,11 +1535,11 @@ func (BatchGetDevicesResponsePathSelectorDevicesMetadataSyncing) FieldPath() *Ba
 	}
 }
 
-func (s BatchGetDevicesResponsePathSelectorDevicesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetDevicesResponse_FieldSubPathValue {
+func (s BatchGetDevicesResponsePathSelectorDevicesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetDevicesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetDevicesResponse_FieldSubPathValue)
 }
 
-func (s BatchGetDevicesResponsePathSelectorDevicesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetDevicesResponse_FieldSubPathArrayOfValues {
+func (s BatchGetDevicesResponsePathSelectorDevicesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetDevicesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDevicesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -3102,11 +3100,11 @@ func (ListDevicesResponsePathSelectorDevicesMetadataSyncing) FieldPath() *ListDe
 	}
 }
 
-func (s ListDevicesResponsePathSelectorDevicesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListDevicesResponse_FieldSubPathValue {
+func (s ListDevicesResponsePathSelectorDevicesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListDevicesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListDevicesResponse_FieldSubPathValue)
 }
 
-func (s ListDevicesResponsePathSelectorDevicesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListDevicesResponse_FieldSubPathArrayOfValues {
+func (s ListDevicesResponsePathSelectorDevicesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListDevicesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDevicesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -5043,11 +5041,11 @@ func (CreateDeviceRequestPathSelectorDeviceMetadataSyncing) FieldPath() *CreateD
 	}
 }
 
-func (s CreateDeviceRequestPathSelectorDeviceMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreateDeviceRequest_FieldSubPathValue {
+func (s CreateDeviceRequestPathSelectorDeviceMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreateDeviceRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateDeviceRequest_FieldSubPathValue)
 }
 
-func (s CreateDeviceRequestPathSelectorDeviceMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreateDeviceRequest_FieldSubPathArrayOfValues {
+func (s CreateDeviceRequestPathSelectorDeviceMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreateDeviceRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6462,11 +6460,11 @@ func (UpdateDeviceRequestPathSelectorDeviceMetadataSyncing) FieldPath() *UpdateD
 	}
 }
 
-func (s UpdateDeviceRequestPathSelectorDeviceMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathValue {
+func (s UpdateDeviceRequestPathSelectorDeviceMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateDeviceRequest_FieldSubPathValue)
 }
 
-func (s UpdateDeviceRequestPathSelectorDeviceMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathArrayOfValues {
+func (s UpdateDeviceRequestPathSelectorDeviceMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceRequest_FieldSubPathArrayOfValues)
 }
 
@@ -7905,11 +7903,11 @@ func (UpdateDeviceRequestPathSelectorCasConditionalStateMetadataSyncing) FieldPa
 	}
 }
 
-func (s UpdateDeviceRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathValue {
+func (s UpdateDeviceRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateDeviceRequest_FieldSubPathValue)
 }
 
-func (s UpdateDeviceRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathArrayOfValues {
+func (s UpdateDeviceRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateDeviceRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceRequest_FieldSubPathArrayOfValues)
 }
 
@@ -9338,11 +9336,11 @@ func (UpdateDeviceRequest_CASPathSelectorConditionalStateMetadataSyncing) FieldP
 	}
 }
 
-func (s UpdateDeviceRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateDeviceRequestCAS_FieldSubPathValue {
+func (s UpdateDeviceRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateDeviceRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateDeviceRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateDeviceRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateDeviceRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateDeviceRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateDeviceRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceRequestCAS_FieldSubPathArrayOfValues)
 }
 

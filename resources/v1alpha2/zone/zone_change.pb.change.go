@@ -100,7 +100,7 @@ func (c *ZoneChange) GetZone() *Zone {
 	return nil
 }
 
-func (c *ZoneChange) GetResource() gotenresource.Resource {
+func (c *ZoneChange) GetRawResource() gotenresource.Resource {
 	return c.GetZone()
 }
 

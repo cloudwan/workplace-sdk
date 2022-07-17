@@ -7,10 +7,9 @@ package property
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	agent "github.com/cloudwan/workplace-sdk/resources/v1alpha2/agent"
 	area "github.com/cloudwan/workplace-sdk/resources/v1alpha2/area"
@@ -28,10 +27,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &duration.Duration{}
 	_ = &timestamp.Timestamp{}
@@ -865,11 +863,11 @@ func (PropertyPathSelectorMetadataSyncing) FieldPath() *Property_FieldSubPath {
 	}
 }
 
-func (s PropertyPathSelectorMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *Property_FieldSubPathValue {
+func (s PropertyPathSelectorMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *Property_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*Property_FieldSubPathValue)
 }
 
-func (s PropertyPathSelectorMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *Property_FieldSubPathArrayOfValues {
+func (s PropertyPathSelectorMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *Property_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*Property_FieldSubPathArrayOfValues)
 }
 

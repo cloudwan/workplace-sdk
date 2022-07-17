@@ -94,7 +94,7 @@ func (c *AreaChange) GetArea() *Area {
 	return nil
 }
 
-func (c *AreaChange) GetResource() gotenresource.Resource {
+func (c *AreaChange) GetRawResource() gotenresource.Resource {
 	return c.GetArea()
 }
 

@@ -94,7 +94,7 @@ func (c *BuildingChange) GetBuilding() *Building {
 	return nil
 }
 
-func (c *BuildingChange) GetResource() gotenresource.Resource {
+func (c *BuildingChange) GetRawResource() gotenresource.Resource {
 	return c.GetBuilding()
 }
 

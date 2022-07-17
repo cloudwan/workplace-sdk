@@ -94,7 +94,7 @@ func (c *VendorConnectionChange) GetVendorConnection() *VendorConnection {
 	return nil
 }
 
-func (c *VendorConnectionChange) GetResource() gotenresource.Resource {
+func (c *VendorConnectionChange) GetRawResource() gotenresource.Resource {
 	return c.GetVendorConnection()
 }
 

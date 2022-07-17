@@ -7,10 +7,9 @@ package floor_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -27,10 +26,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
@@ -1451,11 +1449,11 @@ func (BatchGetFloorsResponsePathSelectorFloorsMetadataSyncing) FieldPath() *Batc
 	}
 }
 
-func (s BatchGetFloorsResponsePathSelectorFloorsMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetFloorsResponse_FieldSubPathValue {
+func (s BatchGetFloorsResponsePathSelectorFloorsMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetFloorsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetFloorsResponse_FieldSubPathValue)
 }
 
-func (s BatchGetFloorsResponsePathSelectorFloorsMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetFloorsResponse_FieldSubPathArrayOfValues {
+func (s BatchGetFloorsResponsePathSelectorFloorsMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetFloorsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetFloorsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2940,11 +2938,11 @@ func (ListFloorsResponsePathSelectorFloorsMetadataSyncing) FieldPath() *ListFloo
 	}
 }
 
-func (s ListFloorsResponsePathSelectorFloorsMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListFloorsResponse_FieldSubPathValue {
+func (s ListFloorsResponsePathSelectorFloorsMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListFloorsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListFloorsResponse_FieldSubPathValue)
 }
 
-func (s ListFloorsResponsePathSelectorFloorsMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListFloorsResponse_FieldSubPathArrayOfValues {
+func (s ListFloorsResponsePathSelectorFloorsMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListFloorsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListFloorsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -4805,11 +4803,11 @@ func (CreateFloorRequestPathSelectorFloorMetadataSyncing) FieldPath() *CreateFlo
 	}
 }
 
-func (s CreateFloorRequestPathSelectorFloorMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreateFloorRequest_FieldSubPathValue {
+func (s CreateFloorRequestPathSelectorFloorMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreateFloorRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateFloorRequest_FieldSubPathValue)
 }
 
-func (s CreateFloorRequestPathSelectorFloorMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreateFloorRequest_FieldSubPathArrayOfValues {
+func (s CreateFloorRequestPathSelectorFloorMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreateFloorRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateFloorRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6148,11 +6146,11 @@ func (UpdateFloorRequestPathSelectorFloorMetadataSyncing) FieldPath() *UpdateFlo
 	}
 }
 
-func (s UpdateFloorRequestPathSelectorFloorMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathValue {
+func (s UpdateFloorRequestPathSelectorFloorMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateFloorRequest_FieldSubPathValue)
 }
 
-func (s UpdateFloorRequestPathSelectorFloorMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathArrayOfValues {
+func (s UpdateFloorRequestPathSelectorFloorMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateFloorRequest_FieldSubPathArrayOfValues)
 }
 
@@ -7515,11 +7513,11 @@ func (UpdateFloorRequestPathSelectorCasConditionalStateMetadataSyncing) FieldPat
 	}
 }
 
-func (s UpdateFloorRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathValue {
+func (s UpdateFloorRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateFloorRequest_FieldSubPathValue)
 }
 
-func (s UpdateFloorRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathArrayOfValues {
+func (s UpdateFloorRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateFloorRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateFloorRequest_FieldSubPathArrayOfValues)
 }
 
@@ -8872,11 +8870,11 @@ func (UpdateFloorRequest_CASPathSelectorConditionalStateMetadataSyncing) FieldPa
 	}
 }
 
-func (s UpdateFloorRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateFloorRequestCAS_FieldSubPathValue {
+func (s UpdateFloorRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateFloorRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateFloorRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateFloorRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateFloorRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateFloorRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateFloorRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateFloorRequestCAS_FieldSubPathArrayOfValues)
 }
 

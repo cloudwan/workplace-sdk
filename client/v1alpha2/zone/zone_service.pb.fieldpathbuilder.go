@@ -7,10 +7,9 @@ package zone_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -29,10 +28,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
@@ -1086,11 +1084,11 @@ func (BatchGetZonesResponsePathSelectorZonesMetadataSyncing) FieldPath() *BatchG
 	}
 }
 
-func (s BatchGetZonesResponsePathSelectorZonesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetZonesResponse_FieldSubPathValue {
+func (s BatchGetZonesResponsePathSelectorZonesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetZonesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetZonesResponse_FieldSubPathValue)
 }
 
-func (s BatchGetZonesResponsePathSelectorZonesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetZonesResponse_FieldSubPathArrayOfValues {
+func (s BatchGetZonesResponsePathSelectorZonesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetZonesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetZonesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2206,11 +2204,11 @@ func (ListZonesResponsePathSelectorZonesMetadataSyncing) FieldPath() *ListZonesR
 	}
 }
 
-func (s ListZonesResponsePathSelectorZonesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListZonesResponse_FieldSubPathValue {
+func (s ListZonesResponsePathSelectorZonesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListZonesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListZonesResponse_FieldSubPathValue)
 }
 
-func (s ListZonesResponsePathSelectorZonesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListZonesResponse_FieldSubPathArrayOfValues {
+func (s ListZonesResponsePathSelectorZonesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListZonesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListZonesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -3702,11 +3700,11 @@ func (CreateZoneRequestPathSelectorZoneMetadataSyncing) FieldPath() *CreateZoneR
 	}
 }
 
-func (s CreateZoneRequestPathSelectorZoneMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreateZoneRequest_FieldSubPathValue {
+func (s CreateZoneRequestPathSelectorZoneMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreateZoneRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateZoneRequest_FieldSubPathValue)
 }
 
-func (s CreateZoneRequestPathSelectorZoneMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreateZoneRequest_FieldSubPathArrayOfValues {
+func (s CreateZoneRequestPathSelectorZoneMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreateZoneRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateZoneRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4676,11 +4674,11 @@ func (UpdateZoneRequestPathSelectorZoneMetadataSyncing) FieldPath() *UpdateZoneR
 	}
 }
 
-func (s UpdateZoneRequestPathSelectorZoneMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathValue {
+func (s UpdateZoneRequestPathSelectorZoneMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateZoneRequest_FieldSubPathValue)
 }
 
-func (s UpdateZoneRequestPathSelectorZoneMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathArrayOfValues {
+func (s UpdateZoneRequestPathSelectorZoneMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateZoneRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5674,11 +5672,11 @@ func (UpdateZoneRequestPathSelectorCasConditionalStateMetadataSyncing) FieldPath
 	}
 }
 
-func (s UpdateZoneRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathValue {
+func (s UpdateZoneRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateZoneRequest_FieldSubPathValue)
 }
 
-func (s UpdateZoneRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathArrayOfValues {
+func (s UpdateZoneRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateZoneRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateZoneRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6662,11 +6660,11 @@ func (UpdateZoneRequest_CASPathSelectorConditionalStateMetadataSyncing) FieldPat
 	}
 }
 
-func (s UpdateZoneRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateZoneRequestCAS_FieldSubPathValue {
+func (s UpdateZoneRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateZoneRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateZoneRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateZoneRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateZoneRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateZoneRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateZoneRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateZoneRequestCAS_FieldSubPathArrayOfValues)
 }
 

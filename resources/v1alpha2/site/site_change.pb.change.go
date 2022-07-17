@@ -94,7 +94,7 @@ func (c *SiteChange) GetSite() *Site {
 	return nil
 }
 
-func (c *SiteChange) GetResource() gotenresource.Resource {
+func (c *SiteChange) GetRawResource() gotenresource.Resource {
 	return c.GetSite()
 }
 

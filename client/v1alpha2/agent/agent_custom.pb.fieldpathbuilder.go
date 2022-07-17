@@ -7,12 +7,11 @@ package agent_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	iam_service_account "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/service_account"
 	iam_service_account_key "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/service_account_key"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	agent "github.com/cloudwan/workplace-sdk/resources/v1alpha2/agent"
 	timestamp "github.com/golang/protobuf/ptypes/timestamp"
@@ -21,12 +20,11 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &iam_service_account.ServiceAccount{}
 	_ = &iam_service_account_key.ServiceAccountKey{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &timestamp.Timestamp{}
 	_ = &agent.Agent{}
@@ -605,11 +603,11 @@ func (ActivationRequestPathSelectorActivateAgentMetadataSyncing) FieldPath() *Ac
 	}
 }
 
-func (s ActivationRequestPathSelectorActivateAgentMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ActivationRequest_FieldSubPathValue {
+func (s ActivationRequestPathSelectorActivateAgentMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ActivationRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ActivationRequest_FieldSubPathValue)
 }
 
-func (s ActivationRequestPathSelectorActivateAgentMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ActivationRequest_FieldSubPathArrayOfValues {
+func (s ActivationRequestPathSelectorActivateAgentMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ActivationRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ActivationRequest_FieldSubPathArrayOfValues)
 }
 
@@ -1251,11 +1249,11 @@ func (ActivationRequest_ActivatePathSelectorAgentMetadataSyncing) FieldPath() *A
 	}
 }
 
-func (s ActivationRequest_ActivatePathSelectorAgentMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ActivationRequestActivate_FieldSubPathValue {
+func (s ActivationRequest_ActivatePathSelectorAgentMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ActivationRequestActivate_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ActivationRequestActivate_FieldSubPathValue)
 }
 
-func (s ActivationRequest_ActivatePathSelectorAgentMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ActivationRequestActivate_FieldSubPathArrayOfValues {
+func (s ActivationRequest_ActivatePathSelectorAgentMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ActivationRequestActivate_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ActivationRequestActivate_FieldSubPathArrayOfValues)
 }
 
@@ -1863,11 +1861,11 @@ func (ActivationResponsePathSelectorActivatedProbeMetadataSyncing) FieldPath() *
 	}
 }
 
-func (s ActivationResponsePathSelectorActivatedProbeMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ActivationResponse_FieldSubPathValue {
+func (s ActivationResponsePathSelectorActivatedProbeMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ActivationResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ActivationResponse_FieldSubPathValue)
 }
 
-func (s ActivationResponsePathSelectorActivatedProbeMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ActivationResponse_FieldSubPathArrayOfValues {
+func (s ActivationResponsePathSelectorActivatedProbeMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ActivationResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ActivationResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2528,11 +2526,11 @@ func (ActivationResponsePathSelectorActivatedServiceAccountKeyMetadataSyncing) F
 	}
 }
 
-func (s ActivationResponsePathSelectorActivatedServiceAccountKeyMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ActivationResponse_FieldSubPathValue {
+func (s ActivationResponsePathSelectorActivatedServiceAccountKeyMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ActivationResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ActivationResponse_FieldSubPathValue)
 }
 
-func (s ActivationResponsePathSelectorActivatedServiceAccountKeyMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ActivationResponse_FieldSubPathArrayOfValues {
+func (s ActivationResponsePathSelectorActivatedServiceAccountKeyMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ActivationResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ActivationResponse_FieldSubPathArrayOfValues)
 }
 
@@ -3122,11 +3120,11 @@ func (ActivationResponse_ActivatedPathSelectorProbeMetadataSyncing) FieldPath() 
 	}
 }
 
-func (s ActivationResponse_ActivatedPathSelectorProbeMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathValue {
+func (s ActivationResponse_ActivatedPathSelectorProbeMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ActivationResponseActivated_FieldSubPathValue)
 }
 
-func (s ActivationResponse_ActivatedPathSelectorProbeMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathArrayOfValues {
+func (s ActivationResponse_ActivatedPathSelectorProbeMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ActivationResponseActivated_FieldSubPathArrayOfValues)
 }
 
@@ -3800,11 +3798,11 @@ func (ActivationResponse_ActivatedPathSelectorServiceAccountKeyMetadataSyncing) 
 	}
 }
 
-func (s ActivationResponse_ActivatedPathSelectorServiceAccountKeyMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathValue {
+func (s ActivationResponse_ActivatedPathSelectorServiceAccountKeyMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ActivationResponseActivated_FieldSubPathValue)
 }
 
-func (s ActivationResponse_ActivatedPathSelectorServiceAccountKeyMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathArrayOfValues {
+func (s ActivationResponse_ActivatedPathSelectorServiceAccountKeyMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ActivationResponseActivated_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ActivationResponseActivated_FieldSubPathArrayOfValues)
 }
 

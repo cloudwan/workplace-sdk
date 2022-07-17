@@ -7,12 +7,11 @@ package agent_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	iam_service_account "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/service_account"
 	iam_service_account_key "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/service_account_key"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -25,12 +24,11 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &iam_service_account.ServiceAccount{}
 	_ = &iam_service_account_key.ServiceAccountKey{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
@@ -671,11 +669,11 @@ func (BatchGetAgentsResponsePathSelectorAgentsMetadataSyncing) FieldPath() *Batc
 	}
 }
 
-func (s BatchGetAgentsResponsePathSelectorAgentsMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetAgentsResponse_FieldSubPathValue {
+func (s BatchGetAgentsResponsePathSelectorAgentsMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetAgentsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetAgentsResponse_FieldSubPathValue)
 }
 
-func (s BatchGetAgentsResponsePathSelectorAgentsMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetAgentsResponse_FieldSubPathArrayOfValues {
+func (s BatchGetAgentsResponsePathSelectorAgentsMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetAgentsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetAgentsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1384,11 +1382,11 @@ func (ListAgentsResponsePathSelectorAgentsMetadataSyncing) FieldPath() *ListAgen
 	}
 }
 
-func (s ListAgentsResponsePathSelectorAgentsMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListAgentsResponse_FieldSubPathValue {
+func (s ListAgentsResponsePathSelectorAgentsMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListAgentsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListAgentsResponse_FieldSubPathValue)
 }
 
-func (s ListAgentsResponsePathSelectorAgentsMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListAgentsResponse_FieldSubPathArrayOfValues {
+func (s ListAgentsResponsePathSelectorAgentsMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListAgentsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListAgentsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2473,11 +2471,11 @@ func (CreateAgentRequestPathSelectorAgentMetadataSyncing) FieldPath() *CreateAge
 	}
 }
 
-func (s CreateAgentRequestPathSelectorAgentMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreateAgentRequest_FieldSubPathValue {
+func (s CreateAgentRequestPathSelectorAgentMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreateAgentRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateAgentRequest_FieldSubPathValue)
 }
 
-func (s CreateAgentRequestPathSelectorAgentMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreateAgentRequest_FieldSubPathArrayOfValues {
+func (s CreateAgentRequestPathSelectorAgentMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreateAgentRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateAgentRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3040,11 +3038,11 @@ func (UpdateAgentRequestPathSelectorAgentMetadataSyncing) FieldPath() *UpdateAge
 	}
 }
 
-func (s UpdateAgentRequestPathSelectorAgentMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathValue {
+func (s UpdateAgentRequestPathSelectorAgentMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateAgentRequest_FieldSubPathValue)
 }
 
-func (s UpdateAgentRequestPathSelectorAgentMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathArrayOfValues {
+func (s UpdateAgentRequestPathSelectorAgentMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateAgentRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3631,11 +3629,11 @@ func (UpdateAgentRequestPathSelectorCasConditionalStateMetadataSyncing) FieldPat
 	}
 }
 
-func (s UpdateAgentRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathValue {
+func (s UpdateAgentRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateAgentRequest_FieldSubPathValue)
 }
 
-func (s UpdateAgentRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathArrayOfValues {
+func (s UpdateAgentRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateAgentRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateAgentRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4212,11 +4210,11 @@ func (UpdateAgentRequest_CASPathSelectorConditionalStateMetadataSyncing) FieldPa
 	}
 }
 
-func (s UpdateAgentRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateAgentRequestCAS_FieldSubPathValue {
+func (s UpdateAgentRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateAgentRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateAgentRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateAgentRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateAgentRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateAgentRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateAgentRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateAgentRequestCAS_FieldSubPathArrayOfValues)
 }
 

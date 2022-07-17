@@ -7,10 +7,9 @@ package property_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -33,10 +32,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &duration.Duration{}
 	_ = &empty.Empty{}
@@ -1018,11 +1016,11 @@ func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncing) FieldPath
 	}
 }
 
-func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetPropertiesResponse_FieldSubPathValue {
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetPropertiesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
 }
 
-func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2243,11 +2241,11 @@ func (ListPropertiesResponsePathSelectorPropertiesMetadataSyncing) FieldPath() *
 	}
 }
 
-func (s ListPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListPropertiesResponse_FieldSubPathValue {
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListPropertiesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
 }
 
-func (s ListPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -3844,11 +3842,11 @@ func (CreatePropertyRequestPathSelectorPropertyMetadataSyncing) FieldPath() *Cre
 	}
 }
 
-func (s CreatePropertyRequestPathSelectorPropertyMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreatePropertyRequest_FieldSubPathValue {
+func (s CreatePropertyRequestPathSelectorPropertyMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreatePropertyRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
 }
 
-func (s CreatePropertyRequestPathSelectorPropertyMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+func (s CreatePropertyRequestPathSelectorPropertyMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4923,11 +4921,11 @@ func (UpdatePropertyRequestPathSelectorPropertyMetadataSyncing) FieldPath() *Upd
 	}
 }
 
-func (s UpdatePropertyRequestPathSelectorPropertyMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathValue {
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
 }
 
-func (s UpdatePropertyRequestPathSelectorPropertyMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6026,11 +6024,11 @@ func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncing) Field
 	}
 }
 
-func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathValue {
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
 }
 
-func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -7119,11 +7117,11 @@ func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncing) Fiel
 	}
 }
 
-func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdatePropertyRequestCAS_FieldSubPathValue {
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdatePropertyRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 

@@ -94,7 +94,7 @@ func (c *AgentChange) GetAgent() *Agent {
 	return nil
 }
 
-func (c *AgentChange) GetResource() gotenresource.Resource {
+func (c *AgentChange) GetRawResource() gotenresource.Resource {
 	return c.GetAgent()
 }
 

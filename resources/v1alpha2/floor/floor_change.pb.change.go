@@ -94,7 +94,7 @@ func (c *FloorChange) GetFloor() *Floor {
 	return nil
 }
 
-func (c *FloorChange) GetResource() gotenresource.Resource {
+func (c *FloorChange) GetRawResource() gotenresource.Resource {
 	return c.GetFloor()
 }
 

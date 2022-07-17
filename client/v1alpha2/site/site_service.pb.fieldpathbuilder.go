@@ -7,10 +7,9 @@ package site_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -25,10 +24,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
@@ -990,11 +988,11 @@ func (BatchGetSitesResponsePathSelectorSitesMetadataSyncing) FieldPath() *BatchG
 	}
 }
 
-func (s BatchGetSitesResponsePathSelectorSitesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetSitesResponse_FieldSubPathValue {
+func (s BatchGetSitesResponsePathSelectorSitesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetSitesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetSitesResponse_FieldSubPathValue)
 }
 
-func (s BatchGetSitesResponsePathSelectorSitesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetSitesResponse_FieldSubPathArrayOfValues {
+func (s BatchGetSitesResponsePathSelectorSitesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetSitesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetSitesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2022,11 +2020,11 @@ func (ListSitesResponsePathSelectorSitesMetadataSyncing) FieldPath() *ListSitesR
 	}
 }
 
-func (s ListSitesResponsePathSelectorSitesMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListSitesResponse_FieldSubPathValue {
+func (s ListSitesResponsePathSelectorSitesMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListSitesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListSitesResponse_FieldSubPathValue)
 }
 
-func (s ListSitesResponsePathSelectorSitesMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListSitesResponse_FieldSubPathArrayOfValues {
+func (s ListSitesResponsePathSelectorSitesMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListSitesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListSitesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -3430,11 +3428,11 @@ func (CreateSiteRequestPathSelectorSiteMetadataSyncing) FieldPath() *CreateSiteR
 	}
 }
 
-func (s CreateSiteRequestPathSelectorSiteMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreateSiteRequest_FieldSubPathValue {
+func (s CreateSiteRequestPathSelectorSiteMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreateSiteRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateSiteRequest_FieldSubPathValue)
 }
 
-func (s CreateSiteRequestPathSelectorSiteMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreateSiteRequest_FieldSubPathArrayOfValues {
+func (s CreateSiteRequestPathSelectorSiteMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreateSiteRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateSiteRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4316,11 +4314,11 @@ func (UpdateSiteRequestPathSelectorSiteMetadataSyncing) FieldPath() *UpdateSiteR
 	}
 }
 
-func (s UpdateSiteRequestPathSelectorSiteMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathValue {
+func (s UpdateSiteRequestPathSelectorSiteMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateSiteRequest_FieldSubPathValue)
 }
 
-func (s UpdateSiteRequestPathSelectorSiteMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathArrayOfValues {
+func (s UpdateSiteRequestPathSelectorSiteMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateSiteRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5226,11 +5224,11 @@ func (UpdateSiteRequestPathSelectorCasConditionalStateMetadataSyncing) FieldPath
 	}
 }
 
-func (s UpdateSiteRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathValue {
+func (s UpdateSiteRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateSiteRequest_FieldSubPathValue)
 }
 
-func (s UpdateSiteRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathArrayOfValues {
+func (s UpdateSiteRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateSiteRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateSiteRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6126,11 +6124,11 @@ func (UpdateSiteRequest_CASPathSelectorConditionalStateMetadataSyncing) FieldPat
 	}
 }
 
-func (s UpdateSiteRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateSiteRequestCAS_FieldSubPathValue {
+func (s UpdateSiteRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateSiteRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateSiteRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateSiteRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateSiteRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateSiteRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateSiteRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateSiteRequestCAS_FieldSubPathArrayOfValues)
 }
 

@@ -7,10 +7,9 @@ package floor
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	building "github.com/cloudwan/workplace-sdk/resources/v1alpha2/building"
 	workplace_common "github.com/cloudwan/workplace-sdk/resources/v1alpha2/common"
@@ -22,10 +21,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &timestamp.Timestamp{}
 	_ = &latlng.LatLng{}
@@ -1343,11 +1341,11 @@ func (FloorPathSelectorMetadataSyncing) FieldPath() *Floor_FieldSubPath {
 	}
 }
 
-func (s FloorPathSelectorMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *Floor_FieldSubPathValue {
+func (s FloorPathSelectorMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *Floor_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*Floor_FieldSubPathValue)
 }
 
-func (s FloorPathSelectorMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *Floor_FieldSubPathArrayOfValues {
+func (s FloorPathSelectorMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *Floor_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*Floor_FieldSubPathArrayOfValues)
 }
 

@@ -7,10 +7,9 @@ package vendor_connection_client
 // proto imports
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
+	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
-	policy "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/policy"
-	syncing_meta "github.com/cloudwan/edgelq-sdk/meta/multi_region/proto/syncing_meta"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
 	view "github.com/cloudwan/goten-sdk/runtime/api/view"
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
@@ -25,10 +24,9 @@ import (
 // make sure we're using proto imports
 var (
 	_ = &ntt_meta.Meta{}
+	_ = &multi_region_policy.MultiRegionPolicy{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
-	_ = &policy.Policy{}
-	_ = &syncing_meta.SyncingMeta{}
 	_ = &meta_service.Service{}
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
@@ -1053,11 +1051,11 @@ func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSync
 	}
 }
 
-func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
 }
 
-func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2148,11 +2146,11 @@ func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing)
 	}
 }
 
-func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *ListVendorConnectionsResponse_FieldSubPathValue {
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *ListVendorConnectionsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
 }
 
-func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -3619,11 +3617,11 @@ func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) 
 	}
 }
 
-func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *CreateVendorConnectionRequest_FieldSubPathValue {
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *CreateVendorConnectionRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
 }
 
-func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4568,11 +4566,11 @@ func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) 
 	}
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathValue {
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5541,11 +5539,11 @@ func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncin
 	}
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathValue {
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6504,11 +6502,11 @@ func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSynci
 	}
 }
 
-func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *syncing_meta.SyncingMeta) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyncing) WithValue(value *ntt_meta.SyncingMeta) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*syncing_meta.SyncingMeta) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyncing) WithArrayOfValues(values []*ntt_meta.SyncingMeta) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
