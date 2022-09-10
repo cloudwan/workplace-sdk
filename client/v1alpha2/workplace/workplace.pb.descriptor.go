@@ -117,6 +117,15 @@ func (d *WorkplaceDescriptor) AllApiDescriptors() []gotenclient.ApiDescriptor {
 	}
 }
 
+func (d *WorkplaceDescriptor) AllImportedServiceInfos() []gotenclient.ServiceImportInfo {
+	return []gotenclient.ServiceImportInfo{
+		{
+			Domain:  "iam.edgelq.com",
+			Version: "v1alpha2",
+		},
+	}
+}
+
 func GetWorkplaceDescriptor() *WorkplaceDescriptor {
 	return workplaceDescriptor
 }

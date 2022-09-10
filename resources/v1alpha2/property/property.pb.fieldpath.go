@@ -314,6 +314,10 @@ func (fp *Property_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == Property_FieldPathSelectorDisplayName
 }
 
+func (fp *Property_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Property_FieldTerminalPath) WithIValue(value interface{}) Property_FieldPathValue {
 	switch fp.selector {
 	case Property_FieldPathSelectorName:
@@ -491,6 +495,12 @@ func (fps *Property_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Property_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Property_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Property_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Property_FieldSubPath) WithIValue(value interface{}) Property_FieldPathValue {
@@ -1156,6 +1166,10 @@ func (fp *PropertySitePlacement_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == PropertySitePlacement_FieldPathSelectorZone
 }
 
+func (fp *PropertySitePlacement_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *PropertySitePlacement_FieldTerminalPath) WithIValue(value interface{}) PropertySitePlacement_FieldPathValue {
 	switch fp.selector {
 	case PropertySitePlacement_FieldPathSelectorSite:
@@ -1696,6 +1710,10 @@ func (fp *PropertyMetricOverride_FieldTerminalPath) ClearValueRaw(item proto.Mes
 func (fp *PropertyMetricOverride_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == PropertyMetricOverride_FieldPathSelectorPropertyName ||
 		fp.selector == PropertyMetricOverride_FieldPathSelectorUnit
+}
+
+func (fp *PropertyMetricOverride_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *PropertyMetricOverride_FieldTerminalPath) WithIValue(value interface{}) PropertyMetricOverride_FieldPathValue {

@@ -212,6 +212,10 @@ func (fp *BBox_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == BBox_FieldPathSelectorNorthEast
 }
 
+func (fp *BBox_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BBox_FieldTerminalPath) WithIValue(value interface{}) BBox_FieldPathValue {
 	switch fp.selector {
 	case BBox_FieldPathSelectorSouthWest:
@@ -596,6 +600,10 @@ func (fp *Polygon_FieldTerminalPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fp *Polygon_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == Polygon_FieldPathSelectorCoordinates
+}
+
+func (fp *Polygon_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *Polygon_FieldTerminalPath) WithIValue(value interface{}) Polygon_FieldPathValue {
@@ -1031,6 +1039,10 @@ func (fp *Geometry_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == Geometry_FieldPathSelectorPanning
 }
 
+func (fp *Geometry_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Geometry_FieldTerminalPath) WithIValue(value interface{}) Geometry_FieldPathValue {
 	switch fp.selector {
 	case Geometry_FieldPathSelectorCenter:
@@ -1174,6 +1186,12 @@ func (fps *Geometry_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Geometry_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Geometry_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Geometry_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Geometry_FieldSubPath) WithIValue(value interface{}) Geometry_FieldPathValue {
@@ -1700,6 +1718,10 @@ func (fp *StreetLocation_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == StreetLocation_FieldPathSelectorStreetCoordinates
 }
 
+func (fp *StreetLocation_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *StreetLocation_FieldTerminalPath) WithIValue(value interface{}) StreetLocation_FieldPathValue {
 	switch fp.selector {
 	case StreetLocation_FieldPathSelectorStreetAddress:
@@ -2103,6 +2125,10 @@ func (fp *VendorMapping_FieldTerminalPath) ClearValueRaw(item proto.Message) {
 func (fp *VendorMapping_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == VendorMapping_FieldPathSelectorVendor ||
 		fp.selector == VendorMapping_FieldPathSelectorId
+}
+
+func (fp *VendorMapping_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *VendorMapping_FieldTerminalPath) WithIValue(value interface{}) VendorMapping_FieldPathValue {
@@ -2516,6 +2542,10 @@ func (fp *Point_FieldTerminalPath) ClearValueRaw(item proto.Message) {
 func (fp *Point_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == Point_FieldPathSelectorX ||
 		fp.selector == Point_FieldPathSelectorY
+}
+
+func (fp *Point_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *Point_FieldTerminalPath) WithIValue(value interface{}) Point_FieldPathValue {
@@ -2945,6 +2975,10 @@ func (fp *ReferencePoint_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ReferencePoint_FieldPathSelectorLatLng
 }
 
+func (fp *ReferencePoint_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ReferencePoint_FieldTerminalPath) WithIValue(value interface{}) ReferencePoint_FieldPathValue {
 	switch fp.selector {
 	case ReferencePoint_FieldPathSelectorPoint:
@@ -3067,6 +3101,12 @@ func (fps *ReferencePoint_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *ReferencePoint_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ReferencePoint_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ReferencePoint_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ReferencePoint_FieldSubPath) WithIValue(value interface{}) ReferencePoint_FieldPathValue {

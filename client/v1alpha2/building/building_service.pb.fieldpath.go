@@ -236,6 +236,10 @@ func (fp *GetBuildingRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == GetBuildingRequest_FieldPathSelectorView
 }
 
+func (fp *GetBuildingRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *GetBuildingRequest_FieldTerminalPath) WithIValue(value interface{}) GetBuildingRequest_FieldPathValue {
 	switch fp.selector {
 	case GetBuildingRequest_FieldPathSelectorName:
@@ -698,6 +702,10 @@ func (fp *BatchGetBuildingsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == BatchGetBuildingsRequest_FieldPathSelectorView
 }
 
+func (fp *BatchGetBuildingsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BatchGetBuildingsRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetBuildingsRequest_FieldPathValue {
 	switch fp.selector {
 	case BatchGetBuildingsRequest_FieldPathSelectorNames:
@@ -1143,6 +1151,10 @@ func (fp *BatchGetBuildingsResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == BatchGetBuildingsResponse_FieldPathSelectorMissing
 }
 
+func (fp *BatchGetBuildingsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BatchGetBuildingsResponse_FieldTerminalPath) WithIValue(value interface{}) BatchGetBuildingsResponse_FieldPathValue {
 	switch fp.selector {
 	case BatchGetBuildingsResponse_FieldPathSelectorBuildings:
@@ -1273,6 +1285,12 @@ func (fps *BatchGetBuildingsResponse_FieldSubPath) ClearValueRaw(item proto.Mess
 // IsLeaf - whether field path is holds simple value
 func (fps *BatchGetBuildingsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *BatchGetBuildingsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&BatchGetBuildingsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *BatchGetBuildingsResponse_FieldSubPath) WithIValue(value interface{}) BatchGetBuildingsResponse_FieldPathValue {
@@ -1829,6 +1847,10 @@ func (fp *ListBuildingsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListBuildingsRequest_FieldPathSelectorFilter ||
 		fp.selector == ListBuildingsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == ListBuildingsRequest_FieldPathSelectorView
+}
+
+func (fp *ListBuildingsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *ListBuildingsRequest_FieldTerminalPath) WithIValue(value interface{}) ListBuildingsRequest_FieldPathValue {
@@ -2392,6 +2414,10 @@ func (fp *ListBuildingsResponse_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListBuildingsResponse_FieldPathSelectorNextPageToken
 }
 
+func (fp *ListBuildingsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ListBuildingsResponse_FieldTerminalPath) WithIValue(value interface{}) ListBuildingsResponse_FieldPathValue {
 	switch fp.selector {
 	case ListBuildingsResponse_FieldPathSelectorBuildings:
@@ -2524,6 +2550,12 @@ func (fps *ListBuildingsResponse_FieldSubPath) ClearValueRaw(item proto.Message)
 // IsLeaf - whether field path is holds simple value
 func (fps *ListBuildingsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ListBuildingsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ListBuildingsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ListBuildingsResponse_FieldSubPath) WithIValue(value interface{}) ListBuildingsResponse_FieldPathValue {
@@ -3029,6 +3061,10 @@ func (fp *WatchBuildingRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchBuildingRequest_FieldPathSelectorView
 }
 
+func (fp *WatchBuildingRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchBuildingRequest_FieldTerminalPath) WithIValue(value interface{}) WatchBuildingRequest_FieldPathValue {
 	switch fp.selector {
 	case WatchBuildingRequest_FieldPathSelectorName:
@@ -3458,6 +3494,10 @@ func (fp *WatchBuildingResponse_FieldTerminalPath) ClearValueRaw(item proto.Mess
 // IsLeaf - whether field path is holds simple value
 func (fp *WatchBuildingResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == WatchBuildingResponse_FieldPathSelectorChange
+}
+
+func (fp *WatchBuildingResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *WatchBuildingResponse_FieldTerminalPath) WithIValue(value interface{}) WatchBuildingResponse_FieldPathValue {
@@ -3962,6 +4002,10 @@ func (fp *WatchBuildingsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchBuildingsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == WatchBuildingsRequest_FieldPathSelectorView ||
 		fp.selector == WatchBuildingsRequest_FieldPathSelectorMaxChunkSize
+}
+
+func (fp *WatchBuildingsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *WatchBuildingsRequest_FieldTerminalPath) WithIValue(value interface{}) WatchBuildingsRequest_FieldPathValue {
@@ -4662,6 +4706,10 @@ func (fp *WatchBuildingsResponse_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchBuildingsResponse_FieldPathSelectorIsHardReset
 }
 
+func (fp *WatchBuildingsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchBuildingsResponse_FieldTerminalPath) WithIValue(value interface{}) WatchBuildingsResponse_FieldPathValue {
 	switch fp.selector {
 	case WatchBuildingsResponse_FieldPathSelectorBuildingChanges:
@@ -4806,6 +4854,12 @@ func (fps *WatchBuildingsResponse_FieldSubPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fps *WatchBuildingsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *WatchBuildingsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&WatchBuildingsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *WatchBuildingsResponse_FieldSubPath) WithIValue(value interface{}) WatchBuildingsResponse_FieldPathValue {
@@ -5401,6 +5455,10 @@ func (fp *WatchBuildingsResponsePageTokenChange_FieldTerminalPath) IsLeaf() bool
 		fp.selector == WatchBuildingsResponsePageTokenChange_FieldPathSelectorNextPageToken
 }
 
+func (fp *WatchBuildingsResponsePageTokenChange_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchBuildingsResponsePageTokenChange_FieldTerminalPath) WithIValue(value interface{}) WatchBuildingsResponsePageTokenChange_FieldPathValue {
 	switch fp.selector {
 	case WatchBuildingsResponsePageTokenChange_FieldPathSelectorPrevPageToken:
@@ -5812,6 +5870,10 @@ func (fp *CreateBuildingRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == CreateBuildingRequest_FieldPathSelectorParent
 }
 
+func (fp *CreateBuildingRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *CreateBuildingRequest_FieldTerminalPath) WithIValue(value interface{}) CreateBuildingRequest_FieldPathValue {
 	switch fp.selector {
 	case CreateBuildingRequest_FieldPathSelectorParent:
@@ -5934,6 +5996,12 @@ func (fps *CreateBuildingRequest_FieldSubPath) ClearValueRaw(item proto.Message)
 // IsLeaf - whether field path is holds simple value
 func (fps *CreateBuildingRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *CreateBuildingRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&CreateBuildingRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *CreateBuildingRequest_FieldSubPath) WithIValue(value interface{}) CreateBuildingRequest_FieldPathValue {
@@ -6452,6 +6520,10 @@ func (fp *UpdateBuildingRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == UpdateBuildingRequest_FieldPathSelectorUpdateMask
 }
 
+func (fp *UpdateBuildingRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *UpdateBuildingRequest_FieldTerminalPath) WithIValue(value interface{}) UpdateBuildingRequest_FieldPathValue {
 	switch fp.selector {
 	case UpdateBuildingRequest_FieldPathSelectorBuilding:
@@ -6591,6 +6663,12 @@ func (fps *UpdateBuildingRequest_FieldSubPath) ClearValueRaw(item proto.Message)
 // IsLeaf - whether field path is holds simple value
 func (fps *UpdateBuildingRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *UpdateBuildingRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&UpdateBuildingRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *UpdateBuildingRequest_FieldSubPath) WithIValue(value interface{}) UpdateBuildingRequest_FieldPathValue {
@@ -7104,6 +7182,10 @@ func (fp *UpdateBuildingRequestCAS_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == UpdateBuildingRequestCAS_FieldPathSelectorFieldMask
 }
 
+func (fp *UpdateBuildingRequestCAS_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *UpdateBuildingRequestCAS_FieldTerminalPath) WithIValue(value interface{}) UpdateBuildingRequestCAS_FieldPathValue {
 	switch fp.selector {
 	case UpdateBuildingRequestCAS_FieldPathSelectorConditionalState:
@@ -7226,6 +7308,12 @@ func (fps *UpdateBuildingRequestCAS_FieldSubPath) ClearValueRaw(item proto.Messa
 // IsLeaf - whether field path is holds simple value
 func (fps *UpdateBuildingRequestCAS_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *UpdateBuildingRequestCAS_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&UpdateBuildingRequestCAS_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *UpdateBuildingRequestCAS_FieldSubPath) WithIValue(value interface{}) UpdateBuildingRequestCAS_FieldPathValue {
@@ -7678,6 +7766,10 @@ func (fp *DeleteBuildingRequest_FieldTerminalPath) ClearValueRaw(item proto.Mess
 // IsLeaf - whether field path is holds simple value
 func (fp *DeleteBuildingRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == DeleteBuildingRequest_FieldPathSelectorName
+}
+
+func (fp *DeleteBuildingRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *DeleteBuildingRequest_FieldTerminalPath) WithIValue(value interface{}) DeleteBuildingRequest_FieldPathValue {

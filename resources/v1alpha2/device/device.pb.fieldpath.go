@@ -369,6 +369,10 @@ func (fp *Device_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == Device_FieldPathSelectorOwnerAgent
 }
 
+func (fp *Device_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Device_FieldTerminalPath) WithIValue(value interface{}) Device_FieldPathValue {
 	switch fp.selector {
 	case Device_FieldPathSelectorName:
@@ -571,6 +575,12 @@ func (fps *Device_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Device_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Device_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Device_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Device_FieldSubPath) WithIValue(value interface{}) Device_FieldPathValue {
@@ -1327,6 +1337,10 @@ func (fp *DeviceSitePlacement_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == DeviceSitePlacement_FieldPathSelectorZone
 }
 
+func (fp *DeviceSitePlacement_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *DeviceSitePlacement_FieldTerminalPath) WithIValue(value interface{}) DeviceSitePlacement_FieldPathValue {
 	switch fp.selector {
 	case DeviceSitePlacement_FieldPathSelectorSite:
@@ -1902,6 +1916,10 @@ func (fp *DeviceVendorInfo_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == DeviceVendorInfo_FieldPathSelectorVendor
 }
 
+func (fp *DeviceVendorInfo_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *DeviceVendorInfo_FieldTerminalPath) WithIValue(value interface{}) DeviceVendorInfo_FieldPathValue {
 	switch fp.selector {
 	case DeviceVendorInfo_FieldPathSelectorVendor:
@@ -2041,6 +2059,12 @@ func (fps *DeviceVendorInfo_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *DeviceVendorInfo_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *DeviceVendorInfo_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&DeviceVendorInfo_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *DeviceVendorInfo_FieldSubPath) WithIValue(value interface{}) DeviceVendorInfo_FieldPathValue {
@@ -2546,6 +2570,10 @@ func (fp *DeviceState_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *DeviceState_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *DeviceState_FieldTerminalPath) WithIValue(value interface{}) DeviceState_FieldPathValue {
 	switch fp.selector {
 	case DeviceState_FieldPathSelectorConnection:
@@ -2664,6 +2692,12 @@ func (fps *DeviceState_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *DeviceState_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *DeviceState_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&DeviceState_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *DeviceState_FieldSubPath) WithIValue(value interface{}) DeviceState_FieldPathValue {
@@ -3113,6 +3147,10 @@ func (fp *DeviceVendorInfoPointGrabInfo_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == DeviceVendorInfoPointGrabInfo_FieldPathSelectorRotation
 }
 
+func (fp *DeviceVendorInfoPointGrabInfo_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *DeviceVendorInfoPointGrabInfo_FieldTerminalPath) WithIValue(value interface{}) DeviceVendorInfoPointGrabInfo_FieldPathValue {
 	switch fp.selector {
 	case DeviceVendorInfoPointGrabInfo_FieldPathSelectorDeviceId:
@@ -3527,6 +3565,10 @@ func (fp *DeviceStateConnection_FieldTerminalPath) ClearValueRaw(item proto.Mess
 func (fp *DeviceStateConnection_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == DeviceStateConnection_FieldPathSelectorStatus ||
 		fp.selector == DeviceStateConnection_FieldPathSelectorStatusSince
+}
+
+func (fp *DeviceStateConnection_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *DeviceStateConnection_FieldTerminalPath) WithIValue(value interface{}) DeviceStateConnection_FieldPathValue {

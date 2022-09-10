@@ -88,6 +88,10 @@ func (AgentPathSelectorMetadata) UpdateTime() AgentPathSelectorMetadataUpdateTim
 	return AgentPathSelectorMetadataUpdateTime{}
 }
 
+func (AgentPathSelectorMetadata) DeleteTime() AgentPathSelectorMetadataDeleteTime {
+	return AgentPathSelectorMetadataDeleteTime{}
+}
+
 func (AgentPathSelectorMetadata) Uuid() AgentPathSelectorMetadataUuid {
 	return AgentPathSelectorMetadataUuid{}
 }
@@ -124,6 +128,10 @@ func (AgentPathSelectorMetadata) Syncing() AgentPathSelectorMetadataSyncing {
 	return AgentPathSelectorMetadataSyncing{}
 }
 
+func (AgentPathSelectorMetadata) Lifecycle() AgentPathSelectorMetadataLifecycle {
+	return AgentPathSelectorMetadataLifecycle{}
+}
+
 type AgentPathSelectorMetadataCreateTime struct{}
 
 func (AgentPathSelectorMetadataCreateTime) FieldPath() *Agent_FieldSubPath {
@@ -155,6 +163,23 @@ func (s AgentPathSelectorMetadataUpdateTime) WithValue(value *timestamp.Timestam
 }
 
 func (s AgentPathSelectorMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *Agent_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
+}
+
+type AgentPathSelectorMetadataDeleteTime struct{}
+
+func (AgentPathSelectorMetadataDeleteTime) FieldPath() *Agent_FieldSubPath {
+	return &Agent_FieldSubPath{
+		selector: Agent_FieldPathSelectorMetadata,
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().DeleteTime().FieldPath(),
+	}
+}
+
+func (s AgentPathSelectorMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *Agent_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
+}
+
+func (s AgentPathSelectorMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *Agent_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
 }
 
@@ -331,20 +356,20 @@ func (s AgentPathSelectorMetadataOwnerReferences) WithItemValue(value *ntt_meta.
 	return s.FieldPath().WithIArrayItemValue(value).(*Agent_FieldSubPathArrayItemValue)
 }
 
-func (AgentPathSelectorMetadataOwnerReferences) ApiVersion() AgentPathSelectorMetadataOwnerReferencesApiVersion {
-	return AgentPathSelectorMetadataOwnerReferencesApiVersion{}
-}
-
 func (AgentPathSelectorMetadataOwnerReferences) Kind() AgentPathSelectorMetadataOwnerReferencesKind {
 	return AgentPathSelectorMetadataOwnerReferencesKind{}
+}
+
+func (AgentPathSelectorMetadataOwnerReferences) Version() AgentPathSelectorMetadataOwnerReferencesVersion {
+	return AgentPathSelectorMetadataOwnerReferencesVersion{}
 }
 
 func (AgentPathSelectorMetadataOwnerReferences) Name() AgentPathSelectorMetadataOwnerReferencesName {
 	return AgentPathSelectorMetadataOwnerReferencesName{}
 }
 
-func (AgentPathSelectorMetadataOwnerReferences) Uid() AgentPathSelectorMetadataOwnerReferencesUid {
-	return AgentPathSelectorMetadataOwnerReferencesUid{}
+func (AgentPathSelectorMetadataOwnerReferences) Region() AgentPathSelectorMetadataOwnerReferencesRegion {
+	return AgentPathSelectorMetadataOwnerReferencesRegion{}
 }
 
 func (AgentPathSelectorMetadataOwnerReferences) Controller() AgentPathSelectorMetadataOwnerReferencesController {
@@ -355,21 +380,8 @@ func (AgentPathSelectorMetadataOwnerReferences) BlockOwnerDeletion() AgentPathSe
 	return AgentPathSelectorMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type AgentPathSelectorMetadataOwnerReferencesApiVersion struct{}
-
-func (AgentPathSelectorMetadataOwnerReferencesApiVersion) FieldPath() *Agent_FieldSubPath {
-	return &Agent_FieldSubPath{
-		selector: Agent_FieldPathSelectorMetadata,
-		subPath:  ntt_meta.NewMetaFieldPathBuilder().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s AgentPathSelectorMetadataOwnerReferencesApiVersion) WithValue(value string) *Agent_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
-}
-
-func (s AgentPathSelectorMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *Agent_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
+func (AgentPathSelectorMetadataOwnerReferences) RequiresOwnerReference() AgentPathSelectorMetadataOwnerReferencesRequiresOwnerReference {
+	return AgentPathSelectorMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type AgentPathSelectorMetadataOwnerReferencesKind struct{}
@@ -386,6 +398,23 @@ func (s AgentPathSelectorMetadataOwnerReferencesKind) WithValue(value string) *A
 }
 
 func (s AgentPathSelectorMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *Agent_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
+}
+
+type AgentPathSelectorMetadataOwnerReferencesVersion struct{}
+
+func (AgentPathSelectorMetadataOwnerReferencesVersion) FieldPath() *Agent_FieldSubPath {
+	return &Agent_FieldSubPath{
+		selector: Agent_FieldPathSelectorMetadata,
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s AgentPathSelectorMetadataOwnerReferencesVersion) WithValue(value string) *Agent_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
+}
+
+func (s AgentPathSelectorMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *Agent_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
 }
 
@@ -406,20 +435,20 @@ func (s AgentPathSelectorMetadataOwnerReferencesName) WithArrayOfValues(values [
 	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
 }
 
-type AgentPathSelectorMetadataOwnerReferencesUid struct{}
+type AgentPathSelectorMetadataOwnerReferencesRegion struct{}
 
-func (AgentPathSelectorMetadataOwnerReferencesUid) FieldPath() *Agent_FieldSubPath {
+func (AgentPathSelectorMetadataOwnerReferencesRegion) FieldPath() *Agent_FieldSubPath {
 	return &Agent_FieldSubPath{
 		selector: Agent_FieldPathSelectorMetadata,
-		subPath:  ntt_meta.NewMetaFieldPathBuilder().OwnerReferences().Uid().FieldPath(),
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s AgentPathSelectorMetadataOwnerReferencesUid) WithValue(value string) *Agent_FieldSubPathValue {
+func (s AgentPathSelectorMetadataOwnerReferencesRegion) WithValue(value string) *Agent_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
 }
 
-func (s AgentPathSelectorMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *Agent_FieldSubPathArrayOfValues {
+func (s AgentPathSelectorMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *Agent_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
 }
 
@@ -454,6 +483,23 @@ func (s AgentPathSelectorMetadataOwnerReferencesBlockOwnerDeletion) WithValue(va
 }
 
 func (s AgentPathSelectorMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *Agent_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
+}
+
+type AgentPathSelectorMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (AgentPathSelectorMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *Agent_FieldSubPath {
+	return &Agent_FieldSubPath{
+		selector: Agent_FieldPathSelectorMetadata,
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s AgentPathSelectorMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *Agent_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
+}
+
+func (s AgentPathSelectorMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *Agent_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
 }
 
@@ -558,4 +604,63 @@ func (s AgentPathSelectorMetadataSyncingRegions) WithArrayOfValues(values [][]st
 
 func (s AgentPathSelectorMetadataSyncingRegions) WithItemValue(value string) *Agent_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*Agent_FieldSubPathArrayItemValue)
+}
+
+type AgentPathSelectorMetadataLifecycle struct{}
+
+func (AgentPathSelectorMetadataLifecycle) FieldPath() *Agent_FieldSubPath {
+	return &Agent_FieldSubPath{
+		selector: Agent_FieldPathSelectorMetadata,
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().Lifecycle().FieldPath(),
+	}
+}
+
+func (s AgentPathSelectorMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *Agent_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
+}
+
+func (s AgentPathSelectorMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *Agent_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
+}
+
+func (AgentPathSelectorMetadataLifecycle) State() AgentPathSelectorMetadataLifecycleState {
+	return AgentPathSelectorMetadataLifecycleState{}
+}
+
+func (AgentPathSelectorMetadataLifecycle) BlockDeletion() AgentPathSelectorMetadataLifecycleBlockDeletion {
+	return AgentPathSelectorMetadataLifecycleBlockDeletion{}
+}
+
+type AgentPathSelectorMetadataLifecycleState struct{}
+
+func (AgentPathSelectorMetadataLifecycleState) FieldPath() *Agent_FieldSubPath {
+	return &Agent_FieldSubPath{
+		selector: Agent_FieldPathSelectorMetadata,
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s AgentPathSelectorMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *Agent_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
+}
+
+func (s AgentPathSelectorMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *Agent_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
+}
+
+type AgentPathSelectorMetadataLifecycleBlockDeletion struct{}
+
+func (AgentPathSelectorMetadataLifecycleBlockDeletion) FieldPath() *Agent_FieldSubPath {
+	return &Agent_FieldSubPath{
+		selector: Agent_FieldPathSelectorMetadata,
+		subPath:  ntt_meta.NewMetaFieldPathBuilder().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s AgentPathSelectorMetadataLifecycleBlockDeletion) WithValue(value bool) *Agent_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*Agent_FieldSubPathValue)
+}
+
+func (s AgentPathSelectorMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *Agent_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*Agent_FieldSubPathArrayOfValues)
 }

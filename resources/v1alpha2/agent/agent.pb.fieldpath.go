@@ -222,6 +222,10 @@ func (fp *Agent_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == Agent_FieldPathSelectorName
 }
 
+func (fp *Agent_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Agent_FieldTerminalPath) WithIValue(value interface{}) Agent_FieldPathValue {
 	switch fp.selector {
 	case Agent_FieldPathSelectorName:
@@ -344,6 +348,12 @@ func (fps *Agent_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Agent_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Agent_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Agent_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Agent_FieldSubPath) WithIValue(value interface{}) Agent_FieldPathValue {

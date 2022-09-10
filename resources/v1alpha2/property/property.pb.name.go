@@ -352,6 +352,35 @@ func (name *Name) GetSegments() gotenresource.NameSegments {
 	})
 }
 
+func (name *Name) GetIParentName() gotenresource.Name {
+	if name == nil {
+		return (*ParentName)(nil)
+	}
+	return &name.ParentName
+}
+
+func (name *Name) GetIUnderlyingParentName() gotenresource.Name {
+	if parentName := name.GetSiteName(); parentName != nil {
+		return parentName
+	}
+	if parentName := name.GetBuildingName(); parentName != nil {
+		return parentName
+	}
+	if parentName := name.GetFloorName(); parentName != nil {
+		return parentName
+	}
+	if parentName := name.GetAreaName(); parentName != nil {
+		return parentName
+	}
+	if parentName := name.GetZoneName(); parentName != nil {
+		return parentName
+	}
+	if parentName := name.GetDeviceName(); parentName != nil {
+		return parentName
+	}
+	return nil
+}
+
 // implement methods required by protobuf-go library for string-struct conversion
 
 func (name *Name) ProtoString() (string, error) {
@@ -610,6 +639,20 @@ func (ref *Reference) GetIdParts() map[string]string {
 func (ref *Reference) GetSegments() gotenresource.NameSegments {
 	if ref != nil {
 		return ref.Name.GetSegments()
+	}
+	return nil
+}
+
+func (ref *Reference) GetIParentName() gotenresource.Name {
+	if ref == nil {
+		return (*ParentName)(nil)
+	}
+	return ref.Name.GetIParentName()
+}
+
+func (ref *Reference) GetIUnderlyingParentName() gotenresource.Name {
+	if ref != nil {
+		return ref.Name.GetIUnderlyingParentName()
 	}
 	return nil
 }

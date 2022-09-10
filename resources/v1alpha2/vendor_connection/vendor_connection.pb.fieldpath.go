@@ -180,6 +180,10 @@ func (fp *PointGrab_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *PointGrab_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *PointGrab_FieldTerminalPath) WithIValue(value interface{}) PointGrab_FieldPathValue {
 	switch fp.selector {
 	default:
@@ -505,6 +509,10 @@ func (fp *PointGrabTelemetry_FieldTerminalPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fp *PointGrabTelemetry_FieldTerminalPath) IsLeaf() bool {
 	return false
+}
+
+func (fp *PointGrabTelemetry_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *PointGrabTelemetry_FieldTerminalPath) WithIValue(value interface{}) PointGrabTelemetry_FieldPathValue {
@@ -950,6 +958,10 @@ func (fp *VendorConnection_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == VendorConnection_FieldPathSelectorVendor
 }
 
+func (fp *VendorConnection_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnection_FieldTerminalPath) WithIValue(value interface{}) VendorConnection_FieldPathValue {
 	switch fp.selector {
 	case VendorConnection_FieldPathSelectorName:
@@ -1114,6 +1126,12 @@ func (fps *VendorConnection_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *VendorConnection_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *VendorConnection_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&VendorConnection_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *VendorConnection_FieldSubPath) WithIValue(value interface{}) VendorConnection_FieldPathValue {
@@ -1710,6 +1728,10 @@ func (fp *VendorConnectionSpec_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *VendorConnectionSpec_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionSpec_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionSpec_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionSpec_FieldPathSelectorPointGrab:
@@ -1828,6 +1850,12 @@ func (fps *VendorConnectionSpec_FieldSubPath) ClearValueRaw(item proto.Message) 
 // IsLeaf - whether field path is holds simple value
 func (fps *VendorConnectionSpec_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *VendorConnectionSpec_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&VendorConnectionSpec_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *VendorConnectionSpec_FieldSubPath) WithIValue(value interface{}) VendorConnectionSpec_FieldPathValue {
@@ -2275,6 +2303,10 @@ func (fp *VendorConnectionInfo_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *VendorConnectionInfo_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionInfo_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionInfo_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionInfo_FieldPathSelectorInfo:
@@ -2393,6 +2425,12 @@ func (fps *VendorConnectionInfo_FieldSubPath) ClearValueRaw(item proto.Message) 
 // IsLeaf - whether field path is holds simple value
 func (fps *VendorConnectionInfo_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *VendorConnectionInfo_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&VendorConnectionInfo_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *VendorConnectionInfo_FieldSubPath) WithIValue(value interface{}) VendorConnectionInfo_FieldPathValue {
@@ -2875,6 +2913,10 @@ func (fp *VendorConnectionSpecPointGrabSpec_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == VendorConnectionSpecPointGrabSpec_FieldPathSelectorEndpoint
 }
 
+func (fp *VendorConnectionSpecPointGrabSpec_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionSpecPointGrabSpec_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionSpecPointGrabSpec_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionSpecPointGrabSpec_FieldPathSelectorEndpoint:
@@ -3014,6 +3056,12 @@ func (fps *VendorConnectionSpecPointGrabSpec_FieldSubPath) ClearValueRaw(item pr
 // IsLeaf - whether field path is holds simple value
 func (fps *VendorConnectionSpecPointGrabSpec_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *VendorConnectionSpecPointGrabSpec_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&VendorConnectionSpecPointGrabSpec_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *VendorConnectionSpecPointGrabSpec_FieldSubPath) WithIValue(value interface{}) VendorConnectionSpecPointGrabSpec_FieldPathValue {
@@ -3535,6 +3583,10 @@ func (fp *VendorConnectionSpecPointGrabSpecAuth_FieldTerminalPath) IsLeaf() bool
 		fp.selector == VendorConnectionSpecPointGrabSpecAuth_FieldPathSelectorTokenEndpoint
 }
 
+func (fp *VendorConnectionSpecPointGrabSpecAuth_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionSpecPointGrabSpecAuth_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionSpecPointGrabSpecAuth_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionSpecPointGrabSpecAuth_FieldPathSelectorApplication:
@@ -3974,6 +4026,10 @@ func (fp *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldTerminalPath) IsLea
 	return false
 }
 
+func (fp *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionSpecPointGrabSpecCallbackSpec_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionSpecPointGrabSpecCallbackSpec_FieldPathSelectorAuthToken:
@@ -4092,6 +4148,12 @@ func (fps *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldSubPath) ClearValu
 // IsLeaf - whether field path is holds simple value
 func (fps *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&VendorConnectionSpecPointGrabSpecCallbackSpec_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldSubPath) WithIValue(value interface{}) VendorConnectionSpecPointGrabSpecCallbackSpec_FieldPathValue {
@@ -4541,6 +4603,10 @@ func (fp *VendorConnectionSpecPointGrabSpecCallbackSpecAuthToken_FieldTerminalPa
 		fp.selector == VendorConnectionSpecPointGrabSpecCallbackSpecAuthToken_FieldPathSelectorTokenValue
 }
 
+func (fp *VendorConnectionSpecPointGrabSpecCallbackSpecAuthToken_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionSpecPointGrabSpecCallbackSpecAuthToken_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionSpecPointGrabSpecCallbackSpecAuthToken_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionSpecPointGrabSpecCallbackSpecAuthToken_FieldPathSelectorTokenHeader:
@@ -4952,6 +5018,10 @@ func (fp *VendorConnectionInfoPointGrabInfo_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *VendorConnectionInfoPointGrabInfo_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *VendorConnectionInfoPointGrabInfo_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionInfoPointGrabInfo_FieldPathValue {
 	switch fp.selector {
 	case VendorConnectionInfoPointGrabInfo_FieldPathSelectorTelemetrySubscriptions:
@@ -5076,6 +5146,12 @@ func (fps *VendorConnectionInfoPointGrabInfo_FieldSubPath) ClearValueRaw(item pr
 // IsLeaf - whether field path is holds simple value
 func (fps *VendorConnectionInfoPointGrabInfo_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *VendorConnectionInfoPointGrabInfo_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&VendorConnectionInfoPointGrabInfo_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *VendorConnectionInfoPointGrabInfo_FieldSubPath) WithIValue(value interface{}) VendorConnectionInfoPointGrabInfo_FieldPathValue {
@@ -5527,6 +5603,10 @@ func (fp *VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldTerminalPa
 func (fp *VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldPathSelectorSubscriptionId ||
 		fp.selector == VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldPathSelectorNotificationType
+}
+
+func (fp *VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldTerminalPath) WithIValue(value interface{}) VendorConnectionInfoPointGrabInfoTelemetrySubscription_FieldPathValue {

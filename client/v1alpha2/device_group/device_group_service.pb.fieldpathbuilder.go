@@ -268,6 +268,10 @@ func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) UpdateTime()
 	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUpdateTime{}
 }
 
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) DeleteTime() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime{}
+}
+
 func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) Uuid() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUuid {
 	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUuid{}
 }
@@ -304,6 +308,10 @@ func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) Syncing() Ba
 	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataSyncing{}
 }
 
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) Lifecycle() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle{}
+}
+
 type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataCreateTime struct{}
 
 func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataCreateTime) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
@@ -335,6 +343,23 @@ func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUpdateTime) 
 }
 
 func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime struct{}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+	return &BatchGetDeviceGroupsResponse_FieldSubPath{
+		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -511,20 +536,20 @@ func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferen
 	return s.FieldPath().WithIArrayItemValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayItemValue)
 }
 
-func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) ApiVersion() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion {
-	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion{}
-}
-
 func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Kind() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind {
 	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind{}
+}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Version() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion{}
 }
 
 func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Name() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesName {
 	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesName{}
 }
 
-func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Uid() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid {
-	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid{}
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Region() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion{}
 }
 
 func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Controller() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesController {
@@ -535,21 +560,8 @@ func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReference
 	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion struct{}
-
-func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
-	return &BatchGetDeviceGroupsResponse_FieldSubPath{
-		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion) WithValue(value string) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
-}
-
-func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) RequiresOwnerReference() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind struct{}
@@ -566,6 +578,23 @@ func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferen
 }
 
 func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion struct{}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+	return &BatchGetDeviceGroupsResponse_FieldSubPath{
+		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion) WithValue(value string) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -586,20 +615,20 @@ func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferen
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
-type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid struct{}
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion struct{}
 
-func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
 	return &BatchGetDeviceGroupsResponse_FieldSubPath{
 		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid) WithValue(value string) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion) WithValue(value string) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
 }
 
-func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -634,6 +663,23 @@ func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferen
 }
 
 func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+	return &BatchGetDeviceGroupsResponse_FieldSubPath{
+		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -738,6 +784,65 @@ func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataSyncingRegio
 
 func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataSyncingRegions) WithItemValue(value string) *BatchGetDeviceGroupsResponse_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayItemValue)
+}
+
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle struct{}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+	return &BatchGetDeviceGroupsResponse_FieldSubPath{
+		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) State() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState{}
+}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) BlockDeletion() BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion {
+	return BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion{}
+}
+
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState struct{}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+	return &BatchGetDeviceGroupsResponse_FieldSubPath{
+		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion struct{}
+
+func (BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion) FieldPath() *BatchGetDeviceGroupsResponse_FieldSubPath {
+	return &BatchGetDeviceGroupsResponse_FieldSubPath{
+		selector: BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion) WithValue(value bool) *BatchGetDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
 type BatchGetDeviceGroupsResponsePathSelectorMissing struct{}
@@ -1002,6 +1107,10 @@ func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) UpdateTime() Lis
 	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUpdateTime{}
 }
 
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) DeleteTime() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime{}
+}
+
 func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) Uuid() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUuid {
 	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUuid{}
 }
@@ -1038,6 +1147,10 @@ func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) Syncing() ListDe
 	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataSyncing{}
 }
 
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadata) Lifecycle() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle{}
+}
+
 type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataCreateTime struct{}
 
 func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataCreateTime) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
@@ -1069,6 +1182,23 @@ func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUpdateTime) With
 }
 
 func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime struct{}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+	return &ListDeviceGroupsResponse_FieldSubPath{
+		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *ListDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1245,20 +1375,20 @@ func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences)
 	return s.FieldPath().WithIArrayItemValue(value).(*ListDeviceGroupsResponse_FieldSubPathArrayItemValue)
 }
 
-func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) ApiVersion() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion {
-	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion{}
-}
-
 func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Kind() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind {
 	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind{}
+}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Version() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion{}
 }
 
 func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Name() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesName {
 	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesName{}
 }
 
-func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Uid() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid {
-	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid{}
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Region() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion{}
 }
 
 func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) Controller() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesController {
@@ -1269,21 +1399,8 @@ func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) B
 	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion struct{}
-
-func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
-	return &ListDeviceGroupsResponse_FieldSubPath{
-		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion) WithValue(value string) *ListDeviceGroupsResponse_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
-}
-
-func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferences) RequiresOwnerReference() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind struct{}
@@ -1300,6 +1417,23 @@ func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesK
 }
 
 func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion struct{}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+	return &ListDeviceGroupsResponse_FieldSubPath{
+		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion) WithValue(value string) *ListDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1320,20 +1454,20 @@ func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesN
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
-type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid struct{}
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion struct{}
 
-func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
 	return &ListDeviceGroupsResponse_FieldSubPath{
 		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid) WithValue(value string) *ListDeviceGroupsResponse_FieldSubPathValue {
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion) WithValue(value string) *ListDeviceGroupsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
 }
 
-func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1368,6 +1502,23 @@ func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesB
 }
 
 func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+	return &ListDeviceGroupsResponse_FieldSubPath{
+		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *ListDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1472,6 +1623,65 @@ func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataSyncingRegions) 
 
 func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataSyncingRegions) WithItemValue(value string) *ListDeviceGroupsResponse_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*ListDeviceGroupsResponse_FieldSubPathArrayItemValue)
+}
+
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle struct{}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+	return &ListDeviceGroupsResponse_FieldSubPath{
+		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *ListDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) State() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState{}
+}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycle) BlockDeletion() ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion {
+	return ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion{}
+}
+
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState struct{}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+	return &ListDeviceGroupsResponse_FieldSubPath{
+		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *ListDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion struct{}
+
+func (ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion) FieldPath() *ListDeviceGroupsResponse_FieldSubPath {
+	return &ListDeviceGroupsResponse_FieldSubPath{
+		selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion) WithValue(value bool) *ListDeviceGroupsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDeviceGroupsResponse_FieldSubPathValue)
+}
+
+func (s ListDeviceGroupsResponsePathSelectorDeviceGroupsMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *ListDeviceGroupsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDeviceGroupsResponse_FieldSubPathArrayOfValues)
 }
 
 type ListDeviceGroupsResponsePathSelectorPrevPageToken struct{}
@@ -2112,6 +2322,10 @@ func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadata) UpdateTime() Crea
 	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataUpdateTime{}
 }
 
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadata) DeleteTime() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime{}
+}
+
 func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadata) Uuid() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataUuid {
 	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataUuid{}
 }
@@ -2148,6 +2362,10 @@ func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadata) Syncing() CreateD
 	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataSyncing{}
 }
 
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadata) Lifecycle() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle{}
+}
+
 type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataCreateTime struct{}
 
 func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataCreateTime) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
@@ -2179,6 +2397,23 @@ func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataUpdateTime) WithV
 }
 
 func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime struct{}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+	return &CreateDeviceGroupRequest_FieldSubPath{
+		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *CreateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -2355,20 +2590,20 @@ func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) 
 	return s.FieldPath().WithIArrayItemValue(value).(*CreateDeviceGroupRequest_FieldSubPathArrayItemValue)
 }
 
-func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) ApiVersion() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion {
-	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion{}
-}
-
 func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Kind() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind {
 	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind{}
+}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Version() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion{}
 }
 
 func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Name() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesName {
 	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesName{}
 }
 
-func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Uid() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid {
-	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid{}
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Region() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion{}
 }
 
 func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Controller() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesController {
@@ -2379,21 +2614,8 @@ func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Bl
 	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion struct{}
-
-func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
-	return &CreateDeviceGroupRequest_FieldSubPath{
-		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion) WithValue(value string) *CreateDeviceGroupRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
-}
-
-func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) RequiresOwnerReference() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind struct{}
@@ -2410,6 +2632,23 @@ func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKi
 }
 
 func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion struct{}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+	return &CreateDeviceGroupRequest_FieldSubPath{
+		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion) WithValue(value string) *CreateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -2430,20 +2669,20 @@ func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesNa
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
-type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid struct{}
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion struct{}
 
-func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
 	return &CreateDeviceGroupRequest_FieldSubPath{
 		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid) WithValue(value string) *CreateDeviceGroupRequest_FieldSubPathValue {
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion) WithValue(value string) *CreateDeviceGroupRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
 }
 
-func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -2478,6 +2717,23 @@ func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesBl
 }
 
 func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+	return &CreateDeviceGroupRequest_FieldSubPath{
+		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *CreateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -2582,6 +2838,65 @@ func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataSyncingRegions) W
 
 func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataSyncingRegions) WithItemValue(value string) *CreateDeviceGroupRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*CreateDeviceGroupRequest_FieldSubPathArrayItemValue)
+}
+
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle struct{}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+	return &CreateDeviceGroupRequest_FieldSubPath{
+		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *CreateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) State() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState{}
+}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) BlockDeletion() CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion {
+	return CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion{}
+}
+
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState struct{}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+	return &CreateDeviceGroupRequest_FieldSubPath{
+		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *CreateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion struct{}
+
+func (CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion) FieldPath() *CreateDeviceGroupRequest_FieldSubPath {
+	return &CreateDeviceGroupRequest_FieldSubPath{
+		selector: CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion) WithValue(value bool) *CreateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s CreateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *CreateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdateDeviceGroupRequestFieldPathBuilder struct{}
@@ -2700,6 +3015,10 @@ func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadata) UpdateTime() Upda
 	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataUpdateTime{}
 }
 
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadata) DeleteTime() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime{}
+}
+
 func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadata) Uuid() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataUuid {
 	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataUuid{}
 }
@@ -2736,6 +3055,10 @@ func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadata) Syncing() UpdateD
 	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataSyncing{}
 }
 
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadata) Lifecycle() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle{}
+}
+
 type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataCreateTime struct{}
 
 func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataCreateTime) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
@@ -2767,6 +3090,23 @@ func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataUpdateTime) WithV
 }
 
 func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -2943,20 +3283,20 @@ func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) 
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateDeviceGroupRequest_FieldSubPathArrayItemValue)
 }
 
-func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) ApiVersion() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion {
-	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Kind() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind {
 	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind{}
+}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Version() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion{}
 }
 
 func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Name() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesName {
 	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesName{}
 }
 
-func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Uid() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid {
-	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid{}
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Region() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion{}
 }
 
 func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Controller() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesController {
@@ -2967,21 +3307,8 @@ func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) Bl
 	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
-	return &UpdateDeviceGroupRequest_FieldSubPath{
-		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
-}
-
-func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferences) RequiresOwnerReference() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind struct{}
@@ -2998,6 +3325,23 @@ func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKi
 }
 
 func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3018,20 +3362,20 @@ func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesNa
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
-type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid struct{}
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion struct{}
 
-func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
 	return &UpdateDeviceGroupRequest_FieldSubPath{
 		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
 }
 
-func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3066,6 +3410,23 @@ func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesBl
 }
 
 func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3170,6 +3531,65 @@ func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataSyncingRegions) W
 
 func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataSyncingRegions) WithItemValue(value string) *UpdateDeviceGroupRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateDeviceGroupRequest_FieldSubPathArrayItemValue)
+}
+
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) State() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState{}
+}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycle) BlockDeletion() UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion {
+	return UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion{}
+}
+
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorDeviceGroupMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdateDeviceGroupRequestPathSelectorUpdateMask struct{}
@@ -3312,6 +3732,10 @@ func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadata) UpdateTim
 	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataUpdateTime{}
 }
 
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadata) DeleteTime() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataDeleteTime {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataDeleteTime{}
+}
+
 func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadata) Uuid() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataUuid {
 	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataUuid{}
 }
@@ -3348,6 +3772,10 @@ func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadata) Syncing()
 	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataSyncing{}
 }
 
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadata) Lifecycle() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle{}
+}
+
 type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataCreateTime struct{}
 
 func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataCreateTime) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
@@ -3379,6 +3807,23 @@ func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataUpdateTim
 }
 
 func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataDeleteTime struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataDeleteTime) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3555,20 +4000,20 @@ func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerRefe
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateDeviceGroupRequest_FieldSubPathArrayItemValue)
 }
 
-func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) ApiVersion() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion {
-	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Kind() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind {
 	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind{}
+}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Version() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion{}
 }
 
 func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Name() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesName {
 	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesName{}
 }
 
-func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Uid() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid {
-	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid{}
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Region() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion{}
 }
 
 func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Controller() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesController {
@@ -3579,21 +4024,8 @@ func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerRefere
 	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
-	return &UpdateDeviceGroupRequest_FieldSubPath{
-		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
-		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
-}
-
-func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferences) RequiresOwnerReference() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind struct{}
@@ -3610,6 +4042,23 @@ func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerRefe
 }
 
 func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3630,20 +4079,20 @@ func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerRefe
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
-type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid struct{}
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion struct{}
 
-func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
 	return &UpdateDeviceGroupRequest_FieldSubPath{
 		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
-		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) WithValue(value string) *UpdateDeviceGroupRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
 }
 
-func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3678,6 +4127,23 @@ func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerRefe
 }
 
 func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3782,6 +4248,65 @@ func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataSyncingRe
 
 func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataSyncingRegions) WithItemValue(value string) *UpdateDeviceGroupRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateDeviceGroupRequest_FieldSubPathArrayItemValue)
+}
+
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle) State() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleState {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleState{}
+}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycle) BlockDeletion() UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion {
+	return UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion{}
+}
+
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleState struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleState) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion struct{}
+
+func (UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) FieldPath() *UpdateDeviceGroupRequest_FieldSubPath {
+	return &UpdateDeviceGroupRequest_FieldSubPath{
+		selector: UpdateDeviceGroupRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateDeviceGroupRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdateDeviceGroupRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequest_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdateDeviceGroupRequestPathSelectorCasFieldMask struct{}
@@ -3914,6 +4439,10 @@ func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadata) UpdateTi
 	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataUpdateTime{}
 }
 
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadata) DeleteTime() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataDeleteTime {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataDeleteTime{}
+}
+
 func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadata) Uuid() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataUuid {
 	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataUuid{}
 }
@@ -3950,6 +4479,10 @@ func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadata) Syncing(
 	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataSyncing{}
 }
 
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadata) Lifecycle() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle{}
+}
+
 type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataCreateTime struct{}
 
 func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataCreateTime) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
@@ -3981,6 +4514,23 @@ func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataUpdateTi
 }
 
 func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataDeleteTime struct{}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataDeleteTime) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
+		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -4157,20 +4707,20 @@ func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerRef
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayItemValue)
 }
 
-func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) ApiVersion() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion {
-	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Kind() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind {
 	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind{}
+}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Version() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion{}
 }
 
 func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Name() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesName {
 	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesName{}
 }
 
-func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Uid() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid {
-	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid{}
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Region() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion{}
 }
 
 func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Controller() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesController {
@@ -4181,21 +4731,8 @@ func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerRefer
 	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
-	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
-		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
-}
-
-func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) RequiresOwnerReference() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind struct{}
@@ -4212,6 +4749,23 @@ func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerRef
 }
 
 func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion struct{}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
+		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) WithValue(value string) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -4232,20 +4786,20 @@ func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerRef
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
 }
 
-type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid struct{}
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion struct{}
 
-func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
 	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
 		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
-		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) WithValue(value string) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) WithValue(value string) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -4280,6 +4834,23 @@ func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerRef
 }
 
 func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
+		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -4384,6 +4955,65 @@ func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataSyncingR
 
 func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataSyncingRegions) WithItemValue(value string) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayItemValue)
+}
+
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle struct{}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
+		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
+}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle) State() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleState {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleState{}
+}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycle) BlockDeletion() UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion {
+	return UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion{}
+}
+
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleState struct{}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleState) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
+		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion struct{}
+
+func (UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) FieldPath() *UpdateDeviceGroupRequestCAS_FieldSubPath {
+	return &UpdateDeviceGroupRequestCAS_FieldSubPath{
+		selector: UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  device_group.NewDeviceGroupFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdateDeviceGroupRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateDeviceGroupRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateDeviceGroupRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateDeviceGroupRequestCAS_FieldSubPathArrayOfValues)
 }
 
 type UpdateDeviceGroupRequest_CASPathSelectorFieldMask struct{}

@@ -633,6 +633,10 @@ func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Up
 	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUpdateTime{}
 }
 
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) DeleteTime() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime{}
+}
+
 func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Uuid() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUuid {
 	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUuid{}
 }
@@ -669,6 +673,10 @@ func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Sy
 	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing{}
 }
 
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Lifecycle() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle{}
+}
+
 type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataCreateTime struct{}
 
 func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataCreateTime) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
@@ -700,6 +708,23 @@ func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUp
 }
 
 func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime struct{}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+	return &BatchGetVendorConnectionsResponse_FieldSubPath{
+		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -876,20 +901,20 @@ func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOw
 	return s.FieldPath().WithIArrayItemValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayItemValue)
 }
 
-func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) ApiVersion() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion {
-	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion{}
-}
-
 func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Kind() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind {
 	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind{}
+}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Version() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion{}
 }
 
 func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Name() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesName {
 	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesName{}
 }
 
-func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Uid() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid {
-	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid{}
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Region() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion{}
 }
 
 func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Controller() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesController {
@@ -900,21 +925,8 @@ func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwne
 	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion struct{}
-
-func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
-	return &BatchGetVendorConnectionsResponse_FieldSubPath{
-		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion) WithValue(value string) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
-}
-
-func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) RequiresOwnerReference() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind struct{}
@@ -931,6 +943,23 @@ func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOw
 }
 
 func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion struct{}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+	return &BatchGetVendorConnectionsResponse_FieldSubPath{
+		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion) WithValue(value string) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -951,20 +980,20 @@ func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOw
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
-type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid struct{}
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion struct{}
 
-func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
 	return &BatchGetVendorConnectionsResponse_FieldSubPath{
 		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid) WithValue(value string) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion) WithValue(value string) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
 }
 
-func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -999,6 +1028,23 @@ func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOw
 }
 
 func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+	return &BatchGetVendorConnectionsResponse_FieldSubPath{
+		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1103,6 +1149,65 @@ func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSy
 
 func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncingRegions) WithItemValue(value string) *BatchGetVendorConnectionsResponse_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayItemValue)
+}
+
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle struct{}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+	return &BatchGetVendorConnectionsResponse_FieldSubPath{
+		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) State() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState{}
+}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) BlockDeletion() BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion {
+	return BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion{}
+}
+
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState struct{}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+	return &BatchGetVendorConnectionsResponse_FieldSubPath{
+		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion struct{}
+
+func (BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion) FieldPath() *BatchGetVendorConnectionsResponse_FieldSubPath {
+	return &BatchGetVendorConnectionsResponse_FieldSubPath{
+		selector: BatchGetVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion) WithValue(value bool) *BatchGetVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s BatchGetVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
 type BatchGetVendorConnectionsResponsePathSelectorMissing struct{}
@@ -1728,6 +1833,10 @@ func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Update
 	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUpdateTime{}
 }
 
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) DeleteTime() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime{}
+}
+
 func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Uuid() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUuid {
 	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUuid{}
 }
@@ -1764,6 +1873,10 @@ func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Syncin
 	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncing{}
 }
 
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadata) Lifecycle() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle{}
+}
+
 type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataCreateTime struct{}
 
 func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataCreateTime) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
@@ -1795,6 +1908,23 @@ func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUpdate
 }
 
 func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime struct{}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+	return &ListVendorConnectionsResponse_FieldSubPath{
+		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *ListVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1971,20 +2101,20 @@ func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerR
 	return s.FieldPath().WithIArrayItemValue(value).(*ListVendorConnectionsResponse_FieldSubPathArrayItemValue)
 }
 
-func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) ApiVersion() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion {
-	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion{}
-}
-
 func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Kind() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind {
 	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind{}
+}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Version() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion{}
 }
 
 func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Name() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesName {
 	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesName{}
 }
 
-func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Uid() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid {
-	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid{}
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Region() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion{}
 }
 
 func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) Controller() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesController {
@@ -1995,21 +2125,8 @@ func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerRef
 	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion struct{}
-
-func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
-	return &ListVendorConnectionsResponse_FieldSubPath{
-		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion) WithValue(value string) *ListVendorConnectionsResponse_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
-}
-
-func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferences) RequiresOwnerReference() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind struct{}
@@ -2026,6 +2143,23 @@ func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerR
 }
 
 func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion struct{}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+	return &ListVendorConnectionsResponse_FieldSubPath{
+		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion) WithValue(value string) *ListVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2046,20 +2180,20 @@ func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerR
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
-type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid struct{}
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion struct{}
 
-func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
 	return &ListVendorConnectionsResponse_FieldSubPath{
 		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid) WithValue(value string) *ListVendorConnectionsResponse_FieldSubPathValue {
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion) WithValue(value string) *ListVendorConnectionsResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
 }
 
-func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2094,6 +2228,23 @@ func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerR
 }
 
 func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+	return &ListVendorConnectionsResponse_FieldSubPath{
+		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *ListVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2198,6 +2349,65 @@ func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncin
 
 func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataSyncingRegions) WithItemValue(value string) *ListVendorConnectionsResponse_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*ListVendorConnectionsResponse_FieldSubPathArrayItemValue)
+}
+
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle struct{}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+	return &ListVendorConnectionsResponse_FieldSubPath{
+		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *ListVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) State() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState{}
+}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycle) BlockDeletion() ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion {
+	return ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion{}
+}
+
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState struct{}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+	return &ListVendorConnectionsResponse_FieldSubPath{
+		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *ListVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
+}
+
+type ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion struct{}
+
+func (ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion) FieldPath() *ListVendorConnectionsResponse_FieldSubPath {
+	return &ListVendorConnectionsResponse_FieldSubPath{
+		selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion) WithValue(value bool) *ListVendorConnectionsResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldSubPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorVendorConnectionsMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *ListVendorConnectionsResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldSubPathArrayOfValues)
 }
 
 type ListVendorConnectionsResponsePathSelectorPrevPageToken struct{}
@@ -3199,6 +3409,10 @@ func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadata) UpdateT
 	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataUpdateTime{}
 }
 
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadata) DeleteTime() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime{}
+}
+
 func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadata) Uuid() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataUuid {
 	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataUuid{}
 }
@@ -3235,6 +3449,10 @@ func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadata) Syncing
 	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing{}
 }
 
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadata) Lifecycle() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle{}
+}
+
 type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataCreateTime struct{}
 
 func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataCreateTime) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
@@ -3266,6 +3484,23 @@ func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataUpdateT
 }
 
 func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime struct{}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+	return &CreateVendorConnectionRequest_FieldSubPath{
+		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *CreateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3442,20 +3677,20 @@ func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 	return s.FieldPath().WithIArrayItemValue(value).(*CreateVendorConnectionRequest_FieldSubPathArrayItemValue)
 }
 
-func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) ApiVersion() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion {
-	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion{}
-}
-
 func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Kind() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind {
 	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind{}
+}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Version() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion{}
 }
 
 func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Name() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesName {
 	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesName{}
 }
 
-func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Uid() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid {
-	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid{}
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Region() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion{}
 }
 
 func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Controller() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesController {
@@ -3466,21 +3701,8 @@ func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRefe
 	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion struct{}
-
-func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
-	return &CreateVendorConnectionRequest_FieldSubPath{
-		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion) WithValue(value string) *CreateVendorConnectionRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
-}
-
-func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) RequiresOwnerReference() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind struct{}
@@ -3497,6 +3719,23 @@ func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 }
 
 func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion struct{}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+	return &CreateVendorConnectionRequest_FieldSubPath{
+		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion) WithValue(value string) *CreateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3517,20 +3756,20 @@ func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
-type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid struct{}
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion struct{}
 
-func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
 	return &CreateVendorConnectionRequest_FieldSubPath{
 		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid) WithValue(value string) *CreateVendorConnectionRequest_FieldSubPathValue {
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion) WithValue(value string) *CreateVendorConnectionRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
 }
 
-func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3565,6 +3804,23 @@ func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 }
 
 func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+	return &CreateVendorConnectionRequest_FieldSubPath{
+		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *CreateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3669,6 +3925,65 @@ func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing
 
 func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncingRegions) WithItemValue(value string) *CreateVendorConnectionRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*CreateVendorConnectionRequest_FieldSubPathArrayItemValue)
+}
+
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle struct{}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+	return &CreateVendorConnectionRequest_FieldSubPath{
+		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *CreateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) State() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState{}
+}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) BlockDeletion() CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion {
+	return CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion{}
+}
+
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState struct{}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+	return &CreateVendorConnectionRequest_FieldSubPath{
+		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *CreateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion struct{}
+
+func (CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion) FieldPath() *CreateVendorConnectionRequest_FieldSubPath {
+	return &CreateVendorConnectionRequest_FieldSubPath{
+		selector: CreateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion) WithValue(value bool) *CreateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s CreateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *CreateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdateVendorConnectionRequestFieldPathBuilder struct{}
@@ -4148,6 +4463,10 @@ func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadata) UpdateT
 	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataUpdateTime{}
 }
 
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadata) DeleteTime() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime{}
+}
+
 func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadata) Uuid() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataUuid {
 	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataUuid{}
 }
@@ -4184,6 +4503,10 @@ func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadata) Syncing
 	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing{}
 }
 
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadata) Lifecycle() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle{}
+}
+
 type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataCreateTime struct{}
 
 func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataCreateTime) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
@@ -4215,6 +4538,23 @@ func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataUpdateT
 }
 
 func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4391,20 +4731,20 @@ func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateVendorConnectionRequest_FieldSubPathArrayItemValue)
 }
 
-func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) ApiVersion() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion {
-	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Kind() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind {
 	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind{}
+}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Version() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion{}
 }
 
 func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Name() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesName {
 	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesName{}
 }
 
-func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Uid() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid {
-	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid{}
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Region() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion{}
 }
 
 func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) Controller() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesController {
@@ -4415,21 +4755,8 @@ func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRefe
 	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
-	return &UpdateVendorConnectionRequest_FieldSubPath{
-		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
-}
-
-func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferences) RequiresOwnerReference() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind struct{}
@@ -4446,6 +4773,23 @@ func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 }
 
 func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4466,20 +4810,20 @@ func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
-type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid struct{}
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion struct{}
 
-func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
 	return &UpdateVendorConnectionRequest_FieldSubPath{
 		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4514,6 +4858,23 @@ func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerRe
 }
 
 func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4618,6 +4979,65 @@ func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncing
 
 func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataSyncingRegions) WithItemValue(value string) *UpdateVendorConnectionRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateVendorConnectionRequest_FieldSubPathArrayItemValue)
+}
+
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) State() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState{}
+}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycle) BlockDeletion() UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion {
+	return UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion{}
+}
+
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorVendorConnection,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorVendorConnectionMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdateVendorConnectionRequestPathSelectorUpdateMask struct{}
@@ -5121,6 +5541,10 @@ func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadata) Upda
 	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataUpdateTime{}
 }
 
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadata) DeleteTime() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataDeleteTime {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataDeleteTime{}
+}
+
 func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadata) Uuid() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataUuid {
 	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataUuid{}
 }
@@ -5157,6 +5581,10 @@ func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadata) Sync
 	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncing{}
 }
 
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadata) Lifecycle() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle{}
+}
+
 type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataCreateTime struct{}
 
 func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataCreateTime) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
@@ -5188,6 +5616,23 @@ func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataUpda
 }
 
 func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataDeleteTime struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataDeleteTime) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5364,20 +5809,20 @@ func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwne
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateVendorConnectionRequest_FieldSubPathArrayItemValue)
 }
 
-func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) ApiVersion() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion {
-	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Kind() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind {
 	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind{}
+}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Version() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion{}
 }
 
 func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Name() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesName {
 	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesName{}
 }
 
-func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Uid() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid {
-	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid{}
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Region() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion{}
 }
 
 func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Controller() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesController {
@@ -5388,21 +5833,8 @@ func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerR
 	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
-	return &UpdateVendorConnectionRequest_FieldSubPath{
-		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
-		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
-}
-
-func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferences) RequiresOwnerReference() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind struct{}
@@ -5419,6 +5851,23 @@ func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwne
 }
 
 func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5439,20 +5888,20 @@ func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwne
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
-type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid struct{}
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion struct{}
 
-func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
 	return &UpdateVendorConnectionRequest_FieldSubPath{
 		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
-		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) WithValue(value string) *UpdateVendorConnectionRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
 }
 
-func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5487,6 +5936,23 @@ func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwne
 }
 
 func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5591,6 +6057,65 @@ func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSync
 
 func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataSyncingRegions) WithItemValue(value string) *UpdateVendorConnectionRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateVendorConnectionRequest_FieldSubPathArrayItemValue)
+}
+
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle) State() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleState {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleState{}
+}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycle) BlockDeletion() UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion {
+	return UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion{}
+}
+
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleState struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleState) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion struct{}
+
+func (UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) FieldPath() *UpdateVendorConnectionRequest_FieldSubPath {
+	return &UpdateVendorConnectionRequest_FieldSubPath{
+		selector: UpdateVendorConnectionRequest_FieldPathSelectorCas,
+		subPath:  NewUpdateVendorConnectionRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdateVendorConnectionRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequest_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdateVendorConnectionRequestPathSelectorCasFieldMask struct{}
@@ -6084,6 +6609,10 @@ func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadata) Upd
 	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataUpdateTime{}
 }
 
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadata) DeleteTime() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataDeleteTime {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataDeleteTime{}
+}
+
 func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadata) Uuid() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataUuid {
 	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataUuid{}
 }
@@ -6120,6 +6649,10 @@ func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadata) Syn
 	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyncing{}
 }
 
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadata) Lifecycle() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle{}
+}
+
 type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataCreateTime struct{}
 
 func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataCreateTime) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
@@ -6151,6 +6684,23 @@ func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataUpd
 }
 
 func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataDeleteTime struct{}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataDeleteTime) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
+		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -6327,20 +6877,20 @@ func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwn
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayItemValue)
 }
 
-func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) ApiVersion() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion {
-	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Kind() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind {
 	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind{}
+}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Version() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion{}
 }
 
 func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Name() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesName {
 	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesName{}
 }
 
-func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Uid() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid {
-	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid{}
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Region() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion{}
 }
 
 func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Controller() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesController {
@@ -6351,21 +6901,8 @@ func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwner
 	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
-	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
-		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
-}
-
-func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) RequiresOwnerReference() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind struct{}
@@ -6382,6 +6919,23 @@ func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwn
 }
 
 func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion struct{}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
+		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) WithValue(value string) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -6402,20 +6956,20 @@ func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwn
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
-type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid struct{}
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion struct{}
 
-func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
 	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
 		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
-		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) WithValue(value string) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) WithValue(value string) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -6450,6 +7004,23 @@ func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwn
 }
 
 func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
+		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -6554,6 +7125,65 @@ func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyn
 
 func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataSyncingRegions) WithItemValue(value string) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayItemValue)
+}
+
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle struct{}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
+		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
+}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle) State() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleState {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleState{}
+}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycle) BlockDeletion() UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion {
+	return UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion{}
+}
+
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleState struct{}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleState) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
+		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion struct{}
+
+func (UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) FieldPath() *UpdateVendorConnectionRequestCAS_FieldSubPath {
+	return &UpdateVendorConnectionRequestCAS_FieldSubPath{
+		selector: UpdateVendorConnectionRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  vendor_connection.NewVendorConnectionFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdateVendorConnectionRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdateVendorConnectionRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdateVendorConnectionRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdateVendorConnectionRequestCAS_FieldSubPathArrayOfValues)
 }
 
 type UpdateVendorConnectionRequest_CASPathSelectorFieldMask struct{}

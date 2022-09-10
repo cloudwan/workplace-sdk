@@ -598,6 +598,10 @@ func (BatchGetPropertiesResponsePathSelectorPropertiesMetadata) UpdateTime() Bat
 	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataUpdateTime{}
 }
 
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadata) DeleteTime() BatchGetPropertiesResponsePathSelectorPropertiesMetadataDeleteTime {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataDeleteTime{}
+}
+
 func (BatchGetPropertiesResponsePathSelectorPropertiesMetadata) Uuid() BatchGetPropertiesResponsePathSelectorPropertiesMetadataUuid {
 	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataUuid{}
 }
@@ -634,6 +638,10 @@ func (BatchGetPropertiesResponsePathSelectorPropertiesMetadata) Syncing() BatchG
 	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncing{}
 }
 
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadata) Lifecycle() BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle{}
+}
+
 type BatchGetPropertiesResponsePathSelectorPropertiesMetadataCreateTime struct{}
 
 func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataCreateTime) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
@@ -665,6 +673,23 @@ func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataUpdateTime) With
 }
 
 func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataDeleteTime struct{}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataDeleteTime) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+	return &BatchGetPropertiesResponse_FieldSubPath{
+		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *BatchGetPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -841,20 +866,20 @@ func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences)
 	return s.FieldPath().WithIArrayItemValue(value).(*BatchGetPropertiesResponse_FieldSubPathArrayItemValue)
 }
 
-func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) ApiVersion() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion {
-	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion{}
-}
-
 func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Kind() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind {
 	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind{}
+}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Version() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion{}
 }
 
 func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Name() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesName {
 	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesName{}
 }
 
-func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Uid() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid {
-	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid{}
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Region() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion{}
 }
 
 func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Controller() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesController {
@@ -865,21 +890,8 @@ func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) B
 	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion struct{}
-
-func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
-	return &BatchGetPropertiesResponse_FieldSubPath{
-		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion) WithValue(value string) *BatchGetPropertiesResponse_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
-}
-
-func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) RequiresOwnerReference() BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind struct{}
@@ -896,6 +908,23 @@ func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesK
 }
 
 func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion struct{}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+	return &BatchGetPropertiesResponse_FieldSubPath{
+		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion) WithValue(value string) *BatchGetPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -916,20 +945,20 @@ func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesN
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
-type BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid struct{}
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion struct{}
 
-func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
 	return &BatchGetPropertiesResponse_FieldSubPath{
 		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid) WithValue(value string) *BatchGetPropertiesResponse_FieldSubPathValue {
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion) WithValue(value string) *BatchGetPropertiesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
 }
 
-func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -964,6 +993,23 @@ func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesB
 }
 
 func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+	return &BatchGetPropertiesResponse_FieldSubPath{
+		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *BatchGetPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -1068,6 +1114,65 @@ func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncingRegions) 
 
 func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataSyncingRegions) WithItemValue(value string) *BatchGetPropertiesResponse_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*BatchGetPropertiesResponse_FieldSubPathArrayItemValue)
+}
+
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle struct{}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+	return &BatchGetPropertiesResponse_FieldSubPath{
+		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *BatchGetPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle) State() BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleState {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleState{}
+}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycle) BlockDeletion() BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion {
+	return BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion{}
+}
+
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleState struct{}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleState) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+	return &BatchGetPropertiesResponse_FieldSubPath{
+		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *BatchGetPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion struct{}
+
+func (BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion) FieldPath() *BatchGetPropertiesResponse_FieldSubPath {
+	return &BatchGetPropertiesResponse_FieldSubPath{
+		selector: BatchGetPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion) WithValue(value bool) *BatchGetPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*BatchGetPropertiesResponse_FieldSubPathValue)
+}
+
+func (s BatchGetPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *BatchGetPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*BatchGetPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
 type BatchGetPropertiesResponsePathSelectorPropertiesSitePlacement struct{}
@@ -1823,6 +1928,10 @@ func (ListPropertiesResponsePathSelectorPropertiesMetadata) UpdateTime() ListPro
 	return ListPropertiesResponsePathSelectorPropertiesMetadataUpdateTime{}
 }
 
+func (ListPropertiesResponsePathSelectorPropertiesMetadata) DeleteTime() ListPropertiesResponsePathSelectorPropertiesMetadataDeleteTime {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataDeleteTime{}
+}
+
 func (ListPropertiesResponsePathSelectorPropertiesMetadata) Uuid() ListPropertiesResponsePathSelectorPropertiesMetadataUuid {
 	return ListPropertiesResponsePathSelectorPropertiesMetadataUuid{}
 }
@@ -1859,6 +1968,10 @@ func (ListPropertiesResponsePathSelectorPropertiesMetadata) Syncing() ListProper
 	return ListPropertiesResponsePathSelectorPropertiesMetadataSyncing{}
 }
 
+func (ListPropertiesResponsePathSelectorPropertiesMetadata) Lifecycle() ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle{}
+}
+
 type ListPropertiesResponsePathSelectorPropertiesMetadataCreateTime struct{}
 
 func (ListPropertiesResponsePathSelectorPropertiesMetadataCreateTime) FieldPath() *ListPropertiesResponse_FieldSubPath {
@@ -1890,6 +2003,23 @@ func (s ListPropertiesResponsePathSelectorPropertiesMetadataUpdateTime) WithValu
 }
 
 func (s ListPropertiesResponsePathSelectorPropertiesMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type ListPropertiesResponsePathSelectorPropertiesMetadataDeleteTime struct{}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataDeleteTime) FieldPath() *ListPropertiesResponse_FieldSubPath {
+	return &ListPropertiesResponse_FieldSubPath{
+		selector: ListPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *ListPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *ListPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2066,20 +2196,20 @@ func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Wit
 	return s.FieldPath().WithIArrayItemValue(value).(*ListPropertiesResponse_FieldSubPathArrayItemValue)
 }
 
-func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) ApiVersion() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion {
-	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion{}
-}
-
 func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Kind() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind {
 	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind{}
+}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Version() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion{}
 }
 
 func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Name() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesName {
 	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesName{}
 }
 
-func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Uid() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid {
-	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid{}
+func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Region() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion{}
 }
 
 func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Controller() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesController {
@@ -2090,21 +2220,8 @@ func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) Block
 	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion struct{}
-
-func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion) FieldPath() *ListPropertiesResponse_FieldSubPath {
-	return &ListPropertiesResponse_FieldSubPath{
-		selector: ListPropertiesResponse_FieldPathSelectorProperties,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion) WithValue(value string) *ListPropertiesResponse_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
-}
-
-func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *ListPropertiesResponse_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
+func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferences) RequiresOwnerReference() ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind struct{}
@@ -2121,6 +2238,23 @@ func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind)
 }
 
 func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion struct{}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion) FieldPath() *ListPropertiesResponse_FieldSubPath {
+	return &ListPropertiesResponse_FieldSubPath{
+		selector: ListPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion) WithValue(value string) *ListPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *ListPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2141,20 +2275,20 @@ func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesName)
 	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
-type ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid struct{}
+type ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion struct{}
 
-func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid) FieldPath() *ListPropertiesResponse_FieldSubPath {
+func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion) FieldPath() *ListPropertiesResponse_FieldSubPath {
 	return &ListPropertiesResponse_FieldSubPath{
 		selector: ListPropertiesResponse_FieldPathSelectorProperties,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid) WithValue(value string) *ListPropertiesResponse_FieldSubPathValue {
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion) WithValue(value string) *ListPropertiesResponse_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
 }
 
-func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *ListPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2189,6 +2323,23 @@ func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesBlock
 }
 
 func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *ListPropertiesResponse_FieldSubPath {
+	return &ListPropertiesResponse_FieldSubPath{
+		selector: ListPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *ListPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *ListPropertiesResponse_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
@@ -2293,6 +2444,65 @@ func (s ListPropertiesResponsePathSelectorPropertiesMetadataSyncingRegions) With
 
 func (s ListPropertiesResponsePathSelectorPropertiesMetadataSyncingRegions) WithItemValue(value string) *ListPropertiesResponse_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*ListPropertiesResponse_FieldSubPathArrayItemValue)
+}
+
+type ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle struct{}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle) FieldPath() *ListPropertiesResponse_FieldSubPath {
+	return &ListPropertiesResponse_FieldSubPath{
+		selector: ListPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *ListPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle) State() ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleState {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleState{}
+}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataLifecycle) BlockDeletion() ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion {
+	return ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion{}
+}
+
+type ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleState struct{}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleState) FieldPath() *ListPropertiesResponse_FieldSubPath {
+	return &ListPropertiesResponse_FieldSubPath{
+		selector: ListPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *ListPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
+}
+
+type ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion struct{}
+
+func (ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion) FieldPath() *ListPropertiesResponse_FieldSubPath {
+	return &ListPropertiesResponse_FieldSubPath{
+		selector: ListPropertiesResponse_FieldPathSelectorProperties,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion) WithValue(value bool) *ListPropertiesResponse_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*ListPropertiesResponse_FieldSubPathValue)
+}
+
+func (s ListPropertiesResponsePathSelectorPropertiesMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *ListPropertiesResponse_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListPropertiesResponse_FieldSubPathArrayOfValues)
 }
 
 type ListPropertiesResponsePathSelectorPropertiesSitePlacement struct{}
@@ -3424,6 +3634,10 @@ func (CreatePropertyRequestPathSelectorPropertyMetadata) UpdateTime() CreateProp
 	return CreatePropertyRequestPathSelectorPropertyMetadataUpdateTime{}
 }
 
+func (CreatePropertyRequestPathSelectorPropertyMetadata) DeleteTime() CreatePropertyRequestPathSelectorPropertyMetadataDeleteTime {
+	return CreatePropertyRequestPathSelectorPropertyMetadataDeleteTime{}
+}
+
 func (CreatePropertyRequestPathSelectorPropertyMetadata) Uuid() CreatePropertyRequestPathSelectorPropertyMetadataUuid {
 	return CreatePropertyRequestPathSelectorPropertyMetadataUuid{}
 }
@@ -3460,6 +3674,10 @@ func (CreatePropertyRequestPathSelectorPropertyMetadata) Syncing() CreatePropert
 	return CreatePropertyRequestPathSelectorPropertyMetadataSyncing{}
 }
 
+func (CreatePropertyRequestPathSelectorPropertyMetadata) Lifecycle() CreatePropertyRequestPathSelectorPropertyMetadataLifecycle {
+	return CreatePropertyRequestPathSelectorPropertyMetadataLifecycle{}
+}
+
 type CreatePropertyRequestPathSelectorPropertyMetadataCreateTime struct{}
 
 func (CreatePropertyRequestPathSelectorPropertyMetadataCreateTime) FieldPath() *CreatePropertyRequest_FieldSubPath {
@@ -3491,6 +3709,23 @@ func (s CreatePropertyRequestPathSelectorPropertyMetadataUpdateTime) WithValue(v
 }
 
 func (s CreatePropertyRequestPathSelectorPropertyMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type CreatePropertyRequestPathSelectorPropertyMetadataDeleteTime struct{}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataDeleteTime) FieldPath() *CreatePropertyRequest_FieldSubPath {
+	return &CreatePropertyRequest_FieldSubPath{
+		selector: CreatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *CreatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *CreatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3667,20 +3902,20 @@ func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) WithIt
 	return s.FieldPath().WithIArrayItemValue(value).(*CreatePropertyRequest_FieldSubPathArrayItemValue)
 }
 
-func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) ApiVersion() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion {
-	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion{}
-}
-
 func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Kind() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind {
 	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind{}
+}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Version() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion {
+	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion{}
 }
 
 func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Name() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesName {
 	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesName{}
 }
 
-func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Uid() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid {
-	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid{}
+func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Region() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion {
+	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion{}
 }
 
 func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Controller() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesController {
@@ -3691,21 +3926,8 @@ func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) BlockOwn
 	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion struct{}
-
-func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion) FieldPath() *CreatePropertyRequest_FieldSubPath {
-	return &CreatePropertyRequest_FieldSubPath{
-		selector: CreatePropertyRequest_FieldPathSelectorProperty,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion) WithValue(value string) *CreatePropertyRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
-}
-
-func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *CreatePropertyRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
+func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) RequiresOwnerReference() CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference {
+	return CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind struct{}
@@ -3722,6 +3944,23 @@ func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind) Wi
 }
 
 func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion struct{}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion) FieldPath() *CreatePropertyRequest_FieldSubPath {
+	return &CreatePropertyRequest_FieldSubPath{
+		selector: CreatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion) WithValue(value string) *CreatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *CreatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3742,20 +3981,20 @@ func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesName) Wi
 	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
-type CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid struct{}
+type CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion struct{}
 
-func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid) FieldPath() *CreatePropertyRequest_FieldSubPath {
+func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion) FieldPath() *CreatePropertyRequest_FieldSubPath {
 	return &CreatePropertyRequest_FieldSubPath{
 		selector: CreatePropertyRequest_FieldPathSelectorProperty,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid) WithValue(value string) *CreatePropertyRequest_FieldSubPathValue {
+func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion) WithValue(value string) *CreatePropertyRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
 }
 
-func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *CreatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3790,6 +4029,23 @@ func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesBlockOwn
 }
 
 func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *CreatePropertyRequest_FieldSubPath {
+	return &CreatePropertyRequest_FieldSubPath{
+		selector: CreatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *CreatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *CreatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -3894,6 +4150,65 @@ func (s CreatePropertyRequestPathSelectorPropertyMetadataSyncingRegions) WithArr
 
 func (s CreatePropertyRequestPathSelectorPropertyMetadataSyncingRegions) WithItemValue(value string) *CreatePropertyRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*CreatePropertyRequest_FieldSubPathArrayItemValue)
+}
+
+type CreatePropertyRequestPathSelectorPropertyMetadataLifecycle struct{}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataLifecycle) FieldPath() *CreatePropertyRequest_FieldSubPath {
+	return &CreatePropertyRequest_FieldSubPath{
+		selector: CreatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *CreatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataLifecycle) State() CreatePropertyRequestPathSelectorPropertyMetadataLifecycleState {
+	return CreatePropertyRequestPathSelectorPropertyMetadataLifecycleState{}
+}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataLifecycle) BlockDeletion() CreatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion {
+	return CreatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion{}
+}
+
+type CreatePropertyRequestPathSelectorPropertyMetadataLifecycleState struct{}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataLifecycleState) FieldPath() *CreatePropertyRequest_FieldSubPath {
+	return &CreatePropertyRequest_FieldSubPath{
+		selector: CreatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *CreatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type CreatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion struct{}
+
+func (CreatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion) FieldPath() *CreatePropertyRequest_FieldSubPath {
+	return &CreatePropertyRequest_FieldSubPath{
+		selector: CreatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion) WithValue(value bool) *CreatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*CreatePropertyRequest_FieldSubPathValue)
+}
+
+func (s CreatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *CreatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*CreatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
 type CreatePropertyRequestPathSelectorPropertySitePlacement struct{}
@@ -4503,6 +4818,10 @@ func (UpdatePropertyRequestPathSelectorPropertyMetadata) UpdateTime() UpdateProp
 	return UpdatePropertyRequestPathSelectorPropertyMetadataUpdateTime{}
 }
 
+func (UpdatePropertyRequestPathSelectorPropertyMetadata) DeleteTime() UpdatePropertyRequestPathSelectorPropertyMetadataDeleteTime {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataDeleteTime{}
+}
+
 func (UpdatePropertyRequestPathSelectorPropertyMetadata) Uuid() UpdatePropertyRequestPathSelectorPropertyMetadataUuid {
 	return UpdatePropertyRequestPathSelectorPropertyMetadataUuid{}
 }
@@ -4539,6 +4858,10 @@ func (UpdatePropertyRequestPathSelectorPropertyMetadata) Syncing() UpdatePropert
 	return UpdatePropertyRequestPathSelectorPropertyMetadataSyncing{}
 }
 
+func (UpdatePropertyRequestPathSelectorPropertyMetadata) Lifecycle() UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle{}
+}
+
 type UpdatePropertyRequestPathSelectorPropertyMetadataCreateTime struct{}
 
 func (UpdatePropertyRequestPathSelectorPropertyMetadataCreateTime) FieldPath() *UpdatePropertyRequest_FieldSubPath {
@@ -4570,6 +4893,23 @@ func (s UpdatePropertyRequestPathSelectorPropertyMetadataUpdateTime) WithValue(v
 }
 
 func (s UpdatePropertyRequestPathSelectorPropertyMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorPropertyMetadataDeleteTime struct{}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataDeleteTime) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4746,20 +5086,20 @@ func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) WithIt
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdatePropertyRequest_FieldSubPathArrayItemValue)
 }
 
-func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) ApiVersion() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion {
-	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Kind() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind {
 	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind{}
+}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Version() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion{}
 }
 
 func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Name() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesName {
 	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesName{}
 }
 
-func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Uid() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid {
-	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid{}
+func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Region() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion{}
 }
 
 func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) Controller() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesController {
@@ -4770,21 +5110,8 @@ func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) BlockOwn
 	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
-	return &UpdatePropertyRequest_FieldSubPath{
-		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
-}
-
-func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferences) RequiresOwnerReference() UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind struct{}
@@ -4801,6 +5128,23 @@ func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind) Wi
 }
 
 func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion struct{}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4821,20 +5165,20 @@ func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesName) Wi
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
-type UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid struct{}
+type UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion struct{}
 
-func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
 	return &UpdatePropertyRequest_FieldSubPath{
 		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
 }
 
-func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4869,6 +5213,23 @@ func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesBlockOwn
 }
 
 func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -4973,6 +5334,65 @@ func (s UpdatePropertyRequestPathSelectorPropertyMetadataSyncingRegions) WithArr
 
 func (s UpdatePropertyRequestPathSelectorPropertyMetadataSyncingRegions) WithItemValue(value string) *UpdatePropertyRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdatePropertyRequest_FieldSubPathArrayItemValue)
+}
+
+type UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle struct{}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle) State() UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleState {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleState{}
+}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataLifecycle) BlockDeletion() UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion {
+	return UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion{}
+}
+
+type UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleState struct{}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleState) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion struct{}
+
+func (UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorProperty,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorPropertyMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdatePropertyRequestPathSelectorPropertySitePlacement struct{}
@@ -5606,6 +6026,10 @@ func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadata) UpdateTime()
 	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataUpdateTime{}
 }
 
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadata) DeleteTime() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataDeleteTime {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataDeleteTime{}
+}
+
 func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadata) Uuid() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataUuid {
 	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataUuid{}
 }
@@ -5642,6 +6066,10 @@ func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadata) Syncing() Up
 	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncing{}
 }
 
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadata) Lifecycle() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle{}
+}
+
 type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataCreateTime struct{}
 
 func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataCreateTime) FieldPath() *UpdatePropertyRequest_FieldSubPath {
@@ -5673,6 +6101,23 @@ func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataUpdateTime) 
 }
 
 func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataDeleteTime struct{}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataDeleteTime) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorCas,
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5849,20 +6294,20 @@ func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferen
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdatePropertyRequest_FieldSubPathArrayItemValue)
 }
 
-func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) ApiVersion() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion {
-	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Kind() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind {
 	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind{}
+}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Version() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion{}
 }
 
 func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Name() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesName {
 	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesName{}
 }
 
-func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Uid() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid {
-	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid{}
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Region() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion{}
 }
 
 func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) Controller() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesController {
@@ -5873,21 +6318,8 @@ func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReference
 	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
-	return &UpdatePropertyRequest_FieldSubPath{
-		selector: UpdatePropertyRequest_FieldPathSelectorCas,
-		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
-}
-
-func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferences) RequiresOwnerReference() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind struct{}
@@ -5904,6 +6336,23 @@ func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferen
 }
 
 func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion struct{}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorCas,
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5924,20 +6373,20 @@ func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferen
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
-type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid struct{}
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion struct{}
 
-func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
 	return &UpdatePropertyRequest_FieldSubPath{
 		selector: UpdatePropertyRequest_FieldPathSelectorCas,
-		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) WithValue(value string) *UpdatePropertyRequest_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
 }
 
-func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -5972,6 +6421,23 @@ func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferen
 }
 
 func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorCas,
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
@@ -6076,6 +6542,65 @@ func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncingRegio
 
 func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataSyncingRegions) WithItemValue(value string) *UpdatePropertyRequest_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdatePropertyRequest_FieldSubPathArrayItemValue)
+}
+
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle struct{}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorCas,
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle) State() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleState {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleState{}
+}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycle) BlockDeletion() UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion {
+	return UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion{}
+}
+
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleState struct{}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleState) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorCas,
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion struct{}
+
+func (UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) FieldPath() *UpdatePropertyRequest_FieldSubPath {
+	return &UpdatePropertyRequest_FieldSubPath{
+		selector: UpdatePropertyRequest_FieldPathSelectorCas,
+		subPath:  NewUpdatePropertyRequestCASFieldPathBuilder().ConditionalState().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdatePropertyRequest_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequest_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequestPathSelectorCasConditionalStateMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdatePropertyRequest_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequest_FieldSubPathArrayOfValues)
 }
 
 type UpdatePropertyRequestPathSelectorCasConditionalStateSitePlacement struct{}
@@ -6699,6 +7224,10 @@ func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadata) UpdateTime(
 	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataUpdateTime{}
 }
 
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadata) DeleteTime() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataDeleteTime {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataDeleteTime{}
+}
+
 func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadata) Uuid() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataUuid {
 	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataUuid{}
 }
@@ -6735,6 +7264,10 @@ func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadata) Syncing() U
 	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncing{}
 }
 
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadata) Lifecycle() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle{}
+}
+
 type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataCreateTime struct{}
 
 func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataCreateTime) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
@@ -6766,6 +7299,23 @@ func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataUpdateTime)
 }
 
 func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataUpdateTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataDeleteTime struct{}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataDeleteTime) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+	return &UpdatePropertyRequestCAS_FieldSubPath{
+		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().DeleteTime().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataDeleteTime) WithValue(value *timestamp.Timestamp) *UpdatePropertyRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataDeleteTime) WithArrayOfValues(values []*timestamp.Timestamp) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -6942,20 +7492,20 @@ func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerRefere
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdatePropertyRequestCAS_FieldSubPathArrayItemValue)
 }
 
-func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) ApiVersion() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion {
-	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion{}
-}
-
 func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Kind() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind {
 	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind{}
+}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Version() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion{}
 }
 
 func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Name() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesName {
 	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesName{}
 }
 
-func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Uid() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid {
-	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid{}
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Region() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion{}
 }
 
 func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) Controller() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesController {
@@ -6966,21 +7516,8 @@ func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferenc
 	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesBlockOwnerDeletion{}
 }
 
-type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion struct{}
-
-func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
-	return &UpdatePropertyRequestCAS_FieldSubPath{
-		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().ApiVersion().FieldPath(),
-	}
-}
-
-func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) WithValue(value string) *UpdatePropertyRequestCAS_FieldSubPathValue {
-	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
-}
-
-func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesApiVersion) WithArrayOfValues(values []string) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
-	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferences) RequiresOwnerReference() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference{}
 }
 
 type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind struct{}
@@ -6997,6 +7534,23 @@ func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerRefere
 }
 
 func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesKind) WithArrayOfValues(values []string) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion struct{}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+	return &UpdatePropertyRequestCAS_FieldSubPath{
+		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Version().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) WithValue(value string) *UpdatePropertyRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesVersion) WithArrayOfValues(values []string) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -7017,20 +7571,20 @@ func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerRefere
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 
-type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid struct{}
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion struct{}
 
-func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
 	return &UpdatePropertyRequestCAS_FieldSubPath{
 		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
-		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Uid().FieldPath(),
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().Region().FieldPath(),
 	}
 }
 
-func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) WithValue(value string) *UpdatePropertyRequestCAS_FieldSubPathValue {
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) WithValue(value string) *UpdatePropertyRequestCAS_FieldSubPathValue {
 	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
 }
 
-func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesUid) WithArrayOfValues(values []string) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRegion) WithArrayOfValues(values []string) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -7065,6 +7619,23 @@ func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerRefere
 }
 
 func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesBlockOwnerDeletion) WithArrayOfValues(values []bool) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference struct{}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+	return &UpdatePropertyRequestCAS_FieldSubPath{
+		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().OwnerReferences().RequiresOwnerReference().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithValue(value bool) *UpdatePropertyRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataOwnerReferencesRequiresOwnerReference) WithArrayOfValues(values []bool) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 
@@ -7169,6 +7740,65 @@ func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncingRegi
 
 func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataSyncingRegions) WithItemValue(value string) *UpdatePropertyRequestCAS_FieldSubPathArrayItemValue {
 	return s.FieldPath().WithIArrayItemValue(value).(*UpdatePropertyRequestCAS_FieldSubPathArrayItemValue)
+}
+
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle struct{}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+	return &UpdatePropertyRequestCAS_FieldSubPath{
+		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle) WithValue(value *ntt_meta.Lifecycle) *UpdatePropertyRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle) WithArrayOfValues(values []*ntt_meta.Lifecycle) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
+}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle) State() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleState {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleState{}
+}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycle) BlockDeletion() UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion {
+	return UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion{}
+}
+
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleState struct{}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleState) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+	return &UpdatePropertyRequestCAS_FieldSubPath{
+		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().State().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleState) WithValue(value ntt_meta.Lifecycle_State) *UpdatePropertyRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleState) WithArrayOfValues(values []ntt_meta.Lifecycle_State) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
+}
+
+type UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion struct{}
+
+func (UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) FieldPath() *UpdatePropertyRequestCAS_FieldSubPath {
+	return &UpdatePropertyRequestCAS_FieldSubPath{
+		selector: UpdatePropertyRequestCAS_FieldPathSelectorConditionalState,
+		subPath:  property.NewPropertyFieldPathBuilder().Metadata().Lifecycle().BlockDeletion().FieldPath(),
+	}
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) WithValue(value bool) *UpdatePropertyRequestCAS_FieldSubPathValue {
+	return s.FieldPath().WithIValue(value).(*UpdatePropertyRequestCAS_FieldSubPathValue)
+}
+
+func (s UpdatePropertyRequest_CASPathSelectorConditionalStateMetadataLifecycleBlockDeletion) WithArrayOfValues(values []bool) *UpdatePropertyRequestCAS_FieldSubPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*UpdatePropertyRequestCAS_FieldSubPathArrayOfValues)
 }
 
 type UpdatePropertyRequest_CASPathSelectorConditionalStateSitePlacement struct{}

@@ -236,6 +236,10 @@ func (fp *ActivationRequest_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *ActivationRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ActivationRequest_FieldTerminalPath) WithIValue(value interface{}) ActivationRequest_FieldPathValue {
 	switch fp.selector {
 	case ActivationRequest_FieldPathSelectorActivate:
@@ -379,6 +383,12 @@ func (fps *ActivationRequest_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *ActivationRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ActivationRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ActivationRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ActivationRequest_FieldSubPath) WithIValue(value interface{}) ActivationRequest_FieldPathValue {
@@ -899,6 +909,10 @@ func (fp *ActivationRequestActivate_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ActivationRequestActivate_FieldPathSelectorClientCookie
 }
 
+func (fp *ActivationRequestActivate_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ActivationRequestActivate_FieldTerminalPath) WithIValue(value interface{}) ActivationRequestActivate_FieldPathValue {
 	switch fp.selector {
 	case ActivationRequestActivate_FieldPathSelectorToken:
@@ -1025,6 +1039,12 @@ func (fps *ActivationRequestActivate_FieldSubPath) ClearValueRaw(item proto.Mess
 // IsLeaf - whether field path is holds simple value
 func (fps *ActivationRequestActivate_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ActivationRequestActivate_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ActivationRequestActivate_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ActivationRequestActivate_FieldSubPath) WithIValue(value interface{}) ActivationRequestActivate_FieldPathValue {
@@ -1508,6 +1528,10 @@ func (fp *ActivationRequestConfirmActivation_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ActivationRequestConfirmActivation_FieldPathSelectorClientCookie
 }
 
+func (fp *ActivationRequestConfirmActivation_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ActivationRequestConfirmActivation_FieldTerminalPath) WithIValue(value interface{}) ActivationRequestConfirmActivation_FieldPathValue {
 	switch fp.selector {
 	case ActivationRequestConfirmActivation_FieldPathSelectorClientCookie:
@@ -1921,6 +1945,10 @@ func (fp *ActivationResponse_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *ActivationResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ActivationResponse_FieldTerminalPath) WithIValue(value interface{}) ActivationResponse_FieldPathValue {
 	switch fp.selector {
 	case ActivationResponse_FieldPathSelectorActivated:
@@ -2064,6 +2092,12 @@ func (fps *ActivationResponse_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *ActivationResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ActivationResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ActivationResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ActivationResponse_FieldSubPath) WithIValue(value interface{}) ActivationResponse_FieldPathValue {
@@ -2579,6 +2613,10 @@ func (fp *ActivationResponseActivated_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *ActivationResponseActivated_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ActivationResponseActivated_FieldTerminalPath) WithIValue(value interface{}) ActivationResponseActivated_FieldPathValue {
 	switch fp.selector {
 	case ActivationResponseActivated_FieldPathSelectorProbe:
@@ -2714,6 +2752,12 @@ func (fps *ActivationResponseActivated_FieldSubPath) ClearValueRaw(item proto.Me
 // IsLeaf - whether field path is holds simple value
 func (fps *ActivationResponseActivated_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ActivationResponseActivated_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ActivationResponseActivated_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ActivationResponseActivated_FieldSubPath) WithIValue(value interface{}) ActivationResponseActivated_FieldPathValue {
@@ -3165,6 +3209,10 @@ func (fp *ActivationResponseConfirmActivationAck_FieldTerminalPath) ClearValueRa
 // IsLeaf - whether field path is holds simple value
 func (fp *ActivationResponseConfirmActivationAck_FieldTerminalPath) IsLeaf() bool {
 	return false
+}
+
+func (fp *ActivationResponseConfirmActivationAck_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *ActivationResponseConfirmActivationAck_FieldTerminalPath) WithIValue(value interface{}) ActivationResponseConfirmActivationAck_FieldPathValue {

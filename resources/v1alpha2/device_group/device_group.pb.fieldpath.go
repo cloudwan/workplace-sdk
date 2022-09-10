@@ -236,6 +236,10 @@ func (fp *DeviceGroup_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == DeviceGroup_FieldPathSelectorDisplayName
 }
 
+func (fp *DeviceGroup_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *DeviceGroup_FieldTerminalPath) WithIValue(value interface{}) DeviceGroup_FieldPathValue {
 	switch fp.selector {
 	case DeviceGroup_FieldPathSelectorName:
@@ -362,6 +366,12 @@ func (fps *DeviceGroup_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *DeviceGroup_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *DeviceGroup_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&DeviceGroup_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *DeviceGroup_FieldSubPath) WithIValue(value interface{}) DeviceGroup_FieldPathValue {

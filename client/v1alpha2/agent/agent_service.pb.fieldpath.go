@@ -236,6 +236,10 @@ func (fp *GetAgentRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == GetAgentRequest_FieldPathSelectorView
 }
 
+func (fp *GetAgentRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *GetAgentRequest_FieldTerminalPath) WithIValue(value interface{}) GetAgentRequest_FieldPathValue {
 	switch fp.selector {
 	case GetAgentRequest_FieldPathSelectorName:
@@ -698,6 +702,10 @@ func (fp *BatchGetAgentsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == BatchGetAgentsRequest_FieldPathSelectorView
 }
 
+func (fp *BatchGetAgentsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BatchGetAgentsRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetAgentsRequest_FieldPathValue {
 	switch fp.selector {
 	case BatchGetAgentsRequest_FieldPathSelectorNames:
@@ -1143,6 +1151,10 @@ func (fp *BatchGetAgentsResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == BatchGetAgentsResponse_FieldPathSelectorMissing
 }
 
+func (fp *BatchGetAgentsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BatchGetAgentsResponse_FieldTerminalPath) WithIValue(value interface{}) BatchGetAgentsResponse_FieldPathValue {
 	switch fp.selector {
 	case BatchGetAgentsResponse_FieldPathSelectorAgents:
@@ -1273,6 +1285,12 @@ func (fps *BatchGetAgentsResponse_FieldSubPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fps *BatchGetAgentsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *BatchGetAgentsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&BatchGetAgentsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *BatchGetAgentsResponse_FieldSubPath) WithIValue(value interface{}) BatchGetAgentsResponse_FieldPathValue {
@@ -1829,6 +1847,10 @@ func (fp *ListAgentsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListAgentsRequest_FieldPathSelectorFilter ||
 		fp.selector == ListAgentsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == ListAgentsRequest_FieldPathSelectorView
+}
+
+func (fp *ListAgentsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *ListAgentsRequest_FieldTerminalPath) WithIValue(value interface{}) ListAgentsRequest_FieldPathValue {
@@ -2392,6 +2414,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListAgentsResponse_FieldPathSelectorNextPageToken
 }
 
+func (fp *ListAgentsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ListAgentsResponse_FieldTerminalPath) WithIValue(value interface{}) ListAgentsResponse_FieldPathValue {
 	switch fp.selector {
 	case ListAgentsResponse_FieldPathSelectorAgents:
@@ -2524,6 +2550,12 @@ func (fps *ListAgentsResponse_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *ListAgentsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ListAgentsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ListAgentsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ListAgentsResponse_FieldSubPath) WithIValue(value interface{}) ListAgentsResponse_FieldPathValue {
@@ -3029,6 +3061,10 @@ func (fp *WatchAgentRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchAgentRequest_FieldPathSelectorView
 }
 
+func (fp *WatchAgentRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchAgentRequest_FieldTerminalPath) WithIValue(value interface{}) WatchAgentRequest_FieldPathValue {
 	switch fp.selector {
 	case WatchAgentRequest_FieldPathSelectorName:
@@ -3458,6 +3494,10 @@ func (fp *WatchAgentResponse_FieldTerminalPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fp *WatchAgentResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == WatchAgentResponse_FieldPathSelectorChange
+}
+
+func (fp *WatchAgentResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *WatchAgentResponse_FieldTerminalPath) WithIValue(value interface{}) WatchAgentResponse_FieldPathValue {
@@ -3962,6 +4002,10 @@ func (fp *WatchAgentsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchAgentsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == WatchAgentsRequest_FieldPathSelectorView ||
 		fp.selector == WatchAgentsRequest_FieldPathSelectorMaxChunkSize
+}
+
+func (fp *WatchAgentsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *WatchAgentsRequest_FieldTerminalPath) WithIValue(value interface{}) WatchAgentsRequest_FieldPathValue {
@@ -4662,6 +4706,10 @@ func (fp *WatchAgentsResponse_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchAgentsResponse_FieldPathSelectorIsHardReset
 }
 
+func (fp *WatchAgentsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchAgentsResponse_FieldTerminalPath) WithIValue(value interface{}) WatchAgentsResponse_FieldPathValue {
 	switch fp.selector {
 	case WatchAgentsResponse_FieldPathSelectorAgentChanges:
@@ -4806,6 +4854,12 @@ func (fps *WatchAgentsResponse_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *WatchAgentsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *WatchAgentsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&WatchAgentsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *WatchAgentsResponse_FieldSubPath) WithIValue(value interface{}) WatchAgentsResponse_FieldPathValue {
@@ -5401,6 +5455,10 @@ func (fp *WatchAgentsResponsePageTokenChange_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchAgentsResponsePageTokenChange_FieldPathSelectorNextPageToken
 }
 
+func (fp *WatchAgentsResponsePageTokenChange_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchAgentsResponsePageTokenChange_FieldTerminalPath) WithIValue(value interface{}) WatchAgentsResponsePageTokenChange_FieldPathValue {
 	switch fp.selector {
 	case WatchAgentsResponsePageTokenChange_FieldPathSelectorPrevPageToken:
@@ -5812,6 +5870,10 @@ func (fp *CreateAgentRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == CreateAgentRequest_FieldPathSelectorParent
 }
 
+func (fp *CreateAgentRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *CreateAgentRequest_FieldTerminalPath) WithIValue(value interface{}) CreateAgentRequest_FieldPathValue {
 	switch fp.selector {
 	case CreateAgentRequest_FieldPathSelectorParent:
@@ -5934,6 +5996,12 @@ func (fps *CreateAgentRequest_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *CreateAgentRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *CreateAgentRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&CreateAgentRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *CreateAgentRequest_FieldSubPath) WithIValue(value interface{}) CreateAgentRequest_FieldPathValue {
@@ -6452,6 +6520,10 @@ func (fp *UpdateAgentRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == UpdateAgentRequest_FieldPathSelectorUpdateMask
 }
 
+func (fp *UpdateAgentRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *UpdateAgentRequest_FieldTerminalPath) WithIValue(value interface{}) UpdateAgentRequest_FieldPathValue {
 	switch fp.selector {
 	case UpdateAgentRequest_FieldPathSelectorAgent:
@@ -6591,6 +6663,12 @@ func (fps *UpdateAgentRequest_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *UpdateAgentRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *UpdateAgentRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&UpdateAgentRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *UpdateAgentRequest_FieldSubPath) WithIValue(value interface{}) UpdateAgentRequest_FieldPathValue {
@@ -7104,6 +7182,10 @@ func (fp *UpdateAgentRequestCAS_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == UpdateAgentRequestCAS_FieldPathSelectorFieldMask
 }
 
+func (fp *UpdateAgentRequestCAS_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *UpdateAgentRequestCAS_FieldTerminalPath) WithIValue(value interface{}) UpdateAgentRequestCAS_FieldPathValue {
 	switch fp.selector {
 	case UpdateAgentRequestCAS_FieldPathSelectorConditionalState:
@@ -7226,6 +7308,12 @@ func (fps *UpdateAgentRequestCAS_FieldSubPath) ClearValueRaw(item proto.Message)
 // IsLeaf - whether field path is holds simple value
 func (fps *UpdateAgentRequestCAS_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *UpdateAgentRequestCAS_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&UpdateAgentRequestCAS_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *UpdateAgentRequestCAS_FieldSubPath) WithIValue(value interface{}) UpdateAgentRequestCAS_FieldPathValue {
@@ -7678,6 +7766,10 @@ func (fp *DeleteAgentRequest_FieldTerminalPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fp *DeleteAgentRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == DeleteAgentRequest_FieldPathSelectorName
+}
+
+func (fp *DeleteAgentRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *DeleteAgentRequest_FieldTerminalPath) WithIValue(value interface{}) DeleteAgentRequest_FieldPathValue {

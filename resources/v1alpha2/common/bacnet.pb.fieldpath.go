@@ -353,6 +353,10 @@ func (fp *BACNetEntity_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == BACNetEntity_FieldPathSelectorMarkerTags
 }
 
+func (fp *BACNetEntity_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BACNetEntity_FieldTerminalPath) WithIValue(value interface{}) BACNetEntity_FieldPathValue {
 	switch fp.selector {
 	case BACNetEntity_FieldPathSelectorObjectType:
@@ -540,6 +544,10 @@ func (fpm *BACNetEntity_FieldPathMap) IsLeaf() bool {
 	default:
 		panic(fmt.Sprintf("Invalid selector for BACNetEntity: %d", fpm.selector))
 	}
+}
+
+func (fpm *BACNetEntity_FieldPathMap) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fpm}
 }
 
 func (fpm *BACNetEntity_FieldPathMap) WithIValue(value interface{}) BACNetEntity_FieldPathValue {

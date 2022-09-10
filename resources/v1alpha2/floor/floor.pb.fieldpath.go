@@ -366,6 +366,10 @@ func (fp *Floor_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == Floor_FieldPathSelectorOrderingNumber
 }
 
+func (fp *Floor_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Floor_FieldTerminalPath) WithIValue(value interface{}) Floor_FieldPathValue {
 	switch fp.selector {
 	case Floor_FieldPathSelectorName:
@@ -587,6 +591,12 @@ func (fps *Floor_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Floor_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Floor_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Floor_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Floor_FieldSubPath) WithIValue(value interface{}) Floor_FieldPathValue {
@@ -1311,6 +1321,10 @@ func (fp *FloorVendorSpec_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *FloorVendorSpec_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorSpec_FieldTerminalPath) WithIValue(value interface{}) FloorVendorSpec_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorSpec_FieldPathSelectorPointGrab:
@@ -1446,6 +1460,12 @@ func (fps *FloorVendorSpec_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorSpec_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorSpec_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorSpec_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorSpec_FieldSubPath) WithIValue(value interface{}) FloorVendorSpec_FieldPathValue {
@@ -1927,6 +1947,10 @@ func (fp *FloorVendorInfo_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *FloorVendorInfo_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorInfo_FieldTerminalPath) WithIValue(value interface{}) FloorVendorInfo_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorInfo_FieldPathSelectorPointGrab:
@@ -2045,6 +2069,12 @@ func (fps *FloorVendorInfo_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorInfo_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorInfo_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorInfo_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorInfo_FieldSubPath) WithIValue(value interface{}) FloorVendorInfo_FieldPathValue {
@@ -2492,6 +2522,10 @@ func (fp *FloorVendorState_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *FloorVendorState_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorState_FieldTerminalPath) WithIValue(value interface{}) FloorVendorState_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorState_FieldPathSelectorPointGrab:
@@ -2610,6 +2644,12 @@ func (fps *FloorVendorState_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorState_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorState_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorState_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorState_FieldSubPath) WithIValue(value interface{}) FloorVendorState_FieldPathValue {
@@ -3070,6 +3110,10 @@ func (fp *FloorVendorSpecPointGrab_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == FloorVendorSpecPointGrab_FieldPathSelectorFloorId
 }
 
+func (fp *FloorVendorSpecPointGrab_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorSpecPointGrab_FieldTerminalPath) WithIValue(value interface{}) FloorVendorSpecPointGrab_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorSpecPointGrab_FieldPathSelectorFloorId:
@@ -3198,6 +3242,12 @@ func (fps *FloorVendorSpecPointGrab_FieldSubPath) ClearValueRaw(item proto.Messa
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorSpecPointGrab_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorSpecPointGrab_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorSpecPointGrab_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorSpecPointGrab_FieldSubPath) WithIValue(value interface{}) FloorVendorSpecPointGrab_FieldPathValue {
@@ -3675,6 +3725,10 @@ func (fp *FloorVendorSpecMapbox_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == FloorVendorSpecMapbox_FieldPathSelectorBearing
 }
 
+func (fp *FloorVendorSpecMapbox_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorSpecMapbox_FieldTerminalPath) WithIValue(value interface{}) FloorVendorSpecMapbox_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorSpecMapbox_FieldPathSelectorFloorPlanTilesetId:
@@ -4102,6 +4156,10 @@ func (fp *FloorVendorSpecPointGrabReferencePoint_FieldTerminalPath) IsLeaf() boo
 	return fp.selector == FloorVendorSpecPointGrabReferencePoint_FieldPathSelectorLatLng
 }
 
+func (fp *FloorVendorSpecPointGrabReferencePoint_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorSpecPointGrabReferencePoint_FieldTerminalPath) WithIValue(value interface{}) FloorVendorSpecPointGrabReferencePoint_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorSpecPointGrabReferencePoint_FieldPathSelectorLatLng:
@@ -4224,6 +4282,12 @@ func (fps *FloorVendorSpecPointGrabReferencePoint_FieldSubPath) ClearValueRaw(it
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorSpecPointGrabReferencePoint_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorSpecPointGrabReferencePoint_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorSpecPointGrabReferencePoint_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorSpecPointGrabReferencePoint_FieldSubPath) WithIValue(value interface{}) FloorVendorSpecPointGrabReferencePoint_FieldPathValue {
@@ -4687,6 +4751,10 @@ func (fp *FloorVendorInfoPointGrab_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *FloorVendorInfoPointGrab_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorInfoPointGrab_FieldTerminalPath) WithIValue(value interface{}) FloorVendorInfoPointGrab_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorInfoPointGrab_FieldPathSelectorReferencePoints:
@@ -4811,6 +4879,12 @@ func (fps *FloorVendorInfoPointGrab_FieldSubPath) ClearValueRaw(item proto.Messa
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorInfoPointGrab_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorInfoPointGrab_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorInfoPointGrab_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorInfoPointGrab_FieldSubPath) WithIValue(value interface{}) FloorVendorInfoPointGrab_FieldPathValue {
@@ -5262,6 +5336,10 @@ func (fp *FloorVendorStatePointGrab_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *FloorVendorStatePointGrab_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *FloorVendorStatePointGrab_FieldTerminalPath) WithIValue(value interface{}) FloorVendorStatePointGrab_FieldPathValue {
 	switch fp.selector {
 	case FloorVendorStatePointGrab_FieldPathSelectorPeoplePositions:
@@ -5380,6 +5458,12 @@ func (fps *FloorVendorStatePointGrab_FieldSubPath) ClearValueRaw(item proto.Mess
 // IsLeaf - whether field path is holds simple value
 func (fps *FloorVendorStatePointGrab_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *FloorVendorStatePointGrab_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&FloorVendorStatePointGrab_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *FloorVendorStatePointGrab_FieldSubPath) WithIValue(value interface{}) FloorVendorStatePointGrab_FieldPathValue {
@@ -5833,6 +5917,10 @@ func (fp *FloorVendorStatePointGrabPeoplePositions_FieldTerminalPath) ClearValue
 func (fp *FloorVendorStatePointGrabPeoplePositions_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == FloorVendorStatePointGrabPeoplePositions_FieldPathSelectorCoordinates ||
 		fp.selector == FloorVendorStatePointGrabPeoplePositions_FieldPathSelectorLastReportTimestamp
+}
+
+func (fp *FloorVendorStatePointGrabPeoplePositions_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *FloorVendorStatePointGrabPeoplePositions_FieldTerminalPath) WithIValue(value interface{}) FloorVendorStatePointGrabPeoplePositions_FieldPathValue {

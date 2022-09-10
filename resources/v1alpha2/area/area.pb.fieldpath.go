@@ -282,6 +282,10 @@ func (fp *Area_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == Area_FieldPathSelectorDisplayName
 }
 
+func (fp *Area_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Area_FieldTerminalPath) WithIValue(value interface{}) Area_FieldPathValue {
 	switch fp.selector {
 	case Area_FieldPathSelectorName:
@@ -442,6 +446,12 @@ func (fps *Area_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Area_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Area_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Area_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Area_FieldSubPath) WithIValue(value interface{}) Area_FieldPathValue {
@@ -1014,6 +1024,10 @@ func (fp *AreaVendorSpec_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *AreaVendorSpec_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *AreaVendorSpec_FieldTerminalPath) WithIValue(value interface{}) AreaVendorSpec_FieldPathValue {
 	switch fp.selector {
 	case AreaVendorSpec_FieldPathSelectorPointGrab:
@@ -1132,6 +1146,12 @@ func (fps *AreaVendorSpec_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *AreaVendorSpec_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *AreaVendorSpec_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&AreaVendorSpec_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *AreaVendorSpec_FieldSubPath) WithIValue(value interface{}) AreaVendorSpec_FieldPathValue {
@@ -1565,6 +1585,10 @@ func (fp *AreaVendorSpecPointGrab_FieldTerminalPath) ClearValueRaw(item proto.Me
 // IsLeaf - whether field path is holds simple value
 func (fp *AreaVendorSpecPointGrab_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == AreaVendorSpecPointGrab_FieldPathSelectorBuildingId
+}
+
+func (fp *AreaVendorSpecPointGrab_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *AreaVendorSpecPointGrab_FieldTerminalPath) WithIValue(value interface{}) AreaVendorSpecPointGrab_FieldPathValue {

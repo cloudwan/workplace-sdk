@@ -236,6 +236,10 @@ func (fp *GetDeviceGroupRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == GetDeviceGroupRequest_FieldPathSelectorView
 }
 
+func (fp *GetDeviceGroupRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *GetDeviceGroupRequest_FieldTerminalPath) WithIValue(value interface{}) GetDeviceGroupRequest_FieldPathValue {
 	switch fp.selector {
 	case GetDeviceGroupRequest_FieldPathSelectorName:
@@ -698,6 +702,10 @@ func (fp *BatchGetDeviceGroupsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == BatchGetDeviceGroupsRequest_FieldPathSelectorView
 }
 
+func (fp *BatchGetDeviceGroupsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BatchGetDeviceGroupsRequest_FieldTerminalPath) WithIValue(value interface{}) BatchGetDeviceGroupsRequest_FieldPathValue {
 	switch fp.selector {
 	case BatchGetDeviceGroupsRequest_FieldPathSelectorNames:
@@ -1143,6 +1151,10 @@ func (fp *BatchGetDeviceGroupsResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == BatchGetDeviceGroupsResponse_FieldPathSelectorMissing
 }
 
+func (fp *BatchGetDeviceGroupsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *BatchGetDeviceGroupsResponse_FieldTerminalPath) WithIValue(value interface{}) BatchGetDeviceGroupsResponse_FieldPathValue {
 	switch fp.selector {
 	case BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups:
@@ -1273,6 +1285,12 @@ func (fps *BatchGetDeviceGroupsResponse_FieldSubPath) ClearValueRaw(item proto.M
 // IsLeaf - whether field path is holds simple value
 func (fps *BatchGetDeviceGroupsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *BatchGetDeviceGroupsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&BatchGetDeviceGroupsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *BatchGetDeviceGroupsResponse_FieldSubPath) WithIValue(value interface{}) BatchGetDeviceGroupsResponse_FieldPathValue {
@@ -1829,6 +1847,10 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorFilter ||
 		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorView
+}
+
+func (fp *ListDeviceGroupsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *ListDeviceGroupsRequest_FieldTerminalPath) WithIValue(value interface{}) ListDeviceGroupsRequest_FieldPathValue {
@@ -2392,6 +2414,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListDeviceGroupsResponse_FieldPathSelectorNextPageToken
 }
 
+func (fp *ListDeviceGroupsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ListDeviceGroupsResponse_FieldTerminalPath) WithIValue(value interface{}) ListDeviceGroupsResponse_FieldPathValue {
 	switch fp.selector {
 	case ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups:
@@ -2524,6 +2550,12 @@ func (fps *ListDeviceGroupsResponse_FieldSubPath) ClearValueRaw(item proto.Messa
 // IsLeaf - whether field path is holds simple value
 func (fps *ListDeviceGroupsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ListDeviceGroupsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ListDeviceGroupsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ListDeviceGroupsResponse_FieldSubPath) WithIValue(value interface{}) ListDeviceGroupsResponse_FieldPathValue {
@@ -3029,6 +3061,10 @@ func (fp *WatchDeviceGroupRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchDeviceGroupRequest_FieldPathSelectorView
 }
 
+func (fp *WatchDeviceGroupRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchDeviceGroupRequest_FieldTerminalPath) WithIValue(value interface{}) WatchDeviceGroupRequest_FieldPathValue {
 	switch fp.selector {
 	case WatchDeviceGroupRequest_FieldPathSelectorName:
@@ -3458,6 +3494,10 @@ func (fp *WatchDeviceGroupResponse_FieldTerminalPath) ClearValueRaw(item proto.M
 // IsLeaf - whether field path is holds simple value
 func (fp *WatchDeviceGroupResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == WatchDeviceGroupResponse_FieldPathSelectorChange
+}
+
+func (fp *WatchDeviceGroupResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *WatchDeviceGroupResponse_FieldTerminalPath) WithIValue(value interface{}) WatchDeviceGroupResponse_FieldPathValue {
@@ -3962,6 +4002,10 @@ func (fp *WatchDeviceGroupsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchDeviceGroupsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == WatchDeviceGroupsRequest_FieldPathSelectorView ||
 		fp.selector == WatchDeviceGroupsRequest_FieldPathSelectorMaxChunkSize
+}
+
+func (fp *WatchDeviceGroupsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *WatchDeviceGroupsRequest_FieldTerminalPath) WithIValue(value interface{}) WatchDeviceGroupsRequest_FieldPathValue {
@@ -4662,6 +4706,10 @@ func (fp *WatchDeviceGroupsResponse_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchDeviceGroupsResponse_FieldPathSelectorIsHardReset
 }
 
+func (fp *WatchDeviceGroupsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchDeviceGroupsResponse_FieldTerminalPath) WithIValue(value interface{}) WatchDeviceGroupsResponse_FieldPathValue {
 	switch fp.selector {
 	case WatchDeviceGroupsResponse_FieldPathSelectorDeviceGroupChanges:
@@ -4806,6 +4854,12 @@ func (fps *WatchDeviceGroupsResponse_FieldSubPath) ClearValueRaw(item proto.Mess
 // IsLeaf - whether field path is holds simple value
 func (fps *WatchDeviceGroupsResponse_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *WatchDeviceGroupsResponse_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&WatchDeviceGroupsResponse_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *WatchDeviceGroupsResponse_FieldSubPath) WithIValue(value interface{}) WatchDeviceGroupsResponse_FieldPathValue {
@@ -5401,6 +5455,10 @@ func (fp *WatchDeviceGroupsResponsePageTokenChange_FieldTerminalPath) IsLeaf() b
 		fp.selector == WatchDeviceGroupsResponsePageTokenChange_FieldPathSelectorNextPageToken
 }
 
+func (fp *WatchDeviceGroupsResponsePageTokenChange_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *WatchDeviceGroupsResponsePageTokenChange_FieldTerminalPath) WithIValue(value interface{}) WatchDeviceGroupsResponsePageTokenChange_FieldPathValue {
 	switch fp.selector {
 	case WatchDeviceGroupsResponsePageTokenChange_FieldPathSelectorPrevPageToken:
@@ -5812,6 +5870,10 @@ func (fp *CreateDeviceGroupRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == CreateDeviceGroupRequest_FieldPathSelectorParent
 }
 
+func (fp *CreateDeviceGroupRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *CreateDeviceGroupRequest_FieldTerminalPath) WithIValue(value interface{}) CreateDeviceGroupRequest_FieldPathValue {
 	switch fp.selector {
 	case CreateDeviceGroupRequest_FieldPathSelectorParent:
@@ -5934,6 +5996,12 @@ func (fps *CreateDeviceGroupRequest_FieldSubPath) ClearValueRaw(item proto.Messa
 // IsLeaf - whether field path is holds simple value
 func (fps *CreateDeviceGroupRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *CreateDeviceGroupRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&CreateDeviceGroupRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *CreateDeviceGroupRequest_FieldSubPath) WithIValue(value interface{}) CreateDeviceGroupRequest_FieldPathValue {
@@ -6452,6 +6520,10 @@ func (fp *UpdateDeviceGroupRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == UpdateDeviceGroupRequest_FieldPathSelectorUpdateMask
 }
 
+func (fp *UpdateDeviceGroupRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *UpdateDeviceGroupRequest_FieldTerminalPath) WithIValue(value interface{}) UpdateDeviceGroupRequest_FieldPathValue {
 	switch fp.selector {
 	case UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup:
@@ -6591,6 +6663,12 @@ func (fps *UpdateDeviceGroupRequest_FieldSubPath) ClearValueRaw(item proto.Messa
 // IsLeaf - whether field path is holds simple value
 func (fps *UpdateDeviceGroupRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *UpdateDeviceGroupRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&UpdateDeviceGroupRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *UpdateDeviceGroupRequest_FieldSubPath) WithIValue(value interface{}) UpdateDeviceGroupRequest_FieldPathValue {
@@ -7104,6 +7182,10 @@ func (fp *UpdateDeviceGroupRequestCAS_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == UpdateDeviceGroupRequestCAS_FieldPathSelectorFieldMask
 }
 
+func (fp *UpdateDeviceGroupRequestCAS_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *UpdateDeviceGroupRequestCAS_FieldTerminalPath) WithIValue(value interface{}) UpdateDeviceGroupRequestCAS_FieldPathValue {
 	switch fp.selector {
 	case UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState:
@@ -7226,6 +7308,12 @@ func (fps *UpdateDeviceGroupRequestCAS_FieldSubPath) ClearValueRaw(item proto.Me
 // IsLeaf - whether field path is holds simple value
 func (fps *UpdateDeviceGroupRequestCAS_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *UpdateDeviceGroupRequestCAS_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&UpdateDeviceGroupRequestCAS_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *UpdateDeviceGroupRequestCAS_FieldSubPath) WithIValue(value interface{}) UpdateDeviceGroupRequestCAS_FieldPathValue {
@@ -7678,6 +7766,10 @@ func (fp *DeleteDeviceGroupRequest_FieldTerminalPath) ClearValueRaw(item proto.M
 // IsLeaf - whether field path is holds simple value
 func (fp *DeleteDeviceGroupRequest_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == DeleteDeviceGroupRequest_FieldPathSelectorName
+}
+
+func (fp *DeleteDeviceGroupRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *DeleteDeviceGroupRequest_FieldTerminalPath) WithIValue(value interface{}) DeleteDeviceGroupRequest_FieldPathValue {

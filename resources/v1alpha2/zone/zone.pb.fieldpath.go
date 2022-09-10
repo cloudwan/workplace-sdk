@@ -326,6 +326,10 @@ func (fp *Zone_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == Zone_FieldPathSelectorType
 }
 
+func (fp *Zone_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *Zone_FieldTerminalPath) WithIValue(value interface{}) Zone_FieldPathValue {
 	switch fp.selector {
 	case Zone_FieldPathSelectorName:
@@ -507,6 +511,12 @@ func (fps *Zone_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *Zone_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *Zone_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&Zone_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *Zone_FieldSubPath) WithIValue(value interface{}) Zone_FieldPathValue {
@@ -1137,6 +1147,10 @@ func (fp *ZoneVendorSpec_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *ZoneVendorSpec_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ZoneVendorSpec_FieldTerminalPath) WithIValue(value interface{}) ZoneVendorSpec_FieldPathValue {
 	switch fp.selector {
 	case ZoneVendorSpec_FieldPathSelectorPointGrab:
@@ -1255,6 +1269,12 @@ func (fps *ZoneVendorSpec_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *ZoneVendorSpec_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ZoneVendorSpec_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ZoneVendorSpec_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ZoneVendorSpec_FieldSubPath) WithIValue(value interface{}) ZoneVendorSpec_FieldPathValue {
@@ -1702,6 +1722,10 @@ func (fp *ZoneState_FieldTerminalPath) IsLeaf() bool {
 	return false
 }
 
+func (fp *ZoneState_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ZoneState_FieldTerminalPath) WithIValue(value interface{}) ZoneState_FieldPathValue {
 	switch fp.selector {
 	case ZoneState_FieldPathSelectorOccupancy:
@@ -1820,6 +1844,12 @@ func (fps *ZoneState_FieldSubPath) ClearValueRaw(item proto.Message) {
 // IsLeaf - whether field path is holds simple value
 func (fps *ZoneState_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ZoneState_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ZoneState_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ZoneState_FieldSubPath) WithIValue(value interface{}) ZoneState_FieldPathValue {
@@ -2280,6 +2310,10 @@ func (fp *ZoneVendorSpecPointGrab_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ZoneVendorSpecPointGrab_FieldPathSelectorAreaId
 }
 
+func (fp *ZoneVendorSpecPointGrab_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *ZoneVendorSpecPointGrab_FieldTerminalPath) WithIValue(value interface{}) ZoneVendorSpecPointGrab_FieldPathValue {
 	switch fp.selector {
 	case ZoneVendorSpecPointGrab_FieldPathSelectorAreaId:
@@ -2402,6 +2436,12 @@ func (fps *ZoneVendorSpecPointGrab_FieldSubPath) ClearValueRaw(item proto.Messag
 // IsLeaf - whether field path is holds simple value
 func (fps *ZoneVendorSpecPointGrab_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *ZoneVendorSpecPointGrab_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&ZoneVendorSpecPointGrab_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *ZoneVendorSpecPointGrab_FieldSubPath) WithIValue(value interface{}) ZoneVendorSpecPointGrab_FieldPathValue {
@@ -2876,6 +2916,10 @@ func (fp *ZoneStateOccupancy_FieldTerminalPath) ClearValueRaw(item proto.Message
 func (fp *ZoneStateOccupancy_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ZoneStateOccupancy_FieldPathSelectorIsOccupied ||
 		fp.selector == ZoneStateOccupancy_FieldPathSelectorLastOccupiedTime
+}
+
+func (fp *ZoneStateOccupancy_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
 }
 
 func (fp *ZoneStateOccupancy_FieldTerminalPath) WithIValue(value interface{}) ZoneStateOccupancy_FieldPathValue {

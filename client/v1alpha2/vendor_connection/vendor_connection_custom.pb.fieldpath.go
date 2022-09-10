@@ -351,6 +351,10 @@ func (fp *PointGrabTelemetryNotifyRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == PointGrabTelemetryNotifyRequest_FieldPathSelectorCountOut
 }
 
+func (fp *PointGrabTelemetryNotifyRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	return []gotenobject.FieldPath{fp}
+}
+
 func (fp *PointGrabTelemetryNotifyRequest_FieldTerminalPath) WithIValue(value interface{}) PointGrabTelemetryNotifyRequest_FieldPathValue {
 	switch fp.selector {
 	case PointGrabTelemetryNotifyRequest_FieldPathSelectorName:
@@ -517,6 +521,12 @@ func (fps *PointGrabTelemetryNotifyRequest_FieldSubPath) ClearValueRaw(item prot
 // IsLeaf - whether field path is holds simple value
 func (fps *PointGrabTelemetryNotifyRequest_FieldSubPath) IsLeaf() bool {
 	return fps.subPath.IsLeaf()
+}
+
+func (fps *PointGrabTelemetryNotifyRequest_FieldSubPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
+	iPaths := []gotenobject.FieldPath{&PointGrabTelemetryNotifyRequest_FieldTerminalPath{selector: fps.selector}}
+	iPaths = append(iPaths, fps.subPath.SplitIntoTerminalIPaths()...)
+	return iPaths
 }
 
 func (fps *PointGrabTelemetryNotifyRequest_FieldSubPath) WithIValue(value interface{}) PointGrabTelemetryNotifyRequest_FieldPathValue {
