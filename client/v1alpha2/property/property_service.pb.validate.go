@@ -33,6 +33,7 @@ import (
 	site "github.com/cloudwan/workplace-sdk/resources/v1alpha2/site"
 	zone "github.com/cloudwan/workplace-sdk/resources/v1alpha2/zone"
 	empty "github.com/golang/protobuf/ptypes/empty"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
@@ -55,6 +56,7 @@ var (
 var (
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
+	_ = &timestamp.Timestamp{}
 	_ = view.View(0)
 	_ = watch_type.WatchType(0)
 	_ = &area.Area{}

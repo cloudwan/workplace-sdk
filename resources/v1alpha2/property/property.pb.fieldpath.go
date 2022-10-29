@@ -36,8 +36,8 @@ import (
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -46,11 +46,11 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
@@ -791,7 +791,11 @@ func (fpaiv *Property_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto
 func (fpaiv *Property_FieldTerminalPathArrayItemValue) ContainsValue(source *Property) bool {
 	slice := fpaiv.Property_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1471,7 +1475,11 @@ func (fpaiv *PropertySitePlacement_FieldTerminalPathArrayItemValue) GetSingleRaw
 func (fpaiv *PropertySitePlacement_FieldTerminalPathArrayItemValue) ContainsValue(source *Property_SitePlacement) bool {
 	slice := fpaiv.PropertySitePlacement_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1912,7 +1920,11 @@ func (fpaiv *PropertyMetricOverride_FieldTerminalPathArrayItemValue) GetSingleRa
 func (fpaiv *PropertyMetricOverride_FieldTerminalPathArrayItemValue) ContainsValue(source *Property_MetricOverride) bool {
 	slice := fpaiv.PropertyMetricOverride_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

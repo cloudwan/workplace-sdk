@@ -33,6 +33,15 @@ div.operation .signature {
 div.operation .description {
   padding: 0.2em;
 }
+div.operation .rest {
+  font-size: 80%;
+  color: #808080;
+  padding: 0.2em;
+}
+div.operation .rest pre {
+  color: inherit;
+  margin: 2px 0px;
+}
 table th,
 table td {
   padding: 0.2em;
@@ -66,6 +75,8 @@ table.fields tbody tr td.none {
 }
 </style>
 </head>
+
+
 <body>
 <h1>Service: Workplace (ntt.workplace.v1alpha2 - v1alpha2)</h1>
 
@@ -140,6 +151,17 @@ table.fields tbody tr td.none {
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/agents/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -153,6 +175,17 @@ table.fields tbody tr td.none {
 <p>BatchGetAgents</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/agents:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -168,6 +201,17 @@ table.fields tbody tr td.none {
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*}/agents </pre>
+
+</div>
+
+
 </div>
 
 
@@ -181,6 +225,17 @@ table.fields tbody tr td.none {
 <p>WatchAgent</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/agents/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -196,6 +251,17 @@ table.fields tbody tr td.none {
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*}/agents:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -209,6 +275,17 @@ table.fields tbody tr td.none {
 <p>CreateAgent</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*}/agents (BODY: agent)</pre>
+
+</div>
+
 
 </div>
 
@@ -224,6 +301,17 @@ table.fields tbody tr td.none {
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{agent.name=projects/*/regions/*/agents/*} (BODY: agent)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -238,6 +326,17 @@ table.fields tbody tr td.none {
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/agents/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -251,6 +350,17 @@ table.fields tbody tr td.none {
 <p>Activation</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/agents:activation </pre>
+
+</div>
+
 
 </div>
 
@@ -582,6 +692,17 @@ populated only for stateful watch type.</p>
 </tr>
 <tr><td class="description"><p>A token identifying watch resume point from previous session.
 Can be populated only for stateless watch type.</p>
+</td></tr>
+
+<tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
 </td></tr>
 
 <tr>
@@ -1076,6 +1197,17 @@ won't be usable</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -1089,6 +1221,17 @@ won't be usable</p>
 <p>BatchGetAreas</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/areas:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -1104,6 +1247,17 @@ won't be usable</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/areas </pre>
+
+</div>
+
+
 </div>
 
 
@@ -1117,6 +1271,17 @@ won't be usable</p>
 <p>WatchArea</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -1132,6 +1297,17 @@ won't be usable</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/areas:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -1145,6 +1321,17 @@ won't be usable</p>
 <p>CreateArea</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/areas (BODY: area)</pre>
+
+</div>
+
 
 </div>
 
@@ -1160,6 +1347,17 @@ won't be usable</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{area.name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*} (BODY: area)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -1173,6 +1371,17 @@ won't be usable</p>
 <p>DeleteArea</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -1546,6 +1755,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -1896,6 +2116,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -1909,6 +2140,17 @@ compare.</p>
 <p>BatchGetBuildings</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/buildings:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -1924,6 +2166,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*}/buildings </pre>
+
+</div>
+
+
 </div>
 
 
@@ -1937,6 +2190,17 @@ compare.</p>
 <p>WatchBuilding</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -1952,6 +2216,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/buildings:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -1965,6 +2240,17 @@ compare.</p>
 <p>CreateBuilding</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/buildings (BODY: building)</pre>
+
+</div>
+
 
 </div>
 
@@ -1980,6 +2266,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{building.name=projects/*/regions/*/sites/*/buildings/*} (BODY: building)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -1993,6 +2290,17 @@ compare.</p>
 <p>DeleteBuilding</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -2370,6 +2678,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -2742,6 +3061,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/devices/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -2755,6 +3085,17 @@ compare.</p>
 <p>BatchGetDevices</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/devices:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -2770,6 +3111,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*}/devices </pre>
+
+</div>
+
+
 </div>
 
 
@@ -2783,6 +3135,17 @@ compare.</p>
 <p>WatchDevice</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/devices/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -2798,6 +3161,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/devices:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -2811,6 +3185,17 @@ compare.</p>
 <p>CreateDevice</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/devices (BODY: device)</pre>
+
+</div>
+
 
 </div>
 
@@ -2826,6 +3211,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{device.name=projects/*/regions/*/sites/*/devices/*} (BODY: device)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -2839,6 +3235,17 @@ compare.</p>
 <p>DeleteDevice</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/devices/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -3328,6 +3735,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -3744,6 +4162,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/deviceGroups/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -3757,6 +4186,17 @@ compare.</p>
 <p>BatchGetDeviceGroups</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/deviceGroups:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -3772,6 +4212,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*}/deviceGroups </pre>
+
+</div>
+
+
 </div>
 
 
@@ -3785,6 +4236,17 @@ compare.</p>
 <p>WatchDeviceGroup</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/deviceGroups/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -3800,6 +4262,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*}/deviceGroups:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -3813,6 +4286,17 @@ compare.</p>
 <p>CreateDeviceGroup</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*}/deviceGroups (BODY: device_group)</pre>
+
+</div>
+
 
 </div>
 
@@ -3828,6 +4312,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{device_group.name=projects/*/deviceGroups/*} (BODY: device_group)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -3841,6 +4336,17 @@ compare.</p>
 <p>DeleteDeviceGroup</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/deviceGroups/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -4177,6 +4683,17 @@ populated only for stateful watch type.</p>
 </tr>
 <tr><td class="description"><p>A token identifying watch resume point from previous session.
 Can be populated only for stateless watch type.</p>
+</td></tr>
+
+<tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
 </td></tr>
 
 <tr>
@@ -4560,6 +5077,17 @@ PointGrab: Floor</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -4573,6 +5101,17 @@ PointGrab: Floor</p>
 <p>BatchGetFloors</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/floors:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -4588,6 +5127,17 @@ PointGrab: Floor</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/floors </pre>
+
+</div>
+
+
 </div>
 
 
@@ -4601,6 +5151,17 @@ PointGrab: Floor</p>
 <p>WatchFloor</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -4616,6 +5177,17 @@ PointGrab: Floor</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/floors:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -4629,6 +5201,17 @@ PointGrab: Floor</p>
 <p>CreateFloor</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/floors (BODY: floor)</pre>
+
+</div>
+
 
 </div>
 
@@ -4644,6 +5227,17 @@ PointGrab: Floor</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{floor.name=projects/*/regions/*/sites/*/buildings/*/floors/*} (BODY: floor)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -4657,6 +5251,17 @@ PointGrab: Floor</p>
 <p>DeleteFloor</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -5204,6 +5809,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -5553,6 +6169,33 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/zones/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/zones/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*/properties/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/devices/*/properties/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -5566,6 +6209,17 @@ compare.</p>
 <p>BatchGetProperties</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/properties:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -5581,6 +6235,33 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/zones/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/zones/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*}/properties </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/devices/*}/properties </pre>
+
+</div>
+
+
 </div>
 
 
@@ -5594,6 +6275,33 @@ compare.</p>
 <p>WatchProperty</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/zones/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/zones/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*/properties/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/devices/*/properties/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -5609,6 +6317,33 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/zones/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/zones/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*}/properties:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/devices/*}/properties:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -5622,6 +6357,33 @@ compare.</p>
 <p>CreateProperty</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/properties (BODY: property)</pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/zones/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/zones/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*}/properties </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/devices/*}/properties </pre>
+
+</div>
+
 
 </div>
 
@@ -5637,6 +6399,33 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/properties/*} (BODY: property)</pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/buildings/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/buildings/*/floors/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/zones/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/buildings/*/zones/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*/properties/*} </pre>
+
+<pre>PUT /v1alpha2/{property.name=projects/*/regions/*/sites/*/devices/*/properties/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -5650,6 +6439,33 @@ compare.</p>
 <p>DeleteProperty</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/zones/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/zones/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*/properties/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/devices/*/properties/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -6066,6 +6882,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -6419,6 +7246,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -6432,6 +7270,17 @@ compare.</p>
 <p>BatchGetSites</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/sites:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -6447,6 +7296,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*}/sites </pre>
+
+</div>
+
+
 </div>
 
 
@@ -6460,6 +7320,17 @@ compare.</p>
 <p>WatchSite</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -6475,6 +7346,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*}/sites:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -6488,6 +7370,17 @@ compare.</p>
 <p>CreateSite</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*}/sites (BODY: site)</pre>
+
+</div>
+
 
 </div>
 
@@ -6503,6 +7396,17 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{site.name=projects/*/regions/*/sites/*} (BODY: site)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -6516,6 +7420,17 @@ compare.</p>
 <p>DeleteSite</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -6889,6 +7804,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -7242,6 +8168,17 @@ VendorConnectionSpec. Supported vendors:</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/vendorConnections/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -7255,6 +8192,17 @@ VendorConnectionSpec. Supported vendors:</p>
 <p>BatchGetVendorConnections</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/vendorConnections:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -7270,6 +8218,17 @@ VendorConnectionSpec. Supported vendors:</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*}/vendorConnections </pre>
+
+</div>
+
+
 </div>
 
 
@@ -7283,6 +8242,17 @@ VendorConnectionSpec. Supported vendors:</p>
 <p>WatchVendorConnection</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/vendorConnections/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -7298,6 +8268,17 @@ VendorConnectionSpec. Supported vendors:</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*}/vendorConnections:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -7311,6 +8292,17 @@ VendorConnectionSpec. Supported vendors:</p>
 <p>CreateVendorConnection</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*}/vendorConnections (BODY: vendor_connection)</pre>
+
+</div>
+
 
 </div>
 
@@ -7326,6 +8318,17 @@ VendorConnectionSpec. Supported vendors:</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{vendor_connection.name=projects/*/vendorConnections/*} (BODY: vendor_connection)</pre>
+
+</div>
+
+
 </div>
 
 
@@ -7340,6 +8343,17 @@ VendorConnectionSpec. Supported vendors:</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/vendorConnections/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -7353,6 +8367,17 @@ VendorConnectionSpec. Supported vendors:</p>
 <p>PointGrabTelemetryNotify</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/vendorConnections/*}:pointGrabTelemetryNotify </pre>
+
+</div>
+
 
 </div>
 
@@ -7887,6 +8912,17 @@ Can be populated only for stateless watch type.</p>
 </td></tr>
 
 <tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
+</td></tr>
+
+<tr>
 <th rowspan="2">filter</th>
 <td class="type"><pre>string</pre></td>
 </tr>
@@ -8383,6 +9419,23 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/zones/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/zones/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*} </pre>
+
+<pre>GET /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -8396,6 +9449,17 @@ compare.</p>
 <p>BatchGetZones</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/zones:batchGet </pre>
+
+</div>
+
 
 </div>
 
@@ -8411,6 +9475,23 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*}/zones </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/zones </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/zones </pre>
+
+<pre>GET /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}/zones </pre>
+
+</div>
+
+
 </div>
 
 
@@ -8424,6 +9505,23 @@ compare.</p>
 <p>WatchZone</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/zones/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/zones/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*}:watch </pre>
+
+<pre>POST /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*}:watch </pre>
+
+</div>
+
 
 </div>
 
@@ -8439,6 +9537,23 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/zones:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/zones:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/zones:watch </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}/zones:watch </pre>
+
+</div>
+
+
 </div>
 
 
@@ -8452,6 +9567,23 @@ compare.</p>
 <p>CreateZone</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*}/zones (BODY: zone)</pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*}/zones </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*}/zones </pre>
+
+<pre>POST /v1alpha2/{parent=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*}/zones </pre>
+
+</div>
+
 
 </div>
 
@@ -8467,6 +9599,23 @@ compare.</p>
 
 </div>
 
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>PUT /v1alpha2/{zone.name=projects/*/regions/*/sites/*/zones/*} (BODY: zone)</pre>
+
+<pre>PUT /v1alpha2/{zone.name=projects/*/regions/*/sites/*/buildings/*/zones/*} </pre>
+
+<pre>PUT /v1alpha2/{zone.name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*} </pre>
+
+<pre>PUT /v1alpha2/{zone.name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*} </pre>
+
+</div>
+
+
 </div>
 
 
@@ -8480,6 +9629,23 @@ compare.</p>
 <p>DeleteZone</p>
 
 </div>
+
+
+
+
+<div class="rest">
+Equivalent REST API:
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/zones/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/zones/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/zones/*} </pre>
+
+<pre>DELETE /v1alpha2/{name=projects/*/regions/*/sites/*/buildings/*/floors/*/areas/*/zones/*} </pre>
+
+</div>
+
 
 </div>
 
@@ -8899,6 +10065,17 @@ populated only for stateful watch type.</p>
 </tr>
 <tr><td class="description"><p>A token identifying watch resume point from previous session.
 Can be populated only for stateless watch type.</p>
+</td></tr>
+
+<tr>
+<th rowspan="2">starting_time</th>
+<td class="type"><pre>.google.protobuf.Timestamp</pre></td>
+</tr>
+<tr><td class="description"><p>Point in the time from which we want to start getting updates. This field
+can be populated only for stateless watch type and if resume token is not
+known yet. If specified, initial snapshot will NOT be provided. It is
+assumed client can obtain it using separate means. Watch responses will
+contain resume tokens which should be used to resume broken connection.</p>
 </td></tr>
 
 <tr>

@@ -30,8 +30,8 @@ import (
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -40,11 +40,11 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
@@ -618,7 +618,11 @@ func (fpaiv *ActivationRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *ActivationRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *ActivationRequest) bool {
 	slice := fpaiv.ActivationRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1278,7 +1282,11 @@ func (fpaiv *ActivationRequestActivate_FieldTerminalPathArrayItemValue) GetSingl
 func (fpaiv *ActivationRequestActivate_FieldTerminalPathArrayItemValue) ContainsValue(source *ActivationRequest_Activate) bool {
 	slice := fpaiv.ActivationRequestActivate_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1708,7 +1716,11 @@ func (fpaiv *ActivationRequestConfirmActivation_FieldTerminalPathArrayItemValue)
 func (fpaiv *ActivationRequestConfirmActivation_FieldTerminalPathArrayItemValue) ContainsValue(source *ActivationRequest_ConfirmActivation) bool {
 	slice := fpaiv.ActivationRequestConfirmActivation_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2327,7 +2339,11 @@ func (fpaiv *ActivationResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(so
 func (fpaiv *ActivationResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *ActivationResponse) bool {
 	slice := fpaiv.ActivationResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2975,7 +2991,11 @@ func (fpaiv *ActivationResponseActivated_FieldTerminalPathArrayItemValue) GetSin
 func (fpaiv *ActivationResponseActivated_FieldTerminalPathArrayItemValue) ContainsValue(source *ActivationResponse_Activated) bool {
 	slice := fpaiv.ActivationResponseActivated_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3371,7 +3391,11 @@ func (fpaiv *ActivationResponseConfirmActivationAck_FieldTerminalPathArrayItemVa
 func (fpaiv *ActivationResponseConfirmActivationAck_FieldTerminalPathArrayItemValue) ContainsValue(source *ActivationResponse_ConfirmActivationAck) bool {
 	slice := fpaiv.ActivationResponseConfirmActivationAck_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

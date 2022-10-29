@@ -32,14 +32,14 @@ import (
 // ensure the imports are used
 var (
 	_ = codes.NotFound
-	_ = fmt.Stringer(nil)
-	_ = proto.Message(nil)
+	_ = new(fmt.Stringer)
+	_ = new(proto.Message)
 	_ = status.Status{}
 	_ = url.URL{}
 	_ = strings.Builder{}
 
-	_ = goten.GotenMessage(nil)
-	_ = gotenresource.ListQuery(nil)
+	_ = new(goten.GotenMessage)
+	_ = new(gotenresource.ListQuery)
 )
 
 // make sure we're using proto imports
@@ -101,7 +101,7 @@ func ParseNameOrId(nameOrId string) (*Name, error) {
 	if vendorConnection_RegexpId.MatchString(nameOrId) {
 		return &Name{VendorConnectionId: nameOrId}, nil
 	} else {
-		return nil, fmt.Errorf("unable to parse '%s' as VendorConnection name or id", name)
+		return nil, fmt.Errorf("unable to parse '%s' as VendorConnection name or id", nameOrId)
 	}
 }
 

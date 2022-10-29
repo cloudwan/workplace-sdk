@@ -2541,6 +2541,9 @@ func (WatchVendorConnectionsRequestFieldPathBuilder) OrderBy() WatchVendorConnec
 func (WatchVendorConnectionsRequestFieldPathBuilder) ResumeToken() WatchVendorConnectionsRequestPathSelectorResumeToken {
 	return WatchVendorConnectionsRequestPathSelectorResumeToken{}
 }
+func (WatchVendorConnectionsRequestFieldPathBuilder) StartingTime() WatchVendorConnectionsRequestPathSelectorStartingTime {
+	return WatchVendorConnectionsRequestPathSelectorStartingTime{}
+}
 func (WatchVendorConnectionsRequestFieldPathBuilder) Filter() WatchVendorConnectionsRequestPathSelectorFilter {
 	return WatchVendorConnectionsRequestPathSelectorFilter{}
 }
@@ -2635,6 +2638,20 @@ func (s WatchVendorConnectionsRequestPathSelectorResumeToken) WithValue(value st
 }
 
 func (s WatchVendorConnectionsRequestPathSelectorResumeToken) WithArrayOfValues(values []string) *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues)
+}
+
+type WatchVendorConnectionsRequestPathSelectorStartingTime struct{}
+
+func (WatchVendorConnectionsRequestPathSelectorStartingTime) FieldPath() *WatchVendorConnectionsRequest_FieldTerminalPath {
+	return &WatchVendorConnectionsRequest_FieldTerminalPath{selector: WatchVendorConnectionsRequest_FieldPathSelectorStartingTime}
+}
+
+func (s WatchVendorConnectionsRequestPathSelectorStartingTime) WithValue(value *timestamp.Timestamp) *WatchVendorConnectionsRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*WatchVendorConnectionsRequest_FieldTerminalPathValue)
+}
+
+func (s WatchVendorConnectionsRequestPathSelectorStartingTime) WithArrayOfValues(values []*timestamp.Timestamp) *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues)
 }
 

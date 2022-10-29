@@ -29,13 +29,14 @@ import (
 	device "github.com/cloudwan/workplace-sdk/resources/v1alpha2/device"
 	site "github.com/cloudwan/workplace-sdk/resources/v1alpha2/site"
 	empty "github.com/golang/protobuf/ptypes/empty"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -44,17 +45,18 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
 var (
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
+	_ = &timestamp.Timestamp{}
 	_ = view.View(0)
 	_ = watch_type.WatchType(0)
 	_ = &device.Device{}
@@ -457,7 +459,11 @@ func (fpaiv *GetDeviceRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sour
 func (fpaiv *GetDeviceRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *GetDeviceRequest) bool {
 	slice := fpaiv.GetDeviceRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -912,7 +918,11 @@ func (fpaiv *BatchGetDevicesRequest_FieldTerminalPathArrayItemValue) GetSingleRa
 func (fpaiv *BatchGetDevicesRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *BatchGetDevicesRequest) bool {
 	slice := fpaiv.BatchGetDevicesRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1508,7 +1518,11 @@ func (fpaiv *BatchGetDevicesResponse_FieldTerminalPathArrayItemValue) GetSingleR
 func (fpaiv *BatchGetDevicesResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *BatchGetDevicesResponse) bool {
 	slice := fpaiv.BatchGetDevicesResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2126,7 +2140,11 @@ func (fpaiv *ListDevicesRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(so
 func (fpaiv *ListDevicesRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *ListDevicesRequest) bool {
 	slice := fpaiv.ListDevicesRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2777,7 +2795,11 @@ func (fpaiv *ListDevicesResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *ListDevicesResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *ListDevicesResponse) bool {
 	slice := fpaiv.ListDevicesResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3282,7 +3304,11 @@ func (fpaiv *WatchDeviceRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(so
 func (fpaiv *WatchDeviceRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchDeviceRequest) bool {
 	slice := fpaiv.WatchDeviceRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3668,7 +3694,11 @@ func (fpaiv *WatchDeviceResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *WatchDeviceResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchDeviceResponse) bool {
 	slice := fpaiv.WatchDeviceResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3747,10 +3777,11 @@ const (
 	WatchDevicesRequest_FieldPathSelectorPageToken    WatchDevicesRequest_FieldPathSelector = 3
 	WatchDevicesRequest_FieldPathSelectorOrderBy      WatchDevicesRequest_FieldPathSelector = 4
 	WatchDevicesRequest_FieldPathSelectorResumeToken  WatchDevicesRequest_FieldPathSelector = 5
-	WatchDevicesRequest_FieldPathSelectorFilter       WatchDevicesRequest_FieldPathSelector = 6
-	WatchDevicesRequest_FieldPathSelectorFieldMask    WatchDevicesRequest_FieldPathSelector = 7
-	WatchDevicesRequest_FieldPathSelectorView         WatchDevicesRequest_FieldPathSelector = 8
-	WatchDevicesRequest_FieldPathSelectorMaxChunkSize WatchDevicesRequest_FieldPathSelector = 9
+	WatchDevicesRequest_FieldPathSelectorStartingTime WatchDevicesRequest_FieldPathSelector = 6
+	WatchDevicesRequest_FieldPathSelectorFilter       WatchDevicesRequest_FieldPathSelector = 7
+	WatchDevicesRequest_FieldPathSelectorFieldMask    WatchDevicesRequest_FieldPathSelector = 8
+	WatchDevicesRequest_FieldPathSelectorView         WatchDevicesRequest_FieldPathSelector = 9
+	WatchDevicesRequest_FieldPathSelectorMaxChunkSize WatchDevicesRequest_FieldPathSelector = 10
 )
 
 func (s WatchDevicesRequest_FieldPathSelector) String() string {
@@ -3767,6 +3798,8 @@ func (s WatchDevicesRequest_FieldPathSelector) String() string {
 		return "order_by"
 	case WatchDevicesRequest_FieldPathSelectorResumeToken:
 		return "resume_token"
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		return "starting_time"
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		return "filter"
 	case WatchDevicesRequest_FieldPathSelectorFieldMask:
@@ -3798,6 +3831,8 @@ func BuildWatchDevicesRequest_FieldPath(fp gotenobject.RawFieldPath) (WatchDevic
 			return &WatchDevicesRequest_FieldTerminalPath{selector: WatchDevicesRequest_FieldPathSelectorOrderBy}, nil
 		case "resume_token", "resumeToken", "resume-token":
 			return &WatchDevicesRequest_FieldTerminalPath{selector: WatchDevicesRequest_FieldPathSelectorResumeToken}, nil
+		case "starting_time", "startingTime", "starting-time":
+			return &WatchDevicesRequest_FieldTerminalPath{selector: WatchDevicesRequest_FieldPathSelectorStartingTime}, nil
 		case "filter":
 			return &WatchDevicesRequest_FieldTerminalPath{selector: WatchDevicesRequest_FieldPathSelectorFilter}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -3869,6 +3904,10 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) Get(source *WatchDevicesRequest
 			}
 		case WatchDevicesRequest_FieldPathSelectorResumeToken:
 			values = append(values, source.ResumeToken)
+		case WatchDevicesRequest_FieldPathSelectorStartingTime:
+			if source.StartingTime != nil {
+				values = append(values, source.StartingTime)
+			}
 		case WatchDevicesRequest_FieldPathSelectorFilter:
 			if source.Filter != nil {
 				values = append(values, source.Filter)
@@ -3910,6 +3949,9 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) GetSingle(source *WatchDevicesR
 		return res, res != nil
 	case WatchDevicesRequest_FieldPathSelectorResumeToken:
 		return source.GetResumeToken(), source != nil
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		res := source.GetStartingTime()
+		return res, res != nil
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		res := source.GetFilter()
 		return res, res != nil
@@ -3944,6 +3986,8 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) GetDefault() interface{} {
 		return (*device.OrderBy)(nil)
 	case WatchDevicesRequest_FieldPathSelectorResumeToken:
 		return ""
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		return (*timestamp.Timestamp)(nil)
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		return (*device.Filter)(nil)
 	case WatchDevicesRequest_FieldPathSelectorFieldMask:
@@ -3972,6 +4016,8 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) ClearValue(item *WatchDevicesRe
 			item.OrderBy = nil
 		case WatchDevicesRequest_FieldPathSelectorResumeToken:
 			item.ResumeToken = ""
+		case WatchDevicesRequest_FieldPathSelectorStartingTime:
+			item.StartingTime = nil
 		case WatchDevicesRequest_FieldPathSelectorFilter:
 			item.Filter = nil
 		case WatchDevicesRequest_FieldPathSelectorFieldMask:
@@ -3998,6 +4044,7 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchDevicesRequest_FieldPathSelectorPageToken ||
 		fp.selector == WatchDevicesRequest_FieldPathSelectorOrderBy ||
 		fp.selector == WatchDevicesRequest_FieldPathSelectorResumeToken ||
+		fp.selector == WatchDevicesRequest_FieldPathSelectorStartingTime ||
 		fp.selector == WatchDevicesRequest_FieldPathSelectorFilter ||
 		fp.selector == WatchDevicesRequest_FieldPathSelectorFieldMask ||
 		fp.selector == WatchDevicesRequest_FieldPathSelectorView ||
@@ -4022,6 +4069,8 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) WithIValue(value interface{}) W
 		return &WatchDevicesRequest_FieldTerminalPathValue{WatchDevicesRequest_FieldTerminalPath: *fp, value: value.(*device.OrderBy)}
 	case WatchDevicesRequest_FieldPathSelectorResumeToken:
 		return &WatchDevicesRequest_FieldTerminalPathValue{WatchDevicesRequest_FieldTerminalPath: *fp, value: value.(string)}
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		return &WatchDevicesRequest_FieldTerminalPathValue{WatchDevicesRequest_FieldTerminalPath: *fp, value: value.(*timestamp.Timestamp)}
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		return &WatchDevicesRequest_FieldTerminalPathValue{WatchDevicesRequest_FieldTerminalPath: *fp, value: value.(*device.Filter)}
 	case WatchDevicesRequest_FieldPathSelectorFieldMask:
@@ -4054,6 +4103,8 @@ func (fp *WatchDevicesRequest_FieldTerminalPath) WithIArrayOfValues(values inter
 		return &WatchDevicesRequest_FieldTerminalPathArrayOfValues{WatchDevicesRequest_FieldTerminalPath: *fp, values: values.([]*device.OrderBy)}
 	case WatchDevicesRequest_FieldPathSelectorResumeToken:
 		return &WatchDevicesRequest_FieldTerminalPathArrayOfValues{WatchDevicesRequest_FieldTerminalPath: *fp, values: values.([]string)}
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		return &WatchDevicesRequest_FieldTerminalPathArrayOfValues{WatchDevicesRequest_FieldTerminalPath: *fp, values: values.([]*timestamp.Timestamp)}
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		return &WatchDevicesRequest_FieldTerminalPathArrayOfValues{WatchDevicesRequest_FieldTerminalPath: *fp, values: values.([]*device.Filter)}
 	case WatchDevicesRequest_FieldPathSelectorFieldMask:
@@ -4146,6 +4197,10 @@ func (fpv *WatchDevicesRequest_FieldTerminalPathValue) AsResumeTokenValue() (str
 	res, ok := fpv.value.(string)
 	return res, ok
 }
+func (fpv *WatchDevicesRequest_FieldTerminalPathValue) AsStartingTimeValue() (*timestamp.Timestamp, bool) {
+	res, ok := fpv.value.(*timestamp.Timestamp)
+	return res, ok
+}
 func (fpv *WatchDevicesRequest_FieldTerminalPathValue) AsFilterValue() (*device.Filter, bool) {
 	res, ok := fpv.value.(*device.Filter)
 	return res, ok
@@ -4181,6 +4236,8 @@ func (fpv *WatchDevicesRequest_FieldTerminalPathValue) SetTo(target **WatchDevic
 		(*target).OrderBy = fpv.value.(*device.OrderBy)
 	case WatchDevicesRequest_FieldPathSelectorResumeToken:
 		(*target).ResumeToken = fpv.value.(string)
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		(*target).StartingTime = fpv.value.(*timestamp.Timestamp)
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		(*target).Filter = fpv.value.(*device.Filter)
 	case WatchDevicesRequest_FieldPathSelectorFieldMask:
@@ -4251,6 +4308,25 @@ func (fpv *WatchDevicesRequest_FieldTerminalPathValue) CompareWith(source *Watch
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		leftValue := fpv.value.(*timestamp.Timestamp)
+		rightValue := source.GetStartingTime()
+		if leftValue == nil {
+			if rightValue != nil {
+				return -1, true
+			}
+			return 0, true
+		}
+		if rightValue == nil {
+			return 1, true
+		}
+		if leftValue.AsTime().Equal(rightValue.AsTime()) {
+			return 0, true
+		} else if leftValue.AsTime().Before(rightValue.AsTime()) {
 			return -1, true
 		} else {
 			return 1, true
@@ -4341,7 +4417,11 @@ func (fpaiv *WatchDevicesRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *WatchDevicesRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchDevicesRequest) bool {
 	slice := fpaiv.WatchDevicesRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -4407,6 +4487,10 @@ func (fpaov *WatchDevicesRequest_FieldTerminalPathArrayOfValues) GetRawValues() 
 		for _, v := range fpaov.values.([]string) {
 			values = append(values, v)
 		}
+	case WatchDevicesRequest_FieldPathSelectorStartingTime:
+		for _, v := range fpaov.values.([]*timestamp.Timestamp) {
+			values = append(values, v)
+		}
 	case WatchDevicesRequest_FieldPathSelectorFilter:
 		for _, v := range fpaov.values.([]*device.Filter) {
 			values = append(values, v)
@@ -4448,6 +4532,10 @@ func (fpaov *WatchDevicesRequest_FieldTerminalPathArrayOfValues) AsOrderByArrayO
 }
 func (fpaov *WatchDevicesRequest_FieldTerminalPathArrayOfValues) AsResumeTokenArrayOfValues() ([]string, bool) {
 	res, ok := fpaov.values.([]string)
+	return res, ok
+}
+func (fpaov *WatchDevicesRequest_FieldTerminalPathArrayOfValues) AsStartingTimeArrayOfValues() ([]*timestamp.Timestamp, bool) {
+	res, ok := fpaov.values.([]*timestamp.Timestamp)
 	return res, ok
 }
 func (fpaov *WatchDevicesRequest_FieldTerminalPathArrayOfValues) AsFilterArrayOfValues() ([]*device.Filter, bool) {
@@ -5153,7 +5241,11 @@ func (fpaiv *WatchDevicesResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(
 func (fpaiv *WatchDevicesResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchDevicesResponse) bool {
 	slice := fpaiv.WatchDevicesResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -5639,7 +5731,11 @@ func (fpaiv *WatchDevicesResponsePageTokenChange_FieldTerminalPathArrayItemValue
 func (fpaiv *WatchDevicesResponsePageTokenChange_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchDevicesResponse_PageTokenChange) bool {
 	slice := fpaiv.WatchDevicesResponsePageTokenChange_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -6228,7 +6324,11 @@ func (fpaiv *CreateDeviceRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *CreateDeviceRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *CreateDeviceRequest) bool {
 	slice := fpaiv.CreateDeviceRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -6894,7 +6994,11 @@ func (fpaiv *UpdateDeviceRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *UpdateDeviceRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *UpdateDeviceRequest) bool {
 	slice := fpaiv.UpdateDeviceRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -7523,7 +7627,11 @@ func (fpaiv *UpdateDeviceRequestCAS_FieldTerminalPathArrayItemValue) GetSingleRa
 func (fpaiv *UpdateDeviceRequestCAS_FieldTerminalPathArrayItemValue) ContainsValue(source *UpdateDeviceRequest_CAS) bool {
 	slice := fpaiv.UpdateDeviceRequestCAS_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -7957,7 +8065,11 @@ func (fpaiv *DeleteDeviceRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *DeleteDeviceRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *DeleteDeviceRequest) bool {
 	slice := fpaiv.DeleteDeviceRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

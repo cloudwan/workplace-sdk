@@ -21,24 +21,26 @@ import (
 	area "github.com/cloudwan/workplace-sdk/resources/v1alpha2/area"
 	floor "github.com/cloudwan/workplace-sdk/resources/v1alpha2/floor"
 	empty "github.com/golang/protobuf/ptypes/empty"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
 // ensure the imports are used
 var (
-	_ = fmt.Stringer(nil)
-	_ = sort.Interface(nil)
+	_ = new(fmt.Stringer)
+	_ = new(sort.Interface)
 
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
 var (
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
+	_ = &timestamp.Timestamp{}
 	_ = view.View(0)
 	_ = watch_type.WatchType(0)
 	_ = &area.Area{}
@@ -854,6 +856,9 @@ func (o *WatchAreasRequest) MakeDiffFieldMask(other *WatchAreasRequest) *WatchAr
 	if o.GetResumeToken() != other.GetResumeToken() {
 		res.Paths = append(res.Paths, &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorResumeToken})
 	}
+	if !proto.Equal(o.GetStartingTime(), other.GetStartingTime()) {
+		res.Paths = append(res.Paths, &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorStartingTime})
+	}
 	if o.GetFilter().String() != other.GetFilter().String() {
 		res.Paths = append(res.Paths, &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorFilter})
 	}
@@ -911,6 +916,7 @@ func (o *WatchAreasRequest) Clone() *WatchAreasRequest {
 		}
 	}
 	result.ResumeToken = o.ResumeToken
+	result.StartingTime = proto.Clone(o.StartingTime).(*timestamp.Timestamp)
 	if o.Filter == nil {
 		result.Filter = nil
 	} else if data, err := o.Filter.ProtoString(); err != nil {
@@ -971,6 +977,12 @@ func (o *WatchAreasRequest) Merge(source *WatchAreasRequest) {
 		o.OrderBy = nil
 	}
 	o.ResumeToken = source.GetResumeToken()
+	if source.GetStartingTime() != nil {
+		if o.StartingTime == nil {
+			o.StartingTime = new(timestamp.Timestamp)
+		}
+		proto.Merge(o.StartingTime, source.GetStartingTime())
+	}
 	if source.GetFilter() != nil {
 		if data, err := source.GetFilter().ProtoString(); err != nil {
 			panic(err)

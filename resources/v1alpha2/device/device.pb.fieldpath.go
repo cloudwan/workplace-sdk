@@ -37,8 +37,8 @@ import (
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -47,11 +47,11 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
@@ -928,7 +928,11 @@ func (fpaiv *Device_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto.M
 func (fpaiv *Device_FieldTerminalPathArrayItemValue) ContainsValue(source *Device) bool {
 	slice := fpaiv.Device_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1642,7 +1646,11 @@ func (fpaiv *DeviceSitePlacement_FieldTerminalPathArrayItemValue) GetSingleRaw(s
 func (fpaiv *DeviceSitePlacement_FieldTerminalPathArrayItemValue) ContainsValue(source *Device_SitePlacement) bool {
 	slice := fpaiv.DeviceSitePlacement_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2298,7 +2306,11 @@ func (fpaiv *DeviceVendorInfo_FieldTerminalPathArrayItemValue) GetSingleRaw(sour
 func (fpaiv *DeviceVendorInfo_FieldTerminalPathArrayItemValue) ContainsValue(source *Device_VendorInfo) bool {
 	slice := fpaiv.DeviceVendorInfo_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2899,7 +2911,11 @@ func (fpaiv *DeviceState_FieldTerminalPathArrayItemValue) GetSingleRaw(source pr
 func (fpaiv *DeviceState_FieldTerminalPathArrayItemValue) ContainsValue(source *Device_State) bool {
 	slice := fpaiv.DeviceState_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3347,7 +3363,11 @@ func (fpaiv *DeviceVendorInfoPointGrabInfo_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *DeviceVendorInfoPointGrabInfo_FieldTerminalPathArrayItemValue) ContainsValue(source *Device_VendorInfo_PointGrabInfo) bool {
 	slice := fpaiv.DeviceVendorInfoPointGrabInfo_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3776,7 +3796,11 @@ func (fpaiv *DeviceStateConnection_FieldTerminalPathArrayItemValue) GetSingleRaw
 func (fpaiv *DeviceStateConnection_FieldTerminalPathArrayItemValue) ContainsValue(source *Device_State_Connection) bool {
 	slice := fpaiv.DeviceStateConnection_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

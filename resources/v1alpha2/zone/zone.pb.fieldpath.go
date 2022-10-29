@@ -35,8 +35,8 @@ import (
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -45,11 +45,11 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
@@ -823,7 +823,11 @@ func (fpaiv *Zone_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto.Mes
 func (fpaiv *Zone_FieldTerminalPathArrayItemValue) ContainsValue(source *Zone) bool {
 	slice := fpaiv.Zone_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1476,7 +1480,11 @@ func (fpaiv *ZoneVendorSpec_FieldTerminalPathArrayItemValue) GetSingleRaw(source
 func (fpaiv *ZoneVendorSpec_FieldTerminalPathArrayItemValue) ContainsValue(source *Zone_VendorSpec) bool {
 	slice := fpaiv.ZoneVendorSpec_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2051,7 +2059,11 @@ func (fpaiv *ZoneState_FieldTerminalPathArrayItemValue) GetSingleRaw(source prot
 func (fpaiv *ZoneState_FieldTerminalPathArrayItemValue) ContainsValue(source *Zone_State) bool {
 	slice := fpaiv.ZoneState_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2659,7 +2671,11 @@ func (fpaiv *ZoneVendorSpecPointGrab_FieldTerminalPathArrayItemValue) GetSingleR
 func (fpaiv *ZoneVendorSpecPointGrab_FieldTerminalPathArrayItemValue) ContainsValue(source *Zone_VendorSpec_PointGrab) bool {
 	slice := fpaiv.ZoneVendorSpecPointGrab_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3127,7 +3143,11 @@ func (fpaiv *ZoneStateOccupancy_FieldTerminalPathArrayItemValue) GetSingleRaw(so
 func (fpaiv *ZoneStateOccupancy_FieldTerminalPathArrayItemValue) ContainsValue(source *Zone_State_Occupancy) bool {
 	slice := fpaiv.ZoneStateOccupancy_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

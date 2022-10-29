@@ -2817,6 +2817,9 @@ func (WatchPropertiesRequestFieldPathBuilder) OrderBy() WatchPropertiesRequestPa
 func (WatchPropertiesRequestFieldPathBuilder) ResumeToken() WatchPropertiesRequestPathSelectorResumeToken {
 	return WatchPropertiesRequestPathSelectorResumeToken{}
 }
+func (WatchPropertiesRequestFieldPathBuilder) StartingTime() WatchPropertiesRequestPathSelectorStartingTime {
+	return WatchPropertiesRequestPathSelectorStartingTime{}
+}
 func (WatchPropertiesRequestFieldPathBuilder) Filter() WatchPropertiesRequestPathSelectorFilter {
 	return WatchPropertiesRequestPathSelectorFilter{}
 }
@@ -2911,6 +2914,20 @@ func (s WatchPropertiesRequestPathSelectorResumeToken) WithValue(value string) *
 }
 
 func (s WatchPropertiesRequestPathSelectorResumeToken) WithArrayOfValues(values []string) *WatchPropertiesRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*WatchPropertiesRequest_FieldTerminalPathArrayOfValues)
+}
+
+type WatchPropertiesRequestPathSelectorStartingTime struct{}
+
+func (WatchPropertiesRequestPathSelectorStartingTime) FieldPath() *WatchPropertiesRequest_FieldTerminalPath {
+	return &WatchPropertiesRequest_FieldTerminalPath{selector: WatchPropertiesRequest_FieldPathSelectorStartingTime}
+}
+
+func (s WatchPropertiesRequestPathSelectorStartingTime) WithValue(value *timestamp.Timestamp) *WatchPropertiesRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*WatchPropertiesRequest_FieldTerminalPathValue)
+}
+
+func (s WatchPropertiesRequestPathSelectorStartingTime) WithArrayOfValues(values []*timestamp.Timestamp) *WatchPropertiesRequest_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*WatchPropertiesRequest_FieldTerminalPathArrayOfValues)
 }
 

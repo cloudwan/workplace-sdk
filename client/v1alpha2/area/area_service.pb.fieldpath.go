@@ -29,13 +29,14 @@ import (
 	area "github.com/cloudwan/workplace-sdk/resources/v1alpha2/area"
 	floor "github.com/cloudwan/workplace-sdk/resources/v1alpha2/floor"
 	empty "github.com/golang/protobuf/ptypes/empty"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -44,17 +45,18 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
 var (
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
+	_ = &timestamp.Timestamp{}
 	_ = view.View(0)
 	_ = watch_type.WatchType(0)
 	_ = &area.Area{}
@@ -457,7 +459,11 @@ func (fpaiv *GetAreaRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(source
 func (fpaiv *GetAreaRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *GetAreaRequest) bool {
 	slice := fpaiv.GetAreaRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -912,7 +918,11 @@ func (fpaiv *BatchGetAreasRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(
 func (fpaiv *BatchGetAreasRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *BatchGetAreasRequest) bool {
 	slice := fpaiv.BatchGetAreasRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1508,7 +1518,11 @@ func (fpaiv *BatchGetAreasResponse_FieldTerminalPathArrayItemValue) GetSingleRaw
 func (fpaiv *BatchGetAreasResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *BatchGetAreasResponse) bool {
 	slice := fpaiv.BatchGetAreasResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2126,7 +2140,11 @@ func (fpaiv *ListAreasRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sour
 func (fpaiv *ListAreasRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *ListAreasRequest) bool {
 	slice := fpaiv.ListAreasRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2777,7 +2795,11 @@ func (fpaiv *ListAreasResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *ListAreasResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *ListAreasResponse) bool {
 	slice := fpaiv.ListAreasResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3282,7 +3304,11 @@ func (fpaiv *WatchAreaRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sour
 func (fpaiv *WatchAreaRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchAreaRequest) bool {
 	slice := fpaiv.WatchAreaRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3668,7 +3694,11 @@ func (fpaiv *WatchAreaResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *WatchAreaResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchAreaResponse) bool {
 	slice := fpaiv.WatchAreaResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3747,10 +3777,11 @@ const (
 	WatchAreasRequest_FieldPathSelectorPageToken    WatchAreasRequest_FieldPathSelector = 3
 	WatchAreasRequest_FieldPathSelectorOrderBy      WatchAreasRequest_FieldPathSelector = 4
 	WatchAreasRequest_FieldPathSelectorResumeToken  WatchAreasRequest_FieldPathSelector = 5
-	WatchAreasRequest_FieldPathSelectorFilter       WatchAreasRequest_FieldPathSelector = 6
-	WatchAreasRequest_FieldPathSelectorFieldMask    WatchAreasRequest_FieldPathSelector = 7
-	WatchAreasRequest_FieldPathSelectorView         WatchAreasRequest_FieldPathSelector = 8
-	WatchAreasRequest_FieldPathSelectorMaxChunkSize WatchAreasRequest_FieldPathSelector = 9
+	WatchAreasRequest_FieldPathSelectorStartingTime WatchAreasRequest_FieldPathSelector = 6
+	WatchAreasRequest_FieldPathSelectorFilter       WatchAreasRequest_FieldPathSelector = 7
+	WatchAreasRequest_FieldPathSelectorFieldMask    WatchAreasRequest_FieldPathSelector = 8
+	WatchAreasRequest_FieldPathSelectorView         WatchAreasRequest_FieldPathSelector = 9
+	WatchAreasRequest_FieldPathSelectorMaxChunkSize WatchAreasRequest_FieldPathSelector = 10
 )
 
 func (s WatchAreasRequest_FieldPathSelector) String() string {
@@ -3767,6 +3798,8 @@ func (s WatchAreasRequest_FieldPathSelector) String() string {
 		return "order_by"
 	case WatchAreasRequest_FieldPathSelectorResumeToken:
 		return "resume_token"
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		return "starting_time"
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		return "filter"
 	case WatchAreasRequest_FieldPathSelectorFieldMask:
@@ -3798,6 +3831,8 @@ func BuildWatchAreasRequest_FieldPath(fp gotenobject.RawFieldPath) (WatchAreasRe
 			return &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorOrderBy}, nil
 		case "resume_token", "resumeToken", "resume-token":
 			return &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorResumeToken}, nil
+		case "starting_time", "startingTime", "starting-time":
+			return &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorStartingTime}, nil
 		case "filter":
 			return &WatchAreasRequest_FieldTerminalPath{selector: WatchAreasRequest_FieldPathSelectorFilter}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -3869,6 +3904,10 @@ func (fp *WatchAreasRequest_FieldTerminalPath) Get(source *WatchAreasRequest) (v
 			}
 		case WatchAreasRequest_FieldPathSelectorResumeToken:
 			values = append(values, source.ResumeToken)
+		case WatchAreasRequest_FieldPathSelectorStartingTime:
+			if source.StartingTime != nil {
+				values = append(values, source.StartingTime)
+			}
 		case WatchAreasRequest_FieldPathSelectorFilter:
 			if source.Filter != nil {
 				values = append(values, source.Filter)
@@ -3910,6 +3949,9 @@ func (fp *WatchAreasRequest_FieldTerminalPath) GetSingle(source *WatchAreasReque
 		return res, res != nil
 	case WatchAreasRequest_FieldPathSelectorResumeToken:
 		return source.GetResumeToken(), source != nil
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		res := source.GetStartingTime()
+		return res, res != nil
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		res := source.GetFilter()
 		return res, res != nil
@@ -3944,6 +3986,8 @@ func (fp *WatchAreasRequest_FieldTerminalPath) GetDefault() interface{} {
 		return (*area.OrderBy)(nil)
 	case WatchAreasRequest_FieldPathSelectorResumeToken:
 		return ""
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		return (*timestamp.Timestamp)(nil)
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		return (*area.Filter)(nil)
 	case WatchAreasRequest_FieldPathSelectorFieldMask:
@@ -3972,6 +4016,8 @@ func (fp *WatchAreasRequest_FieldTerminalPath) ClearValue(item *WatchAreasReques
 			item.OrderBy = nil
 		case WatchAreasRequest_FieldPathSelectorResumeToken:
 			item.ResumeToken = ""
+		case WatchAreasRequest_FieldPathSelectorStartingTime:
+			item.StartingTime = nil
 		case WatchAreasRequest_FieldPathSelectorFilter:
 			item.Filter = nil
 		case WatchAreasRequest_FieldPathSelectorFieldMask:
@@ -3998,6 +4044,7 @@ func (fp *WatchAreasRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchAreasRequest_FieldPathSelectorPageToken ||
 		fp.selector == WatchAreasRequest_FieldPathSelectorOrderBy ||
 		fp.selector == WatchAreasRequest_FieldPathSelectorResumeToken ||
+		fp.selector == WatchAreasRequest_FieldPathSelectorStartingTime ||
 		fp.selector == WatchAreasRequest_FieldPathSelectorFilter ||
 		fp.selector == WatchAreasRequest_FieldPathSelectorFieldMask ||
 		fp.selector == WatchAreasRequest_FieldPathSelectorView ||
@@ -4022,6 +4069,8 @@ func (fp *WatchAreasRequest_FieldTerminalPath) WithIValue(value interface{}) Wat
 		return &WatchAreasRequest_FieldTerminalPathValue{WatchAreasRequest_FieldTerminalPath: *fp, value: value.(*area.OrderBy)}
 	case WatchAreasRequest_FieldPathSelectorResumeToken:
 		return &WatchAreasRequest_FieldTerminalPathValue{WatchAreasRequest_FieldTerminalPath: *fp, value: value.(string)}
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		return &WatchAreasRequest_FieldTerminalPathValue{WatchAreasRequest_FieldTerminalPath: *fp, value: value.(*timestamp.Timestamp)}
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		return &WatchAreasRequest_FieldTerminalPathValue{WatchAreasRequest_FieldTerminalPath: *fp, value: value.(*area.Filter)}
 	case WatchAreasRequest_FieldPathSelectorFieldMask:
@@ -4054,6 +4103,8 @@ func (fp *WatchAreasRequest_FieldTerminalPath) WithIArrayOfValues(values interfa
 		return &WatchAreasRequest_FieldTerminalPathArrayOfValues{WatchAreasRequest_FieldTerminalPath: *fp, values: values.([]*area.OrderBy)}
 	case WatchAreasRequest_FieldPathSelectorResumeToken:
 		return &WatchAreasRequest_FieldTerminalPathArrayOfValues{WatchAreasRequest_FieldTerminalPath: *fp, values: values.([]string)}
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		return &WatchAreasRequest_FieldTerminalPathArrayOfValues{WatchAreasRequest_FieldTerminalPath: *fp, values: values.([]*timestamp.Timestamp)}
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		return &WatchAreasRequest_FieldTerminalPathArrayOfValues{WatchAreasRequest_FieldTerminalPath: *fp, values: values.([]*area.Filter)}
 	case WatchAreasRequest_FieldPathSelectorFieldMask:
@@ -4146,6 +4197,10 @@ func (fpv *WatchAreasRequest_FieldTerminalPathValue) AsResumeTokenValue() (strin
 	res, ok := fpv.value.(string)
 	return res, ok
 }
+func (fpv *WatchAreasRequest_FieldTerminalPathValue) AsStartingTimeValue() (*timestamp.Timestamp, bool) {
+	res, ok := fpv.value.(*timestamp.Timestamp)
+	return res, ok
+}
 func (fpv *WatchAreasRequest_FieldTerminalPathValue) AsFilterValue() (*area.Filter, bool) {
 	res, ok := fpv.value.(*area.Filter)
 	return res, ok
@@ -4181,6 +4236,8 @@ func (fpv *WatchAreasRequest_FieldTerminalPathValue) SetTo(target **WatchAreasRe
 		(*target).OrderBy = fpv.value.(*area.OrderBy)
 	case WatchAreasRequest_FieldPathSelectorResumeToken:
 		(*target).ResumeToken = fpv.value.(string)
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		(*target).StartingTime = fpv.value.(*timestamp.Timestamp)
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		(*target).Filter = fpv.value.(*area.Filter)
 	case WatchAreasRequest_FieldPathSelectorFieldMask:
@@ -4251,6 +4308,25 @@ func (fpv *WatchAreasRequest_FieldTerminalPathValue) CompareWith(source *WatchAr
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		leftValue := fpv.value.(*timestamp.Timestamp)
+		rightValue := source.GetStartingTime()
+		if leftValue == nil {
+			if rightValue != nil {
+				return -1, true
+			}
+			return 0, true
+		}
+		if rightValue == nil {
+			return 1, true
+		}
+		if leftValue.AsTime().Equal(rightValue.AsTime()) {
+			return 0, true
+		} else if leftValue.AsTime().Before(rightValue.AsTime()) {
 			return -1, true
 		} else {
 			return 1, true
@@ -4341,7 +4417,11 @@ func (fpaiv *WatchAreasRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *WatchAreasRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchAreasRequest) bool {
 	slice := fpaiv.WatchAreasRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -4407,6 +4487,10 @@ func (fpaov *WatchAreasRequest_FieldTerminalPathArrayOfValues) GetRawValues() (v
 		for _, v := range fpaov.values.([]string) {
 			values = append(values, v)
 		}
+	case WatchAreasRequest_FieldPathSelectorStartingTime:
+		for _, v := range fpaov.values.([]*timestamp.Timestamp) {
+			values = append(values, v)
+		}
 	case WatchAreasRequest_FieldPathSelectorFilter:
 		for _, v := range fpaov.values.([]*area.Filter) {
 			values = append(values, v)
@@ -4448,6 +4532,10 @@ func (fpaov *WatchAreasRequest_FieldTerminalPathArrayOfValues) AsOrderByArrayOfV
 }
 func (fpaov *WatchAreasRequest_FieldTerminalPathArrayOfValues) AsResumeTokenArrayOfValues() ([]string, bool) {
 	res, ok := fpaov.values.([]string)
+	return res, ok
+}
+func (fpaov *WatchAreasRequest_FieldTerminalPathArrayOfValues) AsStartingTimeArrayOfValues() ([]*timestamp.Timestamp, bool) {
+	res, ok := fpaov.values.([]*timestamp.Timestamp)
 	return res, ok
 }
 func (fpaov *WatchAreasRequest_FieldTerminalPathArrayOfValues) AsFilterArrayOfValues() ([]*area.Filter, bool) {
@@ -5153,7 +5241,11 @@ func (fpaiv *WatchAreasResponse_FieldTerminalPathArrayItemValue) GetSingleRaw(so
 func (fpaiv *WatchAreasResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchAreasResponse) bool {
 	slice := fpaiv.WatchAreasResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -5639,7 +5731,11 @@ func (fpaiv *WatchAreasResponsePageTokenChange_FieldTerminalPathArrayItemValue) 
 func (fpaiv *WatchAreasResponsePageTokenChange_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchAreasResponse_PageTokenChange) bool {
 	slice := fpaiv.WatchAreasResponsePageTokenChange_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -6228,7 +6324,11 @@ func (fpaiv *CreateAreaRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *CreateAreaRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *CreateAreaRequest) bool {
 	slice := fpaiv.CreateAreaRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -6894,7 +6994,11 @@ func (fpaiv *UpdateAreaRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *UpdateAreaRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *UpdateAreaRequest) bool {
 	slice := fpaiv.UpdateAreaRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -7523,7 +7627,11 @@ func (fpaiv *UpdateAreaRequestCAS_FieldTerminalPathArrayItemValue) GetSingleRaw(
 func (fpaiv *UpdateAreaRequestCAS_FieldTerminalPathArrayItemValue) ContainsValue(source *UpdateAreaRequest_CAS) bool {
 	slice := fpaiv.UpdateAreaRequestCAS_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -7957,7 +8065,11 @@ func (fpaiv *DeleteAreaRequest_FieldTerminalPathArrayItemValue) GetSingleRaw(sou
 func (fpaiv *DeleteAreaRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *DeleteAreaRequest) bool {
 	slice := fpaiv.DeleteAreaRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

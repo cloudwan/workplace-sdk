@@ -1815,6 +1815,9 @@ func (WatchDeviceGroupsRequestFieldPathBuilder) OrderBy() WatchDeviceGroupsReque
 func (WatchDeviceGroupsRequestFieldPathBuilder) ResumeToken() WatchDeviceGroupsRequestPathSelectorResumeToken {
 	return WatchDeviceGroupsRequestPathSelectorResumeToken{}
 }
+func (WatchDeviceGroupsRequestFieldPathBuilder) StartingTime() WatchDeviceGroupsRequestPathSelectorStartingTime {
+	return WatchDeviceGroupsRequestPathSelectorStartingTime{}
+}
 func (WatchDeviceGroupsRequestFieldPathBuilder) Filter() WatchDeviceGroupsRequestPathSelectorFilter {
 	return WatchDeviceGroupsRequestPathSelectorFilter{}
 }
@@ -1909,6 +1912,20 @@ func (s WatchDeviceGroupsRequestPathSelectorResumeToken) WithValue(value string)
 }
 
 func (s WatchDeviceGroupsRequestPathSelectorResumeToken) WithArrayOfValues(values []string) *WatchDeviceGroupsRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*WatchDeviceGroupsRequest_FieldTerminalPathArrayOfValues)
+}
+
+type WatchDeviceGroupsRequestPathSelectorStartingTime struct{}
+
+func (WatchDeviceGroupsRequestPathSelectorStartingTime) FieldPath() *WatchDeviceGroupsRequest_FieldTerminalPath {
+	return &WatchDeviceGroupsRequest_FieldTerminalPath{selector: WatchDeviceGroupsRequest_FieldPathSelectorStartingTime}
+}
+
+func (s WatchDeviceGroupsRequestPathSelectorStartingTime) WithValue(value *timestamp.Timestamp) *WatchDeviceGroupsRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*WatchDeviceGroupsRequest_FieldTerminalPathValue)
+}
+
+func (s WatchDeviceGroupsRequestPathSelectorStartingTime) WithArrayOfValues(values []*timestamp.Timestamp) *WatchDeviceGroupsRequest_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*WatchDeviceGroupsRequest_FieldTerminalPathArrayOfValues)
 }
 

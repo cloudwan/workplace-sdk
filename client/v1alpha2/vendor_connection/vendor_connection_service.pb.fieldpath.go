@@ -29,13 +29,14 @@ import (
 	watch_type "github.com/cloudwan/goten-sdk/runtime/api/watch_type"
 	vendor_connection "github.com/cloudwan/workplace-sdk/resources/v1alpha2/vendor_connection"
 	empty "github.com/golang/protobuf/ptypes/empty"
+	timestamp "github.com/golang/protobuf/ptypes/timestamp"
 	field_mask "google.golang.org/genproto/protobuf/field_mask"
 )
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -44,11 +45,11 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
@@ -56,6 +57,7 @@ var (
 	_ = &iam_project.Project{}
 	_ = &empty.Empty{}
 	_ = &field_mask.FieldMask{}
+	_ = &timestamp.Timestamp{}
 	_ = view.View(0)
 	_ = watch_type.WatchType(0)
 	_ = &vendor_connection.PointGrab{}
@@ -457,7 +459,11 @@ func (fpaiv *GetVendorConnectionRequest_FieldTerminalPathArrayItemValue) GetSing
 func (fpaiv *GetVendorConnectionRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *GetVendorConnectionRequest) bool {
 	slice := fpaiv.GetVendorConnectionRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -912,7 +918,11 @@ func (fpaiv *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayItemValue) G
 func (fpaiv *BatchGetVendorConnectionsRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *BatchGetVendorConnectionsRequest) bool {
 	slice := fpaiv.BatchGetVendorConnectionsRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1508,7 +1518,11 @@ func (fpaiv *BatchGetVendorConnectionsResponse_FieldTerminalPathArrayItemValue) 
 func (fpaiv *BatchGetVendorConnectionsResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *BatchGetVendorConnectionsResponse) bool {
 	slice := fpaiv.BatchGetVendorConnectionsResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2126,7 +2140,11 @@ func (fpaiv *ListVendorConnectionsRequest_FieldTerminalPathArrayItemValue) GetSi
 func (fpaiv *ListVendorConnectionsRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *ListVendorConnectionsRequest) bool {
 	slice := fpaiv.ListVendorConnectionsRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2777,7 +2795,11 @@ func (fpaiv *ListVendorConnectionsResponse_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *ListVendorConnectionsResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *ListVendorConnectionsResponse) bool {
 	slice := fpaiv.ListVendorConnectionsResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3282,7 +3304,11 @@ func (fpaiv *WatchVendorConnectionRequest_FieldTerminalPathArrayItemValue) GetSi
 func (fpaiv *WatchVendorConnectionRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchVendorConnectionRequest) bool {
 	slice := fpaiv.WatchVendorConnectionRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3668,7 +3694,11 @@ func (fpaiv *WatchVendorConnectionResponse_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *WatchVendorConnectionResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchVendorConnectionResponse) bool {
 	slice := fpaiv.WatchVendorConnectionResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3747,10 +3777,11 @@ const (
 	WatchVendorConnectionsRequest_FieldPathSelectorPageToken    WatchVendorConnectionsRequest_FieldPathSelector = 3
 	WatchVendorConnectionsRequest_FieldPathSelectorOrderBy      WatchVendorConnectionsRequest_FieldPathSelector = 4
 	WatchVendorConnectionsRequest_FieldPathSelectorResumeToken  WatchVendorConnectionsRequest_FieldPathSelector = 5
-	WatchVendorConnectionsRequest_FieldPathSelectorFilter       WatchVendorConnectionsRequest_FieldPathSelector = 6
-	WatchVendorConnectionsRequest_FieldPathSelectorFieldMask    WatchVendorConnectionsRequest_FieldPathSelector = 7
-	WatchVendorConnectionsRequest_FieldPathSelectorView         WatchVendorConnectionsRequest_FieldPathSelector = 8
-	WatchVendorConnectionsRequest_FieldPathSelectorMaxChunkSize WatchVendorConnectionsRequest_FieldPathSelector = 9
+	WatchVendorConnectionsRequest_FieldPathSelectorStartingTime WatchVendorConnectionsRequest_FieldPathSelector = 6
+	WatchVendorConnectionsRequest_FieldPathSelectorFilter       WatchVendorConnectionsRequest_FieldPathSelector = 7
+	WatchVendorConnectionsRequest_FieldPathSelectorFieldMask    WatchVendorConnectionsRequest_FieldPathSelector = 8
+	WatchVendorConnectionsRequest_FieldPathSelectorView         WatchVendorConnectionsRequest_FieldPathSelector = 9
+	WatchVendorConnectionsRequest_FieldPathSelectorMaxChunkSize WatchVendorConnectionsRequest_FieldPathSelector = 10
 )
 
 func (s WatchVendorConnectionsRequest_FieldPathSelector) String() string {
@@ -3767,6 +3798,8 @@ func (s WatchVendorConnectionsRequest_FieldPathSelector) String() string {
 		return "order_by"
 	case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 		return "resume_token"
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		return "starting_time"
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		return "filter"
 	case WatchVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -3798,6 +3831,8 @@ func BuildWatchVendorConnectionsRequest_FieldPath(fp gotenobject.RawFieldPath) (
 			return &WatchVendorConnectionsRequest_FieldTerminalPath{selector: WatchVendorConnectionsRequest_FieldPathSelectorOrderBy}, nil
 		case "resume_token", "resumeToken", "resume-token":
 			return &WatchVendorConnectionsRequest_FieldTerminalPath{selector: WatchVendorConnectionsRequest_FieldPathSelectorResumeToken}, nil
+		case "starting_time", "startingTime", "starting-time":
+			return &WatchVendorConnectionsRequest_FieldTerminalPath{selector: WatchVendorConnectionsRequest_FieldPathSelectorStartingTime}, nil
 		case "filter":
 			return &WatchVendorConnectionsRequest_FieldTerminalPath{selector: WatchVendorConnectionsRequest_FieldPathSelectorFilter}, nil
 		case "field_mask", "fieldMask", "field-mask":
@@ -3869,6 +3904,10 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) Get(source *WatchVend
 			}
 		case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 			values = append(values, source.ResumeToken)
+		case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+			if source.StartingTime != nil {
+				values = append(values, source.StartingTime)
+			}
 		case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 			if source.Filter != nil {
 				values = append(values, source.Filter)
@@ -3910,6 +3949,9 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) GetSingle(source *Wat
 		return res, res != nil
 	case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 		return source.GetResumeToken(), source != nil
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		res := source.GetStartingTime()
+		return res, res != nil
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		res := source.GetFilter()
 		return res, res != nil
@@ -3944,6 +3986,8 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) GetDefault() interfac
 		return (*vendor_connection.OrderBy)(nil)
 	case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 		return ""
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		return (*timestamp.Timestamp)(nil)
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		return (*vendor_connection.Filter)(nil)
 	case WatchVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -3972,6 +4016,8 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) ClearValue(item *Watc
 			item.OrderBy = nil
 		case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 			item.ResumeToken = ""
+		case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+			item.StartingTime = nil
 		case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 			item.Filter = nil
 		case WatchVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -3998,6 +4044,7 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorPageToken ||
 		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorOrderBy ||
 		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorResumeToken ||
+		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorStartingTime ||
 		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorFilter ||
 		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorFieldMask ||
 		fp.selector == WatchVendorConnectionsRequest_FieldPathSelectorView ||
@@ -4022,6 +4069,8 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) WithIValue(value inte
 		return &WatchVendorConnectionsRequest_FieldTerminalPathValue{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, value: value.(*vendor_connection.OrderBy)}
 	case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 		return &WatchVendorConnectionsRequest_FieldTerminalPathValue{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, value: value.(string)}
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		return &WatchVendorConnectionsRequest_FieldTerminalPathValue{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, value: value.(*timestamp.Timestamp)}
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		return &WatchVendorConnectionsRequest_FieldTerminalPathValue{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, value: value.(*vendor_connection.Filter)}
 	case WatchVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -4054,6 +4103,8 @@ func (fp *WatchVendorConnectionsRequest_FieldTerminalPath) WithIArrayOfValues(va
 		return &WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, values: values.([]*vendor_connection.OrderBy)}
 	case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 		return &WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, values: values.([]string)}
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		return &WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, values: values.([]*timestamp.Timestamp)}
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		return &WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues{WatchVendorConnectionsRequest_FieldTerminalPath: *fp, values: values.([]*vendor_connection.Filter)}
 	case WatchVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -4146,6 +4197,10 @@ func (fpv *WatchVendorConnectionsRequest_FieldTerminalPathValue) AsResumeTokenVa
 	res, ok := fpv.value.(string)
 	return res, ok
 }
+func (fpv *WatchVendorConnectionsRequest_FieldTerminalPathValue) AsStartingTimeValue() (*timestamp.Timestamp, bool) {
+	res, ok := fpv.value.(*timestamp.Timestamp)
+	return res, ok
+}
 func (fpv *WatchVendorConnectionsRequest_FieldTerminalPathValue) AsFilterValue() (*vendor_connection.Filter, bool) {
 	res, ok := fpv.value.(*vendor_connection.Filter)
 	return res, ok
@@ -4181,6 +4236,8 @@ func (fpv *WatchVendorConnectionsRequest_FieldTerminalPathValue) SetTo(target **
 		(*target).OrderBy = fpv.value.(*vendor_connection.OrderBy)
 	case WatchVendorConnectionsRequest_FieldPathSelectorResumeToken:
 		(*target).ResumeToken = fpv.value.(string)
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		(*target).StartingTime = fpv.value.(*timestamp.Timestamp)
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		(*target).Filter = fpv.value.(*vendor_connection.Filter)
 	case WatchVendorConnectionsRequest_FieldPathSelectorFieldMask:
@@ -4251,6 +4308,25 @@ func (fpv *WatchVendorConnectionsRequest_FieldTerminalPathValue) CompareWith(sou
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		leftValue := fpv.value.(*timestamp.Timestamp)
+		rightValue := source.GetStartingTime()
+		if leftValue == nil {
+			if rightValue != nil {
+				return -1, true
+			}
+			return 0, true
+		}
+		if rightValue == nil {
+			return 1, true
+		}
+		if leftValue.AsTime().Equal(rightValue.AsTime()) {
+			return 0, true
+		} else if leftValue.AsTime().Before(rightValue.AsTime()) {
 			return -1, true
 		} else {
 			return 1, true
@@ -4341,7 +4417,11 @@ func (fpaiv *WatchVendorConnectionsRequest_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *WatchVendorConnectionsRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchVendorConnectionsRequest) bool {
 	slice := fpaiv.WatchVendorConnectionsRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -4407,6 +4487,10 @@ func (fpaov *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues) GetRa
 		for _, v := range fpaov.values.([]string) {
 			values = append(values, v)
 		}
+	case WatchVendorConnectionsRequest_FieldPathSelectorStartingTime:
+		for _, v := range fpaov.values.([]*timestamp.Timestamp) {
+			values = append(values, v)
+		}
 	case WatchVendorConnectionsRequest_FieldPathSelectorFilter:
 		for _, v := range fpaov.values.([]*vendor_connection.Filter) {
 			values = append(values, v)
@@ -4448,6 +4532,10 @@ func (fpaov *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues) AsOrd
 }
 func (fpaov *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues) AsResumeTokenArrayOfValues() ([]string, bool) {
 	res, ok := fpaov.values.([]string)
+	return res, ok
+}
+func (fpaov *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues) AsStartingTimeArrayOfValues() ([]*timestamp.Timestamp, bool) {
+	res, ok := fpaov.values.([]*timestamp.Timestamp)
 	return res, ok
 }
 func (fpaov *WatchVendorConnectionsRequest_FieldTerminalPathArrayOfValues) AsFilterArrayOfValues() ([]*vendor_connection.Filter, bool) {
@@ -5153,7 +5241,11 @@ func (fpaiv *WatchVendorConnectionsResponse_FieldTerminalPathArrayItemValue) Get
 func (fpaiv *WatchVendorConnectionsResponse_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchVendorConnectionsResponse) bool {
 	slice := fpaiv.WatchVendorConnectionsResponse_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -5639,7 +5731,11 @@ func (fpaiv *WatchVendorConnectionsResponsePageTokenChange_FieldTerminalPathArra
 func (fpaiv *WatchVendorConnectionsResponsePageTokenChange_FieldTerminalPathArrayItemValue) ContainsValue(source *WatchVendorConnectionsResponse_PageTokenChange) bool {
 	slice := fpaiv.WatchVendorConnectionsResponsePageTokenChange_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -6228,7 +6324,11 @@ func (fpaiv *CreateVendorConnectionRequest_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *CreateVendorConnectionRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *CreateVendorConnectionRequest) bool {
 	slice := fpaiv.CreateVendorConnectionRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -6894,7 +6994,11 @@ func (fpaiv *UpdateVendorConnectionRequest_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *UpdateVendorConnectionRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *UpdateVendorConnectionRequest) bool {
 	slice := fpaiv.UpdateVendorConnectionRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -7523,7 +7627,11 @@ func (fpaiv *UpdateVendorConnectionRequestCAS_FieldTerminalPathArrayItemValue) G
 func (fpaiv *UpdateVendorConnectionRequestCAS_FieldTerminalPathArrayItemValue) ContainsValue(source *UpdateVendorConnectionRequest_CAS) bool {
 	slice := fpaiv.UpdateVendorConnectionRequestCAS_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -7957,7 +8065,11 @@ func (fpaiv *DeleteVendorConnectionRequest_FieldTerminalPathArrayItemValue) GetS
 func (fpaiv *DeleteVendorConnectionRequest_FieldTerminalPathArrayItemValue) ContainsValue(source *DeleteVendorConnectionRequest) bool {
 	slice := fpaiv.DeleteVendorConnectionRequest_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}

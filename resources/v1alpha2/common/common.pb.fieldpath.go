@@ -29,8 +29,8 @@ import (
 
 // ensure the imports are used
 var (
-	_ = json.Marshaler(nil)
-	_ = fmt.Stringer(nil)
+	_ = new(json.Marshaler)
+	_ = new(fmt.Stringer)
 	_ = reflect.DeepEqual
 	_ = strings.Builder{}
 	_ = time.Second
@@ -39,11 +39,11 @@ var (
 	_ = codes.NotFound
 	_ = status.Status{}
 	_ = protojson.UnmarshalOptions{}
-	_ = proto.Message(nil)
+	_ = new(proto.Message)
 	_ = protoregistry.GlobalTypes
 	_ = fieldmaskpb.FieldMask{}
 
-	_ = gotenobject.FieldPath(nil)
+	_ = new(gotenobject.FieldPath)
 )
 
 // make sure we're using proto imports
@@ -396,7 +396,11 @@ func (fpaiv *BBox_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto.Mes
 func (fpaiv *BBox_FieldTerminalPathArrayItemValue) ContainsValue(source *BBox) bool {
 	slice := fpaiv.BBox_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -780,7 +784,11 @@ func (fpaiv *Polygon_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto.
 func (fpaiv *Polygon_FieldTerminalPathArrayItemValue) ContainsValue(source *Polygon) bool {
 	slice := fpaiv.Polygon_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1433,7 +1441,11 @@ func (fpaiv *Geometry_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto
 func (fpaiv *Geometry_FieldTerminalPathArrayItemValue) ContainsValue(source *Geometry) bool {
 	slice := fpaiv.Geometry_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -1910,7 +1922,11 @@ func (fpaiv *StreetLocation_FieldTerminalPathArrayItemValue) GetSingleRaw(source
 func (fpaiv *StreetLocation_FieldTerminalPathArrayItemValue) ContainsValue(source *StreetLocation) bool {
 	slice := fpaiv.StreetLocation_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2327,7 +2343,11 @@ func (fpaiv *VendorMapping_FieldTerminalPathArrayItemValue) GetSingleRaw(source 
 func (fpaiv *VendorMapping_FieldTerminalPathArrayItemValue) ContainsValue(source *VendorMapping) bool {
 	slice := fpaiv.VendorMapping_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -2744,7 +2764,11 @@ func (fpaiv *Point_FieldTerminalPathArrayItemValue) GetSingleRaw(source proto.Me
 func (fpaiv *Point_FieldTerminalPathArrayItemValue) ContainsValue(source *Point) bool {
 	slice := fpaiv.Point_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
@@ -3316,7 +3340,11 @@ func (fpaiv *ReferencePoint_FieldTerminalPathArrayItemValue) GetSingleRaw(source
 func (fpaiv *ReferencePoint_FieldTerminalPathArrayItemValue) ContainsValue(source *ReferencePoint) bool {
 	slice := fpaiv.ReferencePoint_FieldTerminalPath.Get(source)
 	for _, v := range slice {
-		if reflect.DeepEqual(v, fpaiv.value) {
+		if asProtoMsg, ok := fpaiv.value.(proto.Message); ok {
+			if proto.Equal(asProtoMsg, v.(proto.Message)) {
+				return true
+			}
+		} else if reflect.DeepEqual(v, fpaiv.value) {
 			return true
 		}
 	}
