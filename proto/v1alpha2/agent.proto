@@ -3,7 +3,6 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/common/types/meta.proto";
-import "edgelq-sdk/meta/compilers/annotations/multi_region.proto";
 import "google/api/resource.proto";
 
 option go_package = "github.com/cloudwan/workplace-sdk/resources/v1alpha2/agent;agent";

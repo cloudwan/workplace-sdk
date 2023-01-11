@@ -3,7 +3,6 @@ syntax = "proto3";
 package ntt.workplace.v1alpha2;
 
 import "edgelq-sdk/iam/proto/v1alpha2/service_account_key.proto";
-import "edgelq-sdk/meta/compilers/annotations/multi_region.proto";
 import "workplace-sdk/proto/v1alpha2/agent.proto";
 import "workplace-sdk/proto/v1alpha2/agent_change.proto";
 
