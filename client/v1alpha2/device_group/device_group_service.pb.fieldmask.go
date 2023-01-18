@@ -899,6 +899,7 @@ func FullListDeviceGroupsRequest_FieldMask() *ListDeviceGroupsRequest_FieldMask 
 	res.Paths = append(res.Paths, &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorFilter})
 	res.Paths = append(res.Paths, &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorFieldMask})
 	res.Paths = append(res.Paths, &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorView})
+	res.Paths = append(res.Paths, &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo})
 	return res
 }
 
@@ -942,7 +943,7 @@ func (fieldMask *ListDeviceGroupsRequest_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 7)
+	presentSelectors := make([]bool, 8)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*ListDeviceGroupsRequest_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -972,7 +973,7 @@ func (fieldMask *ListDeviceGroupsRequest_FieldMask) Reset() {
 
 func (fieldMask *ListDeviceGroupsRequest_FieldMask) Subtract(other *ListDeviceGroupsRequest_FieldMask) *ListDeviceGroupsRequest_FieldMask {
 	result := &ListDeviceGroupsRequest_FieldMask{}
-	removedSelectors := make([]bool, 7)
+	removedSelectors := make([]bool, 8)
 
 	for _, path := range other.GetPaths() {
 		switch tp := path.(type) {
@@ -1140,6 +1141,8 @@ func (fieldMask *ListDeviceGroupsRequest_FieldMask) Project(source *ListDeviceGr
 				result.FieldMask = source.FieldMask
 			case ListDeviceGroupsRequest_FieldPathSelectorView:
 				result.View = source.View
+			case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+				result.IncludePagingInfo = source.IncludePagingInfo
 			}
 		}
 	}
@@ -1166,6 +1169,8 @@ func FullListDeviceGroupsResponse_FieldMask() *ListDeviceGroupsResponse_FieldMas
 	res.Paths = append(res.Paths, &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups})
 	res.Paths = append(res.Paths, &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorPrevPageToken})
 	res.Paths = append(res.Paths, &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorNextPageToken})
+	res.Paths = append(res.Paths, &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset})
+	res.Paths = append(res.Paths, &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount})
 	return res
 }
 
@@ -1209,7 +1214,7 @@ func (fieldMask *ListDeviceGroupsResponse_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 3)
+	presentSelectors := make([]bool, 5)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*ListDeviceGroupsResponse_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -1239,7 +1244,7 @@ func (fieldMask *ListDeviceGroupsResponse_FieldMask) Reset() {
 
 func (fieldMask *ListDeviceGroupsResponse_FieldMask) Subtract(other *ListDeviceGroupsResponse_FieldMask) *ListDeviceGroupsResponse_FieldMask {
 	result := &ListDeviceGroupsResponse_FieldMask{}
-	removedSelectors := make([]bool, 3)
+	removedSelectors := make([]bool, 5)
 	otherSubMasks := map[ListDeviceGroupsResponse_FieldPathSelector]gotenobject.FieldMask{
 		ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups: &device_group.DeviceGroup_FieldMask{},
 	}
@@ -1446,6 +1451,10 @@ func (fieldMask *ListDeviceGroupsResponse_FieldMask) Project(source *ListDeviceG
 				result.PrevPageToken = source.PrevPageToken
 			case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 				result.NextPageToken = source.NextPageToken
+			case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+				result.CurrentOffset = source.CurrentOffset
+			case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+				result.TotalResultsCount = source.TotalResultsCount
 			}
 		case *ListDeviceGroupsResponse_FieldSubPath:
 			switch tp.selector {

@@ -425,6 +425,9 @@ func (o *ListZonesRequest) MakeDiffFieldMask(other *ListZonesRequest) *ListZones
 	if o.GetView() != other.GetView() {
 		res.Paths = append(res.Paths, &ListZonesRequest_FieldTerminalPath{selector: ListZonesRequest_FieldPathSelectorView})
 	}
+	if o.GetIncludePagingInfo() != other.GetIncludePagingInfo() {
+		res.Paths = append(res.Paths, &ListZonesRequest_FieldTerminalPath{selector: ListZonesRequest_FieldPathSelectorIncludePagingInfo})
+	}
 	return res
 }
 
@@ -480,6 +483,7 @@ func (o *ListZonesRequest) Clone() *ListZonesRequest {
 	}
 	result.FieldMask = proto.Clone(o.FieldMask).(*zone.Zone_FieldMask)
 	result.View = o.View
+	result.IncludePagingInfo = o.IncludePagingInfo
 	return result
 }
 
@@ -547,6 +551,7 @@ func (o *ListZonesRequest) Merge(source *ListZonesRequest) {
 		}
 	}
 	o.View = source.GetView()
+	o.IncludePagingInfo = source.GetIncludePagingInfo()
 }
 
 func (o *ListZonesRequest) MergeRaw(source gotenobject.GotenObjectExt) {
@@ -590,6 +595,12 @@ func (o *ListZonesResponse) MakeDiffFieldMask(other *ListZonesResponse) *ListZon
 	if o.GetNextPageToken().String() != other.GetNextPageToken().String() {
 		res.Paths = append(res.Paths, &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorNextPageToken})
 	}
+	if o.GetCurrentOffset() != other.GetCurrentOffset() {
+		res.Paths = append(res.Paths, &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorCurrentOffset})
+	}
+	if o.GetTotalResultsCount() != other.GetTotalResultsCount() {
+		res.Paths = append(res.Paths, &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorTotalResultsCount})
+	}
 	return res
 }
 
@@ -626,6 +637,8 @@ func (o *ListZonesResponse) Clone() *ListZonesResponse {
 			panic(err)
 		}
 	}
+	result.CurrentOffset = o.CurrentOffset
+	result.TotalResultsCount = o.TotalResultsCount
 	return result
 }
 
@@ -676,6 +689,8 @@ func (o *ListZonesResponse) Merge(source *ListZonesResponse) {
 	} else {
 		o.NextPageToken = nil
 	}
+	o.CurrentOffset = source.GetCurrentOffset()
+	o.TotalResultsCount = source.GetTotalResultsCount()
 }
 
 func (o *ListZonesResponse) MergeRaw(source gotenobject.GotenObjectExt) {

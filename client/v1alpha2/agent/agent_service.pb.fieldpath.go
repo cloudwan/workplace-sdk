@@ -1239,11 +1239,12 @@ func (fps *BatchGetAgentsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source BatchGetAgentsResponse
 func (fps *BatchGetAgentsResponse_FieldSubPath) Get(source *BatchGetAgentsResponse) (values []interface{}) {
-	if asAgentFieldPath, ok := fps.AsAgentsSubPath(); ok {
+	switch fps.selector {
+	case BatchGetAgentsResponse_FieldPathSelectorAgents:
 		for _, item := range source.GetAgents() {
-			values = append(values, asAgentFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for BatchGetAgentsResponse: %d", fps.selector))
 	}
 	return
@@ -1642,13 +1643,14 @@ type ListAgentsRequest_FieldPath interface {
 type ListAgentsRequest_FieldPathSelector int32
 
 const (
-	ListAgentsRequest_FieldPathSelectorParent    ListAgentsRequest_FieldPathSelector = 0
-	ListAgentsRequest_FieldPathSelectorPageSize  ListAgentsRequest_FieldPathSelector = 1
-	ListAgentsRequest_FieldPathSelectorPageToken ListAgentsRequest_FieldPathSelector = 2
-	ListAgentsRequest_FieldPathSelectorOrderBy   ListAgentsRequest_FieldPathSelector = 3
-	ListAgentsRequest_FieldPathSelectorFilter    ListAgentsRequest_FieldPathSelector = 4
-	ListAgentsRequest_FieldPathSelectorFieldMask ListAgentsRequest_FieldPathSelector = 5
-	ListAgentsRequest_FieldPathSelectorView      ListAgentsRequest_FieldPathSelector = 6
+	ListAgentsRequest_FieldPathSelectorParent            ListAgentsRequest_FieldPathSelector = 0
+	ListAgentsRequest_FieldPathSelectorPageSize          ListAgentsRequest_FieldPathSelector = 1
+	ListAgentsRequest_FieldPathSelectorPageToken         ListAgentsRequest_FieldPathSelector = 2
+	ListAgentsRequest_FieldPathSelectorOrderBy           ListAgentsRequest_FieldPathSelector = 3
+	ListAgentsRequest_FieldPathSelectorFilter            ListAgentsRequest_FieldPathSelector = 4
+	ListAgentsRequest_FieldPathSelectorFieldMask         ListAgentsRequest_FieldPathSelector = 5
+	ListAgentsRequest_FieldPathSelectorView              ListAgentsRequest_FieldPathSelector = 6
+	ListAgentsRequest_FieldPathSelectorIncludePagingInfo ListAgentsRequest_FieldPathSelector = 7
 )
 
 func (s ListAgentsRequest_FieldPathSelector) String() string {
@@ -1667,6 +1669,8 @@ func (s ListAgentsRequest_FieldPathSelector) String() string {
 		return "field_mask"
 	case ListAgentsRequest_FieldPathSelectorView:
 		return "view"
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		return "include_paging_info"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", s))
 	}
@@ -1692,6 +1696,8 @@ func BuildListAgentsRequest_FieldPath(fp gotenobject.RawFieldPath) (ListAgentsRe
 			return &ListAgentsRequest_FieldTerminalPath{selector: ListAgentsRequest_FieldPathSelectorFieldMask}, nil
 		case "view":
 			return &ListAgentsRequest_FieldTerminalPath{selector: ListAgentsRequest_FieldPathSelectorView}, nil
+		case "include_paging_info", "includePagingInfo", "include-paging-info":
+			return &ListAgentsRequest_FieldTerminalPath{selector: ListAgentsRequest_FieldPathSelectorIncludePagingInfo}, nil
 		}
 	}
 	return nil, status.Errorf(codes.InvalidArgument, "unknown field path '%s' for object ListAgentsRequest", fp)
@@ -1761,6 +1767,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) Get(source *ListAgentsRequest) (v
 			}
 		case ListAgentsRequest_FieldPathSelectorView:
 			values = append(values, source.View)
+		case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+			values = append(values, source.IncludePagingInfo)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fp.selector))
 		}
@@ -1794,6 +1802,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) GetSingle(source *ListAgentsReque
 		return res, res != nil
 	case ListAgentsRequest_FieldPathSelectorView:
 		return source.GetView(), source != nil
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		return source.GetIncludePagingInfo(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fp.selector))
 	}
@@ -1820,6 +1830,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) GetDefault() interface{} {
 		return (*agent.Agent_FieldMask)(nil)
 	case ListAgentsRequest_FieldPathSelectorView:
 		return view.View_UNSPECIFIED
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		return false
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fp.selector))
 	}
@@ -1842,6 +1854,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) ClearValue(item *ListAgentsReques
 			item.FieldMask = nil
 		case ListAgentsRequest_FieldPathSelectorView:
 			item.View = view.View_UNSPECIFIED
+		case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+			item.IncludePagingInfo = false
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fp.selector))
 		}
@@ -1860,7 +1874,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListAgentsRequest_FieldPathSelectorOrderBy ||
 		fp.selector == ListAgentsRequest_FieldPathSelectorFilter ||
 		fp.selector == ListAgentsRequest_FieldPathSelectorFieldMask ||
-		fp.selector == ListAgentsRequest_FieldPathSelectorView
+		fp.selector == ListAgentsRequest_FieldPathSelectorView ||
+		fp.selector == ListAgentsRequest_FieldPathSelectorIncludePagingInfo
 }
 
 func (fp *ListAgentsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -1883,6 +1898,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) WithIValue(value interface{}) Lis
 		return &ListAgentsRequest_FieldTerminalPathValue{ListAgentsRequest_FieldTerminalPath: *fp, value: value.(*agent.Agent_FieldMask)}
 	case ListAgentsRequest_FieldPathSelectorView:
 		return &ListAgentsRequest_FieldTerminalPathValue{ListAgentsRequest_FieldTerminalPath: *fp, value: value.(view.View)}
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListAgentsRequest_FieldTerminalPathValue{ListAgentsRequest_FieldTerminalPath: *fp, value: value.(bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fp.selector))
 	}
@@ -1909,6 +1926,8 @@ func (fp *ListAgentsRequest_FieldTerminalPath) WithIArrayOfValues(values interfa
 		return &ListAgentsRequest_FieldTerminalPathArrayOfValues{ListAgentsRequest_FieldTerminalPath: *fp, values: values.([]*agent.Agent_FieldMask)}
 	case ListAgentsRequest_FieldPathSelectorView:
 		return &ListAgentsRequest_FieldTerminalPathArrayOfValues{ListAgentsRequest_FieldTerminalPath: *fp, values: values.([]view.View)}
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListAgentsRequest_FieldTerminalPathArrayOfValues{ListAgentsRequest_FieldTerminalPath: *fp, values: values.([]bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fp.selector))
 	}
@@ -1997,6 +2016,10 @@ func (fpv *ListAgentsRequest_FieldTerminalPathValue) AsViewValue() (view.View, b
 	res, ok := fpv.value.(view.View)
 	return res, ok
 }
+func (fpv *ListAgentsRequest_FieldTerminalPathValue) AsIncludePagingInfoValue() (bool, bool) {
+	res, ok := fpv.value.(bool)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListAgentsRequest
 func (fpv *ListAgentsRequest_FieldTerminalPathValue) SetTo(target **ListAgentsRequest) {
@@ -2018,6 +2041,8 @@ func (fpv *ListAgentsRequest_FieldTerminalPathValue) SetTo(target **ListAgentsRe
 		(*target).FieldMask = fpv.value.(*agent.Agent_FieldMask)
 	case ListAgentsRequest_FieldPathSelectorView:
 		(*target).View = fpv.value.(view.View)
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		(*target).IncludePagingInfo = fpv.value.(bool)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsRequest: %d", fpv.selector))
 	}
@@ -2074,6 +2099,16 @@ func (fpv *ListAgentsRequest_FieldTerminalPathValue) CompareWith(source *ListAge
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		leftValue := fpv.value.(bool)
+		rightValue := source.GetIncludePagingInfo()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if !(leftValue) && (rightValue) {
 			return -1, true
 		} else {
 			return 1, true
@@ -2214,6 +2249,10 @@ func (fpaov *ListAgentsRequest_FieldTerminalPathArrayOfValues) GetRawValues() (v
 		for _, v := range fpaov.values.([]view.View) {
 			values = append(values, v)
 		}
+	case ListAgentsRequest_FieldPathSelectorIncludePagingInfo:
+		for _, v := range fpaov.values.([]bool) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2245,6 +2284,10 @@ func (fpaov *ListAgentsRequest_FieldTerminalPathArrayOfValues) AsViewArrayOfValu
 	res, ok := fpaov.values.([]view.View)
 	return res, ok
 }
+func (fpaov *ListAgentsRequest_FieldTerminalPathArrayOfValues) AsIncludePagingInfoArrayOfValues() ([]bool, bool) {
+	res, ok := fpaov.values.([]bool)
+	return res, ok
+}
 
 // FieldPath provides implementation to handle
 // https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto
@@ -2265,9 +2308,11 @@ type ListAgentsResponse_FieldPath interface {
 type ListAgentsResponse_FieldPathSelector int32
 
 const (
-	ListAgentsResponse_FieldPathSelectorAgents        ListAgentsResponse_FieldPathSelector = 0
-	ListAgentsResponse_FieldPathSelectorPrevPageToken ListAgentsResponse_FieldPathSelector = 1
-	ListAgentsResponse_FieldPathSelectorNextPageToken ListAgentsResponse_FieldPathSelector = 2
+	ListAgentsResponse_FieldPathSelectorAgents            ListAgentsResponse_FieldPathSelector = 0
+	ListAgentsResponse_FieldPathSelectorPrevPageToken     ListAgentsResponse_FieldPathSelector = 1
+	ListAgentsResponse_FieldPathSelectorNextPageToken     ListAgentsResponse_FieldPathSelector = 2
+	ListAgentsResponse_FieldPathSelectorCurrentOffset     ListAgentsResponse_FieldPathSelector = 3
+	ListAgentsResponse_FieldPathSelectorTotalResultsCount ListAgentsResponse_FieldPathSelector = 4
 )
 
 func (s ListAgentsResponse_FieldPathSelector) String() string {
@@ -2278,6 +2323,10 @@ func (s ListAgentsResponse_FieldPathSelector) String() string {
 		return "prev_page_token"
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		return "next_page_token"
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		return "current_offset"
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		return "total_results_count"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", s))
 	}
@@ -2295,6 +2344,10 @@ func BuildListAgentsResponse_FieldPath(fp gotenobject.RawFieldPath) (ListAgentsR
 			return &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorPrevPageToken}, nil
 		case "next_page_token", "nextPageToken", "next-page-token":
 			return &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorNextPageToken}, nil
+		case "current_offset", "currentOffset", "current-offset":
+			return &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorCurrentOffset}, nil
+		case "total_results_count", "totalResultsCount", "total-results-count":
+			return &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorTotalResultsCount}, nil
 		}
 	} else {
 		switch fp[0] {
@@ -2361,6 +2414,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) Get(source *ListAgentsResponse) 
 			if source.NextPageToken != nil {
 				values = append(values, source.NextPageToken)
 			}
+		case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+			values = append(values, source.CurrentOffset)
+		case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+			values = append(values, source.TotalResultsCount)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fp.selector))
 		}
@@ -2384,6 +2441,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) GetSingle(source *ListAgentsResp
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		res := source.GetNextPageToken()
 		return res, res != nil
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		return source.GetCurrentOffset(), source != nil
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		return source.GetTotalResultsCount(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fp.selector))
 	}
@@ -2402,6 +2463,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) GetDefault() interface{} {
 		return (*agent.PagerCursor)(nil)
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		return (*agent.PagerCursor)(nil)
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		return int32(0)
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		return int32(0)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fp.selector))
 	}
@@ -2416,6 +2481,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) ClearValue(item *ListAgentsRespo
 			item.PrevPageToken = nil
 		case ListAgentsResponse_FieldPathSelectorNextPageToken:
 			item.NextPageToken = nil
+		case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+			item.CurrentOffset = int32(0)
+		case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+			item.TotalResultsCount = int32(0)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fp.selector))
 		}
@@ -2429,7 +2498,9 @@ func (fp *ListAgentsResponse_FieldTerminalPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fp *ListAgentsResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ListAgentsResponse_FieldPathSelectorPrevPageToken ||
-		fp.selector == ListAgentsResponse_FieldPathSelectorNextPageToken
+		fp.selector == ListAgentsResponse_FieldPathSelectorNextPageToken ||
+		fp.selector == ListAgentsResponse_FieldPathSelectorCurrentOffset ||
+		fp.selector == ListAgentsResponse_FieldPathSelectorTotalResultsCount
 }
 
 func (fp *ListAgentsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -2444,6 +2515,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) WithIValue(value interface{}) Li
 		return &ListAgentsResponse_FieldTerminalPathValue{ListAgentsResponse_FieldTerminalPath: *fp, value: value.(*agent.PagerCursor)}
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		return &ListAgentsResponse_FieldTerminalPathValue{ListAgentsResponse_FieldTerminalPath: *fp, value: value.(*agent.PagerCursor)}
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		return &ListAgentsResponse_FieldTerminalPathValue{ListAgentsResponse_FieldTerminalPath: *fp, value: value.(int32)}
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		return &ListAgentsResponse_FieldTerminalPathValue{ListAgentsResponse_FieldTerminalPath: *fp, value: value.(int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fp.selector))
 	}
@@ -2462,6 +2537,10 @@ func (fp *ListAgentsResponse_FieldTerminalPath) WithIArrayOfValues(values interf
 		return &ListAgentsResponse_FieldTerminalPathArrayOfValues{ListAgentsResponse_FieldTerminalPath: *fp, values: values.([]*agent.PagerCursor)}
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		return &ListAgentsResponse_FieldTerminalPathArrayOfValues{ListAgentsResponse_FieldTerminalPath: *fp, values: values.([]*agent.PagerCursor)}
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		return &ListAgentsResponse_FieldTerminalPathArrayOfValues{ListAgentsResponse_FieldTerminalPath: *fp, values: values.([]int32)}
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		return &ListAgentsResponse_FieldTerminalPathArrayOfValues{ListAgentsResponse_FieldTerminalPath: *fp, values: values.([]int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fp.selector))
 	}
@@ -2512,11 +2591,12 @@ func (fps *ListAgentsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source ListAgentsResponse
 func (fps *ListAgentsResponse_FieldSubPath) Get(source *ListAgentsResponse) (values []interface{}) {
-	if asAgentFieldPath, ok := fps.AsAgentsSubPath(); ok {
+	switch fps.selector {
+	case ListAgentsResponse_FieldPathSelectorAgents:
 		for _, item := range source.GetAgents() {
-			values = append(values, asAgentFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fps.selector))
 	}
 	return
@@ -2651,6 +2731,14 @@ func (fpv *ListAgentsResponse_FieldTerminalPathValue) AsNextPageTokenValue() (*a
 	res, ok := fpv.value.(*agent.PagerCursor)
 	return res, ok
 }
+func (fpv *ListAgentsResponse_FieldTerminalPathValue) AsCurrentOffsetValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
+func (fpv *ListAgentsResponse_FieldTerminalPathValue) AsTotalResultsCountValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListAgentsResponse
 func (fpv *ListAgentsResponse_FieldTerminalPathValue) SetTo(target **ListAgentsResponse) {
@@ -2664,6 +2752,10 @@ func (fpv *ListAgentsResponse_FieldTerminalPathValue) SetTo(target **ListAgentsR
 		(*target).PrevPageToken = fpv.value.(*agent.PagerCursor)
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		(*target).NextPageToken = fpv.value.(*agent.PagerCursor)
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		(*target).CurrentOffset = fpv.value.(int32)
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		(*target).TotalResultsCount = fpv.value.(int32)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fpv.selector))
 	}
@@ -2683,6 +2775,26 @@ func (fpv *ListAgentsResponse_FieldTerminalPathValue) CompareWith(source *ListAg
 		return 0, false
 	case ListAgentsResponse_FieldPathSelectorNextPageToken:
 		return 0, false
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetCurrentOffset()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetTotalResultsCount()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListAgentsResponse: %d", fpv.selector))
 	}
@@ -2877,6 +2989,14 @@ func (fpaov *ListAgentsResponse_FieldTerminalPathArrayOfValues) GetRawValues() (
 		for _, v := range fpaov.values.([]*agent.PagerCursor) {
 			values = append(values, v)
 		}
+	case ListAgentsResponse_FieldPathSelectorCurrentOffset:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
+	case ListAgentsResponse_FieldPathSelectorTotalResultsCount:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2890,6 +3010,14 @@ func (fpaov *ListAgentsResponse_FieldTerminalPathArrayOfValues) AsPrevPageTokenA
 }
 func (fpaov *ListAgentsResponse_FieldTerminalPathArrayOfValues) AsNextPageTokenArrayOfValues() ([]*agent.PagerCursor, bool) {
 	res, ok := fpaov.values.([]*agent.PagerCursor)
+	return res, ok
+}
+func (fpaov *ListAgentsResponse_FieldTerminalPathArrayOfValues) AsCurrentOffsetArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
+	return res, ok
+}
+func (fpaov *ListAgentsResponse_FieldTerminalPathArrayOfValues) AsTotalResultsCountArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
 	return res, ok
 }
 
@@ -4890,9 +5018,10 @@ func (fps *WatchAgentsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source WatchAgentsResponse
 func (fps *WatchAgentsResponse_FieldSubPath) Get(source *WatchAgentsResponse) (values []interface{}) {
-	if asPageTokenChangeFieldPath, ok := fps.AsPageTokenChangeSubPath(); ok {
-		values = append(values, asPageTokenChangeFieldPath.Get(source.GetPageTokenChange())...)
-	} else {
+	switch fps.selector {
+	case WatchAgentsResponse_FieldPathSelectorPageTokenChange:
+		values = append(values, fps.subPath.GetRaw(source.GetPageTokenChange())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for WatchAgentsResponse: %d", fps.selector))
 	}
 	return
@@ -6040,9 +6169,10 @@ func (fps *CreateAgentRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source CreateAgentRequest
 func (fps *CreateAgentRequest_FieldSubPath) Get(source *CreateAgentRequest) (values []interface{}) {
-	if asAgentFieldPath, ok := fps.AsAgentSubPath(); ok {
-		values = append(values, asAgentFieldPath.Get(source.GetAgent())...)
-	} else {
+	switch fps.selector {
+	case CreateAgentRequest_FieldPathSelectorAgent:
+		values = append(values, fps.subPath.GetRaw(source.GetAgent())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for CreateAgentRequest: %d", fps.selector))
 	}
 	return
@@ -6702,11 +6832,12 @@ func (fps *UpdateAgentRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateAgentRequest
 func (fps *UpdateAgentRequest_FieldSubPath) Get(source *UpdateAgentRequest) (values []interface{}) {
-	if asAgentFieldPath, ok := fps.AsAgentSubPath(); ok {
-		values = append(values, asAgentFieldPath.Get(source.GetAgent())...)
-	} else if asCASFieldPath, ok := fps.AsCasSubPath(); ok {
-		values = append(values, asCASFieldPath.Get(source.GetCas())...)
-	} else {
+	switch fps.selector {
+	case UpdateAgentRequest_FieldPathSelectorAgent:
+		values = append(values, fps.subPath.GetRaw(source.GetAgent())...)
+	case UpdateAgentRequest_FieldPathSelectorCas:
+		values = append(values, fps.subPath.GetRaw(source.GetCas())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateAgentRequest: %d", fps.selector))
 	}
 	return
@@ -7360,9 +7491,10 @@ func (fps *UpdateAgentRequestCAS_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateAgentRequest_CAS
 func (fps *UpdateAgentRequestCAS_FieldSubPath) Get(source *UpdateAgentRequest_CAS) (values []interface{}) {
-	if asAgentFieldPath, ok := fps.AsConditionalStateSubPath(); ok {
-		values = append(values, asAgentFieldPath.Get(source.GetConditionalState())...)
-	} else {
+	switch fps.selector {
+	case UpdateAgentRequestCAS_FieldPathSelectorConditionalState:
+		values = append(values, fps.subPath.GetRaw(source.GetConditionalState())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateAgentRequest_CAS: %d", fps.selector))
 	}
 	return

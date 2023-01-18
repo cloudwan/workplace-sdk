@@ -8,6 +8,7 @@ package site_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -25,6 +26,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1191,6 +1193,9 @@ func (ListSitesRequestFieldPathBuilder) FieldMask() ListSitesRequestPathSelector
 func (ListSitesRequestFieldPathBuilder) View() ListSitesRequestPathSelectorView {
 	return ListSitesRequestPathSelectorView{}
 }
+func (ListSitesRequestFieldPathBuilder) IncludePagingInfo() ListSitesRequestPathSelectorIncludePagingInfo {
+	return ListSitesRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListSitesRequestPathSelectorParent struct{}
 
@@ -1290,6 +1295,20 @@ func (s ListSitesRequestPathSelectorView) WithArrayOfValues(values []view.View) 
 	return s.FieldPath().WithIArrayOfValues(values).(*ListSitesRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListSitesRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListSitesRequestPathSelectorIncludePagingInfo) FieldPath() *ListSitesRequest_FieldTerminalPath {
+	return &ListSitesRequest_FieldTerminalPath{selector: ListSitesRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListSitesRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListSitesRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListSitesRequest_FieldTerminalPathValue)
+}
+
+func (s ListSitesRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListSitesRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListSitesRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListSitesResponseFieldPathBuilder struct{}
 
 func NewListSitesResponseFieldPathBuilder() ListSitesResponseFieldPathBuilder {
@@ -1303,6 +1322,12 @@ func (ListSitesResponseFieldPathBuilder) PrevPageToken() ListSitesResponsePathSe
 }
 func (ListSitesResponseFieldPathBuilder) NextPageToken() ListSitesResponsePathSelectorNextPageToken {
 	return ListSitesResponsePathSelectorNextPageToken{}
+}
+func (ListSitesResponseFieldPathBuilder) CurrentOffset() ListSitesResponsePathSelectorCurrentOffset {
+	return ListSitesResponsePathSelectorCurrentOffset{}
+}
+func (ListSitesResponseFieldPathBuilder) TotalResultsCount() ListSitesResponsePathSelectorTotalResultsCount {
+	return ListSitesResponsePathSelectorTotalResultsCount{}
 }
 
 type ListSitesResponsePathSelectorSites struct{}
@@ -2309,6 +2334,34 @@ func (s ListSitesResponsePathSelectorNextPageToken) WithValue(value *site.PagerC
 }
 
 func (s ListSitesResponsePathSelectorNextPageToken) WithArrayOfValues(values []*site.PagerCursor) *ListSitesResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListSitesResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListSitesResponsePathSelectorCurrentOffset struct{}
+
+func (ListSitesResponsePathSelectorCurrentOffset) FieldPath() *ListSitesResponse_FieldTerminalPath {
+	return &ListSitesResponse_FieldTerminalPath{selector: ListSitesResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListSitesResponsePathSelectorCurrentOffset) WithValue(value int32) *ListSitesResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListSitesResponse_FieldTerminalPathValue)
+}
+
+func (s ListSitesResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListSitesResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListSitesResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListSitesResponsePathSelectorTotalResultsCount struct{}
+
+func (ListSitesResponsePathSelectorTotalResultsCount) FieldPath() *ListSitesResponse_FieldTerminalPath {
+	return &ListSitesResponse_FieldTerminalPath{selector: ListSitesResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListSitesResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListSitesResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListSitesResponse_FieldTerminalPathValue)
+}
+
+func (s ListSitesResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListSitesResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListSitesResponse_FieldTerminalPathArrayOfValues)
 }
 

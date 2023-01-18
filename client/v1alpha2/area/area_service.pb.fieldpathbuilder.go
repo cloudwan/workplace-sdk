@@ -8,6 +8,7 @@ package area_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -28,6 +29,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1134,6 +1136,9 @@ func (ListAreasRequestFieldPathBuilder) FieldMask() ListAreasRequestPathSelector
 func (ListAreasRequestFieldPathBuilder) View() ListAreasRequestPathSelectorView {
 	return ListAreasRequestPathSelectorView{}
 }
+func (ListAreasRequestFieldPathBuilder) IncludePagingInfo() ListAreasRequestPathSelectorIncludePagingInfo {
+	return ListAreasRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListAreasRequestPathSelectorParent struct{}
 
@@ -1233,6 +1238,20 @@ func (s ListAreasRequestPathSelectorView) WithArrayOfValues(values []view.View) 
 	return s.FieldPath().WithIArrayOfValues(values).(*ListAreasRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListAreasRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListAreasRequestPathSelectorIncludePagingInfo) FieldPath() *ListAreasRequest_FieldTerminalPath {
+	return &ListAreasRequest_FieldTerminalPath{selector: ListAreasRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListAreasRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListAreasRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListAreasRequest_FieldTerminalPathValue)
+}
+
+func (s ListAreasRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListAreasRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListAreasRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListAreasResponseFieldPathBuilder struct{}
 
 func NewListAreasResponseFieldPathBuilder() ListAreasResponseFieldPathBuilder {
@@ -1246,6 +1265,12 @@ func (ListAreasResponseFieldPathBuilder) PrevPageToken() ListAreasResponsePathSe
 }
 func (ListAreasResponseFieldPathBuilder) NextPageToken() ListAreasResponsePathSelectorNextPageToken {
 	return ListAreasResponsePathSelectorNextPageToken{}
+}
+func (ListAreasResponseFieldPathBuilder) CurrentOffset() ListAreasResponsePathSelectorCurrentOffset {
+	return ListAreasResponsePathSelectorCurrentOffset{}
+}
+func (ListAreasResponseFieldPathBuilder) TotalResultsCount() ListAreasResponsePathSelectorTotalResultsCount {
+	return ListAreasResponsePathSelectorTotalResultsCount{}
 }
 
 type ListAreasResponsePathSelectorAreas struct{}
@@ -2189,6 +2214,34 @@ func (s ListAreasResponsePathSelectorNextPageToken) WithValue(value *area.PagerC
 }
 
 func (s ListAreasResponsePathSelectorNextPageToken) WithArrayOfValues(values []*area.PagerCursor) *ListAreasResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListAreasResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListAreasResponsePathSelectorCurrentOffset struct{}
+
+func (ListAreasResponsePathSelectorCurrentOffset) FieldPath() *ListAreasResponse_FieldTerminalPath {
+	return &ListAreasResponse_FieldTerminalPath{selector: ListAreasResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListAreasResponsePathSelectorCurrentOffset) WithValue(value int32) *ListAreasResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListAreasResponse_FieldTerminalPathValue)
+}
+
+func (s ListAreasResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListAreasResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListAreasResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListAreasResponsePathSelectorTotalResultsCount struct{}
+
+func (ListAreasResponsePathSelectorTotalResultsCount) FieldPath() *ListAreasResponse_FieldTerminalPath {
+	return &ListAreasResponse_FieldTerminalPath{selector: ListAreasResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListAreasResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListAreasResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListAreasResponse_FieldTerminalPathValue)
+}
+
+func (s ListAreasResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListAreasResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListAreasResponse_FieldTerminalPathArrayOfValues)
 }
 

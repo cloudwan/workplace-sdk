@@ -81,8 +81,9 @@ func (a *apiSiteAccess) BatchGetSites(ctx context.Context, refs []*site.Referenc
 
 func (a *apiSiteAccess) QuerySites(ctx context.Context, query *site.ListQuery) (*site.QueryResultSnapshot, error) {
 	request := &site_client.ListSitesRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiSiteAccess) QuerySites(ctx context.Context, query *site.ListQuery) (
 		return nil, err
 	}
 	return &site.QueryResultSnapshot{
-		Sites:          resp.Sites,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Sites:             resp.Sites,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

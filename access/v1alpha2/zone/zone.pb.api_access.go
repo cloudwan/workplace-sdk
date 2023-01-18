@@ -81,8 +81,9 @@ func (a *apiZoneAccess) BatchGetZones(ctx context.Context, refs []*zone.Referenc
 
 func (a *apiZoneAccess) QueryZones(ctx context.Context, query *zone.ListQuery) (*zone.QueryResultSnapshot, error) {
 	request := &zone_client.ListZonesRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiZoneAccess) QueryZones(ctx context.Context, query *zone.ListQuery) (
 		return nil, err
 	}
 	return &zone.QueryResultSnapshot{
-		Zones:          resp.Zones,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Zones:             resp.Zones,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

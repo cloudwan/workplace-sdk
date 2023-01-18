@@ -8,6 +8,7 @@ package vendor_connection_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -25,6 +26,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1254,6 +1256,9 @@ func (ListVendorConnectionsRequestFieldPathBuilder) FieldMask() ListVendorConnec
 func (ListVendorConnectionsRequestFieldPathBuilder) View() ListVendorConnectionsRequestPathSelectorView {
 	return ListVendorConnectionsRequestPathSelectorView{}
 }
+func (ListVendorConnectionsRequestFieldPathBuilder) IncludePagingInfo() ListVendorConnectionsRequestPathSelectorIncludePagingInfo {
+	return ListVendorConnectionsRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListVendorConnectionsRequestPathSelectorParent struct{}
 
@@ -1353,6 +1358,20 @@ func (s ListVendorConnectionsRequestPathSelectorView) WithArrayOfValues(values [
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListVendorConnectionsRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListVendorConnectionsRequestPathSelectorIncludePagingInfo) FieldPath() *ListVendorConnectionsRequest_FieldTerminalPath {
+	return &ListVendorConnectionsRequest_FieldTerminalPath{selector: ListVendorConnectionsRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListVendorConnectionsRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListVendorConnectionsRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsRequest_FieldTerminalPathValue)
+}
+
+func (s ListVendorConnectionsRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListVendorConnectionsRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListVendorConnectionsResponseFieldPathBuilder struct{}
 
 func NewListVendorConnectionsResponseFieldPathBuilder() ListVendorConnectionsResponseFieldPathBuilder {
@@ -1366,6 +1385,12 @@ func (ListVendorConnectionsResponseFieldPathBuilder) PrevPageToken() ListVendorC
 }
 func (ListVendorConnectionsResponseFieldPathBuilder) NextPageToken() ListVendorConnectionsResponsePathSelectorNextPageToken {
 	return ListVendorConnectionsResponsePathSelectorNextPageToken{}
+}
+func (ListVendorConnectionsResponseFieldPathBuilder) CurrentOffset() ListVendorConnectionsResponsePathSelectorCurrentOffset {
+	return ListVendorConnectionsResponsePathSelectorCurrentOffset{}
+}
+func (ListVendorConnectionsResponseFieldPathBuilder) TotalResultsCount() ListVendorConnectionsResponsePathSelectorTotalResultsCount {
+	return ListVendorConnectionsResponsePathSelectorTotalResultsCount{}
 }
 
 type ListVendorConnectionsResponsePathSelectorVendorConnections struct{}
@@ -2435,6 +2460,34 @@ func (s ListVendorConnectionsResponsePathSelectorNextPageToken) WithValue(value 
 }
 
 func (s ListVendorConnectionsResponsePathSelectorNextPageToken) WithArrayOfValues(values []*vendor_connection.PagerCursor) *ListVendorConnectionsResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListVendorConnectionsResponsePathSelectorCurrentOffset struct{}
+
+func (ListVendorConnectionsResponsePathSelectorCurrentOffset) FieldPath() *ListVendorConnectionsResponse_FieldTerminalPath {
+	return &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorCurrentOffset) WithValue(value int32) *ListVendorConnectionsResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldTerminalPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListVendorConnectionsResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListVendorConnectionsResponsePathSelectorTotalResultsCount struct{}
+
+func (ListVendorConnectionsResponsePathSelectorTotalResultsCount) FieldPath() *ListVendorConnectionsResponse_FieldTerminalPath {
+	return &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListVendorConnectionsResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListVendorConnectionsResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListVendorConnectionsResponse_FieldTerminalPathValue)
+}
+
+func (s ListVendorConnectionsResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListVendorConnectionsResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListVendorConnectionsResponse_FieldTerminalPathArrayOfValues)
 }
 

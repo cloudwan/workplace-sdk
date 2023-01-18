@@ -81,8 +81,9 @@ func (a *apiFloorAccess) BatchGetFloors(ctx context.Context, refs []*floor.Refer
 
 func (a *apiFloorAccess) QueryFloors(ctx context.Context, query *floor.ListQuery) (*floor.QueryResultSnapshot, error) {
 	request := &floor_client.ListFloorsRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiFloorAccess) QueryFloors(ctx context.Context, query *floor.ListQuery
 		return nil, err
 	}
 	return &floor.QueryResultSnapshot{
-		Floors:         resp.Floors,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Floors:            resp.Floors,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

@@ -81,8 +81,9 @@ func (a *apiAgentAccess) BatchGetAgents(ctx context.Context, refs []*agent.Refer
 
 func (a *apiAgentAccess) QueryAgents(ctx context.Context, query *agent.ListQuery) (*agent.QueryResultSnapshot, error) {
 	request := &agent_client.ListAgentsRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiAgentAccess) QueryAgents(ctx context.Context, query *agent.ListQuery
 		return nil, err
 	}
 	return &agent.QueryResultSnapshot{
-		Agents:         resp.Agents,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Agents:            resp.Agents,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

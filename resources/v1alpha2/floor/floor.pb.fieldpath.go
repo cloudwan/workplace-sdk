@@ -490,21 +490,22 @@ func (fps *Floor_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor
 func (fps *Floor_FieldSubPath) Get(source *Floor) (values []interface{}) {
-	if asGeometryFieldPath, ok := fps.AsGeometrySubPath(); ok {
-		values = append(values, asGeometryFieldPath.Get(source.GetGeometry())...)
-	} else if asVendorMappingFieldPath, ok := fps.AsVendorMappingsSubPath(); ok {
+	switch fps.selector {
+	case Floor_FieldPathSelectorGeometry:
+		values = append(values, fps.subPath.GetRaw(source.GetGeometry())...)
+	case Floor_FieldPathSelectorVendorMappings:
 		for _, item := range source.GetVendorMappings() {
-			values = append(values, asVendorMappingFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else if asVendorSpecFieldPath, ok := fps.AsVendorSpecSubPath(); ok {
-		values = append(values, asVendorSpecFieldPath.Get(source.GetVendorSpec())...)
-	} else if asVendorInfoFieldPath, ok := fps.AsVendorInfoSubPath(); ok {
-		values = append(values, asVendorInfoFieldPath.Get(source.GetVendorInfo())...)
-	} else if asVendorStateFieldPath, ok := fps.AsVendorStateSubPath(); ok {
-		values = append(values, asVendorStateFieldPath.Get(source.GetVendorState())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	case Floor_FieldPathSelectorVendorSpec:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorSpec())...)
+	case Floor_FieldPathSelectorVendorInfo:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorInfo())...)
+	case Floor_FieldPathSelectorVendorState:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorState())...)
+	case Floor_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor: %d", fps.selector))
 	}
 	return
@@ -1403,11 +1404,12 @@ func (fps *FloorVendorSpec_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor_VendorSpec
 func (fps *FloorVendorSpec_FieldSubPath) Get(source *Floor_VendorSpec) (values []interface{}) {
-	if asPointGrabFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabFieldPath.Get(source.GetPointGrab())...)
-	} else if asMapboxFieldPath, ok := fps.AsMapboxSubPath(); ok {
-		values = append(values, asMapboxFieldPath.Get(source.GetMapbox())...)
-	} else {
+	switch fps.selector {
+	case FloorVendorSpec_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	case FloorVendorSpec_FieldPathSelectorMapbox:
+		values = append(values, fps.subPath.GetRaw(source.GetMapbox())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorSpec: %d", fps.selector))
 	}
 	return
@@ -2025,9 +2027,10 @@ func (fps *FloorVendorInfo_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor_VendorInfo
 func (fps *FloorVendorInfo_FieldSubPath) Get(source *Floor_VendorInfo) (values []interface{}) {
-	if asPointGrabFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case FloorVendorInfo_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorInfo: %d", fps.selector))
 	}
 	return
@@ -2604,9 +2607,10 @@ func (fps *FloorVendorState_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor_VendorState
 func (fps *FloorVendorState_FieldSubPath) Get(source *Floor_VendorState) (values []interface{}) {
-	if asPointGrabFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case FloorVendorState_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorState: %d", fps.selector))
 	}
 	return
@@ -3202,11 +3206,12 @@ func (fps *FloorVendorSpecPointGrab_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor_VendorSpec_PointGrab
 func (fps *FloorVendorSpecPointGrab_FieldSubPath) Get(source *Floor_VendorSpec_PointGrab) (values []interface{}) {
-	if asReferencePointFieldPath, ok := fps.AsReferencePointsSubPath(); ok {
+	switch fps.selector {
+	case FloorVendorSpecPointGrab_FieldPathSelectorReferencePoints:
 		for _, item := range source.GetReferencePoints() {
-			values = append(values, asReferencePointFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorSpec_PointGrab: %d", fps.selector))
 	}
 	return
@@ -4254,9 +4259,10 @@ func (fps *FloorVendorSpecPointGrabReferencePoint_FieldSubPath) JSONString() str
 
 // Get returns all values pointed by selected field from source Floor_VendorSpec_PointGrab_ReferencePoint
 func (fps *FloorVendorSpecPointGrabReferencePoint_FieldSubPath) Get(source *Floor_VendorSpec_PointGrab_ReferencePoint) (values []interface{}) {
-	if asPointFieldPath, ok := fps.AsXySubPath(); ok {
-		values = append(values, asPointFieldPath.Get(source.GetXy())...)
-	} else {
+	switch fps.selector {
+	case FloorVendorSpecPointGrabReferencePoint_FieldPathSelectorXy:
+		values = append(values, fps.subPath.GetRaw(source.GetXy())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorSpec_PointGrab_ReferencePoint: %d", fps.selector))
 	}
 	return
@@ -4851,11 +4857,12 @@ func (fps *FloorVendorInfoPointGrab_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor_VendorInfo_PointGrab
 func (fps *FloorVendorInfoPointGrab_FieldSubPath) Get(source *Floor_VendorInfo_PointGrab) (values []interface{}) {
-	if asReferencePointFieldPath, ok := fps.AsReferencePointsSubPath(); ok {
+	switch fps.selector {
+	case FloorVendorInfoPointGrab_FieldPathSelectorReferencePoints:
 		for _, item := range source.GetReferencePoints() {
-			values = append(values, asReferencePointFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorInfo_PointGrab: %d", fps.selector))
 	}
 	return
@@ -5438,9 +5445,10 @@ func (fps *FloorVendorStatePointGrab_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Floor_VendorState_PointGrab
 func (fps *FloorVendorStatePointGrab_FieldSubPath) Get(source *Floor_VendorState_PointGrab) (values []interface{}) {
-	if asPeoplePositionsFieldPath, ok := fps.AsPeoplePositionsSubPath(); ok {
-		values = append(values, asPeoplePositionsFieldPath.Get(source.GetPeoplePositions())...)
-	} else {
+	switch fps.selector {
+	case FloorVendorStatePointGrab_FieldPathSelectorPeoplePositions:
+		values = append(values, fps.subPath.GetRaw(source.GetPeoplePositions())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Floor_VendorState_PointGrab: %d", fps.selector))
 	}
 	return

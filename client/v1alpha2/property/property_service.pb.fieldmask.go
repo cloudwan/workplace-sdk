@@ -909,6 +909,7 @@ func FullListPropertiesRequest_FieldMask() *ListPropertiesRequest_FieldMask {
 	res.Paths = append(res.Paths, &ListPropertiesRequest_FieldTerminalPath{selector: ListPropertiesRequest_FieldPathSelectorFilter})
 	res.Paths = append(res.Paths, &ListPropertiesRequest_FieldTerminalPath{selector: ListPropertiesRequest_FieldPathSelectorFieldMask})
 	res.Paths = append(res.Paths, &ListPropertiesRequest_FieldTerminalPath{selector: ListPropertiesRequest_FieldPathSelectorView})
+	res.Paths = append(res.Paths, &ListPropertiesRequest_FieldTerminalPath{selector: ListPropertiesRequest_FieldPathSelectorIncludePagingInfo})
 	return res
 }
 
@@ -952,7 +953,7 @@ func (fieldMask *ListPropertiesRequest_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 7)
+	presentSelectors := make([]bool, 8)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*ListPropertiesRequest_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -982,7 +983,7 @@ func (fieldMask *ListPropertiesRequest_FieldMask) Reset() {
 
 func (fieldMask *ListPropertiesRequest_FieldMask) Subtract(other *ListPropertiesRequest_FieldMask) *ListPropertiesRequest_FieldMask {
 	result := &ListPropertiesRequest_FieldMask{}
-	removedSelectors := make([]bool, 7)
+	removedSelectors := make([]bool, 8)
 
 	for _, path := range other.GetPaths() {
 		switch tp := path.(type) {
@@ -1150,6 +1151,8 @@ func (fieldMask *ListPropertiesRequest_FieldMask) Project(source *ListProperties
 				result.FieldMask = source.FieldMask
 			case ListPropertiesRequest_FieldPathSelectorView:
 				result.View = source.View
+			case ListPropertiesRequest_FieldPathSelectorIncludePagingInfo:
+				result.IncludePagingInfo = source.IncludePagingInfo
 			}
 		}
 	}
@@ -1176,6 +1179,8 @@ func FullListPropertiesResponse_FieldMask() *ListPropertiesResponse_FieldMask {
 	res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorProperties})
 	res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorPrevPageToken})
 	res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorNextPageToken})
+	res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorCurrentOffset})
+	res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorTotalResultsCount})
 	return res
 }
 
@@ -1219,7 +1224,7 @@ func (fieldMask *ListPropertiesResponse_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 3)
+	presentSelectors := make([]bool, 5)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*ListPropertiesResponse_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -1249,7 +1254,7 @@ func (fieldMask *ListPropertiesResponse_FieldMask) Reset() {
 
 func (fieldMask *ListPropertiesResponse_FieldMask) Subtract(other *ListPropertiesResponse_FieldMask) *ListPropertiesResponse_FieldMask {
 	result := &ListPropertiesResponse_FieldMask{}
-	removedSelectors := make([]bool, 3)
+	removedSelectors := make([]bool, 5)
 	otherSubMasks := map[ListPropertiesResponse_FieldPathSelector]gotenobject.FieldMask{
 		ListPropertiesResponse_FieldPathSelectorProperties: &property.Property_FieldMask{},
 	}
@@ -1456,6 +1461,10 @@ func (fieldMask *ListPropertiesResponse_FieldMask) Project(source *ListPropertie
 				result.PrevPageToken = source.PrevPageToken
 			case ListPropertiesResponse_FieldPathSelectorNextPageToken:
 				result.NextPageToken = source.NextPageToken
+			case ListPropertiesResponse_FieldPathSelectorCurrentOffset:
+				result.CurrentOffset = source.CurrentOffset
+			case ListPropertiesResponse_FieldPathSelectorTotalResultsCount:
+				result.TotalResultsCount = source.TotalResultsCount
 			}
 		case *ListPropertiesResponse_FieldSubPath:
 			switch tp.selector {

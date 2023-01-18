@@ -314,9 +314,10 @@ func (fps *DeviceGroup_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source DeviceGroup
 func (fps *DeviceGroup_FieldSubPath) Get(source *DeviceGroup) (values []interface{}) {
-	if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case DeviceGroup_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for DeviceGroup: %d", fps.selector))
 	}
 	return

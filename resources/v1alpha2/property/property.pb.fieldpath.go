@@ -416,15 +416,16 @@ func (fps *Property_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Property
 func (fps *Property_FieldSubPath) Get(source *Property) (values []interface{}) {
-	if asBACNetEntityFieldPath, ok := fps.AsBacnetSubPath(); ok {
-		values = append(values, asBACNetEntityFieldPath.Get(source.GetBacnet())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else if asSitePlacementFieldPath, ok := fps.AsSitePlacementSubPath(); ok {
-		values = append(values, asSitePlacementFieldPath.Get(source.GetSitePlacement())...)
-	} else if asMetricOverrideFieldPath, ok := fps.AsMetricOverrideSubPath(); ok {
-		values = append(values, asMetricOverrideFieldPath.Get(source.GetMetricOverride())...)
-	} else {
+	switch fps.selector {
+	case Property_FieldPathSelectorBacnet:
+		values = append(values, fps.subPath.GetRaw(source.GetBacnet())...)
+	case Property_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	case Property_FieldPathSelectorSitePlacement:
+		values = append(values, fps.subPath.GetRaw(source.GetSitePlacement())...)
+	case Property_FieldPathSelectorMetricOverride:
+		values = append(values, fps.subPath.GetRaw(source.GetMetricOverride())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Property: %d", fps.selector))
 	}
 	return

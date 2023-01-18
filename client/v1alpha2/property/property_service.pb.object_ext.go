@@ -429,6 +429,9 @@ func (o *ListPropertiesRequest) MakeDiffFieldMask(other *ListPropertiesRequest) 
 	if o.GetView() != other.GetView() {
 		res.Paths = append(res.Paths, &ListPropertiesRequest_FieldTerminalPath{selector: ListPropertiesRequest_FieldPathSelectorView})
 	}
+	if o.GetIncludePagingInfo() != other.GetIncludePagingInfo() {
+		res.Paths = append(res.Paths, &ListPropertiesRequest_FieldTerminalPath{selector: ListPropertiesRequest_FieldPathSelectorIncludePagingInfo})
+	}
 	return res
 }
 
@@ -484,6 +487,7 @@ func (o *ListPropertiesRequest) Clone() *ListPropertiesRequest {
 	}
 	result.FieldMask = proto.Clone(o.FieldMask).(*property.Property_FieldMask)
 	result.View = o.View
+	result.IncludePagingInfo = o.IncludePagingInfo
 	return result
 }
 
@@ -551,6 +555,7 @@ func (o *ListPropertiesRequest) Merge(source *ListPropertiesRequest) {
 		}
 	}
 	o.View = source.GetView()
+	o.IncludePagingInfo = source.GetIncludePagingInfo()
 }
 
 func (o *ListPropertiesRequest) MergeRaw(source gotenobject.GotenObjectExt) {
@@ -594,6 +599,12 @@ func (o *ListPropertiesResponse) MakeDiffFieldMask(other *ListPropertiesResponse
 	if o.GetNextPageToken().String() != other.GetNextPageToken().String() {
 		res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorNextPageToken})
 	}
+	if o.GetCurrentOffset() != other.GetCurrentOffset() {
+		res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorCurrentOffset})
+	}
+	if o.GetTotalResultsCount() != other.GetTotalResultsCount() {
+		res.Paths = append(res.Paths, &ListPropertiesResponse_FieldTerminalPath{selector: ListPropertiesResponse_FieldPathSelectorTotalResultsCount})
+	}
 	return res
 }
 
@@ -630,6 +641,8 @@ func (o *ListPropertiesResponse) Clone() *ListPropertiesResponse {
 			panic(err)
 		}
 	}
+	result.CurrentOffset = o.CurrentOffset
+	result.TotalResultsCount = o.TotalResultsCount
 	return result
 }
 
@@ -680,6 +693,8 @@ func (o *ListPropertiesResponse) Merge(source *ListPropertiesResponse) {
 	} else {
 		o.NextPageToken = nil
 	}
+	o.CurrentOffset = source.GetCurrentOffset()
+	o.TotalResultsCount = source.GetTotalResultsCount()
 }
 
 func (o *ListPropertiesResponse) MergeRaw(source gotenobject.GotenObjectExt) {

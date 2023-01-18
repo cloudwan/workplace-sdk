@@ -8,6 +8,7 @@ package floor_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -27,6 +28,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1652,6 +1654,9 @@ func (ListFloorsRequestFieldPathBuilder) FieldMask() ListFloorsRequestPathSelect
 func (ListFloorsRequestFieldPathBuilder) View() ListFloorsRequestPathSelectorView {
 	return ListFloorsRequestPathSelectorView{}
 }
+func (ListFloorsRequestFieldPathBuilder) IncludePagingInfo() ListFloorsRequestPathSelectorIncludePagingInfo {
+	return ListFloorsRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListFloorsRequestPathSelectorParent struct{}
 
@@ -1751,6 +1756,20 @@ func (s ListFloorsRequestPathSelectorView) WithArrayOfValues(values []view.View)
 	return s.FieldPath().WithIArrayOfValues(values).(*ListFloorsRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListFloorsRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListFloorsRequestPathSelectorIncludePagingInfo) FieldPath() *ListFloorsRequest_FieldTerminalPath {
+	return &ListFloorsRequest_FieldTerminalPath{selector: ListFloorsRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListFloorsRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListFloorsRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListFloorsRequest_FieldTerminalPathValue)
+}
+
+func (s ListFloorsRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListFloorsRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListFloorsRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListFloorsResponseFieldPathBuilder struct{}
 
 func NewListFloorsResponseFieldPathBuilder() ListFloorsResponseFieldPathBuilder {
@@ -1764,6 +1783,12 @@ func (ListFloorsResponseFieldPathBuilder) PrevPageToken() ListFloorsResponsePath
 }
 func (ListFloorsResponseFieldPathBuilder) NextPageToken() ListFloorsResponsePathSelectorNextPageToken {
 	return ListFloorsResponsePathSelectorNextPageToken{}
+}
+func (ListFloorsResponseFieldPathBuilder) CurrentOffset() ListFloorsResponsePathSelectorCurrentOffset {
+	return ListFloorsResponsePathSelectorCurrentOffset{}
+}
+func (ListFloorsResponseFieldPathBuilder) TotalResultsCount() ListFloorsResponsePathSelectorTotalResultsCount {
+	return ListFloorsResponsePathSelectorTotalResultsCount{}
 }
 
 type ListFloorsResponsePathSelectorFloors struct{}
@@ -3227,6 +3252,34 @@ func (s ListFloorsResponsePathSelectorNextPageToken) WithValue(value *floor.Page
 }
 
 func (s ListFloorsResponsePathSelectorNextPageToken) WithArrayOfValues(values []*floor.PagerCursor) *ListFloorsResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListFloorsResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListFloorsResponsePathSelectorCurrentOffset struct{}
+
+func (ListFloorsResponsePathSelectorCurrentOffset) FieldPath() *ListFloorsResponse_FieldTerminalPath {
+	return &ListFloorsResponse_FieldTerminalPath{selector: ListFloorsResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListFloorsResponsePathSelectorCurrentOffset) WithValue(value int32) *ListFloorsResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListFloorsResponse_FieldTerminalPathValue)
+}
+
+func (s ListFloorsResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListFloorsResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListFloorsResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListFloorsResponsePathSelectorTotalResultsCount struct{}
+
+func (ListFloorsResponsePathSelectorTotalResultsCount) FieldPath() *ListFloorsResponse_FieldTerminalPath {
+	return &ListFloorsResponse_FieldTerminalPath{selector: ListFloorsResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListFloorsResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListFloorsResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListFloorsResponse_FieldTerminalPathValue)
+}
+
+func (s ListFloorsResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListFloorsResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListFloorsResponse_FieldTerminalPathArrayOfValues)
 }
 

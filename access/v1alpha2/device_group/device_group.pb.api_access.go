@@ -81,8 +81,9 @@ func (a *apiDeviceGroupAccess) BatchGetDeviceGroups(ctx context.Context, refs []
 
 func (a *apiDeviceGroupAccess) QueryDeviceGroups(ctx context.Context, query *device_group.ListQuery) (*device_group.QueryResultSnapshot, error) {
 	request := &device_group_client.ListDeviceGroupsRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiDeviceGroupAccess) QueryDeviceGroups(ctx context.Context, query *dev
 		return nil, err
 	}
 	return &device_group.QueryResultSnapshot{
-		DeviceGroups:   resp.DeviceGroups,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		DeviceGroups:      resp.DeviceGroups,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

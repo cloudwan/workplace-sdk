@@ -419,6 +419,9 @@ func (o *ListAgentsRequest) MakeDiffFieldMask(other *ListAgentsRequest) *ListAge
 	if o.GetView() != other.GetView() {
 		res.Paths = append(res.Paths, &ListAgentsRequest_FieldTerminalPath{selector: ListAgentsRequest_FieldPathSelectorView})
 	}
+	if o.GetIncludePagingInfo() != other.GetIncludePagingInfo() {
+		res.Paths = append(res.Paths, &ListAgentsRequest_FieldTerminalPath{selector: ListAgentsRequest_FieldPathSelectorIncludePagingInfo})
+	}
 	return res
 }
 
@@ -474,6 +477,7 @@ func (o *ListAgentsRequest) Clone() *ListAgentsRequest {
 	}
 	result.FieldMask = proto.Clone(o.FieldMask).(*agent.Agent_FieldMask)
 	result.View = o.View
+	result.IncludePagingInfo = o.IncludePagingInfo
 	return result
 }
 
@@ -541,6 +545,7 @@ func (o *ListAgentsRequest) Merge(source *ListAgentsRequest) {
 		}
 	}
 	o.View = source.GetView()
+	o.IncludePagingInfo = source.GetIncludePagingInfo()
 }
 
 func (o *ListAgentsRequest) MergeRaw(source gotenobject.GotenObjectExt) {
@@ -584,6 +589,12 @@ func (o *ListAgentsResponse) MakeDiffFieldMask(other *ListAgentsResponse) *ListA
 	if o.GetNextPageToken().String() != other.GetNextPageToken().String() {
 		res.Paths = append(res.Paths, &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorNextPageToken})
 	}
+	if o.GetCurrentOffset() != other.GetCurrentOffset() {
+		res.Paths = append(res.Paths, &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorCurrentOffset})
+	}
+	if o.GetTotalResultsCount() != other.GetTotalResultsCount() {
+		res.Paths = append(res.Paths, &ListAgentsResponse_FieldTerminalPath{selector: ListAgentsResponse_FieldPathSelectorTotalResultsCount})
+	}
 	return res
 }
 
@@ -620,6 +631,8 @@ func (o *ListAgentsResponse) Clone() *ListAgentsResponse {
 			panic(err)
 		}
 	}
+	result.CurrentOffset = o.CurrentOffset
+	result.TotalResultsCount = o.TotalResultsCount
 	return result
 }
 
@@ -670,6 +683,8 @@ func (o *ListAgentsResponse) Merge(source *ListAgentsResponse) {
 	} else {
 		o.NextPageToken = nil
 	}
+	o.CurrentOffset = source.GetCurrentOffset()
+	o.TotalResultsCount = source.GetTotalResultsCount()
 }
 
 func (o *ListAgentsResponse) MergeRaw(source gotenobject.GotenObjectExt) {

@@ -8,6 +8,7 @@ package device_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -32,6 +33,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1738,6 +1740,9 @@ func (ListDevicesRequestFieldPathBuilder) FieldMask() ListDevicesRequestPathSele
 func (ListDevicesRequestFieldPathBuilder) View() ListDevicesRequestPathSelectorView {
 	return ListDevicesRequestPathSelectorView{}
 }
+func (ListDevicesRequestFieldPathBuilder) IncludePagingInfo() ListDevicesRequestPathSelectorIncludePagingInfo {
+	return ListDevicesRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListDevicesRequestPathSelectorParent struct{}
 
@@ -1837,6 +1842,20 @@ func (s ListDevicesRequestPathSelectorView) WithArrayOfValues(values []view.View
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDevicesRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListDevicesRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListDevicesRequestPathSelectorIncludePagingInfo) FieldPath() *ListDevicesRequest_FieldTerminalPath {
+	return &ListDevicesRequest_FieldTerminalPath{selector: ListDevicesRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListDevicesRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListDevicesRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDevicesRequest_FieldTerminalPathValue)
+}
+
+func (s ListDevicesRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListDevicesRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDevicesRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListDevicesResponseFieldPathBuilder struct{}
 
 func NewListDevicesResponseFieldPathBuilder() ListDevicesResponseFieldPathBuilder {
@@ -1850,6 +1869,12 @@ func (ListDevicesResponseFieldPathBuilder) PrevPageToken() ListDevicesResponsePa
 }
 func (ListDevicesResponseFieldPathBuilder) NextPageToken() ListDevicesResponsePathSelectorNextPageToken {
 	return ListDevicesResponsePathSelectorNextPageToken{}
+}
+func (ListDevicesResponseFieldPathBuilder) CurrentOffset() ListDevicesResponsePathSelectorCurrentOffset {
+	return ListDevicesResponsePathSelectorCurrentOffset{}
+}
+func (ListDevicesResponseFieldPathBuilder) TotalResultsCount() ListDevicesResponsePathSelectorTotalResultsCount {
+	return ListDevicesResponsePathSelectorTotalResultsCount{}
 }
 
 type ListDevicesResponsePathSelectorDevices struct{}
@@ -3389,6 +3414,34 @@ func (s ListDevicesResponsePathSelectorNextPageToken) WithValue(value *device.Pa
 }
 
 func (s ListDevicesResponsePathSelectorNextPageToken) WithArrayOfValues(values []*device.PagerCursor) *ListDevicesResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDevicesResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListDevicesResponsePathSelectorCurrentOffset struct{}
+
+func (ListDevicesResponsePathSelectorCurrentOffset) FieldPath() *ListDevicesResponse_FieldTerminalPath {
+	return &ListDevicesResponse_FieldTerminalPath{selector: ListDevicesResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListDevicesResponsePathSelectorCurrentOffset) WithValue(value int32) *ListDevicesResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDevicesResponse_FieldTerminalPathValue)
+}
+
+func (s ListDevicesResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListDevicesResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListDevicesResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListDevicesResponsePathSelectorTotalResultsCount struct{}
+
+func (ListDevicesResponsePathSelectorTotalResultsCount) FieldPath() *ListDevicesResponse_FieldTerminalPath {
+	return &ListDevicesResponse_FieldTerminalPath{selector: ListDevicesResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListDevicesResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListDevicesResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListDevicesResponse_FieldTerminalPathValue)
+}
+
+func (s ListDevicesResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListDevicesResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListDevicesResponse_FieldTerminalPathArrayOfValues)
 }
 

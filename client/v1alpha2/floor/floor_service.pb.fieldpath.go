@@ -1239,11 +1239,12 @@ func (fps *BatchGetFloorsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source BatchGetFloorsResponse
 func (fps *BatchGetFloorsResponse_FieldSubPath) Get(source *BatchGetFloorsResponse) (values []interface{}) {
-	if asFloorFieldPath, ok := fps.AsFloorsSubPath(); ok {
+	switch fps.selector {
+	case BatchGetFloorsResponse_FieldPathSelectorFloors:
 		for _, item := range source.GetFloors() {
-			values = append(values, asFloorFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for BatchGetFloorsResponse: %d", fps.selector))
 	}
 	return
@@ -1642,13 +1643,14 @@ type ListFloorsRequest_FieldPath interface {
 type ListFloorsRequest_FieldPathSelector int32
 
 const (
-	ListFloorsRequest_FieldPathSelectorParent    ListFloorsRequest_FieldPathSelector = 0
-	ListFloorsRequest_FieldPathSelectorPageSize  ListFloorsRequest_FieldPathSelector = 1
-	ListFloorsRequest_FieldPathSelectorPageToken ListFloorsRequest_FieldPathSelector = 2
-	ListFloorsRequest_FieldPathSelectorOrderBy   ListFloorsRequest_FieldPathSelector = 3
-	ListFloorsRequest_FieldPathSelectorFilter    ListFloorsRequest_FieldPathSelector = 4
-	ListFloorsRequest_FieldPathSelectorFieldMask ListFloorsRequest_FieldPathSelector = 5
-	ListFloorsRequest_FieldPathSelectorView      ListFloorsRequest_FieldPathSelector = 6
+	ListFloorsRequest_FieldPathSelectorParent            ListFloorsRequest_FieldPathSelector = 0
+	ListFloorsRequest_FieldPathSelectorPageSize          ListFloorsRequest_FieldPathSelector = 1
+	ListFloorsRequest_FieldPathSelectorPageToken         ListFloorsRequest_FieldPathSelector = 2
+	ListFloorsRequest_FieldPathSelectorOrderBy           ListFloorsRequest_FieldPathSelector = 3
+	ListFloorsRequest_FieldPathSelectorFilter            ListFloorsRequest_FieldPathSelector = 4
+	ListFloorsRequest_FieldPathSelectorFieldMask         ListFloorsRequest_FieldPathSelector = 5
+	ListFloorsRequest_FieldPathSelectorView              ListFloorsRequest_FieldPathSelector = 6
+	ListFloorsRequest_FieldPathSelectorIncludePagingInfo ListFloorsRequest_FieldPathSelector = 7
 )
 
 func (s ListFloorsRequest_FieldPathSelector) String() string {
@@ -1667,6 +1669,8 @@ func (s ListFloorsRequest_FieldPathSelector) String() string {
 		return "field_mask"
 	case ListFloorsRequest_FieldPathSelectorView:
 		return "view"
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		return "include_paging_info"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", s))
 	}
@@ -1692,6 +1696,8 @@ func BuildListFloorsRequest_FieldPath(fp gotenobject.RawFieldPath) (ListFloorsRe
 			return &ListFloorsRequest_FieldTerminalPath{selector: ListFloorsRequest_FieldPathSelectorFieldMask}, nil
 		case "view":
 			return &ListFloorsRequest_FieldTerminalPath{selector: ListFloorsRequest_FieldPathSelectorView}, nil
+		case "include_paging_info", "includePagingInfo", "include-paging-info":
+			return &ListFloorsRequest_FieldTerminalPath{selector: ListFloorsRequest_FieldPathSelectorIncludePagingInfo}, nil
 		}
 	}
 	return nil, status.Errorf(codes.InvalidArgument, "unknown field path '%s' for object ListFloorsRequest", fp)
@@ -1761,6 +1767,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) Get(source *ListFloorsRequest) (v
 			}
 		case ListFloorsRequest_FieldPathSelectorView:
 			values = append(values, source.View)
+		case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+			values = append(values, source.IncludePagingInfo)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fp.selector))
 		}
@@ -1794,6 +1802,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) GetSingle(source *ListFloorsReque
 		return res, res != nil
 	case ListFloorsRequest_FieldPathSelectorView:
 		return source.GetView(), source != nil
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		return source.GetIncludePagingInfo(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fp.selector))
 	}
@@ -1820,6 +1830,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) GetDefault() interface{} {
 		return (*floor.Floor_FieldMask)(nil)
 	case ListFloorsRequest_FieldPathSelectorView:
 		return view.View_UNSPECIFIED
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		return false
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fp.selector))
 	}
@@ -1842,6 +1854,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) ClearValue(item *ListFloorsReques
 			item.FieldMask = nil
 		case ListFloorsRequest_FieldPathSelectorView:
 			item.View = view.View_UNSPECIFIED
+		case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+			item.IncludePagingInfo = false
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fp.selector))
 		}
@@ -1860,7 +1874,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListFloorsRequest_FieldPathSelectorOrderBy ||
 		fp.selector == ListFloorsRequest_FieldPathSelectorFilter ||
 		fp.selector == ListFloorsRequest_FieldPathSelectorFieldMask ||
-		fp.selector == ListFloorsRequest_FieldPathSelectorView
+		fp.selector == ListFloorsRequest_FieldPathSelectorView ||
+		fp.selector == ListFloorsRequest_FieldPathSelectorIncludePagingInfo
 }
 
 func (fp *ListFloorsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -1883,6 +1898,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) WithIValue(value interface{}) Lis
 		return &ListFloorsRequest_FieldTerminalPathValue{ListFloorsRequest_FieldTerminalPath: *fp, value: value.(*floor.Floor_FieldMask)}
 	case ListFloorsRequest_FieldPathSelectorView:
 		return &ListFloorsRequest_FieldTerminalPathValue{ListFloorsRequest_FieldTerminalPath: *fp, value: value.(view.View)}
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListFloorsRequest_FieldTerminalPathValue{ListFloorsRequest_FieldTerminalPath: *fp, value: value.(bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fp.selector))
 	}
@@ -1909,6 +1926,8 @@ func (fp *ListFloorsRequest_FieldTerminalPath) WithIArrayOfValues(values interfa
 		return &ListFloorsRequest_FieldTerminalPathArrayOfValues{ListFloorsRequest_FieldTerminalPath: *fp, values: values.([]*floor.Floor_FieldMask)}
 	case ListFloorsRequest_FieldPathSelectorView:
 		return &ListFloorsRequest_FieldTerminalPathArrayOfValues{ListFloorsRequest_FieldTerminalPath: *fp, values: values.([]view.View)}
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListFloorsRequest_FieldTerminalPathArrayOfValues{ListFloorsRequest_FieldTerminalPath: *fp, values: values.([]bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fp.selector))
 	}
@@ -1997,6 +2016,10 @@ func (fpv *ListFloorsRequest_FieldTerminalPathValue) AsViewValue() (view.View, b
 	res, ok := fpv.value.(view.View)
 	return res, ok
 }
+func (fpv *ListFloorsRequest_FieldTerminalPathValue) AsIncludePagingInfoValue() (bool, bool) {
+	res, ok := fpv.value.(bool)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListFloorsRequest
 func (fpv *ListFloorsRequest_FieldTerminalPathValue) SetTo(target **ListFloorsRequest) {
@@ -2018,6 +2041,8 @@ func (fpv *ListFloorsRequest_FieldTerminalPathValue) SetTo(target **ListFloorsRe
 		(*target).FieldMask = fpv.value.(*floor.Floor_FieldMask)
 	case ListFloorsRequest_FieldPathSelectorView:
 		(*target).View = fpv.value.(view.View)
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		(*target).IncludePagingInfo = fpv.value.(bool)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsRequest: %d", fpv.selector))
 	}
@@ -2074,6 +2099,16 @@ func (fpv *ListFloorsRequest_FieldTerminalPathValue) CompareWith(source *ListFlo
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		leftValue := fpv.value.(bool)
+		rightValue := source.GetIncludePagingInfo()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if !(leftValue) && (rightValue) {
 			return -1, true
 		} else {
 			return 1, true
@@ -2214,6 +2249,10 @@ func (fpaov *ListFloorsRequest_FieldTerminalPathArrayOfValues) GetRawValues() (v
 		for _, v := range fpaov.values.([]view.View) {
 			values = append(values, v)
 		}
+	case ListFloorsRequest_FieldPathSelectorIncludePagingInfo:
+		for _, v := range fpaov.values.([]bool) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2245,6 +2284,10 @@ func (fpaov *ListFloorsRequest_FieldTerminalPathArrayOfValues) AsViewArrayOfValu
 	res, ok := fpaov.values.([]view.View)
 	return res, ok
 }
+func (fpaov *ListFloorsRequest_FieldTerminalPathArrayOfValues) AsIncludePagingInfoArrayOfValues() ([]bool, bool) {
+	res, ok := fpaov.values.([]bool)
+	return res, ok
+}
 
 // FieldPath provides implementation to handle
 // https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto
@@ -2265,9 +2308,11 @@ type ListFloorsResponse_FieldPath interface {
 type ListFloorsResponse_FieldPathSelector int32
 
 const (
-	ListFloorsResponse_FieldPathSelectorFloors        ListFloorsResponse_FieldPathSelector = 0
-	ListFloorsResponse_FieldPathSelectorPrevPageToken ListFloorsResponse_FieldPathSelector = 1
-	ListFloorsResponse_FieldPathSelectorNextPageToken ListFloorsResponse_FieldPathSelector = 2
+	ListFloorsResponse_FieldPathSelectorFloors            ListFloorsResponse_FieldPathSelector = 0
+	ListFloorsResponse_FieldPathSelectorPrevPageToken     ListFloorsResponse_FieldPathSelector = 1
+	ListFloorsResponse_FieldPathSelectorNextPageToken     ListFloorsResponse_FieldPathSelector = 2
+	ListFloorsResponse_FieldPathSelectorCurrentOffset     ListFloorsResponse_FieldPathSelector = 3
+	ListFloorsResponse_FieldPathSelectorTotalResultsCount ListFloorsResponse_FieldPathSelector = 4
 )
 
 func (s ListFloorsResponse_FieldPathSelector) String() string {
@@ -2278,6 +2323,10 @@ func (s ListFloorsResponse_FieldPathSelector) String() string {
 		return "prev_page_token"
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		return "next_page_token"
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		return "current_offset"
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		return "total_results_count"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", s))
 	}
@@ -2295,6 +2344,10 @@ func BuildListFloorsResponse_FieldPath(fp gotenobject.RawFieldPath) (ListFloorsR
 			return &ListFloorsResponse_FieldTerminalPath{selector: ListFloorsResponse_FieldPathSelectorPrevPageToken}, nil
 		case "next_page_token", "nextPageToken", "next-page-token":
 			return &ListFloorsResponse_FieldTerminalPath{selector: ListFloorsResponse_FieldPathSelectorNextPageToken}, nil
+		case "current_offset", "currentOffset", "current-offset":
+			return &ListFloorsResponse_FieldTerminalPath{selector: ListFloorsResponse_FieldPathSelectorCurrentOffset}, nil
+		case "total_results_count", "totalResultsCount", "total-results-count":
+			return &ListFloorsResponse_FieldTerminalPath{selector: ListFloorsResponse_FieldPathSelectorTotalResultsCount}, nil
 		}
 	} else {
 		switch fp[0] {
@@ -2361,6 +2414,10 @@ func (fp *ListFloorsResponse_FieldTerminalPath) Get(source *ListFloorsResponse) 
 			if source.NextPageToken != nil {
 				values = append(values, source.NextPageToken)
 			}
+		case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+			values = append(values, source.CurrentOffset)
+		case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+			values = append(values, source.TotalResultsCount)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fp.selector))
 		}
@@ -2384,6 +2441,10 @@ func (fp *ListFloorsResponse_FieldTerminalPath) GetSingle(source *ListFloorsResp
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		res := source.GetNextPageToken()
 		return res, res != nil
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		return source.GetCurrentOffset(), source != nil
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		return source.GetTotalResultsCount(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fp.selector))
 	}
@@ -2402,6 +2463,10 @@ func (fp *ListFloorsResponse_FieldTerminalPath) GetDefault() interface{} {
 		return (*floor.PagerCursor)(nil)
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		return (*floor.PagerCursor)(nil)
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		return int32(0)
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		return int32(0)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fp.selector))
 	}
@@ -2416,6 +2481,10 @@ func (fp *ListFloorsResponse_FieldTerminalPath) ClearValue(item *ListFloorsRespo
 			item.PrevPageToken = nil
 		case ListFloorsResponse_FieldPathSelectorNextPageToken:
 			item.NextPageToken = nil
+		case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+			item.CurrentOffset = int32(0)
+		case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+			item.TotalResultsCount = int32(0)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fp.selector))
 		}
@@ -2429,7 +2498,9 @@ func (fp *ListFloorsResponse_FieldTerminalPath) ClearValueRaw(item proto.Message
 // IsLeaf - whether field path is holds simple value
 func (fp *ListFloorsResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ListFloorsResponse_FieldPathSelectorPrevPageToken ||
-		fp.selector == ListFloorsResponse_FieldPathSelectorNextPageToken
+		fp.selector == ListFloorsResponse_FieldPathSelectorNextPageToken ||
+		fp.selector == ListFloorsResponse_FieldPathSelectorCurrentOffset ||
+		fp.selector == ListFloorsResponse_FieldPathSelectorTotalResultsCount
 }
 
 func (fp *ListFloorsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -2444,6 +2515,10 @@ func (fp *ListFloorsResponse_FieldTerminalPath) WithIValue(value interface{}) Li
 		return &ListFloorsResponse_FieldTerminalPathValue{ListFloorsResponse_FieldTerminalPath: *fp, value: value.(*floor.PagerCursor)}
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		return &ListFloorsResponse_FieldTerminalPathValue{ListFloorsResponse_FieldTerminalPath: *fp, value: value.(*floor.PagerCursor)}
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		return &ListFloorsResponse_FieldTerminalPathValue{ListFloorsResponse_FieldTerminalPath: *fp, value: value.(int32)}
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		return &ListFloorsResponse_FieldTerminalPathValue{ListFloorsResponse_FieldTerminalPath: *fp, value: value.(int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fp.selector))
 	}
@@ -2462,6 +2537,10 @@ func (fp *ListFloorsResponse_FieldTerminalPath) WithIArrayOfValues(values interf
 		return &ListFloorsResponse_FieldTerminalPathArrayOfValues{ListFloorsResponse_FieldTerminalPath: *fp, values: values.([]*floor.PagerCursor)}
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		return &ListFloorsResponse_FieldTerminalPathArrayOfValues{ListFloorsResponse_FieldTerminalPath: *fp, values: values.([]*floor.PagerCursor)}
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		return &ListFloorsResponse_FieldTerminalPathArrayOfValues{ListFloorsResponse_FieldTerminalPath: *fp, values: values.([]int32)}
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		return &ListFloorsResponse_FieldTerminalPathArrayOfValues{ListFloorsResponse_FieldTerminalPath: *fp, values: values.([]int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fp.selector))
 	}
@@ -2512,11 +2591,12 @@ func (fps *ListFloorsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source ListFloorsResponse
 func (fps *ListFloorsResponse_FieldSubPath) Get(source *ListFloorsResponse) (values []interface{}) {
-	if asFloorFieldPath, ok := fps.AsFloorsSubPath(); ok {
+	switch fps.selector {
+	case ListFloorsResponse_FieldPathSelectorFloors:
 		for _, item := range source.GetFloors() {
-			values = append(values, asFloorFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fps.selector))
 	}
 	return
@@ -2651,6 +2731,14 @@ func (fpv *ListFloorsResponse_FieldTerminalPathValue) AsNextPageTokenValue() (*f
 	res, ok := fpv.value.(*floor.PagerCursor)
 	return res, ok
 }
+func (fpv *ListFloorsResponse_FieldTerminalPathValue) AsCurrentOffsetValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
+func (fpv *ListFloorsResponse_FieldTerminalPathValue) AsTotalResultsCountValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListFloorsResponse
 func (fpv *ListFloorsResponse_FieldTerminalPathValue) SetTo(target **ListFloorsResponse) {
@@ -2664,6 +2752,10 @@ func (fpv *ListFloorsResponse_FieldTerminalPathValue) SetTo(target **ListFloorsR
 		(*target).PrevPageToken = fpv.value.(*floor.PagerCursor)
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		(*target).NextPageToken = fpv.value.(*floor.PagerCursor)
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		(*target).CurrentOffset = fpv.value.(int32)
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		(*target).TotalResultsCount = fpv.value.(int32)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fpv.selector))
 	}
@@ -2683,6 +2775,26 @@ func (fpv *ListFloorsResponse_FieldTerminalPathValue) CompareWith(source *ListFl
 		return 0, false
 	case ListFloorsResponse_FieldPathSelectorNextPageToken:
 		return 0, false
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetCurrentOffset()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetTotalResultsCount()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListFloorsResponse: %d", fpv.selector))
 	}
@@ -2877,6 +2989,14 @@ func (fpaov *ListFloorsResponse_FieldTerminalPathArrayOfValues) GetRawValues() (
 		for _, v := range fpaov.values.([]*floor.PagerCursor) {
 			values = append(values, v)
 		}
+	case ListFloorsResponse_FieldPathSelectorCurrentOffset:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
+	case ListFloorsResponse_FieldPathSelectorTotalResultsCount:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2890,6 +3010,14 @@ func (fpaov *ListFloorsResponse_FieldTerminalPathArrayOfValues) AsPrevPageTokenA
 }
 func (fpaov *ListFloorsResponse_FieldTerminalPathArrayOfValues) AsNextPageTokenArrayOfValues() ([]*floor.PagerCursor, bool) {
 	res, ok := fpaov.values.([]*floor.PagerCursor)
+	return res, ok
+}
+func (fpaov *ListFloorsResponse_FieldTerminalPathArrayOfValues) AsCurrentOffsetArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
+	return res, ok
+}
+func (fpaov *ListFloorsResponse_FieldTerminalPathArrayOfValues) AsTotalResultsCountArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
 	return res, ok
 }
 
@@ -4890,9 +5018,10 @@ func (fps *WatchFloorsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source WatchFloorsResponse
 func (fps *WatchFloorsResponse_FieldSubPath) Get(source *WatchFloorsResponse) (values []interface{}) {
-	if asPageTokenChangeFieldPath, ok := fps.AsPageTokenChangeSubPath(); ok {
-		values = append(values, asPageTokenChangeFieldPath.Get(source.GetPageTokenChange())...)
-	} else {
+	switch fps.selector {
+	case WatchFloorsResponse_FieldPathSelectorPageTokenChange:
+		values = append(values, fps.subPath.GetRaw(source.GetPageTokenChange())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for WatchFloorsResponse: %d", fps.selector))
 	}
 	return
@@ -6040,9 +6169,10 @@ func (fps *CreateFloorRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source CreateFloorRequest
 func (fps *CreateFloorRequest_FieldSubPath) Get(source *CreateFloorRequest) (values []interface{}) {
-	if asFloorFieldPath, ok := fps.AsFloorSubPath(); ok {
-		values = append(values, asFloorFieldPath.Get(source.GetFloor())...)
-	} else {
+	switch fps.selector {
+	case CreateFloorRequest_FieldPathSelectorFloor:
+		values = append(values, fps.subPath.GetRaw(source.GetFloor())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for CreateFloorRequest: %d", fps.selector))
 	}
 	return
@@ -6702,11 +6832,12 @@ func (fps *UpdateFloorRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateFloorRequest
 func (fps *UpdateFloorRequest_FieldSubPath) Get(source *UpdateFloorRequest) (values []interface{}) {
-	if asFloorFieldPath, ok := fps.AsFloorSubPath(); ok {
-		values = append(values, asFloorFieldPath.Get(source.GetFloor())...)
-	} else if asCASFieldPath, ok := fps.AsCasSubPath(); ok {
-		values = append(values, asCASFieldPath.Get(source.GetCas())...)
-	} else {
+	switch fps.selector {
+	case UpdateFloorRequest_FieldPathSelectorFloor:
+		values = append(values, fps.subPath.GetRaw(source.GetFloor())...)
+	case UpdateFloorRequest_FieldPathSelectorCas:
+		values = append(values, fps.subPath.GetRaw(source.GetCas())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateFloorRequest: %d", fps.selector))
 	}
 	return
@@ -7360,9 +7491,10 @@ func (fps *UpdateFloorRequestCAS_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateFloorRequest_CAS
 func (fps *UpdateFloorRequestCAS_FieldSubPath) Get(source *UpdateFloorRequest_CAS) (values []interface{}) {
-	if asFloorFieldPath, ok := fps.AsConditionalStateSubPath(); ok {
-		values = append(values, asFloorFieldPath.Get(source.GetConditionalState())...)
-	} else {
+	switch fps.selector {
+	case UpdateFloorRequestCAS_FieldPathSelectorConditionalState:
+		values = append(values, fps.subPath.GetRaw(source.GetConditionalState())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateFloorRequest_CAS: %d", fps.selector))
 	}
 	return

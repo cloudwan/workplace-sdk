@@ -8,6 +8,7 @@ package building_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -26,6 +27,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1193,6 +1195,9 @@ func (ListBuildingsRequestFieldPathBuilder) FieldMask() ListBuildingsRequestPath
 func (ListBuildingsRequestFieldPathBuilder) View() ListBuildingsRequestPathSelectorView {
 	return ListBuildingsRequestPathSelectorView{}
 }
+func (ListBuildingsRequestFieldPathBuilder) IncludePagingInfo() ListBuildingsRequestPathSelectorIncludePagingInfo {
+	return ListBuildingsRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListBuildingsRequestPathSelectorParent struct{}
 
@@ -1292,6 +1297,20 @@ func (s ListBuildingsRequestPathSelectorView) WithArrayOfValues(values []view.Vi
 	return s.FieldPath().WithIArrayOfValues(values).(*ListBuildingsRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListBuildingsRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListBuildingsRequestPathSelectorIncludePagingInfo) FieldPath() *ListBuildingsRequest_FieldTerminalPath {
+	return &ListBuildingsRequest_FieldTerminalPath{selector: ListBuildingsRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListBuildingsRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListBuildingsRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListBuildingsRequest_FieldTerminalPathValue)
+}
+
+func (s ListBuildingsRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListBuildingsRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListBuildingsRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListBuildingsResponseFieldPathBuilder struct{}
 
 func NewListBuildingsResponseFieldPathBuilder() ListBuildingsResponseFieldPathBuilder {
@@ -1305,6 +1324,12 @@ func (ListBuildingsResponseFieldPathBuilder) PrevPageToken() ListBuildingsRespon
 }
 func (ListBuildingsResponseFieldPathBuilder) NextPageToken() ListBuildingsResponsePathSelectorNextPageToken {
 	return ListBuildingsResponsePathSelectorNextPageToken{}
+}
+func (ListBuildingsResponseFieldPathBuilder) CurrentOffset() ListBuildingsResponsePathSelectorCurrentOffset {
+	return ListBuildingsResponsePathSelectorCurrentOffset{}
+}
+func (ListBuildingsResponseFieldPathBuilder) TotalResultsCount() ListBuildingsResponsePathSelectorTotalResultsCount {
+	return ListBuildingsResponsePathSelectorTotalResultsCount{}
 }
 
 type ListBuildingsResponsePathSelectorBuildings struct{}
@@ -2311,6 +2336,34 @@ func (s ListBuildingsResponsePathSelectorNextPageToken) WithValue(value *buildin
 }
 
 func (s ListBuildingsResponsePathSelectorNextPageToken) WithArrayOfValues(values []*building.PagerCursor) *ListBuildingsResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListBuildingsResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListBuildingsResponsePathSelectorCurrentOffset struct{}
+
+func (ListBuildingsResponsePathSelectorCurrentOffset) FieldPath() *ListBuildingsResponse_FieldTerminalPath {
+	return &ListBuildingsResponse_FieldTerminalPath{selector: ListBuildingsResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListBuildingsResponsePathSelectorCurrentOffset) WithValue(value int32) *ListBuildingsResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListBuildingsResponse_FieldTerminalPathValue)
+}
+
+func (s ListBuildingsResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListBuildingsResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListBuildingsResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListBuildingsResponsePathSelectorTotalResultsCount struct{}
+
+func (ListBuildingsResponsePathSelectorTotalResultsCount) FieldPath() *ListBuildingsResponse_FieldTerminalPath {
+	return &ListBuildingsResponse_FieldTerminalPath{selector: ListBuildingsResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListBuildingsResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListBuildingsResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListBuildingsResponse_FieldTerminalPathValue)
+}
+
+func (s ListBuildingsResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListBuildingsResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListBuildingsResponse_FieldTerminalPathArrayOfValues)
 }
 

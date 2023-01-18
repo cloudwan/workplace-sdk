@@ -406,15 +406,16 @@ func (fps *Site_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Site
 func (fps *Site_FieldSubPath) Get(source *Site) (values []interface{}) {
-	if asStreetLocationFieldPath, ok := fps.AsLocationSubPath(); ok {
-		values = append(values, asStreetLocationFieldPath.Get(source.GetLocation())...)
-	} else if asGeometryFieldPath, ok := fps.AsGeometrySubPath(); ok {
-		values = append(values, asGeometryFieldPath.Get(source.GetGeometry())...)
-	} else if asVendorSpecFieldPath, ok := fps.AsVendorSpecSubPath(); ok {
-		values = append(values, asVendorSpecFieldPath.Get(source.GetVendorSpec())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case Site_FieldPathSelectorLocation:
+		values = append(values, fps.subPath.GetRaw(source.GetLocation())...)
+	case Site_FieldPathSelectorGeometry:
+		values = append(values, fps.subPath.GetRaw(source.GetGeometry())...)
+	case Site_FieldPathSelectorVendorSpec:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorSpec())...)
+	case Site_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Site: %d", fps.selector))
 	}
 	return
@@ -1171,9 +1172,10 @@ func (fps *SiteVendorSpec_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Site_VendorSpec
 func (fps *SiteVendorSpec_FieldSubPath) Get(source *Site_VendorSpec) (values []interface{}) {
-	if asPointGrabFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case SiteVendorSpec_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Site_VendorSpec: %d", fps.selector))
 	}
 	return

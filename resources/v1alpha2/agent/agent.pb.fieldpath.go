@@ -296,9 +296,10 @@ func (fps *Agent_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Agent
 func (fps *Agent_FieldSubPath) Get(source *Agent) (values []interface{}) {
-	if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case Agent_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Agent: %d", fps.selector))
 	}
 	return

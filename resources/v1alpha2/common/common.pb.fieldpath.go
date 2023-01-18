@@ -1133,11 +1133,12 @@ func (fps *Geometry_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Geometry
 func (fps *Geometry_FieldSubPath) Get(source *Geometry) (values []interface{}) {
-	if asBBoxFieldPath, ok := fps.AsBboxSubPath(); ok {
-		values = append(values, asBBoxFieldPath.Get(source.GetBbox())...)
-	} else if asPolygonFieldPath, ok := fps.AsPolygonSubPath(); ok {
-		values = append(values, asPolygonFieldPath.Get(source.GetPolygon())...)
-	} else {
+	switch fps.selector {
+	case Geometry_FieldPathSelectorBbox:
+		values = append(values, fps.subPath.GetRaw(source.GetBbox())...)
+	case Geometry_FieldPathSelectorPolygon:
+		values = append(values, fps.subPath.GetRaw(source.GetPolygon())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Geometry: %d", fps.selector))
 	}
 	return
@@ -3073,9 +3074,10 @@ func (fps *ReferencePoint_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source ReferencePoint
 func (fps *ReferencePoint_FieldSubPath) Get(source *ReferencePoint) (values []interface{}) {
-	if asPointFieldPath, ok := fps.AsPointSubPath(); ok {
-		values = append(values, asPointFieldPath.Get(source.GetPoint())...)
-	} else {
+	switch fps.selector {
+	case ReferencePoint_FieldPathSelectorPoint:
+		values = append(values, fps.subPath.GetRaw(source.GetPoint())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for ReferencePoint: %d", fps.selector))
 	}
 	return

@@ -376,13 +376,14 @@ func (fps *Area_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Area
 func (fps *Area_FieldSubPath) Get(source *Area) (values []interface{}) {
-	if asGeometryFieldPath, ok := fps.AsGeometrySubPath(); ok {
-		values = append(values, asGeometryFieldPath.Get(source.GetGeometry())...)
-	} else if asVendorSpecFieldPath, ok := fps.AsVendorSpecSubPath(); ok {
-		values = append(values, asVendorSpecFieldPath.Get(source.GetVendorSpec())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case Area_FieldPathSelectorGeometry:
+		values = append(values, fps.subPath.GetRaw(source.GetGeometry())...)
+	case Area_FieldPathSelectorVendorSpec:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorSpec())...)
+	case Area_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Area: %d", fps.selector))
 	}
 	return
@@ -1098,9 +1099,10 @@ func (fps *AreaVendorSpec_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Area_VendorSpec
 func (fps *AreaVendorSpec_FieldSubPath) Get(source *Area_VendorSpec) (values []interface{}) {
-	if asPointGrabFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case AreaVendorSpec_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Area_VendorSpec: %d", fps.selector))
 	}
 	return

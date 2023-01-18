@@ -8,6 +8,7 @@ package zone_client
 import (
 	ntt_meta "github.com/cloudwan/edgelq-sdk/common/types/meta"
 	multi_region_policy "github.com/cloudwan/edgelq-sdk/common/types/multi_region_policy"
+	iam_iam_common "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/common"
 	iam_organization "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/organization"
 	iam_project "github.com/cloudwan/edgelq-sdk/iam/resources/v1alpha2/project"
 	meta_service "github.com/cloudwan/edgelq-sdk/meta/resources/v1alpha2/service"
@@ -29,6 +30,7 @@ import (
 var (
 	_ = &ntt_meta.Meta{}
 	_ = &multi_region_policy.MultiRegionPolicy{}
+	_ = &iam_iam_common.PCR{}
 	_ = &iam_organization.Organization{}
 	_ = &iam_project.Project{}
 	_ = &meta_service.Service{}
@@ -1287,6 +1289,9 @@ func (ListZonesRequestFieldPathBuilder) FieldMask() ListZonesRequestPathSelector
 func (ListZonesRequestFieldPathBuilder) View() ListZonesRequestPathSelectorView {
 	return ListZonesRequestPathSelectorView{}
 }
+func (ListZonesRequestFieldPathBuilder) IncludePagingInfo() ListZonesRequestPathSelectorIncludePagingInfo {
+	return ListZonesRequestPathSelectorIncludePagingInfo{}
+}
 
 type ListZonesRequestPathSelectorParent struct{}
 
@@ -1386,6 +1391,20 @@ func (s ListZonesRequestPathSelectorView) WithArrayOfValues(values []view.View) 
 	return s.FieldPath().WithIArrayOfValues(values).(*ListZonesRequest_FieldTerminalPathArrayOfValues)
 }
 
+type ListZonesRequestPathSelectorIncludePagingInfo struct{}
+
+func (ListZonesRequestPathSelectorIncludePagingInfo) FieldPath() *ListZonesRequest_FieldTerminalPath {
+	return &ListZonesRequest_FieldTerminalPath{selector: ListZonesRequest_FieldPathSelectorIncludePagingInfo}
+}
+
+func (s ListZonesRequestPathSelectorIncludePagingInfo) WithValue(value bool) *ListZonesRequest_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListZonesRequest_FieldTerminalPathValue)
+}
+
+func (s ListZonesRequestPathSelectorIncludePagingInfo) WithArrayOfValues(values []bool) *ListZonesRequest_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListZonesRequest_FieldTerminalPathArrayOfValues)
+}
+
 type ListZonesResponseFieldPathBuilder struct{}
 
 func NewListZonesResponseFieldPathBuilder() ListZonesResponseFieldPathBuilder {
@@ -1399,6 +1418,12 @@ func (ListZonesResponseFieldPathBuilder) PrevPageToken() ListZonesResponsePathSe
 }
 func (ListZonesResponseFieldPathBuilder) NextPageToken() ListZonesResponsePathSelectorNextPageToken {
 	return ListZonesResponsePathSelectorNextPageToken{}
+}
+func (ListZonesResponseFieldPathBuilder) CurrentOffset() ListZonesResponsePathSelectorCurrentOffset {
+	return ListZonesResponsePathSelectorCurrentOffset{}
+}
+func (ListZonesResponseFieldPathBuilder) TotalResultsCount() ListZonesResponsePathSelectorTotalResultsCount {
+	return ListZonesResponsePathSelectorTotalResultsCount{}
 }
 
 type ListZonesResponsePathSelectorZones struct{}
@@ -2493,6 +2518,34 @@ func (s ListZonesResponsePathSelectorNextPageToken) WithValue(value *zone.PagerC
 }
 
 func (s ListZonesResponsePathSelectorNextPageToken) WithArrayOfValues(values []*zone.PagerCursor) *ListZonesResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListZonesResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListZonesResponsePathSelectorCurrentOffset struct{}
+
+func (ListZonesResponsePathSelectorCurrentOffset) FieldPath() *ListZonesResponse_FieldTerminalPath {
+	return &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorCurrentOffset}
+}
+
+func (s ListZonesResponsePathSelectorCurrentOffset) WithValue(value int32) *ListZonesResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListZonesResponse_FieldTerminalPathValue)
+}
+
+func (s ListZonesResponsePathSelectorCurrentOffset) WithArrayOfValues(values []int32) *ListZonesResponse_FieldTerminalPathArrayOfValues {
+	return s.FieldPath().WithIArrayOfValues(values).(*ListZonesResponse_FieldTerminalPathArrayOfValues)
+}
+
+type ListZonesResponsePathSelectorTotalResultsCount struct{}
+
+func (ListZonesResponsePathSelectorTotalResultsCount) FieldPath() *ListZonesResponse_FieldTerminalPath {
+	return &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorTotalResultsCount}
+}
+
+func (s ListZonesResponsePathSelectorTotalResultsCount) WithValue(value int32) *ListZonesResponse_FieldTerminalPathValue {
+	return s.FieldPath().WithIValue(value).(*ListZonesResponse_FieldTerminalPathValue)
+}
+
+func (s ListZonesResponsePathSelectorTotalResultsCount) WithArrayOfValues(values []int32) *ListZonesResponse_FieldTerminalPathArrayOfValues {
 	return s.FieldPath().WithIArrayOfValues(values).(*ListZonesResponse_FieldTerminalPathArrayOfValues)
 }
 

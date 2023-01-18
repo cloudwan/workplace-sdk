@@ -81,8 +81,9 @@ func (a *apiAreaAccess) BatchGetAreas(ctx context.Context, refs []*area.Referenc
 
 func (a *apiAreaAccess) QueryAreas(ctx context.Context, query *area.ListQuery) (*area.QueryResultSnapshot, error) {
 	request := &area_client.ListAreasRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiAreaAccess) QueryAreas(ctx context.Context, query *area.ListQuery) (
 		return nil, err
 	}
 	return &area.QueryResultSnapshot{
-		Areas:          resp.Areas,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Areas:             resp.Areas,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

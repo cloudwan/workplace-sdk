@@ -484,7 +484,11 @@ func (ref *Reference) Resolve(resolved *Zone) {
 }
 
 func (ref *Reference) ResolveRaw(res gotenresource.Resource) error {
-	if typedRes, ok := res.(*Zone); ok && typedRes != nil {
+	if res == nil {
+		ref.Resolve(nil)
+		return nil
+	}
+	if typedRes, ok := res.(*Zone); ok {
 		ref.Resolve(typedRes)
 		return nil
 	}

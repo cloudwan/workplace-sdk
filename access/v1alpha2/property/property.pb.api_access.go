@@ -81,8 +81,9 @@ func (a *apiPropertyAccess) BatchGetProperties(ctx context.Context, refs []*prop
 
 func (a *apiPropertyAccess) QueryProperties(ctx context.Context, query *property.ListQuery) (*property.QueryResultSnapshot, error) {
 	request := &property_client.ListPropertiesRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiPropertyAccess) QueryProperties(ctx context.Context, query *property
 		return nil, err
 	}
 	return &property.QueryResultSnapshot{
-		Properties:     resp.Properties,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Properties:        resp.Properties,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

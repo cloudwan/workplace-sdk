@@ -465,11 +465,12 @@ func (fps *PointGrabTelemetryNotifyRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source PointGrabTelemetryNotifyRequest
 func (fps *PointGrabTelemetryNotifyRequest_FieldSubPath) Get(source *PointGrabTelemetryNotifyRequest) (values []interface{}) {
-	if asPointFieldPath, ok := fps.AsPcPositionsSubPath(); ok {
+	switch fps.selector {
+	case PointGrabTelemetryNotifyRequest_FieldPathSelectorPcPositions:
 		for _, item := range source.GetPcPositions() {
-			values = append(values, asPointFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for PointGrabTelemetryNotifyRequest: %d", fps.selector))
 	}
 	return

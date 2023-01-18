@@ -407,7 +407,11 @@ func (ref *Reference) Resolve(resolved *Site) {
 }
 
 func (ref *Reference) ResolveRaw(res gotenresource.Resource) error {
-	if typedRes, ok := res.(*Site); ok && typedRes != nil {
+	if res == nil {
+		ref.Resolve(nil)
+		return nil
+	}
+	if typedRes, ok := res.(*Site); ok {
 		ref.Resolve(typedRes)
 		return nil
 	}

@@ -899,6 +899,7 @@ func FullListVendorConnectionsRequest_FieldMask() *ListVendorConnectionsRequest_
 	res.Paths = append(res.Paths, &ListVendorConnectionsRequest_FieldTerminalPath{selector: ListVendorConnectionsRequest_FieldPathSelectorFilter})
 	res.Paths = append(res.Paths, &ListVendorConnectionsRequest_FieldTerminalPath{selector: ListVendorConnectionsRequest_FieldPathSelectorFieldMask})
 	res.Paths = append(res.Paths, &ListVendorConnectionsRequest_FieldTerminalPath{selector: ListVendorConnectionsRequest_FieldPathSelectorView})
+	res.Paths = append(res.Paths, &ListVendorConnectionsRequest_FieldTerminalPath{selector: ListVendorConnectionsRequest_FieldPathSelectorIncludePagingInfo})
 	return res
 }
 
@@ -942,7 +943,7 @@ func (fieldMask *ListVendorConnectionsRequest_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 7)
+	presentSelectors := make([]bool, 8)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*ListVendorConnectionsRequest_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -972,7 +973,7 @@ func (fieldMask *ListVendorConnectionsRequest_FieldMask) Reset() {
 
 func (fieldMask *ListVendorConnectionsRequest_FieldMask) Subtract(other *ListVendorConnectionsRequest_FieldMask) *ListVendorConnectionsRequest_FieldMask {
 	result := &ListVendorConnectionsRequest_FieldMask{}
-	removedSelectors := make([]bool, 7)
+	removedSelectors := make([]bool, 8)
 
 	for _, path := range other.GetPaths() {
 		switch tp := path.(type) {
@@ -1140,6 +1141,8 @@ func (fieldMask *ListVendorConnectionsRequest_FieldMask) Project(source *ListVen
 				result.FieldMask = source.FieldMask
 			case ListVendorConnectionsRequest_FieldPathSelectorView:
 				result.View = source.View
+			case ListVendorConnectionsRequest_FieldPathSelectorIncludePagingInfo:
+				result.IncludePagingInfo = source.IncludePagingInfo
 			}
 		}
 	}
@@ -1166,6 +1169,8 @@ func FullListVendorConnectionsResponse_FieldMask() *ListVendorConnectionsRespons
 	res.Paths = append(res.Paths, &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorVendorConnections})
 	res.Paths = append(res.Paths, &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorPrevPageToken})
 	res.Paths = append(res.Paths, &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorNextPageToken})
+	res.Paths = append(res.Paths, &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorCurrentOffset})
+	res.Paths = append(res.Paths, &ListVendorConnectionsResponse_FieldTerminalPath{selector: ListVendorConnectionsResponse_FieldPathSelectorTotalResultsCount})
 	return res
 }
 
@@ -1209,7 +1214,7 @@ func (fieldMask *ListVendorConnectionsResponse_FieldMask) IsFull() bool {
 	if fieldMask == nil {
 		return false
 	}
-	presentSelectors := make([]bool, 3)
+	presentSelectors := make([]bool, 5)
 	for _, path := range fieldMask.Paths {
 		if asFinal, ok := path.(*ListVendorConnectionsResponse_FieldTerminalPath); ok {
 			presentSelectors[int(asFinal.selector)] = true
@@ -1239,7 +1244,7 @@ func (fieldMask *ListVendorConnectionsResponse_FieldMask) Reset() {
 
 func (fieldMask *ListVendorConnectionsResponse_FieldMask) Subtract(other *ListVendorConnectionsResponse_FieldMask) *ListVendorConnectionsResponse_FieldMask {
 	result := &ListVendorConnectionsResponse_FieldMask{}
-	removedSelectors := make([]bool, 3)
+	removedSelectors := make([]bool, 5)
 	otherSubMasks := map[ListVendorConnectionsResponse_FieldPathSelector]gotenobject.FieldMask{
 		ListVendorConnectionsResponse_FieldPathSelectorVendorConnections: &vendor_connection.VendorConnection_FieldMask{},
 	}
@@ -1446,6 +1451,10 @@ func (fieldMask *ListVendorConnectionsResponse_FieldMask) Project(source *ListVe
 				result.PrevPageToken = source.PrevPageToken
 			case ListVendorConnectionsResponse_FieldPathSelectorNextPageToken:
 				result.NextPageToken = source.NextPageToken
+			case ListVendorConnectionsResponse_FieldPathSelectorCurrentOffset:
+				result.CurrentOffset = source.CurrentOffset
+			case ListVendorConnectionsResponse_FieldPathSelectorTotalResultsCount:
+				result.TotalResultsCount = source.TotalResultsCount
 			}
 		case *ListVendorConnectionsResponse_FieldSubPath:
 			switch tp.selector {

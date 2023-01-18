@@ -487,17 +487,18 @@ func (fps *Device_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Device
 func (fps *Device_FieldSubPath) Get(source *Device) (values []interface{}) {
-	if asGeometryFieldPath, ok := fps.AsGeometrySubPath(); ok {
-		values = append(values, asGeometryFieldPath.Get(source.GetGeometry())...)
-	} else if asSitePlacementFieldPath, ok := fps.AsSitePlacementSubPath(); ok {
-		values = append(values, asSitePlacementFieldPath.Get(source.GetSitePlacement())...)
-	} else if asVendorInfoFieldPath, ok := fps.AsVendorInfoSubPath(); ok {
-		values = append(values, asVendorInfoFieldPath.Get(source.GetVendorInfo())...)
-	} else if asStateFieldPath, ok := fps.AsStateSubPath(); ok {
-		values = append(values, asStateFieldPath.Get(source.GetState())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case Device_FieldPathSelectorGeometry:
+		values = append(values, fps.subPath.GetRaw(source.GetGeometry())...)
+	case Device_FieldPathSelectorSitePlacement:
+		values = append(values, fps.subPath.GetRaw(source.GetSitePlacement())...)
+	case Device_FieldPathSelectorVendorInfo:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorInfo())...)
+	case Device_FieldPathSelectorState:
+		values = append(values, fps.subPath.GetRaw(source.GetState())...)
+	case Device_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Device: %d", fps.selector))
 	}
 	return
@@ -2006,11 +2007,12 @@ func (fps *DeviceVendorInfo_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Device_VendorInfo
 func (fps *DeviceVendorInfo_FieldSubPath) Get(source *Device_VendorInfo) (values []interface{}) {
-	if asBACNetEntityFieldPath, ok := fps.AsBacnetSubPath(); ok {
-		values = append(values, asBACNetEntityFieldPath.Get(source.GetBacnet())...)
-	} else if asPointGrabInfoFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabInfoFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case DeviceVendorInfo_FieldPathSelectorBacnet:
+		values = append(values, fps.subPath.GetRaw(source.GetBacnet())...)
+	case DeviceVendorInfo_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Device_VendorInfo: %d", fps.selector))
 	}
 	return
@@ -2652,9 +2654,10 @@ func (fps *DeviceState_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Device_State
 func (fps *DeviceState_FieldSubPath) Get(source *Device_State) (values []interface{}) {
-	if asConnectionFieldPath, ok := fps.AsConnectionSubPath(); ok {
-		values = append(values, asConnectionFieldPath.Get(source.GetConnection())...)
-	} else {
+	switch fps.selector {
+	case DeviceState_FieldPathSelectorConnection:
+		values = append(values, fps.subPath.GetRaw(source.GetConnection())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Device_State: %d", fps.selector))
 	}
 	return

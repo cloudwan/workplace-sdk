@@ -81,8 +81,9 @@ func (a *apiBuildingAccess) BatchGetBuildings(ctx context.Context, refs []*build
 
 func (a *apiBuildingAccess) QueryBuildings(ctx context.Context, query *building.ListQuery) (*building.QueryResultSnapshot, error) {
 	request := &building_client.ListBuildingsRequest{
-		Filter:    query.Filter,
-		FieldMask: query.Mask,
+		Filter:            query.Filter,
+		FieldMask:         query.Mask,
+		IncludePagingInfo: query.WithPagingInfo,
 	}
 	if query.Pager != nil {
 		request.PageSize = int32(query.Pager.Limit)
@@ -94,9 +95,11 @@ func (a *apiBuildingAccess) QueryBuildings(ctx context.Context, query *building.
 		return nil, err
 	}
 	return &building.QueryResultSnapshot{
-		Buildings:      resp.Buildings,
-		NextPageCursor: resp.NextPageToken,
-		PrevPageCursor: resp.PrevPageToken,
+		Buildings:         resp.Buildings,
+		NextPageCursor:    resp.NextPageToken,
+		PrevPageCursor:    resp.PrevPageToken,
+		TotalResultsCount: resp.TotalResultsCount,
+		CurrentOffset:     resp.CurrentOffset,
 	}, nil
 }
 

@@ -432,15 +432,16 @@ func (fps *Zone_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Zone
 func (fps *Zone_FieldSubPath) Get(source *Zone) (values []interface{}) {
-	if asGeometryFieldPath, ok := fps.AsGeometrySubPath(); ok {
-		values = append(values, asGeometryFieldPath.Get(source.GetGeometry())...)
-	} else if asVendorSpecFieldPath, ok := fps.AsVendorSpecSubPath(); ok {
-		values = append(values, asVendorSpecFieldPath.Get(source.GetVendorSpec())...)
-	} else if asStateFieldPath, ok := fps.AsStateSubPath(); ok {
-		values = append(values, asStateFieldPath.Get(source.GetState())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case Zone_FieldPathSelectorGeometry:
+		values = append(values, fps.subPath.GetRaw(source.GetGeometry())...)
+	case Zone_FieldPathSelectorVendorSpec:
+		values = append(values, fps.subPath.GetRaw(source.GetVendorSpec())...)
+	case Zone_FieldPathSelectorState:
+		values = append(values, fps.subPath.GetRaw(source.GetState())...)
+	case Zone_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Zone: %d", fps.selector))
 	}
 	return
@@ -1221,9 +1222,10 @@ func (fps *ZoneVendorSpec_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Zone_VendorSpec
 func (fps *ZoneVendorSpec_FieldSubPath) Get(source *Zone_VendorSpec) (values []interface{}) {
-	if asPointGrabFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case ZoneVendorSpec_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Zone_VendorSpec: %d", fps.selector))
 	}
 	return
@@ -1800,9 +1802,10 @@ func (fps *ZoneState_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Zone_State
 func (fps *ZoneState_FieldSubPath) Get(source *Zone_State) (values []interface{}) {
-	if asOccupancyFieldPath, ok := fps.AsOccupancySubPath(); ok {
-		values = append(values, asOccupancyFieldPath.Get(source.GetOccupancy())...)
-	} else {
+	switch fps.selector {
+	case ZoneState_FieldPathSelectorOccupancy:
+		values = append(values, fps.subPath.GetRaw(source.GetOccupancy())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Zone_State: %d", fps.selector))
 	}
 	return
@@ -2396,9 +2399,10 @@ func (fps *ZoneVendorSpecPointGrab_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source Zone_VendorSpec_PointGrab
 func (fps *ZoneVendorSpecPointGrab_FieldSubPath) Get(source *Zone_VendorSpec_PointGrab) (values []interface{}) {
-	if asPolygonFieldPath, ok := fps.AsPolygonSubPath(); ok {
-		values = append(values, asPolygonFieldPath.Get(source.GetPolygon())...)
-	} else {
+	switch fps.selector {
+	case ZoneVendorSpecPointGrab_FieldPathSelectorPolygon:
+		values = append(values, fps.subPath.GetRaw(source.GetPolygon())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for Zone_VendorSpec_PointGrab: %d", fps.selector))
 	}
 	return

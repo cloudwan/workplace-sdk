@@ -1064,13 +1064,14 @@ func (fps *VendorConnection_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source VendorConnection
 func (fps *VendorConnection_FieldSubPath) Get(source *VendorConnection) (values []interface{}) {
-	if asSpecFieldPath, ok := fps.AsSpecSubPath(); ok {
-		values = append(values, asSpecFieldPath.Get(source.GetSpec())...)
-	} else if asInfoFieldPath, ok := fps.AsInfoSubPath(); ok {
-		values = append(values, asInfoFieldPath.Get(source.GetInfo())...)
-	} else if asMetaFieldPath, ok := fps.AsMetadataSubPath(); ok {
-		values = append(values, asMetaFieldPath.Get(source.GetMetadata())...)
-	} else {
+	switch fps.selector {
+	case VendorConnection_FieldPathSelectorSpec:
+		values = append(values, fps.subPath.GetRaw(source.GetSpec())...)
+	case VendorConnection_FieldPathSelectorInfo:
+		values = append(values, fps.subPath.GetRaw(source.GetInfo())...)
+	case VendorConnection_FieldPathSelectorMetadata:
+		values = append(values, fps.subPath.GetRaw(source.GetMetadata())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for VendorConnection: %d", fps.selector))
 	}
 	return
@@ -1810,9 +1811,10 @@ func (fps *VendorConnectionSpec_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source VendorConnection_Spec
 func (fps *VendorConnectionSpec_FieldSubPath) Get(source *VendorConnection_Spec) (values []interface{}) {
-	if asPointGrabSpecFieldPath, ok := fps.AsPointGrabSubPath(); ok {
-		values = append(values, asPointGrabSpecFieldPath.Get(source.GetPointGrab())...)
-	} else {
+	switch fps.selector {
+	case VendorConnectionSpec_FieldPathSelectorPointGrab:
+		values = append(values, fps.subPath.GetRaw(source.GetPointGrab())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for VendorConnection_Spec: %d", fps.selector))
 	}
 	return
@@ -2389,9 +2391,10 @@ func (fps *VendorConnectionInfo_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source VendorConnection_Info
 func (fps *VendorConnectionInfo_FieldSubPath) Get(source *VendorConnection_Info) (values []interface{}) {
-	if asPointGrabInfoFieldPath, ok := fps.AsInfoSubPath(); ok {
-		values = append(values, asPointGrabInfoFieldPath.Get(source.GetInfo())...)
-	} else {
+	switch fps.selector {
+	case VendorConnectionInfo_FieldPathSelectorInfo:
+		values = append(values, fps.subPath.GetRaw(source.GetInfo())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for VendorConnection_Info: %d", fps.selector))
 	}
 	return
@@ -3015,11 +3018,12 @@ func (fps *VendorConnectionSpecPointGrabSpec_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source VendorConnection_Spec_PointGrabSpec
 func (fps *VendorConnectionSpecPointGrabSpec_FieldSubPath) Get(source *VendorConnection_Spec_PointGrabSpec) (values []interface{}) {
-	if asAuthFieldPath, ok := fps.AsAuthSubPath(); ok {
-		values = append(values, asAuthFieldPath.Get(source.GetAuth())...)
-	} else if asCallbackSpecFieldPath, ok := fps.AsCallbackSpecSubPath(); ok {
-		values = append(values, asCallbackSpecFieldPath.Get(source.GetCallbackSpec())...)
-	} else {
+	switch fps.selector {
+	case VendorConnectionSpecPointGrabSpec_FieldPathSelectorAuth:
+		values = append(values, fps.subPath.GetRaw(source.GetAuth())...)
+	case VendorConnectionSpecPointGrabSpec_FieldPathSelectorCallbackSpec:
+		values = append(values, fps.subPath.GetRaw(source.GetCallbackSpec())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for VendorConnection_Spec_PointGrabSpec: %d", fps.selector))
 	}
 	return
@@ -4124,9 +4128,10 @@ func (fps *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldSubPath) JSONStrin
 
 // Get returns all values pointed by selected field from source VendorConnection_Spec_PointGrabSpec_CallbackSpec
 func (fps *VendorConnectionSpecPointGrabSpecCallbackSpec_FieldSubPath) Get(source *VendorConnection_Spec_PointGrabSpec_CallbackSpec) (values []interface{}) {
-	if asAuthTokenFieldPath, ok := fps.AsAuthTokenSubPath(); ok {
-		values = append(values, asAuthTokenFieldPath.Get(source.GetAuthToken())...)
-	} else {
+	switch fps.selector {
+	case VendorConnectionSpecPointGrabSpecCallbackSpec_FieldPathSelectorAuthToken:
+		values = append(values, fps.subPath.GetRaw(source.GetAuthToken())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for VendorConnection_Spec_PointGrabSpec_CallbackSpec: %d", fps.selector))
 	}
 	return
@@ -5126,11 +5131,12 @@ func (fps *VendorConnectionInfoPointGrabInfo_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source VendorConnection_Info_PointGrabInfo
 func (fps *VendorConnectionInfoPointGrabInfo_FieldSubPath) Get(source *VendorConnection_Info_PointGrabInfo) (values []interface{}) {
-	if asTelemetrySubscriptionFieldPath, ok := fps.AsTelemetrySubscriptionsSubPath(); ok {
+	switch fps.selector {
+	case VendorConnectionInfoPointGrabInfo_FieldPathSelectorTelemetrySubscriptions:
 		for _, item := range source.GetTelemetrySubscriptions() {
-			values = append(values, asTelemetrySubscriptionFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for VendorConnection_Info_PointGrabInfo: %d", fps.selector))
 	}
 	return

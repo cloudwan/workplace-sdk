@@ -1239,11 +1239,12 @@ func (fps *BatchGetDeviceGroupsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source BatchGetDeviceGroupsResponse
 func (fps *BatchGetDeviceGroupsResponse_FieldSubPath) Get(source *BatchGetDeviceGroupsResponse) (values []interface{}) {
-	if asDeviceGroupFieldPath, ok := fps.AsDeviceGroupsSubPath(); ok {
+	switch fps.selector {
+	case BatchGetDeviceGroupsResponse_FieldPathSelectorDeviceGroups:
 		for _, item := range source.GetDeviceGroups() {
-			values = append(values, asDeviceGroupFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for BatchGetDeviceGroupsResponse: %d", fps.selector))
 	}
 	return
@@ -1642,13 +1643,14 @@ type ListDeviceGroupsRequest_FieldPath interface {
 type ListDeviceGroupsRequest_FieldPathSelector int32
 
 const (
-	ListDeviceGroupsRequest_FieldPathSelectorParent    ListDeviceGroupsRequest_FieldPathSelector = 0
-	ListDeviceGroupsRequest_FieldPathSelectorPageSize  ListDeviceGroupsRequest_FieldPathSelector = 1
-	ListDeviceGroupsRequest_FieldPathSelectorPageToken ListDeviceGroupsRequest_FieldPathSelector = 2
-	ListDeviceGroupsRequest_FieldPathSelectorOrderBy   ListDeviceGroupsRequest_FieldPathSelector = 3
-	ListDeviceGroupsRequest_FieldPathSelectorFilter    ListDeviceGroupsRequest_FieldPathSelector = 4
-	ListDeviceGroupsRequest_FieldPathSelectorFieldMask ListDeviceGroupsRequest_FieldPathSelector = 5
-	ListDeviceGroupsRequest_FieldPathSelectorView      ListDeviceGroupsRequest_FieldPathSelector = 6
+	ListDeviceGroupsRequest_FieldPathSelectorParent            ListDeviceGroupsRequest_FieldPathSelector = 0
+	ListDeviceGroupsRequest_FieldPathSelectorPageSize          ListDeviceGroupsRequest_FieldPathSelector = 1
+	ListDeviceGroupsRequest_FieldPathSelectorPageToken         ListDeviceGroupsRequest_FieldPathSelector = 2
+	ListDeviceGroupsRequest_FieldPathSelectorOrderBy           ListDeviceGroupsRequest_FieldPathSelector = 3
+	ListDeviceGroupsRequest_FieldPathSelectorFilter            ListDeviceGroupsRequest_FieldPathSelector = 4
+	ListDeviceGroupsRequest_FieldPathSelectorFieldMask         ListDeviceGroupsRequest_FieldPathSelector = 5
+	ListDeviceGroupsRequest_FieldPathSelectorView              ListDeviceGroupsRequest_FieldPathSelector = 6
+	ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo ListDeviceGroupsRequest_FieldPathSelector = 7
 )
 
 func (s ListDeviceGroupsRequest_FieldPathSelector) String() string {
@@ -1667,6 +1669,8 @@ func (s ListDeviceGroupsRequest_FieldPathSelector) String() string {
 		return "field_mask"
 	case ListDeviceGroupsRequest_FieldPathSelectorView:
 		return "view"
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		return "include_paging_info"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", s))
 	}
@@ -1692,6 +1696,8 @@ func BuildListDeviceGroupsRequest_FieldPath(fp gotenobject.RawFieldPath) (ListDe
 			return &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorFieldMask}, nil
 		case "view":
 			return &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorView}, nil
+		case "include_paging_info", "includePagingInfo", "include-paging-info":
+			return &ListDeviceGroupsRequest_FieldTerminalPath{selector: ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo}, nil
 		}
 	}
 	return nil, status.Errorf(codes.InvalidArgument, "unknown field path '%s' for object ListDeviceGroupsRequest", fp)
@@ -1761,6 +1767,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) Get(source *ListDeviceGroup
 			}
 		case ListDeviceGroupsRequest_FieldPathSelectorView:
 			values = append(values, source.View)
+		case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+			values = append(values, source.IncludePagingInfo)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fp.selector))
 		}
@@ -1794,6 +1802,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) GetSingle(source *ListDevic
 		return res, res != nil
 	case ListDeviceGroupsRequest_FieldPathSelectorView:
 		return source.GetView(), source != nil
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		return source.GetIncludePagingInfo(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fp.selector))
 	}
@@ -1820,6 +1830,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) GetDefault() interface{} {
 		return (*device_group.DeviceGroup_FieldMask)(nil)
 	case ListDeviceGroupsRequest_FieldPathSelectorView:
 		return view.View_UNSPECIFIED
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		return false
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fp.selector))
 	}
@@ -1842,6 +1854,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) ClearValue(item *ListDevice
 			item.FieldMask = nil
 		case ListDeviceGroupsRequest_FieldPathSelectorView:
 			item.View = view.View_UNSPECIFIED
+		case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+			item.IncludePagingInfo = false
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fp.selector))
 		}
@@ -1860,7 +1874,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorOrderBy ||
 		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorFilter ||
 		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorFieldMask ||
-		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorView
+		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorView ||
+		fp.selector == ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo
 }
 
 func (fp *ListDeviceGroupsRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -1883,6 +1898,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) WithIValue(value interface{
 		return &ListDeviceGroupsRequest_FieldTerminalPathValue{ListDeviceGroupsRequest_FieldTerminalPath: *fp, value: value.(*device_group.DeviceGroup_FieldMask)}
 	case ListDeviceGroupsRequest_FieldPathSelectorView:
 		return &ListDeviceGroupsRequest_FieldTerminalPathValue{ListDeviceGroupsRequest_FieldTerminalPath: *fp, value: value.(view.View)}
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListDeviceGroupsRequest_FieldTerminalPathValue{ListDeviceGroupsRequest_FieldTerminalPath: *fp, value: value.(bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fp.selector))
 	}
@@ -1909,6 +1926,8 @@ func (fp *ListDeviceGroupsRequest_FieldTerminalPath) WithIArrayOfValues(values i
 		return &ListDeviceGroupsRequest_FieldTerminalPathArrayOfValues{ListDeviceGroupsRequest_FieldTerminalPath: *fp, values: values.([]*device_group.DeviceGroup_FieldMask)}
 	case ListDeviceGroupsRequest_FieldPathSelectorView:
 		return &ListDeviceGroupsRequest_FieldTerminalPathArrayOfValues{ListDeviceGroupsRequest_FieldTerminalPath: *fp, values: values.([]view.View)}
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListDeviceGroupsRequest_FieldTerminalPathArrayOfValues{ListDeviceGroupsRequest_FieldTerminalPath: *fp, values: values.([]bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fp.selector))
 	}
@@ -1997,6 +2016,10 @@ func (fpv *ListDeviceGroupsRequest_FieldTerminalPathValue) AsViewValue() (view.V
 	res, ok := fpv.value.(view.View)
 	return res, ok
 }
+func (fpv *ListDeviceGroupsRequest_FieldTerminalPathValue) AsIncludePagingInfoValue() (bool, bool) {
+	res, ok := fpv.value.(bool)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListDeviceGroupsRequest
 func (fpv *ListDeviceGroupsRequest_FieldTerminalPathValue) SetTo(target **ListDeviceGroupsRequest) {
@@ -2018,6 +2041,8 @@ func (fpv *ListDeviceGroupsRequest_FieldTerminalPathValue) SetTo(target **ListDe
 		(*target).FieldMask = fpv.value.(*device_group.DeviceGroup_FieldMask)
 	case ListDeviceGroupsRequest_FieldPathSelectorView:
 		(*target).View = fpv.value.(view.View)
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		(*target).IncludePagingInfo = fpv.value.(bool)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsRequest: %d", fpv.selector))
 	}
@@ -2074,6 +2099,16 @@ func (fpv *ListDeviceGroupsRequest_FieldTerminalPathValue) CompareWith(source *L
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		leftValue := fpv.value.(bool)
+		rightValue := source.GetIncludePagingInfo()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if !(leftValue) && (rightValue) {
 			return -1, true
 		} else {
 			return 1, true
@@ -2214,6 +2249,10 @@ func (fpaov *ListDeviceGroupsRequest_FieldTerminalPathArrayOfValues) GetRawValue
 		for _, v := range fpaov.values.([]view.View) {
 			values = append(values, v)
 		}
+	case ListDeviceGroupsRequest_FieldPathSelectorIncludePagingInfo:
+		for _, v := range fpaov.values.([]bool) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2245,6 +2284,10 @@ func (fpaov *ListDeviceGroupsRequest_FieldTerminalPathArrayOfValues) AsViewArray
 	res, ok := fpaov.values.([]view.View)
 	return res, ok
 }
+func (fpaov *ListDeviceGroupsRequest_FieldTerminalPathArrayOfValues) AsIncludePagingInfoArrayOfValues() ([]bool, bool) {
+	res, ok := fpaov.values.([]bool)
+	return res, ok
+}
 
 // FieldPath provides implementation to handle
 // https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto
@@ -2265,9 +2308,11 @@ type ListDeviceGroupsResponse_FieldPath interface {
 type ListDeviceGroupsResponse_FieldPathSelector int32
 
 const (
-	ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups  ListDeviceGroupsResponse_FieldPathSelector = 0
-	ListDeviceGroupsResponse_FieldPathSelectorPrevPageToken ListDeviceGroupsResponse_FieldPathSelector = 1
-	ListDeviceGroupsResponse_FieldPathSelectorNextPageToken ListDeviceGroupsResponse_FieldPathSelector = 2
+	ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups      ListDeviceGroupsResponse_FieldPathSelector = 0
+	ListDeviceGroupsResponse_FieldPathSelectorPrevPageToken     ListDeviceGroupsResponse_FieldPathSelector = 1
+	ListDeviceGroupsResponse_FieldPathSelectorNextPageToken     ListDeviceGroupsResponse_FieldPathSelector = 2
+	ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset     ListDeviceGroupsResponse_FieldPathSelector = 3
+	ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount ListDeviceGroupsResponse_FieldPathSelector = 4
 )
 
 func (s ListDeviceGroupsResponse_FieldPathSelector) String() string {
@@ -2278,6 +2323,10 @@ func (s ListDeviceGroupsResponse_FieldPathSelector) String() string {
 		return "prev_page_token"
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		return "next_page_token"
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		return "current_offset"
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		return "total_results_count"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", s))
 	}
@@ -2295,6 +2344,10 @@ func BuildListDeviceGroupsResponse_FieldPath(fp gotenobject.RawFieldPath) (ListD
 			return &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorPrevPageToken}, nil
 		case "next_page_token", "nextPageToken", "next-page-token":
 			return &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorNextPageToken}, nil
+		case "current_offset", "currentOffset", "current-offset":
+			return &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset}, nil
+		case "total_results_count", "totalResultsCount", "total-results-count":
+			return &ListDeviceGroupsResponse_FieldTerminalPath{selector: ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount}, nil
 		}
 	} else {
 		switch fp[0] {
@@ -2361,6 +2414,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) Get(source *ListDeviceGrou
 			if source.NextPageToken != nil {
 				values = append(values, source.NextPageToken)
 			}
+		case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+			values = append(values, source.CurrentOffset)
+		case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+			values = append(values, source.TotalResultsCount)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fp.selector))
 		}
@@ -2384,6 +2441,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) GetSingle(source *ListDevi
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		res := source.GetNextPageToken()
 		return res, res != nil
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		return source.GetCurrentOffset(), source != nil
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		return source.GetTotalResultsCount(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fp.selector))
 	}
@@ -2402,6 +2463,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) GetDefault() interface{} {
 		return (*device_group.PagerCursor)(nil)
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		return (*device_group.PagerCursor)(nil)
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		return int32(0)
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		return int32(0)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fp.selector))
 	}
@@ -2416,6 +2481,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) ClearValue(item *ListDevic
 			item.PrevPageToken = nil
 		case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 			item.NextPageToken = nil
+		case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+			item.CurrentOffset = int32(0)
+		case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+			item.TotalResultsCount = int32(0)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fp.selector))
 		}
@@ -2429,7 +2498,9 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) ClearValueRaw(item proto.M
 // IsLeaf - whether field path is holds simple value
 func (fp *ListDeviceGroupsResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ListDeviceGroupsResponse_FieldPathSelectorPrevPageToken ||
-		fp.selector == ListDeviceGroupsResponse_FieldPathSelectorNextPageToken
+		fp.selector == ListDeviceGroupsResponse_FieldPathSelectorNextPageToken ||
+		fp.selector == ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset ||
+		fp.selector == ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount
 }
 
 func (fp *ListDeviceGroupsResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -2444,6 +2515,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) WithIValue(value interface
 		return &ListDeviceGroupsResponse_FieldTerminalPathValue{ListDeviceGroupsResponse_FieldTerminalPath: *fp, value: value.(*device_group.PagerCursor)}
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		return &ListDeviceGroupsResponse_FieldTerminalPathValue{ListDeviceGroupsResponse_FieldTerminalPath: *fp, value: value.(*device_group.PagerCursor)}
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		return &ListDeviceGroupsResponse_FieldTerminalPathValue{ListDeviceGroupsResponse_FieldTerminalPath: *fp, value: value.(int32)}
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		return &ListDeviceGroupsResponse_FieldTerminalPathValue{ListDeviceGroupsResponse_FieldTerminalPath: *fp, value: value.(int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fp.selector))
 	}
@@ -2462,6 +2537,10 @@ func (fp *ListDeviceGroupsResponse_FieldTerminalPath) WithIArrayOfValues(values 
 		return &ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues{ListDeviceGroupsResponse_FieldTerminalPath: *fp, values: values.([]*device_group.PagerCursor)}
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		return &ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues{ListDeviceGroupsResponse_FieldTerminalPath: *fp, values: values.([]*device_group.PagerCursor)}
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		return &ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues{ListDeviceGroupsResponse_FieldTerminalPath: *fp, values: values.([]int32)}
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		return &ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues{ListDeviceGroupsResponse_FieldTerminalPath: *fp, values: values.([]int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fp.selector))
 	}
@@ -2512,11 +2591,12 @@ func (fps *ListDeviceGroupsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source ListDeviceGroupsResponse
 func (fps *ListDeviceGroupsResponse_FieldSubPath) Get(source *ListDeviceGroupsResponse) (values []interface{}) {
-	if asDeviceGroupFieldPath, ok := fps.AsDeviceGroupsSubPath(); ok {
+	switch fps.selector {
+	case ListDeviceGroupsResponse_FieldPathSelectorDeviceGroups:
 		for _, item := range source.GetDeviceGroups() {
-			values = append(values, asDeviceGroupFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fps.selector))
 	}
 	return
@@ -2651,6 +2731,14 @@ func (fpv *ListDeviceGroupsResponse_FieldTerminalPathValue) AsNextPageTokenValue
 	res, ok := fpv.value.(*device_group.PagerCursor)
 	return res, ok
 }
+func (fpv *ListDeviceGroupsResponse_FieldTerminalPathValue) AsCurrentOffsetValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
+func (fpv *ListDeviceGroupsResponse_FieldTerminalPathValue) AsTotalResultsCountValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListDeviceGroupsResponse
 func (fpv *ListDeviceGroupsResponse_FieldTerminalPathValue) SetTo(target **ListDeviceGroupsResponse) {
@@ -2664,6 +2752,10 @@ func (fpv *ListDeviceGroupsResponse_FieldTerminalPathValue) SetTo(target **ListD
 		(*target).PrevPageToken = fpv.value.(*device_group.PagerCursor)
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		(*target).NextPageToken = fpv.value.(*device_group.PagerCursor)
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		(*target).CurrentOffset = fpv.value.(int32)
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		(*target).TotalResultsCount = fpv.value.(int32)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fpv.selector))
 	}
@@ -2683,6 +2775,26 @@ func (fpv *ListDeviceGroupsResponse_FieldTerminalPathValue) CompareWith(source *
 		return 0, false
 	case ListDeviceGroupsResponse_FieldPathSelectorNextPageToken:
 		return 0, false
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetCurrentOffset()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetTotalResultsCount()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListDeviceGroupsResponse: %d", fpv.selector))
 	}
@@ -2877,6 +2989,14 @@ func (fpaov *ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues) GetRawValu
 		for _, v := range fpaov.values.([]*device_group.PagerCursor) {
 			values = append(values, v)
 		}
+	case ListDeviceGroupsResponse_FieldPathSelectorCurrentOffset:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
+	case ListDeviceGroupsResponse_FieldPathSelectorTotalResultsCount:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2890,6 +3010,14 @@ func (fpaov *ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues) AsPrevPage
 }
 func (fpaov *ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues) AsNextPageTokenArrayOfValues() ([]*device_group.PagerCursor, bool) {
 	res, ok := fpaov.values.([]*device_group.PagerCursor)
+	return res, ok
+}
+func (fpaov *ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues) AsCurrentOffsetArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
+	return res, ok
+}
+func (fpaov *ListDeviceGroupsResponse_FieldTerminalPathArrayOfValues) AsTotalResultsCountArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
 	return res, ok
 }
 
@@ -4890,9 +5018,10 @@ func (fps *WatchDeviceGroupsResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source WatchDeviceGroupsResponse
 func (fps *WatchDeviceGroupsResponse_FieldSubPath) Get(source *WatchDeviceGroupsResponse) (values []interface{}) {
-	if asPageTokenChangeFieldPath, ok := fps.AsPageTokenChangeSubPath(); ok {
-		values = append(values, asPageTokenChangeFieldPath.Get(source.GetPageTokenChange())...)
-	} else {
+	switch fps.selector {
+	case WatchDeviceGroupsResponse_FieldPathSelectorPageTokenChange:
+		values = append(values, fps.subPath.GetRaw(source.GetPageTokenChange())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for WatchDeviceGroupsResponse: %d", fps.selector))
 	}
 	return
@@ -6040,9 +6169,10 @@ func (fps *CreateDeviceGroupRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source CreateDeviceGroupRequest
 func (fps *CreateDeviceGroupRequest_FieldSubPath) Get(source *CreateDeviceGroupRequest) (values []interface{}) {
-	if asDeviceGroupFieldPath, ok := fps.AsDeviceGroupSubPath(); ok {
-		values = append(values, asDeviceGroupFieldPath.Get(source.GetDeviceGroup())...)
-	} else {
+	switch fps.selector {
+	case CreateDeviceGroupRequest_FieldPathSelectorDeviceGroup:
+		values = append(values, fps.subPath.GetRaw(source.GetDeviceGroup())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for CreateDeviceGroupRequest: %d", fps.selector))
 	}
 	return
@@ -6702,11 +6832,12 @@ func (fps *UpdateDeviceGroupRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateDeviceGroupRequest
 func (fps *UpdateDeviceGroupRequest_FieldSubPath) Get(source *UpdateDeviceGroupRequest) (values []interface{}) {
-	if asDeviceGroupFieldPath, ok := fps.AsDeviceGroupSubPath(); ok {
-		values = append(values, asDeviceGroupFieldPath.Get(source.GetDeviceGroup())...)
-	} else if asCASFieldPath, ok := fps.AsCasSubPath(); ok {
-		values = append(values, asCASFieldPath.Get(source.GetCas())...)
-	} else {
+	switch fps.selector {
+	case UpdateDeviceGroupRequest_FieldPathSelectorDeviceGroup:
+		values = append(values, fps.subPath.GetRaw(source.GetDeviceGroup())...)
+	case UpdateDeviceGroupRequest_FieldPathSelectorCas:
+		values = append(values, fps.subPath.GetRaw(source.GetCas())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateDeviceGroupRequest: %d", fps.selector))
 	}
 	return
@@ -7360,9 +7491,10 @@ func (fps *UpdateDeviceGroupRequestCAS_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateDeviceGroupRequest_CAS
 func (fps *UpdateDeviceGroupRequestCAS_FieldSubPath) Get(source *UpdateDeviceGroupRequest_CAS) (values []interface{}) {
-	if asDeviceGroupFieldPath, ok := fps.AsConditionalStateSubPath(); ok {
-		values = append(values, asDeviceGroupFieldPath.Get(source.GetConditionalState())...)
-	} else {
+	switch fps.selector {
+	case UpdateDeviceGroupRequestCAS_FieldPathSelectorConditionalState:
+		values = append(values, fps.subPath.GetRaw(source.GetConditionalState())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateDeviceGroupRequest_CAS: %d", fps.selector))
 	}
 	return

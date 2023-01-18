@@ -1245,11 +1245,12 @@ func (fps *BatchGetZonesResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source BatchGetZonesResponse
 func (fps *BatchGetZonesResponse_FieldSubPath) Get(source *BatchGetZonesResponse) (values []interface{}) {
-	if asZoneFieldPath, ok := fps.AsZonesSubPath(); ok {
+	switch fps.selector {
+	case BatchGetZonesResponse_FieldPathSelectorZones:
 		for _, item := range source.GetZones() {
-			values = append(values, asZoneFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for BatchGetZonesResponse: %d", fps.selector))
 	}
 	return
@@ -1648,13 +1649,14 @@ type ListZonesRequest_FieldPath interface {
 type ListZonesRequest_FieldPathSelector int32
 
 const (
-	ListZonesRequest_FieldPathSelectorParent    ListZonesRequest_FieldPathSelector = 0
-	ListZonesRequest_FieldPathSelectorPageSize  ListZonesRequest_FieldPathSelector = 1
-	ListZonesRequest_FieldPathSelectorPageToken ListZonesRequest_FieldPathSelector = 2
-	ListZonesRequest_FieldPathSelectorOrderBy   ListZonesRequest_FieldPathSelector = 3
-	ListZonesRequest_FieldPathSelectorFilter    ListZonesRequest_FieldPathSelector = 4
-	ListZonesRequest_FieldPathSelectorFieldMask ListZonesRequest_FieldPathSelector = 5
-	ListZonesRequest_FieldPathSelectorView      ListZonesRequest_FieldPathSelector = 6
+	ListZonesRequest_FieldPathSelectorParent            ListZonesRequest_FieldPathSelector = 0
+	ListZonesRequest_FieldPathSelectorPageSize          ListZonesRequest_FieldPathSelector = 1
+	ListZonesRequest_FieldPathSelectorPageToken         ListZonesRequest_FieldPathSelector = 2
+	ListZonesRequest_FieldPathSelectorOrderBy           ListZonesRequest_FieldPathSelector = 3
+	ListZonesRequest_FieldPathSelectorFilter            ListZonesRequest_FieldPathSelector = 4
+	ListZonesRequest_FieldPathSelectorFieldMask         ListZonesRequest_FieldPathSelector = 5
+	ListZonesRequest_FieldPathSelectorView              ListZonesRequest_FieldPathSelector = 6
+	ListZonesRequest_FieldPathSelectorIncludePagingInfo ListZonesRequest_FieldPathSelector = 7
 )
 
 func (s ListZonesRequest_FieldPathSelector) String() string {
@@ -1673,6 +1675,8 @@ func (s ListZonesRequest_FieldPathSelector) String() string {
 		return "field_mask"
 	case ListZonesRequest_FieldPathSelectorView:
 		return "view"
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		return "include_paging_info"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", s))
 	}
@@ -1698,6 +1702,8 @@ func BuildListZonesRequest_FieldPath(fp gotenobject.RawFieldPath) (ListZonesRequ
 			return &ListZonesRequest_FieldTerminalPath{selector: ListZonesRequest_FieldPathSelectorFieldMask}, nil
 		case "view":
 			return &ListZonesRequest_FieldTerminalPath{selector: ListZonesRequest_FieldPathSelectorView}, nil
+		case "include_paging_info", "includePagingInfo", "include-paging-info":
+			return &ListZonesRequest_FieldTerminalPath{selector: ListZonesRequest_FieldPathSelectorIncludePagingInfo}, nil
 		}
 	}
 	return nil, status.Errorf(codes.InvalidArgument, "unknown field path '%s' for object ListZonesRequest", fp)
@@ -1767,6 +1773,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) Get(source *ListZonesRequest) (val
 			}
 		case ListZonesRequest_FieldPathSelectorView:
 			values = append(values, source.View)
+		case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+			values = append(values, source.IncludePagingInfo)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fp.selector))
 		}
@@ -1800,6 +1808,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) GetSingle(source *ListZonesRequest
 		return res, res != nil
 	case ListZonesRequest_FieldPathSelectorView:
 		return source.GetView(), source != nil
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		return source.GetIncludePagingInfo(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fp.selector))
 	}
@@ -1826,6 +1836,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) GetDefault() interface{} {
 		return (*zone.Zone_FieldMask)(nil)
 	case ListZonesRequest_FieldPathSelectorView:
 		return view.View_UNSPECIFIED
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		return false
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fp.selector))
 	}
@@ -1848,6 +1860,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) ClearValue(item *ListZonesRequest)
 			item.FieldMask = nil
 		case ListZonesRequest_FieldPathSelectorView:
 			item.View = view.View_UNSPECIFIED
+		case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+			item.IncludePagingInfo = false
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fp.selector))
 		}
@@ -1866,7 +1880,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) IsLeaf() bool {
 		fp.selector == ListZonesRequest_FieldPathSelectorOrderBy ||
 		fp.selector == ListZonesRequest_FieldPathSelectorFilter ||
 		fp.selector == ListZonesRequest_FieldPathSelectorFieldMask ||
-		fp.selector == ListZonesRequest_FieldPathSelectorView
+		fp.selector == ListZonesRequest_FieldPathSelectorView ||
+		fp.selector == ListZonesRequest_FieldPathSelectorIncludePagingInfo
 }
 
 func (fp *ListZonesRequest_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -1889,6 +1904,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) WithIValue(value interface{}) List
 		return &ListZonesRequest_FieldTerminalPathValue{ListZonesRequest_FieldTerminalPath: *fp, value: value.(*zone.Zone_FieldMask)}
 	case ListZonesRequest_FieldPathSelectorView:
 		return &ListZonesRequest_FieldTerminalPathValue{ListZonesRequest_FieldTerminalPath: *fp, value: value.(view.View)}
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListZonesRequest_FieldTerminalPathValue{ListZonesRequest_FieldTerminalPath: *fp, value: value.(bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fp.selector))
 	}
@@ -1915,6 +1932,8 @@ func (fp *ListZonesRequest_FieldTerminalPath) WithIArrayOfValues(values interfac
 		return &ListZonesRequest_FieldTerminalPathArrayOfValues{ListZonesRequest_FieldTerminalPath: *fp, values: values.([]*zone.Zone_FieldMask)}
 	case ListZonesRequest_FieldPathSelectorView:
 		return &ListZonesRequest_FieldTerminalPathArrayOfValues{ListZonesRequest_FieldTerminalPath: *fp, values: values.([]view.View)}
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		return &ListZonesRequest_FieldTerminalPathArrayOfValues{ListZonesRequest_FieldTerminalPath: *fp, values: values.([]bool)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fp.selector))
 	}
@@ -2003,6 +2022,10 @@ func (fpv *ListZonesRequest_FieldTerminalPathValue) AsViewValue() (view.View, bo
 	res, ok := fpv.value.(view.View)
 	return res, ok
 }
+func (fpv *ListZonesRequest_FieldTerminalPathValue) AsIncludePagingInfoValue() (bool, bool) {
+	res, ok := fpv.value.(bool)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListZonesRequest
 func (fpv *ListZonesRequest_FieldTerminalPathValue) SetTo(target **ListZonesRequest) {
@@ -2024,6 +2047,8 @@ func (fpv *ListZonesRequest_FieldTerminalPathValue) SetTo(target **ListZonesRequ
 		(*target).FieldMask = fpv.value.(*zone.Zone_FieldMask)
 	case ListZonesRequest_FieldPathSelectorView:
 		(*target).View = fpv.value.(view.View)
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		(*target).IncludePagingInfo = fpv.value.(bool)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesRequest: %d", fpv.selector))
 	}
@@ -2080,6 +2105,16 @@ func (fpv *ListZonesRequest_FieldTerminalPathValue) CompareWith(source *ListZone
 		if (leftValue) == (rightValue) {
 			return 0, true
 		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		leftValue := fpv.value.(bool)
+		rightValue := source.GetIncludePagingInfo()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if !(leftValue) && (rightValue) {
 			return -1, true
 		} else {
 			return 1, true
@@ -2220,6 +2255,10 @@ func (fpaov *ListZonesRequest_FieldTerminalPathArrayOfValues) GetRawValues() (va
 		for _, v := range fpaov.values.([]view.View) {
 			values = append(values, v)
 		}
+	case ListZonesRequest_FieldPathSelectorIncludePagingInfo:
+		for _, v := range fpaov.values.([]bool) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2251,6 +2290,10 @@ func (fpaov *ListZonesRequest_FieldTerminalPathArrayOfValues) AsViewArrayOfValue
 	res, ok := fpaov.values.([]view.View)
 	return res, ok
 }
+func (fpaov *ListZonesRequest_FieldTerminalPathArrayOfValues) AsIncludePagingInfoArrayOfValues() ([]bool, bool) {
+	res, ok := fpaov.values.([]bool)
+	return res, ok
+}
 
 // FieldPath provides implementation to handle
 // https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/field_mask.proto
@@ -2271,9 +2314,11 @@ type ListZonesResponse_FieldPath interface {
 type ListZonesResponse_FieldPathSelector int32
 
 const (
-	ListZonesResponse_FieldPathSelectorZones         ListZonesResponse_FieldPathSelector = 0
-	ListZonesResponse_FieldPathSelectorPrevPageToken ListZonesResponse_FieldPathSelector = 1
-	ListZonesResponse_FieldPathSelectorNextPageToken ListZonesResponse_FieldPathSelector = 2
+	ListZonesResponse_FieldPathSelectorZones             ListZonesResponse_FieldPathSelector = 0
+	ListZonesResponse_FieldPathSelectorPrevPageToken     ListZonesResponse_FieldPathSelector = 1
+	ListZonesResponse_FieldPathSelectorNextPageToken     ListZonesResponse_FieldPathSelector = 2
+	ListZonesResponse_FieldPathSelectorCurrentOffset     ListZonesResponse_FieldPathSelector = 3
+	ListZonesResponse_FieldPathSelectorTotalResultsCount ListZonesResponse_FieldPathSelector = 4
 )
 
 func (s ListZonesResponse_FieldPathSelector) String() string {
@@ -2284,6 +2329,10 @@ func (s ListZonesResponse_FieldPathSelector) String() string {
 		return "prev_page_token"
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		return "next_page_token"
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		return "current_offset"
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		return "total_results_count"
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", s))
 	}
@@ -2301,6 +2350,10 @@ func BuildListZonesResponse_FieldPath(fp gotenobject.RawFieldPath) (ListZonesRes
 			return &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorPrevPageToken}, nil
 		case "next_page_token", "nextPageToken", "next-page-token":
 			return &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorNextPageToken}, nil
+		case "current_offset", "currentOffset", "current-offset":
+			return &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorCurrentOffset}, nil
+		case "total_results_count", "totalResultsCount", "total-results-count":
+			return &ListZonesResponse_FieldTerminalPath{selector: ListZonesResponse_FieldPathSelectorTotalResultsCount}, nil
 		}
 	} else {
 		switch fp[0] {
@@ -2367,6 +2420,10 @@ func (fp *ListZonesResponse_FieldTerminalPath) Get(source *ListZonesResponse) (v
 			if source.NextPageToken != nil {
 				values = append(values, source.NextPageToken)
 			}
+		case ListZonesResponse_FieldPathSelectorCurrentOffset:
+			values = append(values, source.CurrentOffset)
+		case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+			values = append(values, source.TotalResultsCount)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fp.selector))
 		}
@@ -2390,6 +2447,10 @@ func (fp *ListZonesResponse_FieldTerminalPath) GetSingle(source *ListZonesRespon
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		res := source.GetNextPageToken()
 		return res, res != nil
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		return source.GetCurrentOffset(), source != nil
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		return source.GetTotalResultsCount(), source != nil
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fp.selector))
 	}
@@ -2408,6 +2469,10 @@ func (fp *ListZonesResponse_FieldTerminalPath) GetDefault() interface{} {
 		return (*zone.PagerCursor)(nil)
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		return (*zone.PagerCursor)(nil)
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		return int32(0)
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		return int32(0)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fp.selector))
 	}
@@ -2422,6 +2487,10 @@ func (fp *ListZonesResponse_FieldTerminalPath) ClearValue(item *ListZonesRespons
 			item.PrevPageToken = nil
 		case ListZonesResponse_FieldPathSelectorNextPageToken:
 			item.NextPageToken = nil
+		case ListZonesResponse_FieldPathSelectorCurrentOffset:
+			item.CurrentOffset = int32(0)
+		case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+			item.TotalResultsCount = int32(0)
 		default:
 			panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fp.selector))
 		}
@@ -2435,7 +2504,9 @@ func (fp *ListZonesResponse_FieldTerminalPath) ClearValueRaw(item proto.Message)
 // IsLeaf - whether field path is holds simple value
 func (fp *ListZonesResponse_FieldTerminalPath) IsLeaf() bool {
 	return fp.selector == ListZonesResponse_FieldPathSelectorPrevPageToken ||
-		fp.selector == ListZonesResponse_FieldPathSelectorNextPageToken
+		fp.selector == ListZonesResponse_FieldPathSelectorNextPageToken ||
+		fp.selector == ListZonesResponse_FieldPathSelectorCurrentOffset ||
+		fp.selector == ListZonesResponse_FieldPathSelectorTotalResultsCount
 }
 
 func (fp *ListZonesResponse_FieldTerminalPath) SplitIntoTerminalIPaths() []gotenobject.FieldPath {
@@ -2450,6 +2521,10 @@ func (fp *ListZonesResponse_FieldTerminalPath) WithIValue(value interface{}) Lis
 		return &ListZonesResponse_FieldTerminalPathValue{ListZonesResponse_FieldTerminalPath: *fp, value: value.(*zone.PagerCursor)}
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		return &ListZonesResponse_FieldTerminalPathValue{ListZonesResponse_FieldTerminalPath: *fp, value: value.(*zone.PagerCursor)}
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		return &ListZonesResponse_FieldTerminalPathValue{ListZonesResponse_FieldTerminalPath: *fp, value: value.(int32)}
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		return &ListZonesResponse_FieldTerminalPathValue{ListZonesResponse_FieldTerminalPath: *fp, value: value.(int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fp.selector))
 	}
@@ -2468,6 +2543,10 @@ func (fp *ListZonesResponse_FieldTerminalPath) WithIArrayOfValues(values interfa
 		return &ListZonesResponse_FieldTerminalPathArrayOfValues{ListZonesResponse_FieldTerminalPath: *fp, values: values.([]*zone.PagerCursor)}
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		return &ListZonesResponse_FieldTerminalPathArrayOfValues{ListZonesResponse_FieldTerminalPath: *fp, values: values.([]*zone.PagerCursor)}
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		return &ListZonesResponse_FieldTerminalPathArrayOfValues{ListZonesResponse_FieldTerminalPath: *fp, values: values.([]int32)}
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		return &ListZonesResponse_FieldTerminalPathArrayOfValues{ListZonesResponse_FieldTerminalPath: *fp, values: values.([]int32)}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fp.selector))
 	}
@@ -2518,11 +2597,12 @@ func (fps *ListZonesResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source ListZonesResponse
 func (fps *ListZonesResponse_FieldSubPath) Get(source *ListZonesResponse) (values []interface{}) {
-	if asZoneFieldPath, ok := fps.AsZonesSubPath(); ok {
+	switch fps.selector {
+	case ListZonesResponse_FieldPathSelectorZones:
 		for _, item := range source.GetZones() {
-			values = append(values, asZoneFieldPath.Get(item)...)
+			values = append(values, fps.subPath.GetRaw(item)...)
 		}
-	} else {
+	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fps.selector))
 	}
 	return
@@ -2657,6 +2737,14 @@ func (fpv *ListZonesResponse_FieldTerminalPathValue) AsNextPageTokenValue() (*zo
 	res, ok := fpv.value.(*zone.PagerCursor)
 	return res, ok
 }
+func (fpv *ListZonesResponse_FieldTerminalPathValue) AsCurrentOffsetValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
+func (fpv *ListZonesResponse_FieldTerminalPathValue) AsTotalResultsCountValue() (int32, bool) {
+	res, ok := fpv.value.(int32)
+	return res, ok
+}
 
 // SetTo stores value for selected field for object ListZonesResponse
 func (fpv *ListZonesResponse_FieldTerminalPathValue) SetTo(target **ListZonesResponse) {
@@ -2670,6 +2758,10 @@ func (fpv *ListZonesResponse_FieldTerminalPathValue) SetTo(target **ListZonesRes
 		(*target).PrevPageToken = fpv.value.(*zone.PagerCursor)
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		(*target).NextPageToken = fpv.value.(*zone.PagerCursor)
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		(*target).CurrentOffset = fpv.value.(int32)
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		(*target).TotalResultsCount = fpv.value.(int32)
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fpv.selector))
 	}
@@ -2689,6 +2781,26 @@ func (fpv *ListZonesResponse_FieldTerminalPathValue) CompareWith(source *ListZon
 		return 0, false
 	case ListZonesResponse_FieldPathSelectorNextPageToken:
 		return 0, false
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetCurrentOffset()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		leftValue := fpv.value.(int32)
+		rightValue := source.GetTotalResultsCount()
+		if (leftValue) == (rightValue) {
+			return 0, true
+		} else if (leftValue) < (rightValue) {
+			return -1, true
+		} else {
+			return 1, true
+		}
 	default:
 		panic(fmt.Sprintf("Invalid selector for ListZonesResponse: %d", fpv.selector))
 	}
@@ -2883,6 +2995,14 @@ func (fpaov *ListZonesResponse_FieldTerminalPathArrayOfValues) GetRawValues() (v
 		for _, v := range fpaov.values.([]*zone.PagerCursor) {
 			values = append(values, v)
 		}
+	case ListZonesResponse_FieldPathSelectorCurrentOffset:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
+	case ListZonesResponse_FieldPathSelectorTotalResultsCount:
+		for _, v := range fpaov.values.([]int32) {
+			values = append(values, v)
+		}
 	}
 	return
 }
@@ -2896,6 +3016,14 @@ func (fpaov *ListZonesResponse_FieldTerminalPathArrayOfValues) AsPrevPageTokenAr
 }
 func (fpaov *ListZonesResponse_FieldTerminalPathArrayOfValues) AsNextPageTokenArrayOfValues() ([]*zone.PagerCursor, bool) {
 	res, ok := fpaov.values.([]*zone.PagerCursor)
+	return res, ok
+}
+func (fpaov *ListZonesResponse_FieldTerminalPathArrayOfValues) AsCurrentOffsetArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
+	return res, ok
+}
+func (fpaov *ListZonesResponse_FieldTerminalPathArrayOfValues) AsTotalResultsCountArrayOfValues() ([]int32, bool) {
+	res, ok := fpaov.values.([]int32)
 	return res, ok
 }
 
@@ -4896,9 +5024,10 @@ func (fps *WatchZonesResponse_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source WatchZonesResponse
 func (fps *WatchZonesResponse_FieldSubPath) Get(source *WatchZonesResponse) (values []interface{}) {
-	if asPageTokenChangeFieldPath, ok := fps.AsPageTokenChangeSubPath(); ok {
-		values = append(values, asPageTokenChangeFieldPath.Get(source.GetPageTokenChange())...)
-	} else {
+	switch fps.selector {
+	case WatchZonesResponse_FieldPathSelectorPageTokenChange:
+		values = append(values, fps.subPath.GetRaw(source.GetPageTokenChange())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for WatchZonesResponse: %d", fps.selector))
 	}
 	return
@@ -6046,9 +6175,10 @@ func (fps *CreateZoneRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source CreateZoneRequest
 func (fps *CreateZoneRequest_FieldSubPath) Get(source *CreateZoneRequest) (values []interface{}) {
-	if asZoneFieldPath, ok := fps.AsZoneSubPath(); ok {
-		values = append(values, asZoneFieldPath.Get(source.GetZone())...)
-	} else {
+	switch fps.selector {
+	case CreateZoneRequest_FieldPathSelectorZone:
+		values = append(values, fps.subPath.GetRaw(source.GetZone())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for CreateZoneRequest: %d", fps.selector))
 	}
 	return
@@ -6708,11 +6838,12 @@ func (fps *UpdateZoneRequest_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateZoneRequest
 func (fps *UpdateZoneRequest_FieldSubPath) Get(source *UpdateZoneRequest) (values []interface{}) {
-	if asZoneFieldPath, ok := fps.AsZoneSubPath(); ok {
-		values = append(values, asZoneFieldPath.Get(source.GetZone())...)
-	} else if asCASFieldPath, ok := fps.AsCasSubPath(); ok {
-		values = append(values, asCASFieldPath.Get(source.GetCas())...)
-	} else {
+	switch fps.selector {
+	case UpdateZoneRequest_FieldPathSelectorZone:
+		values = append(values, fps.subPath.GetRaw(source.GetZone())...)
+	case UpdateZoneRequest_FieldPathSelectorCas:
+		values = append(values, fps.subPath.GetRaw(source.GetCas())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateZoneRequest: %d", fps.selector))
 	}
 	return
@@ -7366,9 +7497,10 @@ func (fps *UpdateZoneRequestCAS_FieldSubPath) JSONString() string {
 
 // Get returns all values pointed by selected field from source UpdateZoneRequest_CAS
 func (fps *UpdateZoneRequestCAS_FieldSubPath) Get(source *UpdateZoneRequest_CAS) (values []interface{}) {
-	if asZoneFieldPath, ok := fps.AsConditionalStateSubPath(); ok {
-		values = append(values, asZoneFieldPath.Get(source.GetConditionalState())...)
-	} else {
+	switch fps.selector {
+	case UpdateZoneRequestCAS_FieldPathSelectorConditionalState:
+		values = append(values, fps.subPath.GetRaw(source.GetConditionalState())...)
+	default:
 		panic(fmt.Sprintf("Invalid selector for UpdateZoneRequest_CAS: %d", fps.selector))
 	}
 	return
